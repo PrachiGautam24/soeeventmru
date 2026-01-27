@@ -1,0 +1,127 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import AppLayout from '@/components/AppLayout'
+import { supabase } from '@/lib/supabase'
+import { Organiser } from '@/lib/types'
+import { motion } from 'framer-motion'
+import { ArrowLeft, Mail, UserCog } from 'lucide-react'
+import Link from 'next/link'
+
+export default function OrganisersPage() {
+  const [organisers, setOrganisers] = useState<Organiser[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchOrganisers()
+  }, [])
+
+  const fetchOrganisers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('organisers')
+        .select('*')
+        .order('order_index', { ascending: true })
+
+      if (error) throw error
+      setOrganisers(data || [])
+    } catch (error) {
+      console.error('Error fetching organisers:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const groupedOrganisers = organisers.reduce((acc, organiser) => {
+    if (!acc[organiser.role]) {
+      acc[organiser.role] = []
+    }
+    acc[organiser.role].push(organiser)
+    return acc
+  }, {} as Record<string, Organiser[]>)
+
+  return (
+    <AppLayout>
+      <div className="min-h-screen bg-gray-50">
+        {/* Header */}
+        <div className="bg-gradient-primary text-white px-6 py-6 sticky top-0 z-10">
+          <div className="flex items-center gap-4">
+            <Link href="/home">
+              <ArrowLeft className="w-6 h-6" />
+            </Link>
+            <div>
+              <h1 className="text-2xl font-bold">Organisers</h1>
+              <p className="text-sm text-white/80">Organizing Committee</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Organisers List */}
+        <div className="px-4 py-6 space-y-6">
+          {loading ? (
+            <div className="flex justify-center items-center h-64">
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
+            </div>
+          ) : Object.keys(groupedOrganisers).length === 0 ? (
+            <div className="text-center py-12 text-gray-500">
+              No organisers information available
+            </div>
+          ) : (
+            Object.entries(groupedOrganisers).map(([role, roleOrganisers]) => (
+              <div key={role}>
+                <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <UserCog className="w-5 h-5 text-primary" />
+                  {role}
+                </h2>
+                
+                <div className="space-y-3">
+                  {roleOrganisers.map((organiser, index) => (
+                    <motion.div
+                      key={organiser.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-white rounded-2xl p-5 shadow-md"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
+                          {organiser.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                        </div>
+                        
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-800 mb-1">
+                            {organiser.name}
+                          </h3>
+                          {organiser.organization && (
+                            <p className="text-sm text-gray-600 mb-2">
+                              {organiser.organization}
+                            </p>
+                          )}
+                          
+                          {organiser.email && (
+                            <a
+                              href={`mailto:${organiser.email}`}
+                              className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary-dark"
+                            >
+                              <Mail className="w-3 h-3" />
+                              {organiser.email}
+                            </a>
+                          )}
+                          {organiser.phone && (
+                            <p className="text-xs text-gray-500 mt-1">
+                              {organiser.phone}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </AppLayout>
+  )
+}
