@@ -7,6 +7,8 @@ export type Patron = Database['public']['Tables']['patrons']['Row']
 export type Organiser = Database['public']['Tables']['organisers']['Row']
 export type Workshop = Database['public']['Tables']['workshop']['Row']
 export type Author = Database['public']['Tables']['authors']['Row']
+export type Attendance = Database['public']['Tables']['attendance']['Row']
+export type Sponsor = Database['public']['Tables']['sponsors']['Row']
 
 export interface SocialLinks {
   twitter?: string

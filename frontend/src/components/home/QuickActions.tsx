@@ -9,7 +9,10 @@ import {
   Target, 
   Award,
   UserCog,
-  Briefcase
+  Briefcase,
+  UserCheck,
+  Building2,
+  ClipboardCheck
 } from 'lucide-react'
 
 export default function QuickActions() {
@@ -37,6 +40,24 @@ export default function QuickActions() {
       icon: Target,
       href: '/tracks',
       color: 'from-primary-light to-primary',
+    },
+    {
+      name: 'Mark Attendance',
+      icon: UserCheck,
+      href: '/attendance',
+      color: 'from-primary to-primary-dark',
+    },
+    {
+      name: 'Sponsors',
+      icon: Building2,
+      href: '/sponsors',
+      color: 'from-secondary-light to-secondary',
+    },
+    {
+      name: 'Session Tracker',
+      icon: ClipboardCheck,
+      href: '/session-tracker',
+      color: 'from-neutral-600 to-neutral-700',
     },
     {
       name: 'Patrons',

@@ -302,6 +302,55 @@ export interface Database {
           updated_at?: string
         }
       }
+      attendance: {
+        Row: {
+          id: string
+          name: string
+          timestamp: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          timestamp?: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          timestamp?: string
+          created_at?: string
+        }
+      }
+      sponsors: {
+        Row: {
+          id: string
+          name: string
+          logo_url: string | null
+          website: string | null
+          description: string | null
+          order_index: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          logo_url?: string | null
+          website?: string | null
+          description?: string | null
+          order_index?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          logo_url?: string | null
+          website?: string | null
+          description?: string | null
+          order_index?: number
+          created_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
