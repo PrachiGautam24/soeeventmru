@@ -64,7 +64,7 @@ export default function SpeakersPage() {
         
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
           <input
             type="text"
             placeholder="Search speakers..."
@@ -76,13 +76,13 @@ export default function SpeakersPage() {
       </div>
 
       {/* Speakers List */}
-      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-4 pt-44">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-4 pt-44">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
             </div>
           ) : filteredSpeakers.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-neutral-500">
               No speakers found
             </div>
           ) : (
@@ -109,16 +109,16 @@ export default function SpeakersPage() {
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-800 truncate">
+                    <h3 className="font-semibold text-neutral-800 truncate">
                       {speaker.name}
                     </h3>
                     {speaker.title && (
-                      <p className="text-sm text-gray-600 truncate">
+                      <p className="text-sm text-neutral-600 truncate">
                         {speaker.title}
                       </p>
                     )}
                     {speaker.organization && (
-                      <p className="text-xs text-gray-500 truncate">
+                      <p className="text-xs text-neutral-500 truncate">
                         {speaker.organization}
                       </p>
                     )}
@@ -134,7 +134,7 @@ export default function SpeakersPage() {
 
 function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => void }) {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-neutral-50">
       {/* Header */}
       <div className="bg-gradient-primary text-white px-6 py-6 sticky top-0 z-10">
         <button onClick={onBack} className="flex items-center gap-2 mb-4">
@@ -160,9 +160,9 @@ function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => v
             )}
           </div>
           
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">{speaker.name}</h2>
-          {speaker.title && <p className="text-base text-gray-600 mb-1">{speaker.title}</p>}
-          {speaker.organization && <p className="text-sm text-gray-500">{speaker.organization}</p>}
+          <h2 className="text-2xl font-bold text-neutral-800 mb-2">{speaker.name}</h2>
+          {speaker.title && <p className="text-base text-neutral-600 mb-1">{speaker.title}</p>}
+          {speaker.organization && <p className="text-sm text-neutral-500">{speaker.organization}</p>}
 
           {/* Social Links */}
           {(speaker.twitter || speaker.linkedin || speaker.website) && (
@@ -192,7 +192,7 @@ function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => v
                   href={speaker.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center text-white hover:bg-gray-800 transition-colors"
+                  className="w-10 h-10 rounded-full bg-neutral-700 flex items-center justify-center text-white hover:bg-neutral-800 transition-colors"
                 >
                   <Globe className="w-5 h-5" />
                 </a>
@@ -203,8 +203,8 @@ function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => v
 
         {/* Bio */}
         <div className="bg-white rounded-2xl p-6 shadow-md">
-          <h3 className="text-lg font-bold text-gray-800 mb-3">Biography</h3>
-          <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+          <h3 className="text-lg font-bold text-neutral-800 mb-3">Biography</h3>
+          <p className="text-sm text-neutral-600 leading-relaxed whitespace-pre-line">
             {speaker.bio}
           </p>
         </div>

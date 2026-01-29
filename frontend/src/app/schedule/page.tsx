@@ -111,19 +111,19 @@ export default function SchedulePage() {
       </div>
 
       {/* Sessions List */}
-      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-6 pt-44">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-6 pt-44">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
             </div>
           ) : Object.keys(sessionsByDate).length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-neutral-500">
               No sessions scheduled
             </div>
           ) : (
             Object.entries(sessionsByDate).map(([date, dateSessions]) => (
               <div key={date}>
-                <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <h2 className="text-lg font-bold text-neutral-800 mb-4 flex items-center gap-2">
                   <Calendar className="w-5 h-5 text-primary" />
                   {new Date(date).toLocaleDateString('en-US', { 
                     weekday: 'long',
@@ -144,15 +144,15 @@ export default function SchedulePage() {
                     >
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex-1">
-                          <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                          <div className="flex items-center gap-2 text-sm text-neutral-600 mb-2">
                             <Clock className="w-4 h-4" />
                             <span>{session.start_time} - {session.end_time}</span>
                             {session.duration_minutes && (
-                              <span className="text-gray-400">({session.duration_minutes} mins)</span>
+                              <span className="text-neutral-400">({session.duration_minutes} mins)</span>
                             )}
                           </div>
                           
-                          <h3 className="font-semibold text-gray-800 mb-2">
+                          <h3 className="font-semibold text-neutral-800 mb-2">
                             {session.title}
                           </h3>
                           
@@ -163,12 +163,12 @@ export default function SchedulePage() {
                           )}
                           
                           {session.description && (
-                            <p className="text-sm text-gray-600 line-clamp-2 mb-2">
+                            <p className="text-sm text-neutral-600 line-clamp-2 mb-2">
                               {session.description}
                             </p>
                           )}
                           
-                          <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <div className="flex items-center gap-4 text-sm text-neutral-500">
                             {session.location && (
                               <div className="flex items-center gap-1">
                                 <MapPin className="w-4 h-4" />
@@ -176,7 +176,7 @@ export default function SchedulePage() {
                               </div>
                             )}
                             {session.track && (
-                              <span className="px-2 py-1 bg-gray-100 rounded text-xs">
+                              <span className="px-2 py-1 bg-neutral-100 rounded text-xs">
                                 {session.track}
                               </span>
                             )}
@@ -188,7 +188,7 @@ export default function SchedulePage() {
                           className={`ml-4 p-2 rounded-full transition-all ${
                             mySchedule.has(session.id)
                               ? 'bg-primary text-white'
-                              : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+                              : 'bg-neutral-100 text-neutral-400 hover:bg-neutral-200'
                           }`}
                         >
                           <Plus className={`w-5 h-5 transition-transform ${

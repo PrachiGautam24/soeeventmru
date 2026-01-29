@@ -53,7 +53,7 @@ export default function AuthorsPage() {
         
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
           <input
             type="text"
             placeholder="Search authors..."
@@ -65,13 +65,13 @@ export default function AuthorsPage() {
       </div>
 
       {/* Authors List */}
-      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-3 pt-44">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-3 pt-44">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
             </div>
           ) : filteredAuthors.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-neutral-500">
               No authors found
             </div>
           ) : (
@@ -84,25 +84,25 @@ export default function AuthorsPage() {
                 className="bg-white rounded-2xl p-4 shadow-md"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
                     {author.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-800 mb-1">
+                    <h3 className="font-semibold text-neutral-800 mb-1">
                       {author.name}
                     </h3>
                     
                     <div className="space-y-1">
                       {author.affiliation && (
-                        <p className="text-sm text-gray-600 flex items-center gap-1">
+                        <p className="text-sm text-neutral-600 flex items-center gap-1">
                           <FileText className="w-3 h-3" />
                           {author.affiliation}
                         </p>
                       )}
                       
                       {author.country && (
-                        <p className="text-sm text-gray-500 flex items-center gap-1">
+                        <p className="text-sm text-neutral-500 flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
                           {author.country}
                         </p>
@@ -120,9 +120,9 @@ export default function AuthorsPage() {
                     </div>
                     
                     {author.paper_title && (
-                      <div className="mt-2 pt-2 border-t border-gray-100">
-                        <p className="text-xs text-gray-500">Paper Title:</p>
-                        <p className="text-sm text-gray-700 font-medium line-clamp-2">
+                      <div className="mt-2 pt-2 border-t border-neutral-100">
+                        <p className="text-xs text-neutral-500">Paper Title:</p>
+                        <p className="text-sm text-neutral-700 font-medium line-clamp-2">
                           {author.paper_title}
                         </p>
                         {author.track && (

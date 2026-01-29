@@ -23,19 +23,19 @@ export default function MorePage() {
           name: 'Speakers',
           icon: Users,
           href: '/speakers',
-          color: 'from-blue-500 to-blue-600',
+          color: 'from-primary to-primary-dark',
         },
         {
           name: 'Patrons & Chairs',
           icon: Award,
           href: '/patrons',
-          color: 'from-yellow-500 to-orange-500',
+          color: 'from-secondary-light to-secondary',
         },
         {
           name: 'Organisers',
           icon: UserCog,
           href: '/organisers',
-          color: 'from-teal-500 to-teal-600',
+          color: 'from-neutral-700 to-neutral-800',
         },
       ],
     },
@@ -46,13 +46,13 @@ export default function MorePage() {
           name: 'Location',
           icon: MapPin,
           href: '/location',
-          color: 'from-red-500 to-red-600',
+          color: 'from-secondary to-secondary-dark',
         },
         {
           name: 'Website',
           icon: Globe,
           href: 'https://icass-2026.in',
-          color: 'from-indigo-500 to-indigo-600',
+          color: 'from-primary to-secondary',
           external: true,
         },
       ],
@@ -64,13 +64,13 @@ export default function MorePage() {
           name: 'About ICASS',
           icon: Info,
           href: '/about',
-          color: 'from-purple-500 to-purple-600',
+          color: 'from-neutral-600 to-neutral-700',
         },
         {
           name: 'Conference Tracks',
           icon: BookOpen,
           href: '/tracks',
-          color: 'from-green-500 to-green-600',
+          color: 'from-primary-light to-primary',
         },
       ],
     },
@@ -92,7 +92,7 @@ export default function MorePage() {
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-neutral-50">
         {/* Header */}
         <div className="bg-gradient-mixed text-white px-6 py-8">
           <h1 className="text-2xl font-bold mb-2">More</h1>
@@ -119,7 +119,7 @@ export default function MorePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: sectionIndex * 0.1 }}
             >
-              <h2 className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3 px-2">
+              <h2 className="text-sm font-bold text-neutral-500 uppercase tracking-wide mb-3 px-2">
                 {section.title}
               </h2>
               
@@ -127,17 +127,17 @@ export default function MorePage() {
                 {section.items.map((item, index) => {
                   const Icon = item.icon
                   const content = (
-                    <div className="flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors">
+                    <div className="flex items-center gap-4 p-4 hover:bg-neutral-50 transition-colors">
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center flex-shrink-0`}>
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       
-                      <span className="font-medium text-gray-800 flex-1">
+                      <span className="font-medium text-neutral-800 flex-1">
                         {item.name}
                       </span>
                       
                       <svg 
-                        className="w-5 h-5 text-gray-400" 
+                        className="w-5 h-5 text-neutral-400" 
                         fill="none" 
                         strokeLinecap="round" 
                         strokeLinejoin="round" 
@@ -152,7 +152,7 @@ export default function MorePage() {
 
                   return (
                     <div key={item.name}>
-                      {index > 0 && <div className="border-t border-gray-100" />}
+                      {index > 0 && <div className="border-t border-neutral-100" />}
                       {item.external ? (
                         <a 
                           href={item.href} 
@@ -178,7 +178,7 @@ export default function MorePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 text-white rounded-2xl p-6 shadow-lg"
+            className="bg-gradient-to-br from-primary via-primary-light to-secondary text-white rounded-2xl p-6 shadow-lg"
           >
             <h3 className="text-xl font-bold mb-2">ICASS 2026</h3>
             <p className="text-sm text-white/90 mb-3">
@@ -194,7 +194,7 @@ export default function MorePage() {
           </motion.div>
 
           {/* Footer */}
-          <div className="text-center py-4 text-sm text-gray-500">
+          <div className="text-center py-4 text-sm text-neutral-500">
             <p>© 2026 Manav Rachna University</p>
             <p className="mt-1">All rights reserved</p>
           </div>

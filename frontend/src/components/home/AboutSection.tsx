@@ -49,8 +49,8 @@ The school has collaborations with leading industry and academic partners such a
   ]
 
   return (
-    <div className="px-4 py-6 bg-gray-50">
-      <h3 className="text-xl font-bold text-gray-800 mb-4">About the Conference</h3>
+    <div className="px-4 py-6 bg-white">
+      <h3 className="text-xl font-bold text-neutral-800 mb-4">About the Conference</h3>
       
       <div className="space-y-3">
         {sections.map((section, index) => (
@@ -59,19 +59,19 @@ The school has collaborations with leading industry and academic partners such a
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white rounded-2xl shadow-md overflow-hidden"
+            className="bg-neutral-50 rounded-xl shadow-sm overflow-hidden border border-neutral-200"
           >
             <button
               onClick={() => setExpandedSection(
                 expandedSection === section.id ? null : section.id
               )}
-              className="w-full px-5 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+              className="w-full px-5 py-4 flex items-center justify-between hover:bg-white transition-colors"
             >
-              <span className="font-semibold text-gray-800 text-left">
+              <span className="font-semibold text-neutral-800 text-left">
                 {section.title}
               </span>
               <ChevronRight
-                className={`w-5 h-5 text-gray-400 transition-transform ${
+                className={`w-5 h-5 text-neutral-400 transition-transform ${
                   expandedSection === section.id ? 'rotate-90' : ''
                 }`}
               />
@@ -84,7 +84,7 @@ The school has collaborations with leading industry and academic partners such a
                 exit={{ height: 0, opacity: 0 }}
                 className="px-5 pb-4"
               >
-                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                <p className="text-sm text-neutral-600 leading-relaxed whitespace-pre-line">
                   {section.content}
                 </p>
               </motion.div>

@@ -56,19 +56,19 @@ export default function OrganisersPage() {
       </div>
 
       {/* Organisers List */}
-      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-6 pt-28">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-6 pt-28">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
             </div>
           ) : Object.keys(groupedOrganisers).length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-neutral-500">
               No organisers information available
             </div>
           ) : (
             Object.entries(groupedOrganisers).map(([role, roleOrganisers]) => (
               <div key={role}>
-                <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <h2 className="text-lg font-bold text-neutral-800 mb-4 flex items-center gap-2">
                   <UserCog className="w-5 h-5 text-primary" />
                   {role}
                 </h2>
@@ -88,11 +88,11 @@ export default function OrganisersPage() {
                         </div>
                         
                         <div className="flex-1">
-                          <h3 className="font-semibold text-gray-800 mb-1">
+                          <h3 className="font-semibold text-neutral-800 mb-1">
                             {organiser.name}
                           </h3>
                           {organiser.organization && (
-                            <p className="text-sm text-gray-600 mb-2">
+                            <p className="text-sm text-neutral-600 mb-2">
                               {organiser.organization}
                             </p>
                           )}
@@ -107,7 +107,7 @@ export default function OrganisersPage() {
                             </a>
                           )}
                           {organiser.phone && (
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-xs text-neutral-500 mt-1">
                               {organiser.phone}
                             </p>
                           )}

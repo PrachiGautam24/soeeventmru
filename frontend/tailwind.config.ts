@@ -10,27 +10,35 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#1E3A8A', // MRU Blue
-          light: '#3B82F6',
-          dark: '#1E40AF',
+          DEFAULT: '#1e4ba9', // University Blue
+          light: '#4a6fc7',
+          dark: '#163a8a',
         },
         secondary: {
-          DEFAULT: '#DC2626', // MRU Red
-          light: '#EF4444',
-          dark: '#B91C1C',
+          DEFAULT: '#b12a2e', // University Red
+          light: '#c74448',
+          dark: '#8f2125',
         },
-        accent: {
-          yellow: '#F59E0B',
-          orange: '#EA580C',
+        neutral: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#1f2937',
+          900: '#111827',
         },
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%)',
-        'gradient-secondary': 'linear-gradient(135deg, #DC2626 0%, #EF4444 100%)',
-        'gradient-mixed': 'linear-gradient(135deg, #1E3A8A 0%, #DC2626 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #1e4ba9 0%, #4a6fc7 100%)',
+        'gradient-secondary': 'linear-gradient(135deg, #b12a2e 0%, #c74448 100%)',
+        'gradient-mixed': 'linear-gradient(135deg, #1e4ba9 0%, #b12a2e 100%)',
       },
     },
   },

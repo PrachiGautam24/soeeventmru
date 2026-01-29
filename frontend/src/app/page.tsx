@@ -53,9 +53,9 @@ export default function SplashPage() {
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
                 className="w-8 h-8 border-4 border-transparent rounded-full mx-auto"
                 style={{
-                  borderTopColor: '#1E3A8A',
-                  borderRightColor: '#1E3A8A',
-                  borderBottomColor: '#DC2626'
+                  borderTopColor: '#1e4ba9',
+                  borderRightColor: '#9a3a3d',
+                  borderBottomColor: '#b12a2e'
                 }}
               />
             </motion.div>

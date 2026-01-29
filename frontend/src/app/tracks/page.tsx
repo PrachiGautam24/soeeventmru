@@ -35,18 +35,14 @@ export default function TracksPage() {
 
   const getTrackColor = (index: number) => {
     const colors = [
-      'from-blue-500 to-blue-600',
-      'from-purple-500 to-purple-600',
-      'from-red-500 to-red-600',
-      'from-green-500 to-green-600',
-      'from-yellow-500 to-orange-500',
-      'from-teal-500 to-teal-600',
-      'from-indigo-500 to-indigo-600',
-      'from-pink-500 to-pink-600',
-      'from-cyan-500 to-cyan-600',
-      'from-amber-500 to-amber-600',
-      'from-lime-500 to-lime-600',
-      'from-rose-500 to-rose-600',
+      'from-primary to-primary-dark',
+      'from-secondary to-secondary-dark',
+      'from-neutral-600 to-neutral-700',
+      'from-primary-light to-primary',
+      'from-secondary-light to-secondary',
+      'from-neutral-700 to-neutral-800',
+      'from-primary to-secondary',
+      'from-neutral-500 to-neutral-600',
     ]
     return colors[index % colors.length]
   }
@@ -64,13 +60,13 @@ export default function TracksPage() {
       </div>
 
       {/* Tracks List */}
-      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-4 pt-28">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-4 pt-28">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
             </div>
           ) : tracks.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-neutral-500">
               No tracks available
             </div>
           ) : (
@@ -86,7 +82,7 @@ export default function TracksPage() {
                   onClick={() => setExpandedTrack(
                     expandedTrack === track.id ? null : track.id
                   )}
-                  className="w-full p-5 flex items-start gap-4 hover:bg-gray-50 transition-colors"
+                  className="w-full p-5 flex items-start gap-4 hover:bg-neutral-50 transition-colors"
                 >
                   <div 
                     className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold flex-shrink-0"
@@ -96,17 +92,17 @@ export default function TracksPage() {
                   </div>
                   
                   <div className="flex-1 text-left">
-                    <div className="text-sm text-gray-500 mb-1">{track.code}</div>
-                    <h3 className="font-semibold text-gray-800 mb-1">
+                    <div className="text-sm text-neutral-500 mb-1">{track.code}</div>
+                    <h3 className="font-semibold text-neutral-800 mb-1">
                       {track.name}
                     </h3>
-                    <p className="text-sm text-gray-600 line-clamp-2">
+                    <p className="text-sm text-neutral-600 line-clamp-2">
                       {track.description}
                     </p>
                   </div>
                   
                   <ChevronDown
-                    className={`w-5 h-5 text-gray-400 transition-transform flex-shrink-0 ${
+                    className={`w-5 h-5 text-neutral-400 transition-transform flex-shrink-0 ${
                       expandedTrack === track.id ? 'rotate-180' : ''
                     }`}
                   />
@@ -117,12 +113,12 @@ export default function TracksPage() {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="px-5 pb-5 pt-2 border-t border-gray-100"
+                    className="px-5 pb-5 pt-2 border-t border-neutral-100"
                   >
-                    <h4 className="font-semibold text-gray-700 mb-3">Topics Covered:</h4>
+                    <h4 className="font-semibold text-neutral-700 mb-3">Topics Covered:</h4>
                     <ul className="space-y-2">
                       {track.topics?.map((topic, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                        <li key={i} className="flex items-start gap-2 text-sm text-neutral-600">
                           <span className="text-primary mt-1">•</span>
                           <span>{topic}</span>
                         </li>

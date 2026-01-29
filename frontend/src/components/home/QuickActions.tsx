@@ -18,49 +18,49 @@ export default function QuickActions() {
       name: 'Speakers',
       icon: Users,
       href: '/speakers',
-      color: 'from-blue-500 to-blue-600',
+      color: 'from-primary to-primary-dark',
     },
     {
       name: 'Authors',
       icon: FileText,
       href: '/authors',
-      color: 'from-purple-500 to-purple-600',
+      color: 'from-neutral-600 to-neutral-700',
     },
     {
       name: 'Schedule',
       icon: Calendar,
       href: '/schedule',
-      color: 'from-red-500 to-red-600',
+      color: 'from-secondary to-secondary-dark',
     },
     {
       name: 'Tracks',
       icon: Target,
       href: '/tracks',
-      color: 'from-green-500 to-green-600',
+      color: 'from-primary-light to-primary',
     },
     {
       name: 'Patrons',
       icon: Award,
       href: '/patrons',
-      color: 'from-yellow-500 to-orange-500',
+      color: 'from-secondary-light to-secondary',
     },
     {
       name: 'Organisers',
       icon: UserCog,
       href: '/organisers',
-      color: 'from-teal-500 to-teal-600',
+      color: 'from-neutral-700 to-neutral-800',
     },
     {
       name: 'Pre Conference Workshop',
       icon: Briefcase,
       href: '/workshop',
-      color: 'from-indigo-500 to-indigo-600',
+      color: 'from-primary to-secondary',
     },
   ]
 
   return (
-    <div className="px-4 py-6 bg-white">
-      <h3 className="text-xl font-bold text-gray-800 mb-4">Explore</h3>
+    <div className="px-4 py-6 bg-neutral-50">
+      <h3 className="text-xl font-bold text-neutral-800 mb-4">Explore</h3>
       
       <div className="grid grid-cols-3 gap-4">
         {actions.map((action, index) => {
@@ -75,10 +75,10 @@ export default function QuickActions() {
             >
               <Link href={action.href}>
                 <div className="flex flex-col items-center group">
-                  <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200 group-hover:scale-110`}>
+                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200 group-hover:scale-105`}>
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  <span className="text-xs font-medium text-gray-700 mt-2 text-center">
+                  <span className="text-xs font-medium text-neutral-700 mt-2 text-center">
                     {action.name}
                   </span>
                 </div>

@@ -58,7 +58,7 @@ export default function PatronsPage() {
       </div>
 
       {/* Patrons List */}
-      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-6 pt-28">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-6 pt-28">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
@@ -70,7 +70,7 @@ export default function PatronsPage() {
 
               return (
                 <div key={category}>
-                  <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <h2 className="text-lg font-bold text-neutral-800 mb-4 flex items-center gap-2">
                     <Award className="w-5 h-5 text-primary" />
                     {category}
                   </h2>
@@ -98,16 +98,16 @@ export default function PatronsPage() {
                           </div>
                           
                           <div className="flex-1">
-                            <h3 className="font-semibold text-gray-800 mb-1">
+                            <h3 className="font-semibold text-neutral-800 mb-1">
                               {patron.name}
                             </h3>
                             {patron.title && (
-                              <p className="text-sm text-gray-600 mb-1">
+                              <p className="text-sm text-neutral-600 mb-1">
                                 {patron.title}
                               </p>
                             )}
                             {patron.organization && (
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm text-neutral-500">
                                 {patron.organization}
                               </p>
                             )}
