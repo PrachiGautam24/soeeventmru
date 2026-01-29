@@ -3,9 +3,25 @@
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 export default function AboutSection() {
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
+
+  // Academic sponsors - images from /public/academic-sponsors/ folder
+  const sponsorImages: string[] = [
+    'Picture 1.jpg',
+    'Picture 2.jpg',
+    'Picture 3.jpg',
+    'Picture 4.jpg',
+    'Picture 5.jpg',
+    'Picture 7.jpg',
+    'Picture 8.jpg',
+    'Picture 12.jpg',
+    'Picture 54.png',
+    'Picture 87.jpg',
+    'Picture 89.jpg',
+  ]
 
   const sections = [
     {
@@ -92,6 +108,36 @@ The school has collaborations with leading industry and academic partners such a
           </motion.div>
         ))}
       </div>
+
+      {/* Academic Sponsors Section */}
+      {sponsorImages.length > 0 && (
+        <div className="mt-6">
+          <p className="text-xs text-neutral-500 text-center mb-4 uppercase tracking-wide">
+            Academic Sponsors
+          </p>
+          
+          <div className="flex items-center justify-center flex-wrap gap-2">
+            {sponsorImages.map((imageName, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="relative w-16 h-16 bg-neutral-50 rounded-lg flex items-center justify-center border border-neutral-200">
+                  <Image
+                    src={`/academic-sponsors/${imageName}`}
+                    alt={`Sponsor ${index + 1}`}
+                    width={64}
+                    height={64}
+                    className="object-contain p-2"
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
