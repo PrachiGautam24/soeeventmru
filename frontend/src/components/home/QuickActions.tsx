@@ -51,7 +51,7 @@ export default function QuickActions() {
       color: 'from-teal-500 to-teal-600',
     },
     {
-      name: 'Workshop',
+      name: 'Pre Conference Workshop',
       icon: Briefcase,
       href: '/workshop',
       color: 'from-indigo-500 to-indigo-600',
