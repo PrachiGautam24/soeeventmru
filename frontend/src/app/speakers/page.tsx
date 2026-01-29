@@ -53,31 +53,30 @@ export default function SpeakersPage() {
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-gradient-primary text-white px-6 py-6 sticky top-0 z-10">
-          <div className="flex items-center gap-4 mb-4">
-            <Link href="/home">
-              <ArrowLeft className="w-6 h-6" />
-            </Link>
-            <h1 className="text-2xl font-bold">Speakers</h1>
-          </div>
-          
-          {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search speakers..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
-            />
-          </div>
+      {/* Header */}
+      <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
+        <div className="flex items-center gap-4 mb-4">
+          <Link href="/home">
+            <ArrowLeft className="w-6 h-6" />
+          </Link>
+          <h1 className="text-2xl font-bold">Speakers</h1>
         </div>
+        
+        {/* Search */}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search speakers..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
+          />
+        </div>
+      </div>
 
-        {/* Speakers List */}
-        <div className="px-4 py-6 space-y-4">
+      {/* Speakers List */}
+      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-4 pt-44">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
@@ -129,7 +128,6 @@ export default function SpeakersPage() {
             ))
           )}
         </div>
-      </div>
     </AppLayout>
   )
 }

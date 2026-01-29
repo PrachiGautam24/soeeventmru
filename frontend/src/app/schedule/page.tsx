@@ -70,49 +70,48 @@ export default function SchedulePage() {
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-gradient-primary text-white px-6 py-6 sticky top-0 z-10">
-          <div className="flex items-center gap-4 mb-4">
-            <Link href="/home">
-              <ArrowLeft className="w-6 h-6" />
-            </Link>
-            <h1 className="text-2xl font-bold">Schedule</h1>
-          </div>
-          
-          {/* Date Filter Tabs */}
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      {/* Header */}
+      <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
+        <div className="flex items-center gap-4 mb-4">
+          <Link href="/home">
+            <ArrowLeft className="w-6 h-6" />
+          </Link>
+          <h1 className="text-2xl font-bold">Schedule</h1>
+        </div>
+        
+        {/* Date Filter Tabs */}
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          <button
+            onClick={() => setSelectedDate('all')}
+            className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-all ${
+              selectedDate === 'all'
+                ? 'bg-white text-primary'
+                : 'bg-white/20 text-white hover:bg-white/30'
+            }`}
+          >
+            All Sessions
+          </button>
+          {uniqueDates.map((date) => (
             <button
-              onClick={() => setSelectedDate('all')}
+              key={date}
+              onClick={() => setSelectedDate(date)}
               className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-all ${
-                selectedDate === 'all'
+                selectedDate === date
                   ? 'bg-white text-primary'
                   : 'bg-white/20 text-white hover:bg-white/30'
               }`}
             >
-              All Sessions
+              {new Date(date).toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric' 
+              })}
             </button>
-            {uniqueDates.map((date) => (
-              <button
-                key={date}
-                onClick={() => setSelectedDate(date)}
-                className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-all ${
-                  selectedDate === date
-                    ? 'bg-white text-primary'
-                    : 'bg-white/20 text-white hover:bg-white/30'
-                }`}
-              >
-                {new Date(date).toLocaleDateString('en-US', { 
-                  month: 'short', 
-                  day: 'numeric' 
-                })}
-              </button>
-            ))}
-          </div>
+          ))}
         </div>
+      </div>
 
-        {/* Sessions List */}
-        <div className="px-4 py-6 space-y-6">
+      {/* Sessions List */}
+      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-6 pt-44">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
@@ -210,7 +209,6 @@ export default function SchedulePage() {
             ))
           )}
         </div>
-      </div>
     </AppLayout>
   )
 }

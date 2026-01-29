@@ -53,19 +53,18 @@ export default function TracksPage() {
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-gradient-primary text-white px-6 py-6 sticky top-0 z-10">
-          <div className="flex items-center gap-4">
-            <Link href="/home">
-              <ArrowLeft className="w-6 h-6" />
-            </Link>
-            <h1 className="text-2xl font-bold">Conference Tracks</h1>
-          </div>
+      {/* Header */}
+      <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
+        <div className="flex items-center gap-4">
+          <Link href="/home">
+            <ArrowLeft className="w-6 h-6" />
+          </Link>
+          <h1 className="text-2xl font-bold">Conference Tracks</h1>
         </div>
+      </div>
 
-        {/* Tracks List */}
-        <div className="px-4 py-6 space-y-4">
+      {/* Tracks List */}
+      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-4 pt-28">
           {loading ? (
             <div className="flex justify-center items-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
@@ -135,7 +134,6 @@ export default function TracksPage() {
             ))
           )}
         </div>
-      </div>
     </AppLayout>
   )
 }

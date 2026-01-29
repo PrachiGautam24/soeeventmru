@@ -63,16 +63,15 @@ export default function WorkshopPage() {
 
   return (
     <AppLayout>
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <div className="bg-gradient-primary text-white px-6 py-6 sticky top-0 z-10">
-          <Link href="/home" className="flex items-center gap-4">
-            <ArrowLeft className="w-6 h-6" />
-            <h1 className="text-2xl font-bold">Pre-Conference Workshop</h1>
-          </Link>
-        </div>
+      {/* Header */}
+      <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
+        <Link href="/home" className="flex items-center gap-4">
+          <ArrowLeft className="w-6 h-6" />
+          <h1 className="text-2xl font-bold">Pre-Conference Workshop</h1>
+        </Link>
+      </div>
 
-        <div className="px-4 py-6 space-y-4">
+      <div className="bg-gray-50 min-h-screen px-4 py-6 space-y-4 pt-28">
           {/* Title Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -266,7 +265,6 @@ export default function WorkshopPage() {
             </motion.div>
           )}
         </div>
-      </div>
     </AppLayout>
   )
 }
