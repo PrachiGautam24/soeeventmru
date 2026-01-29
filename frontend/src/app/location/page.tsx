@@ -8,7 +8,7 @@ import { MapPin, Phone, Mail, Globe, Navigation } from 'lucide-react'
 export default function LocationPage() {
   const venue = {
     name: 'Manav Rachna University',
-    address: 'Sector 43, Faridabad, Haryana 121004, India',
+    address: 'Sector – 43, Aravalli Hills, Delhi – Surajkund Road, Faridabad – 121004, (Haryana), India',
     coordinates: {
       lat: 28.4222,
       lng: 77.3017,
@@ -42,7 +42,7 @@ export default function LocationPage() {
             <div className="h-64 bg-gray-200 relative">
               {/* Embedded Google Map */}
               <iframe
-                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.6789!2d77.2992!3d28.4222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce17d8eb8c649%3A0x8dc637e3ff8b7b0!2sManav%20Rachna%20University!5e0!3m2!1sen!2sin!4v1234567890123`}
+                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJTSKBKvgDDkR675bSGgv0aQ&key=AIzaSyClZxfln6R0Jjk53Y6tydshM46JP6MU-pE"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
