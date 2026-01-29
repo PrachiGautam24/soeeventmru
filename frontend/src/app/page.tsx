@@ -29,7 +29,7 @@ export default function SplashPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center bg-gradient-mixed"
+            className="absolute inset-0 flex items-center justify-center bg-white"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -37,13 +37,26 @@ export default function SplashPage() {
               transition={{ duration: 0.5 }}
               className="text-center px-8"
             >
-              <h2 className="text-4xl font-bold text-white mb-8">
-                Welcome to ICASS 2026
-              </h2>
+              {/* ICASS Logo */}
+              <div className="mb-8">
+                <Image
+                  src="/images/logo.png"
+                  alt="ICASS Logo"
+                  width={200}
+                  height={200}
+                  className="mx-0"
+                />
+              </div>
+              {/* Loading spinner with gradient colors */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                className="w-16 h-16 border-4 border-white border-t-transparent rounded-full mx-auto"
+                className="w-8 h-8 border-4 border-transparent rounded-full mx-auto"
+                style={{
+                  borderTopColor: '#1E3A8A',
+                  borderRightColor: '#1E3A8A',
+                  borderBottomColor: '#DC2626'
+                }}
               />
             </motion.div>
           </motion.div>
