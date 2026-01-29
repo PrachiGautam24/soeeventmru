@@ -60,7 +60,7 @@ export default function QuickActions() {
 
   return (
     <div className="px-4 py-6 bg-neutral-50">
-      <h3 className="text-xl font-bold text-neutral-800 mb-4">Explore</h3>
+      <h3 className="text-xl font-bold text-neutral-800 mb-6 ml-6">More About Conference</h3>
       
       <div className="grid grid-cols-3 gap-4">
         {actions.map((action, index) => {
