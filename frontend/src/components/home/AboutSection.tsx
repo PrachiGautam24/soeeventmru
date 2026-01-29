@@ -49,7 +49,7 @@ The school has collaborations with leading industry and academic partners such a
   ]
 
   return (
-    <div className="px-4 py-6 bg-white">
+    <div className="px-8 py-6 bg-white">
       <h3 className="text-xl font-bold text-neutral-800 mb-4">About the Conference</h3>
       
       <div className="space-y-3">
