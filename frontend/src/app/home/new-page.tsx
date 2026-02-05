@@ -15,7 +15,7 @@ export default function SOEEventsHome() {
       image: '/images/logo.png',
       isActive: true
     },
-    // Add more events here in the future
+    // Add more events
   ]
 
   return (
