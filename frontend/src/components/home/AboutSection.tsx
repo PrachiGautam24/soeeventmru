@@ -10,14 +10,10 @@ export default function AboutSection() {
 
   // Academic sponsors - images from /public/academic-sponsors/ folder
   const sponsorImages: string[] = [
-    'Picture 1.jpg',
-    'Picture 2.jpg',
-    'Picture 3.jpg',
     'Picture 4.jpg',
     'Picture 5.jpg',
     'Picture 7.jpg',
     'Picture 8.jpg',
-    'Picture 12.jpg',
     'Picture 54.png',
     'Picture 87.jpg',
     'Picture 89.jpg',
@@ -113,7 +109,7 @@ The school has collaborations with leading industry and academic partners such a
       {sponsorImages.length > 0 && (
         <div className="mt-6">
           <p className="text-xs text-neutral-500 text-center mb-4 uppercase tracking-wide">
-            Academic Sponsors
+            Academic Partners
           </p>
           
           <div className="flex items-center justify-center flex-wrap gap-2">
