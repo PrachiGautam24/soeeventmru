@@ -37,11 +37,11 @@ export default function SplashPage() {
               transition={{ duration: 0.5 }}
               className="text-center px-8"
             >
-              {/* MRU Logo */}
+              {/* SOE Logo */}
               <div className="mb-8">
                 <Image
-                  src="/images/mru-logo.png"
-                  alt="Manav Rachna University Logo"
+                  src="/images/soe-events-logo.jpg"
+                  alt="School of Engineering - Manav Rachna University"
                   width={200}
                   height={200}
                   className="mx-auto"

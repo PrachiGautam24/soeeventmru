@@ -43,25 +43,6 @@ export default function ICASSLoadingPage() {
               className="mx-auto"
             />
           </div>
-          
-          {/* Event Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2"
-          >
-            ICASS 2026
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="text-gray-600 mb-8"
-          >
-            International Conference on Intelligent Computing
-          </motion.p>
 
           {/* Loading spinner with gradient colors */}
           <motion.div
