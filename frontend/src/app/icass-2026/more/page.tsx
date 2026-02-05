@@ -11,30 +11,42 @@ import {
   Globe,
   BookOpen,
   Info,
-  Share2
+  Share2,
+  ArrowLeft
 } from 'lucide-react'
 
 export default function MorePage() {
   const menuItems = [
+    {
+      title: 'Navigation',
+      items: [
+        {
+          name: 'Back to SOE Events',
+          icon: ArrowLeft,
+          href: '/home',
+          color: 'from-purple-600 to-purple-700',
+        },
+      ],
+    },
     {
       title: 'Conference Info',
       items: [
         {
           name: 'Speakers',
           icon: Users,
-          href: '/speakers',
+          href: '/icass-2026/speakers',
           color: 'from-primary to-primary-dark',
         },
         {
           name: 'Patrons & Chairs',
           icon: Award,
-          href: '/patrons',
+          href: '/icass-2026/patrons',
           color: 'from-secondary-light to-secondary',
         },
         {
           name: 'Organisers',
           icon: UserCog,
-          href: '/organisers',
+          href: '/icass-2026/organisers',
           color: 'from-neutral-700 to-neutral-800',
         },
       ],
@@ -45,7 +57,7 @@ export default function MorePage() {
         {
           name: 'Location',
           icon: MapPin,
-          href: '/location',
+          href: '/icass-2026/location',
           color: 'from-secondary to-secondary-dark',
         },
         {
@@ -61,15 +73,9 @@ export default function MorePage() {
       title: 'Resources',
       items: [
         {
-          name: 'About ICASS',
-          icon: Info,
-          href: '/about',
-          color: 'from-neutral-600 to-neutral-700',
-        },
-        {
           name: 'Conference Tracks',
           icon: BookOpen,
-          href: '/tracks',
+          href: '/icass-2026/tracks',
           color: 'from-primary-light to-primary',
         },
       ],

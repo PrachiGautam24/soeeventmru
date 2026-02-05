@@ -37,14 +37,14 @@ export default function SplashPage() {
               transition={{ duration: 0.5 }}
               className="text-center px-8"
             >
-              {/* ICASS Logo */}
+              {/* MRU Logo */}
               <div className="mb-8">
                 <Image
-                  src="/images/logo.png"
-                  alt="ICASS Logo"
+                  src="/images/mru-logo.png"
+                  alt="Manav Rachna University Logo"
                   width={200}
                   height={200}
-                  className="mx-0"
+                  className="mx-auto"
                 />
               </div>
               {/* Loading spinner with gradient colors */}

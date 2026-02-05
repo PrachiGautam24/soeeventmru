@@ -6,21 +6,25 @@ import { Home, MapPin, Menu } from 'lucide-react'
 
 export default function BottomNav() {
   const pathname = usePathname()
+  
+  // Determine if we're inside an event context
+  const isInEventContext = pathname.startsWith('/icass-2026')
+  const eventPrefix = isInEventContext ? '/icass-2026' : ''
 
   const navItems = [
     {
       name: 'Home',
-      href: '/home',
+      href: `${eventPrefix}/home`,
       icon: Home,
     },
     {
       name: 'Location',
-      href: '/location',
+      href: `${eventPrefix}/location`,
       icon: MapPin,
     },
     {
       name: 'More',
-      href: '/more',
+      href: `${eventPrefix}/more`,
       icon: Menu,
     },
   ]
