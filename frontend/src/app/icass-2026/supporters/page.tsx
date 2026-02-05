@@ -57,7 +57,7 @@ export default function SponsorsPage() {
         ) : sponsors.length === 0 ? (
           <div className="text-center py-12">
             <Award className="w-16 h-16 text-neutral-300 mx-auto mb-4" />
-            <p className="text-neutral-500">No sponsors available</p>
+            <p className="text-neutral-500">No supporter available</p>
           </div>
         ) : (
           sponsors.map((sponsor, index) => (

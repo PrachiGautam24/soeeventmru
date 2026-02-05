@@ -48,9 +48,9 @@ export default function QuickActions() {
       color: 'from-primary to-primary-dark',
     },
     {
-      name: 'Sponsors',
+      name: 'Supporters',
       icon: Building2,
-      href: '/icass-2026/sponsors',
+      href: '/icass-2026/supporters',
       color: 'from-secondary-light to-secondary',
     },
     {

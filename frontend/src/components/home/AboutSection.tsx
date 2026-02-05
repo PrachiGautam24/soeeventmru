@@ -8,7 +8,7 @@ import Image from 'next/image'
 export default function AboutSection() {
   const [expandedSection, setExpandedSection] = useState<string | null>(null)
 
-  // Academic sponsors - images from /public/academic-sponsors/ folder
+  // Academic Partners - images from /public/academic-partners/ folder
   const sponsorImages: string[] = [
     'Picture 4.jpg',
     'Picture 5.jpg',
@@ -105,7 +105,7 @@ The school has collaborations with leading industry and academic partners such a
         ))}
       </div>
 
-      {/* Academic Sponsors Section */}
+      {/* Academic Partners Section */}
       {sponsorImages.length > 0 && (
         <div className="mt-6">
           <p className="text-xs text-neutral-500 text-center mb-4 uppercase tracking-wide">
@@ -122,7 +122,7 @@ The school has collaborations with leading industry and academic partners such a
               >
                 <div className="relative w-16 h-16 bg-neutral-50 rounded-lg flex items-center justify-center border border-neutral-200">
                   <Image
-                    src={`/academic-sponsors/${imageName}`}
+                    src={`/academic-partners/${imageName}`}
                     alt={`Sponsor ${index + 1}`}
                     width={64}
                     height={64}
