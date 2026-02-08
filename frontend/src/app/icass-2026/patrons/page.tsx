@@ -86,13 +86,16 @@ export default function PatronsPage() {
                         className="bg-white rounded-2xl p-5 shadow-md"
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
+                          <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
                             <Image 
                               src={patron.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(patron.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
                               alt={patron.name}
-                              width={48}
-                              height={48}
+                              width={64}
+                              height={64}
                               className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(patron.name)}&size=128&background=1e4ba9&color=fff&bold=true`;
+                              }}
                             />
                           </div>
                           

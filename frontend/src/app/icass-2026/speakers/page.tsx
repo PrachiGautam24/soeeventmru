@@ -103,6 +103,9 @@ export default function SpeakersPage() {
                       width={64}
                       height={64}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.name)}&size=128&background=1e4ba9&color=fff&bold=true`;
+                      }}
                     />
                   </div>
                   
@@ -147,17 +150,16 @@ function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => v
         {/* Profile Card */}
         <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
           <div className="w-32 h-32 mx-auto rounded-full bg-gradient-primary flex items-center justify-center text-white text-4xl font-bold mb-4 overflow-hidden">
-            {speaker.image_url ? (
-              <Image 
-                src={speaker.image_url} 
-                alt={speaker.name}
-                width={128}
-                height={128}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              speaker.name.split(' ').map(n => n[0]).join('').slice(0, 2)
-            )}
+            <Image 
+              src={speaker.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.name)}&size=256&background=1e4ba9&color=fff&bold=true`}
+              alt={speaker.name}
+              width={128}
+              height={128}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.name)}&size=256&background=1e4ba9&color=fff&bold=true`;
+              }}
+            />
           </div>
           
           <h2 className="text-2xl font-bold text-neutral-800 mb-2">{speaker.name}</h2>

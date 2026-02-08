@@ -84,13 +84,16 @@ export default function OrganisersPage() {
                       className="bg-white rounded-2xl p-5 shadow-md"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
+                        <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
                           <Image 
                             src={organiser.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(organiser.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
                             alt={organiser.name}
-                            width={56}
-                            height={56}
+                            width={64}
+                            height={64}
                             className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(organiser.name)}&size=128&background=1e4ba9&color=fff&bold=true`;
+                            }}
                           />
                         </div>
                         
