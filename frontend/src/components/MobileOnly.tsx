@@ -171,7 +171,7 @@ export default function MobileOnly({ children }: { children: React.ReactNode }) 
           {/* Description with better spacing */}
           <div className="space-y-4 mb-10 animate-slideUp" style={{ animationDelay: '0.2s' }}>
             <p className="text-neutral-700 px-8 text-lg leading-relaxed font-medium">
-              SOE Events is designed exclusively for mobile devices to provide you the best experience. So, please access this platform using your smartphone
+              SOE Events is designed exclusively for mobile devices to provide you the best experience. So, please access this platform using your smartphone.
             </p>
 
           </div>
