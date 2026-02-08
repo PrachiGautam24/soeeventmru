@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import MobileOnly from '@/components/MobileOnly'
@@ -10,7 +10,12 @@ export const metadata: Metadata = {
   description: 'Official events platform for School of Engineering, Manav Rachna University. Discover upcoming conferences, workshops, and academic events.',
   keywords: ['SOE Events', 'Manav Rachna University', 'School of Engineering', 'Conferences', 'ICASS 2026', 'Academic Events'],
   authors: [{ name: 'Manav Rachna University' }],
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
   themeColor: '#1E3A8A',
 }
 
