@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   description: 'Official events platform for School of Engineering, Manav Rachna University. Discover upcoming conferences, workshops, and academic events.',
   keywords: ['SOE Events', 'Manav Rachna University', 'School of Engineering', 'Conferences', 'ICASS 2026', 'Academic Events'],
   authors: [{ name: 'Manav Rachna University' }],
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 }
 
 export const viewport: Viewport = {
