@@ -11,7 +11,7 @@ import Link from 'next/link'
 export default function SchedulePage() {
   const [sessions, setSessions] = useState<Session[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedDate, setSelectedDate] = useState<string>('all')
+  const [selectedDate, setSelectedDate] = useState<string>('')
   const [mySchedule, setMySchedule] = useState<Set<string>>(new Set())
 
   useEffect(() => {
@@ -29,6 +29,10 @@ export default function SchedulePage() {
 
       if (error) throw error
       setSessions(data || [])
+      // Set default to first date
+      if (data && data.length > 0) {
+        setSelectedDate(data[0].date)
+      }
     } catch (error) {
       console.error('Error fetching sessions:', error)
     } finally {
@@ -56,9 +60,7 @@ export default function SchedulePage() {
 
   const uniqueDates = [...new Set(sessions.map(s => s.date))].sort()
   
-  const filteredSessions = selectedDate === 'all' 
-    ? sessions 
-    : sessions.filter(s => s.date === selectedDate)
+  const filteredSessions = sessions.filter(s => s.date === selectedDate)
 
   const sessionsByDate = filteredSessions.reduce((acc, session) => {
     if (!acc[session.date]) {
@@ -81,16 +83,6 @@ export default function SchedulePage() {
         
         {/* Date Filter Tabs */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          <button
-            onClick={() => setSelectedDate('all')}
-            className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-all ${
-              selectedDate === 'all'
-                ? 'bg-white text-primary'
-                : 'bg-white/20 text-white hover:bg-white/30'
-            }`}
-          >
-            All Sessions
-          </button>
           {uniqueDates.map((date) => (
             <button
               key={date}
@@ -183,18 +175,6 @@ export default function SchedulePage() {
                           </div>
                         </div>
                         
-                        <button
-                          onClick={() => toggleMySchedule(session.id)}
-                          className={`ml-4 p-2 rounded-full transition-all ${
-                            mySchedule.has(session.id)
-                              ? 'bg-primary text-white'
-                              : 'bg-neutral-100 text-neutral-400 hover:bg-neutral-200'
-                          }`}
-                        >
-                          <Plus className={`w-5 h-5 transition-transform ${
-                            mySchedule.has(session.id) ? 'rotate-45' : ''
-                          }`} />
-                        </button>
                       </div>
                       
                       {session.session_type && (

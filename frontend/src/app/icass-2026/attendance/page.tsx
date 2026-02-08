@@ -115,7 +115,7 @@ export default function AttendancePage() {
               >
                 <CheckCircle className="w-5 h-5" />
                 <span className="text-sm font-medium">
-                  Attendance marked successfully!
+                  Thanks for Joining us !!
                 </span>
               </motion.div>
             )}
