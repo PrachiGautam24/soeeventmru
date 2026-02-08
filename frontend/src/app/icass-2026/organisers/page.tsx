@@ -45,7 +45,7 @@ export default function OrganisersPage() {
       {/* Header */}
       <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
         <div className="flex items-center gap-4">
-          <Link href="/home">
+          <Link href="/icass-2026/home">
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <div>

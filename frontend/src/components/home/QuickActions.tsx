@@ -12,7 +12,8 @@ import {
   Briefcase,
   UserCheck,
   Building2,
-  ClipboardCheck
+  ClipboardCheck,
+  Music
 } from 'lucide-react'
 
 export default function QuickActions() {
@@ -76,6 +77,12 @@ export default function QuickActions() {
       icon: Briefcase,
       href: '/icass-2026/workshop',
       color: 'from-primary to-secondary',
+    },
+    {
+      name: 'Cultural Performances',
+      icon: Music,
+      href: '/icass-2026/cultural-performances',
+      color: 'from-secondary to-secondary-dark',
     },
   ]
 

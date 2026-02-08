@@ -12,7 +12,8 @@ import {
   BookOpen,
   Info,
   Share2,
-  ArrowLeft
+  ArrowLeft,
+  Music
 } from 'lucide-react'
 
 export default function MorePage() {
@@ -77,6 +78,17 @@ export default function MorePage() {
           icon: BookOpen,
           href: '/icass-2026/tracks',
           color: 'from-primary-light to-primary',
+        },
+      ],
+    },
+    {
+      title: 'Cultural Events',
+      items: [
+        {
+          name: 'Cultural Performances',
+          icon: Music,
+          href: '/icass-2026/cultural-performances',
+          color: 'from-secondary to-secondary-dark',
         },
       ],
     },
