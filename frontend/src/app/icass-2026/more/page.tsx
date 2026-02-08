@@ -25,7 +25,7 @@ export default function MorePage() {
           name: 'Back to SOE Events',
           icon: ArrowLeft,
           href: '/home',
-          color: 'from-purple-600 to-purple-700',
+          color: 'from-primary to-primary-dark',
         },
       ],
     },
