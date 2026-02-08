@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Mail, UserCog } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getImageUrl } from '@/lib/utils'
 
 export default function OrganisersPage() {
   const [organisers, setOrganisers] = useState<Organiser[]>([])
@@ -86,7 +87,7 @@ export default function OrganisersPage() {
                       <div className="flex items-start gap-4">
                         <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
                           <Image 
-                            src={organiser.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(organiser.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                            src={getImageUrl(organiser.image_url, organiser.name, 128)}
                             alt={organiser.name}
                             width={64}
                             height={64}

@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Award } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getImageUrl } from '@/lib/utils'
 
 export default function PatronsPage() {
   const [patrons, setPatrons] = useState<Patron[]>([])
@@ -88,7 +89,7 @@ export default function PatronsPage() {
                         <div className="flex items-start gap-4">
                           <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
                             <Image 
-                              src={patron.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(patron.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                              src={getImageUrl(patron.image_url, patron.name, 128)}
                               alt={patron.name}
                               width={64}
                               height={64}

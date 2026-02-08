@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { Search, Twitter, Linkedin, Globe, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getImageUrl } from '@/lib/utils'
 
 export default function SpeakersPage() {
   const [speakers, setSpeakers] = useState<Speaker[]>([])
@@ -98,7 +99,7 @@ export default function SpeakersPage() {
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-xl font-bold flex-shrink-0 overflow-hidden">
                     <Image 
-                      src={speaker.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                      src={getImageUrl(speaker.image_url, speaker.name, 128)}
                       alt={speaker.name}
                       width={64}
                       height={64}
@@ -151,7 +152,7 @@ function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => v
         <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
           <div className="w-32 h-32 mx-auto rounded-full bg-gradient-primary flex items-center justify-center text-white text-4xl font-bold mb-4 overflow-hidden">
             <Image 
-              src={speaker.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.name)}&size=256&background=1e4ba9&color=fff&bold=true`}
+              src={getImageUrl(speaker.image_url, speaker.name, 256)}
               alt={speaker.name}
               width={128}
               height={128}

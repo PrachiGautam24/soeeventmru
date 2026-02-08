@@ -8,6 +8,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Search, FileText, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getImageUrl } from '@/lib/utils'
 
 export default function AuthorsPage() {
   const [authors, setAuthors] = useState<Author[]>([])
@@ -87,7 +88,7 @@ export default function AuthorsPage() {
                 <div className="flex items-start gap-3">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold flex-shrink-0 overflow-hidden">
                     <Image 
-                      src={author.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                      src={getImageUrl(author.image_url, author.name, 128)}
                       alt={author.name}
                       width={64}
                       height={64}
