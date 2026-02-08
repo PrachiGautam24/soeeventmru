@@ -178,6 +178,7 @@ export interface Database {
           organization: string | null
           email: string | null
           phone: string | null
+          image_url: string | null
           order_index: number
           created_at: string
           updated_at: string
@@ -189,6 +190,7 @@ export interface Database {
           organization?: string | null
           email?: string | null
           phone?: string | null
+          image_url?: string | null
           order_index?: number
           created_at?: string
           updated_at?: string
@@ -200,6 +202,7 @@ export interface Database {
           organization?: string | null
           email?: string | null
           phone?: string | null
+          image_url?: string | null
           order_index?: number
           created_at?: string
           updated_at?: string
@@ -273,6 +276,7 @@ export interface Database {
           paper_title: string | null
           track: string | null
           country: string | null
+          image_url: string | null
           order_index: number
           created_at: string
           updated_at: string
@@ -285,6 +289,7 @@ export interface Database {
           paper_title?: string | null
           track?: string | null
           country?: string | null
+          image_url?: string | null
           order_index?: number
           created_at?: string
           updated_at?: string
@@ -297,6 +302,7 @@ export interface Database {
           paper_title?: string | null
           track?: string | null
           country?: string | null
+          image_url?: string | null
           order_index?: number
           created_at?: string
           updated_at?: string

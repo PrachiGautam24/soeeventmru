@@ -7,6 +7,7 @@ import { Author } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Search, FileText, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function AuthorsPage() {
   const [authors, setAuthors] = useState<Author[]>([])
@@ -84,8 +85,18 @@ export default function AuthorsPage() {
                 className="bg-white rounded-2xl p-4 shadow-md"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-                    {author.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold flex-shrink-0 overflow-hidden">
+                    {author.image_url ? (
+                      <Image 
+                        src={author.image_url} 
+                        alt={author.name}
+                        width={48}
+                        height={48}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      author.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+                    )}
                   </div>
                   
                   <div className="flex-1 min-w-0">

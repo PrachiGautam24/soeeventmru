@@ -96,12 +96,14 @@ export default function SpeakersPage() {
                 className="bg-white rounded-2xl p-4 shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-xl font-bold flex-shrink-0 overflow-hidden">
                     {speaker.image_url ? (
-                      <img 
+                      <Image 
                         src={speaker.image_url} 
                         alt={speaker.name}
-                        className="w-full h-full rounded-full object-cover"
+                        width={64}
+                        height={64}
+                        className="w-full h-full object-cover"
                       />
                     ) : (
                       speaker.name.split(' ').map(n => n[0]).join('').slice(0, 2)
@@ -148,12 +150,14 @@ function SpeakerDetails({ speaker, onBack }: { speaker: Speaker; onBack: () => v
       <div className="px-6 py-6 space-y-6">
         {/* Profile Card */}
         <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
-          <div className="w-32 h-32 mx-auto rounded-full bg-gradient-primary flex items-center justify-center text-white text-4xl font-bold mb-4">
+          <div className="w-32 h-32 mx-auto rounded-full bg-gradient-primary flex items-center justify-center text-white text-4xl font-bold mb-4 overflow-hidden">
             {speaker.image_url ? (
-              <img 
+              <Image 
                 src={speaker.image_url} 
                 alt={speaker.name}
-                className="w-full h-full rounded-full object-cover"
+                width={128}
+                height={128}
+                className="w-full h-full object-cover"
               />
             ) : (
               speaker.name.split(' ').map(n => n[0]).join('').slice(0, 2)

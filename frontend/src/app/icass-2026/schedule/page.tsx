@@ -28,10 +28,11 @@ export default function SchedulePage() {
         .order('start_time', { ascending: true })
 
       if (error) throw error
-      setSessions(data || [])
+      const sessionData = data as Session[]
+      setSessions(sessionData || [])
       // Set default to first date
-      if (data && data.length > 0) {
-        setSelectedDate(data[0].date)
+      if (sessionData && sessionData.length > 0) {
+        setSelectedDate(sessionData[0].date)
       }
     } catch (error) {
       console.error('Error fetching sessions:', error)

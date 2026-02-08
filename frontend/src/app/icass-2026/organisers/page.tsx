@@ -7,6 +7,7 @@ import { Organiser } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Mail, UserCog } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function OrganisersPage() {
   const [organisers, setOrganisers] = useState<Organiser[]>([])
@@ -83,8 +84,18 @@ export default function OrganisersPage() {
                       className="bg-white rounded-2xl p-5 shadow-md"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
-                          {organiser.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                        <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
+                          {organiser.image_url ? (
+                            <Image 
+                              src={organiser.image_url} 
+                              alt={organiser.name}
+                              width={56}
+                              height={56}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            organiser.name.split(' ').map(n => n[0]).join('').slice(0, 2)
+                          )}
                         </div>
                         
                         <div className="flex-1">

@@ -7,6 +7,7 @@ import { Patron } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Award } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function PatronsPage() {
   const [patrons, setPatrons] = useState<Patron[]>([])
@@ -85,12 +86,14 @@ export default function PatronsPage() {
                         className="bg-white rounded-2xl p-5 shadow-md"
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0">
+                          <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
                             {patron.image_url ? (
-                              <img 
+                              <Image 
                                 src={patron.image_url} 
                                 alt={patron.name}
-                                className="w-full h-full rounded-full object-cover"
+                                width={48}
+                                height={48}
+                                className="w-full h-full object-cover"
                               />
                             ) : (
                               patron.name.split(' ').map(n => n[0]).join('').slice(0, 2)
