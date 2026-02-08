@@ -86,17 +86,13 @@ export default function AuthorsPage() {
               >
                 <div className="flex items-start gap-3">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold flex-shrink-0 overflow-hidden">
-                    {author.image_url ? (
-                      <Image 
-                        src={author.image_url} 
-                        alt={author.name}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      author.name.split(' ').map(n => n[0]).join('').slice(0, 2)
-                    )}
+                    <Image 
+                      src={author.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(author.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                      alt={author.name}
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   <div className="flex-1 min-w-0">

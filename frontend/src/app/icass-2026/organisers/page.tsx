@@ -85,17 +85,13 @@ export default function OrganisersPage() {
                     >
                       <div className="flex items-start gap-4">
                         <div className="w-14 h-14 rounded-full bg-gradient-primary flex items-center justify-center text-white text-lg font-bold flex-shrink-0 overflow-hidden">
-                          {organiser.image_url ? (
-                            <Image 
-                              src={organiser.image_url} 
-                              alt={organiser.name}
-                              width={56}
-                              height={56}
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            organiser.name.split(' ').map(n => n[0]).join('').slice(0, 2)
-                          )}
+                          <Image 
+                            src={organiser.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(organiser.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                            alt={organiser.name}
+                            width={56}
+                            height={56}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         
                         <div className="flex-1">

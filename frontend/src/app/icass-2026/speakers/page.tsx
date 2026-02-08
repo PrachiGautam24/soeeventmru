@@ -97,17 +97,13 @@ export default function SpeakersPage() {
               >
                 <div className="flex items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-white text-xl font-bold flex-shrink-0 overflow-hidden">
-                    {speaker.image_url ? (
-                      <Image 
-                        src={speaker.image_url} 
-                        alt={speaker.name}
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      speaker.name.split(' ').map(n => n[0]).join('').slice(0, 2)
-                    )}
+                    <Image 
+                      src={speaker.image_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.name)}&size=128&background=1e4ba9&color=fff&bold=true`}
+                      alt={speaker.name}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   <div className="flex-1 min-w-0">
