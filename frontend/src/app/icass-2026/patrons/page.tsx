@@ -42,7 +42,21 @@ export default function PatronsPage() {
     return acc
   }, {} as Record<string, Patron[]>)
 
-  const categoryOrder = ['Chief Patron(s)', 'Patron(s)', 'General Chair', 'Conference Chair']
+  const categoryOrder = [
+    'Chief Patron(s)',
+    'Patron(s)',
+    'General Chair',
+    'Conference Chair',
+    'Executive Chair(s)',
+    'Convener',
+    'Conference Secretary(s)',
+    'Technical Program Chair(s)',
+    'Steering Committee Chair(s)',
+    'Finance Chair / Treasurer(s)',
+    'Publication Chair(s)',
+    'Special Session Chair',
+    'Publicity Chair(s)'
+  ]
 
   return (
     <AppLayout>
