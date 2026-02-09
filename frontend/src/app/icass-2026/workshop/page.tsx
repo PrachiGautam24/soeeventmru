@@ -48,7 +48,7 @@ export default function WorkshopPage() {
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold">Pre-Conference Workshops</h1>
+            <h1 className="text-2xl font-bold">Pre-Conf. Workshops</h1>
             <p className="text-sm text-white/80">February 11, 2026</p>
           </div>
         </div>
@@ -309,25 +309,7 @@ function WorkshopDetails({ workshop, onBack }: { workshop: Workshop; onBack: () 
               </ul>
             </motion.div>
           )}
-
-          {/* Registration Button */}
-          {workshop.registration_url && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="pb-6"
-            >
-              <a
-                href={workshop.registration_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block w-full bg-gradient-primary text-white text-center py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all"
-              >
-                Register Now
-              </a>
-            </motion.div>
-          )}
+          
         </div>
     </AppLayout>
   )
