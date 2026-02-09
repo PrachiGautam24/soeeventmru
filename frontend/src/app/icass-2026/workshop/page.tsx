@@ -9,66 +9,130 @@ import { ArrowLeft, Calendar, Clock, MapPin, Users, Award, Target } from 'lucide
 import Link from 'next/link'
 
 export default function WorkshopPage() {
-  const [workshop, setWorkshop] = useState<Workshop | null>(null)
+  const [workshops, setWorkshops] = useState<Workshop[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedWorkshop, setSelectedWorkshop] = useState<Workshop | null>(null)
 
   useEffect(() => {
-    fetchWorkshop()
+    fetchWorkshops()
   }, [])
 
-  const fetchWorkshop = async () => {
+  const fetchWorkshops = async () => {
     try {
       const { data, error } = await supabase
         .from('workshop')
         .select('*')
-        .limit(1)
-        .single()
+        .order('date', { ascending: true })
+        .order('start_time', { ascending: true })
 
       if (error) throw error
-      setWorkshop(data)
+      setWorkshops(data || [])
     } catch (error) {
-      console.error('Error fetching workshop:', error)
+      console.error('Error fetching workshops:', error)
     } finally {
       setLoading(false)
     }
   }
 
-  if (loading) {
-    return (
-      <AppLayout>
-        <div className="flex justify-center items-center h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
-        </div>
-      </AppLayout>
-    )
-  }
-
-  if (!workshop) {
-    return (
-      <AppLayout>
-        <div className="min-h-screen bg-neutral-50">
-          <div className="bg-gradient-primary text-white px-6 py-6">
-            <Link href="/icass-2026/home" className="flex items-center gap-4">
-              <ArrowLeft className="w-6 h-6" />
-              <h1 className="text-2xl font-bold">Pre-Conference Workshop</h1>
-            </Link>
-          </div>
-          <div className="text-center py-12 text-neutral-500">
-            No workshop information available
-          </div>
-        </div>
-      </AppLayout>
-    )
+  // Show workshop details if one is selected
+  if (selectedWorkshop) {
+    return <WorkshopDetails workshop={selectedWorkshop} onBack={() => setSelectedWorkshop(null)} />
   }
 
   return (
     <AppLayout>
       {/* Header */}
       <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
-        <Link href="/icass-2026/home" className="flex items-center gap-4">
+        <div className="flex items-center gap-4">
+          <Link href="/icass-2026/home">
+            <ArrowLeft className="w-6 h-6" />
+          </Link>
+          <div>
+            <h1 className="text-2xl font-bold">Pre-Conference Workshops</h1>
+            <p className="text-sm text-white/80">February 11, 2026</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-4 pt-28">
+        {loading ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent" />
+          </div>
+        ) : workshops.length === 0 ? (
+          <div className="text-center py-12 text-neutral-500">
+            No workshops available
+          </div>
+        ) : (
+          workshops.map((workshop, index) => (
+            <motion.div
+              key={workshop.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => setSelectedWorkshop(workshop)}
+              className="bg-white rounded-2xl p-5 shadow-md cursor-pointer hover:shadow-lg transition-shadow"
+            >
+              <h2 className="text-lg font-bold text-neutral-800 mb-2">{workshop.title}</h2>
+              {workshop.instructor_name && (
+                <p className="text-sm text-neutral-600 mb-3">
+                  <span className="font-medium">Instructor:</span> {workshop.instructor_name}
+                </p>
+              )}
+              
+              <div className="space-y-2">
+                {workshop.date && workshop.start_time && workshop.end_time && (
+                  <div className="flex items-center gap-2 text-sm text-neutral-600">
+                    <Clock className="w-4 h-4 text-primary" />
+                    <span>
+                      {new Date(`2000-01-01T${workshop.start_time}`).toLocaleTimeString('en-US', { 
+                        hour: 'numeric', 
+                        minute: '2-digit',
+                        hour12: true 
+                      })} - {new Date(`2000-01-01T${workshop.end_time}`).toLocaleTimeString('en-US', { 
+                        hour: 'numeric', 
+                        minute: '2-digit',
+                        hour12: true 
+                      })}
+                    </span>
+                  </div>
+                )}
+                
+                {workshop.location && (
+                  <div className="flex items-center gap-2 text-sm text-neutral-600">
+                    <MapPin className="w-4 h-4 text-primary" />
+                    <span>{workshop.location}</span>
+                  </div>
+                )}
+                
+                {workshop.max_participants && (
+                  <div className="flex items-center gap-2 text-sm text-neutral-600">
+                    <Users className="w-4 h-4 text-primary" />
+                    <span>Max {workshop.max_participants} participants</span>
+                  </div>
+                )}
+              </div>
+              
+              <div className="mt-3 text-sm text-primary font-medium">
+                Tap to view details →
+              </div>
+            </motion.div>
+          ))
+        )}
+      </div>
+    </AppLayout>
+  )
+}
+
+function WorkshopDetails({ workshop, onBack }: { workshop: Workshop; onBack: () => void }) {
+  return (
+    <AppLayout>
+      {/* Header */}
+      <div className="bg-gradient-primary text-white px-6 py-6 fixed top-0 left-0 right-0 z-50 max-w-md mx-auto">
+        <button onClick={onBack} className="flex items-center gap-4">
           <ArrowLeft className="w-6 h-6" />
-          <h1 className="text-2xl font-bold">Pre-Conf. Workshop</h1>
-        </Link>
+          <h1 className="text-2xl font-bold">Workshop Details</h1>
+        </button>
       </div>
 
       <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-4 pt-28">
