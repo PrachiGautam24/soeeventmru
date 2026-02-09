@@ -77,7 +77,7 @@ INSERT INTO sessions (title, description, speaker_name, date, start_time, end_ti
 ('Industry Expert Talk', 'Talk by Industry Expert', NULL, '2026-02-12', '17:30', '18:00', 30, NULL, 'Invited Talk', NULL),
 
 -- Cultural Event
-('Cultural Event & Gala Dinner', 'Cultural performances followed by dinner', NULL, '2026-02-12', '18:00', '20:30', 150, NULL, 'Cultural Event', NULL),
+('Cultural Event & Gala Dinner', 'SITAYANA - A Classical Dance Drama followed by Gala Dinner', NULL, '2026-02-12', '18:00', '19:00', 60, 'Mandala Auditorium, G Block', 'Cultural Event', NULL),
 
 -- ====================================================================================
 -- DAY 2: FRIDAY, FEBRUARY 13, 2026

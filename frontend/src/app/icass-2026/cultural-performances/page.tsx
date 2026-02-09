@@ -10,9 +10,9 @@ export default function CulturalPerformancesPage() {
   const performance = {
     title: "SITAYANA",
     subtitle: "A Classical Dance Drama",
-    date: "March 15, 2026",
-    time: "6:00 PM - 8:00 PM",
-    venue: "Main Auditorium, Manav Rachna University",
+    date: "February 12, 2026",
+    time: "6:00 PM - 7:00 PM",
+    venue: "Mandala Auditorium, G Block, Manav Rachna University",
     description: `SITAYANA is a classical dance drama that reimagines the ancient Indian epic through the lens of Sita's journey, highlighting its resonance in the modern day. While the Ramayana has traditionally centered on Shri Rama, this production brings forth Sita's unyielding courage and inner strength—her endurance through exile, abduction, imprisonment in a foreign land, public humiliation, the Agni Pariksha, and ultimately, abandonment during pregnancy.
 
 Presented by acclaimed Bharatanatyam artists Bhadra Sinha (as Rama) and Gayathri Sharma (as Sita), SITAYANA draws inspiration from Chitra Banerjee Divakaruni's Forest of Enchantment. The production weaves together English monologues with the evocative expressions, hand gestures, and grammar of Bharatanatyam to retell this epic with fresh sensitivity.
