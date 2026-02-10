@@ -390,6 +390,106 @@ export interface Database {
           updated_at?: string
         }
       }
+      schedule_events: {
+        Row: {
+          id: string
+          day: number
+          date: string
+          event_type: string
+          title: string
+          description: string | null
+          start_time: string
+          end_time: string | null
+          venue: string | null
+          session_name: string | null
+          tracks: string | null
+          mode: string | null
+          session_chair: string | null
+          session_incharge: string | null
+          order_index: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          day: number
+          date: string
+          event_type: string
+          title: string
+          description?: string | null
+          start_time: string
+          end_time?: string | null
+          venue?: string | null
+          session_name?: string | null
+          tracks?: string | null
+          mode?: string | null
+          session_chair?: string | null
+          session_incharge?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          day?: number
+          date?: string
+          event_type?: string
+          title?: string
+          description?: string | null
+          start_time?: string
+          end_time?: string | null
+          venue?: string | null
+          session_name?: string | null
+          tracks?: string | null
+          mode?: string | null
+          session_chair?: string | null
+          session_incharge?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      session_papers: {
+        Row: {
+          id: string
+          schedule_event_id: string
+          paper_id: string
+          paper_title: string
+          author_name: string
+          track_number: string | null
+          online_offline: string | null
+          timings: string | null
+          order_index: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          schedule_event_id: string
+          paper_id: string
+          paper_title: string
+          author_name: string
+          track_number?: string | null
+          online_offline?: string | null
+          timings?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          schedule_event_id?: string
+          paper_id?: string
+          paper_title?: string
+          author_name?: string
+          track_number?: string | null
+          online_offline?: string | null
+          timings?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
       attendance: {
         Row: {
           id: string
