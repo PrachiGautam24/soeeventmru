@@ -41,7 +41,7 @@ export default function SponsorsPage() {
           <Link href="/icass-2026/home">
             <ArrowLeft className="w-6 h-6" />
           </Link>
-          <h1 className="text-2xl font-bold">Our Sponsors</h1>
+          <h1 className="text-2xl font-bold">Our Supporters</h1>
         </div>
         <p className="text-sm text-white/80">
           Thank you to our valued support
