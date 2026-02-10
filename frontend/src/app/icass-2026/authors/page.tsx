@@ -184,6 +184,16 @@ export default function AuthorsPage() {
                         </div>
                       )}
 
+                      {author.track_no && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Target className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Track No.: </span>
+                            <span className="text-neutral-700 font-medium">{author.track_no}</span>
+                          </div>
+                        </div>
+                      )}
+
                       {author.track && (
                         <div className="flex items-start gap-2 text-sm">
                           <Target className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />

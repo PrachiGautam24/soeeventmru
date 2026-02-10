@@ -357,6 +357,7 @@ export interface Database {
           email: string | null
           paper_title: string | null
           track: string | null
+          track_no: string | null
           country: string | null
           image_url: string | null
           order_index: number
@@ -370,6 +371,7 @@ export interface Database {
           email?: string | null
           paper_title?: string | null
           track?: string | null
+          track_no?: string | null
           country?: string | null
           image_url?: string | null
           order_index?: number
@@ -383,6 +385,7 @@ export interface Database {
           email?: string | null
           paper_title?: string | null
           track?: string | null
+          track_no?: string | null
           country?: string | null
           image_url?: string | null
           order_index?: number

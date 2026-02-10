@@ -6,6 +6,8 @@
 -- ============================================================================
 
 -- Insert all 176 authors
+-- NOTE: track stores the track number; run authors-track-no-update.sql AFTER this 
+-- to populate track_no and update track to the full name from the tracks table
 INSERT INTO public.authors (paper_id, track, paper_title, name, affiliation, participation_mode, email, order_index) VALUES
 (61, '3', 'Design of A FCRD9T SRAM cell for Low-Power Wireless Communications', 'DEEPIKA BANSAL', 'Manipal University Jaipur', 'offline', 'deepika.bansal@jaipur.manipal.edu', 1),
 (65, '7', 'Size and Strain Analysis of MgFe2O4 Obtained from Citric-acid Assisted Sol-gel route', 'VINOD SINGH', 'Manav Rachna University, Faridabad, Haryana, India', 'offline', 'vinod_singh.phd24@mru.ac.in', 2),
