@@ -15,7 +15,7 @@ export default function HeroSection() {
       >
         <div className="relative w-full max-w-md aspect-[390/420] shadow-2xl overflow-hidden">
           <Image
-            src="/images/conference-poster1.jpg"
+            src="/images/conference-poster.jpg"
             alt="ICASS 2026 Conference Poster"
             fill
             className="object-cover"
