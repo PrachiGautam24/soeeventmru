@@ -5,7 +5,7 @@ import AppLayout from '@/components/AppLayout'
 import { supabase } from '@/lib/supabase'
 import { Author } from '@/lib/types'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Search, FileText, Mail, MapPin, ChevronDown, Clock, Hash, Wifi, User } from 'lucide-react'
+import { ArrowLeft, Search, FileText, Mail, MapPin, ChevronDown, Clock, Hash, Wifi, User, Target } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getImageUrl } from '@/lib/utils'
@@ -143,11 +143,6 @@ export default function AuthorsPage() {
                         <p className="text-sm text-neutral-700 font-medium">
                           {author.paper_title}
                         </p>
-                        {author.track && (
-                          <span className="inline-block mt-2 px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
-                            Track: {author.track}
-                          </span>
-                        )}
                       </div>
                     )}
                   </div>
@@ -185,6 +180,16 @@ export default function AuthorsPage() {
                           <div>
                             <span className="text-neutral-500">Paper ID: </span>
                             <span className="text-neutral-700 font-medium">{author.paper_id}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.track && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Target className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Track: </span>
+                            <span className="text-neutral-700 font-medium">{author.track}</span>
                           </div>
                         </div>
                       )}
