@@ -2,11 +2,11 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { 
-  Users, 
-  FileText, 
-  Calendar, 
-  Target, 
+import {
+  Users,
+  FileText,
+  Calendar,
+  Target,
   Award,
   UserCog,
   Briefcase,
@@ -14,13 +14,27 @@ import {
   Building2,
   ClipboardCheck,
   Music,
-  Presentation
+  Presentation,
+  Star,
+  Trophy
 } from 'lucide-react'
 
 export default function QuickActions() {
   const actions = [
     {
-      name: 'Speakers',
+      name: 'Chief Guest',
+      icon: Star,
+      href: '/icass-2026/chief-guest',
+      color: 'from-amber-400 to-amber-600',
+    },
+    {
+      name: 'Guest of Honor',
+      icon: Trophy,
+      href: '/icass-2026/guest-of-honor',
+      color: 'from-blue-500 to-blue-700',
+    },
+    {
+      name: 'Keynote Speakers',
       icon: Users,
       href: '/icass-2026/speakers',
       color: 'from-primary to-primary-dark',
@@ -96,11 +110,11 @@ export default function QuickActions() {
   return (
     <div className="px-4 py-6 bg-neutral-50">
       <h3 className="text-xl font-bold text-neutral-800 mb-6 ml-6">More About Conference</h3>
-      
+
       <div className="grid grid-cols-3 gap-4">
         {actions.map((action, index) => {
           const Icon = action.icon
-          
+
           return (
             <motion.div
               key={action.name}

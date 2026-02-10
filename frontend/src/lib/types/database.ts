@@ -20,6 +20,8 @@ export interface Database {
           twitter: string | null
           linkedin: string | null
           website: string | null
+          session_type: string | null
+          participation_mode: string | null
           order_index: number
           created_at: string
           updated_at: string
@@ -34,6 +36,8 @@ export interface Database {
           twitter?: string | null
           linkedin?: string | null
           website?: string | null
+          session_type?: string | null
+          participation_mode?: string | null
           order_index?: number
           created_at?: string
           updated_at?: string
@@ -48,6 +52,84 @@ export interface Database {
           twitter?: string | null
           linkedin?: string | null
           website?: string | null
+          session_type?: string | null
+          participation_mode?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      chief_guest: {
+        Row: {
+          id: string
+          name: string
+          title: string | null
+          organization: string | null
+          bio: string | null
+          image_url: string | null
+          session_type: string | null
+          order_index: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          title?: string | null
+          organization?: string | null
+          bio?: string | null
+          image_url?: string | null
+          session_type?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          title?: string | null
+          organization?: string | null
+          bio?: string | null
+          image_url?: string | null
+          session_type?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      guest_of_honor: {
+        Row: {
+          id: string
+          name: string
+          title: string | null
+          organization: string | null
+          bio: string | null
+          image_url: string | null
+          session_type: string | null
+          order_index: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          title?: string | null
+          organization?: string | null
+          bio?: string | null
+          image_url?: string | null
+          session_type?: string | null
+          order_index?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          title?: string | null
+          organization?: string | null
+          bio?: string | null
+          image_url?: string | null
+          session_type?: string | null
           order_index?: number
           created_at?: string
           updated_at?: string

@@ -60,7 +60,7 @@ export default function SpeakersPage() {
           <Link href="/icass-2026/home">
             <ArrowLeft className="w-6 h-6" />
           </Link>
-          <h1 className="text-2xl font-bold">Speakers</h1>
+          <h1 className="text-2xl font-bold">Keynote Speakers</h1>
         </div>
         
         {/* Search */}
