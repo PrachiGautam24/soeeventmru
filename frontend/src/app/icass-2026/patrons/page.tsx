@@ -43,19 +43,11 @@ export default function PatronsPage() {
   }, {} as Record<string, Patron[]>)
 
   const categoryOrder = [
-    'Chief Patron(s)',
-    'Patron(s)',
+    'Chief Patron',
+    'Patron',
     'General Chair',
     'Conference Chair',
-    'Executive Chair(s)',
-    'Convener',
-    'Conference Secretary(s)',
-    'Technical Program Chair(s)',
-    'Steering Committee Chair(s)',
-    'Finance Chair / Treasurer(s)',
-    'Publication Chair(s)',
-    'Special Session Chair',
-    'Publicity Chair(s)'
+    'Executive Chair'
   ]
 
   return (
@@ -118,9 +110,9 @@ export default function PatronsPage() {
                             <h3 className="font-semibold text-neutral-800 mb-1">
                               {patron.name}
                             </h3>
-                            {patron.title && (
+                            {patron.designation && (
                               <p className="text-sm text-neutral-600 mb-1">
-                                {patron.title}
+                                {patron.designation}
                               </p>
                             )}
                             {patron.organization && (

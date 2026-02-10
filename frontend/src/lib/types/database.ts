@@ -221,7 +221,7 @@ export interface Database {
         Row: {
           id: string
           name: string
-          title: string | null
+          designation: string | null
           organization: string | null
           category: string
           image_url: string | null
@@ -232,7 +232,7 @@ export interface Database {
         Insert: {
           id?: string
           name: string
-          title?: string | null
+          designation?: string | null
           organization?: string | null
           category: string
           image_url?: string | null
@@ -243,7 +243,7 @@ export interface Database {
         Update: {
           id?: string
           name?: string
-          title?: string | null
+          designation?: string | null
           organization?: string | null
           category?: string
           image_url?: string | null
