@@ -44,7 +44,7 @@ export default function SponsorsPage() {
           <h1 className="text-2xl font-bold">Our Supporters</h1>
         </div>
         <p className="text-sm text-white/80">
-          Thank you to our valued support
+          Thank you to our valued supporters
         </p>
       </div>
 
