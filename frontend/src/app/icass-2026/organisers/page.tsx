@@ -51,8 +51,8 @@ export default function OrganisersPage() {
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold">Organisers</h1>
-            <p className="text-sm text-white/80">Organizing Committee</p>
+            <h1 className="text-2xl font-bold">Organising Committee</h1>
+            <p className="text-sm text-white/80">ICASS 2026</p>
           </div>
         </div>
       </div>

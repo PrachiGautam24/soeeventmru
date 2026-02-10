@@ -68,7 +68,7 @@ export default function QuickActions() {
       color: 'from-secondary-light to-secondary',
     },
     {
-      name: 'Organisers',
+      name: 'Organising Committee',
       icon: UserCog,
       href: '/icass-2026/organisers',
       color: 'from-neutral-700 to-neutral-800',
