@@ -73,7 +73,7 @@ At its heart, SITAYANA honours the spirit of women as reflections of divine ener
           className="bg-white rounded-2xl p-5 shadow-md space-y-4"
         >
           <h3 className="font-bold text-neutral-800 text-lg mb-3">Event Details</h3>
-          
+
           <div className="flex items-center gap-3">
             <Calendar className="w-5 h-5 text-secondary" />
             <div>
@@ -81,7 +81,7 @@ At its heart, SITAYANA honours the spirit of women as reflections of divine ener
               <p className="font-semibold text-neutral-800">{performance.date}</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-3">
             <Clock className="w-5 h-5 text-secondary" />
             <div>
@@ -89,7 +89,7 @@ At its heart, SITAYANA honours the spirit of women as reflections of divine ener
               <p className="font-semibold text-neutral-800">{performance.time}</p>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-3">
             <MapPin className="w-5 h-5 text-secondary" />
             <div>
@@ -109,7 +109,7 @@ At its heart, SITAYANA honours the spirit of women as reflections of divine ener
           <h3 className="font-bold text-neutral-800 mb-4 text-lg">About the Performance</h3>
           <div className="text-sm text-neutral-700 leading-relaxed space-y-3">
             {performance.description.split('\n\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
+              <p key={index} className="text-justify">{paragraph}</p>
             ))}
           </div>
         </motion.div>
