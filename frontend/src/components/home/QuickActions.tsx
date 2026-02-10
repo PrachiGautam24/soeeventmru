@@ -13,7 +13,8 @@ import {
   UserCheck,
   Building2,
   ClipboardCheck,
-  Music
+  Music,
+  Presentation
 } from 'lucide-react'
 
 export default function QuickActions() {
@@ -83,6 +84,12 @@ export default function QuickActions() {
       icon: Music,
       href: '/icass-2026/cultural-performances',
       color: 'from-secondary to-secondary-dark',
+    },
+    {
+      name: 'Poster Presentation',
+      icon: Presentation,
+      href: '/icass-2026/poster-presentation',
+      color: 'from-primary-light to-secondary-light',
     },
   ]
 
