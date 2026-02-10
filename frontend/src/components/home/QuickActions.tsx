@@ -76,7 +76,7 @@ export default function QuickActions() {
       color: 'from-neutral-600 to-neutral-700',
     },
     {
-      name: 'Patrons',
+      name: 'Patrons and Chairs',
       icon: Award,
       href: '/icass-2026/patrons',
       color: 'from-secondary-light to-secondary',
