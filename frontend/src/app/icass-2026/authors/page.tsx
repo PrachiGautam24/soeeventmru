@@ -5,15 +5,27 @@ import AppLayout from '@/components/AppLayout'
 import { supabase } from '@/lib/supabase'
 import { Author } from '@/lib/types'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Search, FileText, Mail, MapPin } from 'lucide-react'
+import { ArrowLeft, Search, FileText, Mail, MapPin, ChevronDown, Clock, Hash, Wifi, User } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { getImageUrl } from '@/lib/utils'
 
+// Extended Author type to include session details
+interface AuthorWithSession extends Author {
+  paper_id?: string
+  timings?: string
+  participation_mode?: string
+  session_chair?: string
+  session_incharge?: string
+  venue?: string
+  session_name?: string
+}
+
 export default function AuthorsPage() {
-  const [authors, setAuthors] = useState<Author[]>([])
+  const [authors, setAuthors] = useState<AuthorWithSession[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
+  const [expandedAuthor, setExpandedAuthor] = useState<string | null>(null)
 
   useEffect(() => {
     fetchAuthors()
@@ -83,9 +95,14 @@ export default function AuthorsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white rounded-2xl p-4 shadow-md"
+                className="bg-white rounded-2xl shadow-md overflow-hidden"
               >
-                <div className="flex items-start gap-3">
+                <button
+                  onClick={() => setExpandedAuthor(
+                    expandedAuthor === author.id ? null : author.id
+                  )}
+                  className="w-full p-4 flex items-start gap-3 hover:bg-neutral-50 transition-colors text-left"
+                >
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white text-sm font-bold flex-shrink-0 overflow-hidden">
                     <Image 
                       src={getImageUrl(author.image_url, author.name, 128)}
@@ -107,33 +124,23 @@ export default function AuthorsPage() {
                     <div className="space-y-1">
                       {author.affiliation && (
                         <p className="text-sm text-neutral-600 flex items-center gap-1">
-                          <FileText className="w-3 h-3" />
-                          {author.affiliation}
+                          <FileText className="w-3 h-3 flex-shrink-0" />
+                          <span className="truncate">{author.affiliation}</span>
                         </p>
                       )}
                       
                       {author.country && (
                         <p className="text-sm text-neutral-500 flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
+                          <MapPin className="w-3 h-3 flex-shrink-0" />
                           {author.country}
                         </p>
-                      )}
-                      
-                      {author.email && (
-                        <a
-                          href={`mailto:${author.email}`}
-                          className="text-sm text-primary hover:text-primary-dark flex items-center gap-1"
-                        >
-                          <Mail className="w-3 h-3" />
-                          {author.email}
-                        </a>
                       )}
                     </div>
                     
                     {author.paper_title && (
                       <div className="mt-2 pt-2 border-t border-neutral-100">
                         <p className="text-xs text-neutral-500">Paper Title:</p>
-                        <p className="text-sm text-neutral-700 font-medium line-clamp-2">
+                        <p className="text-sm text-neutral-700 font-medium">
                           {author.paper_title}
                         </p>
                         {author.track && (
@@ -144,7 +151,115 @@ export default function AuthorsPage() {
                       </div>
                     )}
                   </div>
-                </div>
+                  
+                  <ChevronDown
+                    className={`w-5 h-5 text-neutral-400 transition-transform flex-shrink-0 mt-1 ${
+                      expandedAuthor === author.id ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {/* Expanded Session Details */}
+                {expandedAuthor === author.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="px-4 pb-4 pt-2 border-t border-neutral-100 bg-neutral-50"
+                  >
+                    <h4 className="font-semibold text-neutral-700 mb-3">Session Details:</h4>
+                    <div className="space-y-2">
+                      {author.timings && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Timings: </span>
+                            <span className="text-neutral-700 font-medium">{author.timings}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.paper_id && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Hash className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Paper ID: </span>
+                            <span className="text-neutral-700 font-medium">{author.paper_id}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.participation_mode && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <Wifi className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Mode: </span>
+                            <span className={`font-medium ${
+                              author.participation_mode.toLowerCase() === 'online' 
+                                ? 'text-green-600' 
+                                : 'text-blue-600'
+                            }`}>
+                              {author.participation_mode}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.venue && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <MapPin className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Venue: </span>
+                            <span className="text-neutral-700 font-medium">{author.venue}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.session_name && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <FileText className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Session: </span>
+                            <span className="text-neutral-700 font-medium">{author.session_name}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.session_chair && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <User className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Session Chair: </span>
+                            <span className="text-neutral-700">{author.session_chair}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.session_incharge && (
+                        <div className="flex items-start gap-2 text-sm">
+                          <User className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div>
+                            <span className="text-neutral-500">Incharge: </span>
+                            <span className="text-neutral-700">{author.session_incharge}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {author.email && (
+                        <div className="flex items-start gap-2 text-sm mt-3 pt-3 border-t border-neutral-200">
+                          <Mail className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <a
+                            href={`mailto:${author.email}`}
+                            className="text-primary hover:text-primary-dark transition-colors"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {author.email}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
               </motion.div>
             ))
           )}
