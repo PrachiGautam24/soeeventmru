@@ -34,17 +34,17 @@ INSERT INTO public.schedule_events (id, day, date, event_type, title, descriptio
 -- Technical Session I - Day 1 (10 rooms)
 ('a0000000-0001-4000-8000-000000000004', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-1 Online', NULL, '11:50 AM', '01:50 PM', 'LT03 (L Block)', 'Technical Session – I', 'Track-1', 'Online', 'Prof Vikas Rathi, Graphic Era Deemed University, 919760207981, vikasrathi@geu.ac.in (offline)', 'Dr Urmila Pilania (9911306200), Dr Manoj Kumar (8368906788)', 4),
 
-('a0000000-0001-4000-8000-000000000005', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-1/ Track-2 Offline', NULL, '11:50 AM', '01:50 PM', 'LT10 (L Block)', 'Technical Session – I', 'Track-1/ Track-2', 'Offline', 'Dr Vidhi Khanduja, Hansraj College, Delhi, 9999695797, vidhikhanduja@hrc.du.ac.in (offline)', 'Dr Deepti Thakral (9958200333), Dr Prinima Gupta (9971405007)', 5),
+('a0000000-0001-4000-8000-000000000005', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-1/ Track-2/ Track-7 Offline', NULL, '11:50 AM', '01:50 PM', 'LT10 (L Block)', 'Technical Session – I', 'Track-1/ Track-2/ Track-7', 'Offline', 'Dr Vidhi Khanduja, Hansraj College, Delhi, 9999695797, vidhikhanduja@hrc.du.ac.in (offline)', 'Dr Deepti Thakral (9958200333), Dr Prinima Gupta (9971405007)', 5),
 
 ('a0000000-0001-4000-8000-000000000006', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-2 Online', NULL, '11:50 AM', '01:50 PM', 'LS10 (L Block)', 'Technical Session – I', 'Track-2', 'Online', 'Prof Nihar Ranjan Roy, AKGEC, Ghaziabad, +919810977908, niharranjanroy@gmail.com (offline)', 'Dr Piyush Charan (9559313115), Dr Awwab Mohammad (9990642712)', 6),
 
-('a0000000-0001-4000-8000-000000000007', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-7 Offline', NULL, '11:50 AM', '01:50 PM', 'LS09 (L Block)', 'Technical Session – I', 'Track-7', 'Offline', 'Prof Naresh Kumar, GD Goenka University, 9873669510, naresh.sharma2006@gmail.com; Dr Aradhna Dutt Johri, Galgotias University, 9711301327, aradhanadutt.jauhari@galgotiasuniversity.edu.in (offline)', 'Dr Jaiprakash Sorout (9711315173), Dr Vinayak Vandan (9870400874)', 7),
+('a0000000-0001-4000-8000-000000000007', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-7 Offline', NULL, '11:50 AM', '01:50 PM', 'LS09 (L Block)', 'Technical Session – I', 'Track-7', 'Offline', 'Prof Naresh Sharma, GD Goenka University, 9873669510, naresh.sharma2006@gmail.com, Dr Aradhna Dutt Johri, Galgotias University, 9711301327, aradhanadutt.jauhari@galgotiasuniversity.edu.in (offline)', 'Dr Jaiprakash Sorout (9711315173), Dr Vinayak Vandan (9870400874)', 7),
 
 ('a0000000-0001-4000-8000-000000000008', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-3/ Track-2 Offline', NULL, '11:50 AM', '01:50 PM', 'LS03 (L Block)', 'Technical Session – I', 'Track-3/ Track-2', 'Offline', 'Dr Charu Gaur, Delhi Skill and Entrepreneurship University, 9868761029, charu.gaur@dseu.ac.in (offline)', 'Dr Mamta Arora (9873599315), Dr Monika Garg (9650353336)', 8),
 
 ('a0000000-0001-4000-8000-000000000009', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-1 Online', NULL, '11:50 AM', '01:50 PM', 'LF03 (L Block)', 'Technical Session – I', 'Track-1', 'Online', 'Prof Ashish Goel, Jaypee Institute of Information Technology Noida (Deemed University), 91-9811946987, ashish.goel@jiit.ac.in (offline)', 'Dr Poonam Rattan (7888493133), Dr Vivek Sharma (9717200103)', 9),
 
-('a0000000-0001-4000-8000-000000000010', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-5/ Track-10 Offline', NULL, '11:50 AM', '01:50 PM', 'LF09 (L Block)', 'Technical Session – I', 'Track-5/ Track-10', 'Offline', 'Dr Kaushal Kumar, Graphic Era University, Dehradun, +91-9997468929, kaushal1987@geu.ac.in (offline)', 'Dr Neha Chaudhary (9958460544), Dr Richa Adlakha (9971304449)', 10),
+('a0000000-0001-4000-8000-000000000010', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-5/ Track-10 Offline', NULL, '11:50 AM', '01:50 PM', 'LF09 (L Block)', 'Technical Session – I', 'Track-5/ Track-10', 'Offline', 'Dr Kaushal Kumar, Graphic Era University, Dehradun, +91-9997468929, kaushal1987@geu.ac.in, Prof Md Irfanul Hasan, Graphic Era University, +91 95575 09130, irfanhasan25@rediffmail.com (offline)', 'Dr Neha Chaudhary (9958460544), Dr Richa Adlakha (9971304449)', 10),
 
 ('a0000000-0001-4000-8000-000000000011', 1, '2026-02-12', 'technical_session', 'Technical Session – I: Track-10 Online', NULL, '11:50 AM', '01:50 PM', 'LF10 (L Block)', 'Technical Session – I', 'Track-10', 'Online', 'Dr Neha Gupta, BVCOE, Delhi, 9968058919, neha.06.gupta@gmail.com (offline)', 'Dr Ranjana Jain (9871543454), Dr Sachin Lakra (9899400694)', 11),
 
@@ -64,13 +64,13 @@ INSERT INTO public.schedule_events (id, day, date, event_type, title, descriptio
 
 ('a0000000-0001-4000-8000-000000000018', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-4/ Track-2 Offline', NULL, '02:20 PM', '05:10 PM', 'LS03 (L Block)', 'Technical Session – II', 'Track-4/ Track-2', 'Offline', 'Prof Jasdeep Kaur Dhanoa, IGDTUW, 9968485100, jasdeep@igdtuw.ac.in (offline)', 'Dr Mohit Kumar Singh (9868098652), Dr Bhim Singh (9212673940)', 18),
 
-('a0000000-0001-4000-8000-000000000019', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-4 Online', NULL, '02:20 PM', '05:10 PM', 'LF03 (L Block)', 'Technical Session – II', 'Track-4', 'Online', 'Prof Ashish Sachdeva, Maharishi Markandeshwar (Deemed to be University), Mullana, +918950115050, er.ashishsachdeva@gmail.com (offline)', 'Dr Neetu Chauhan (9718238836), Dr Priyanka Bansal (9810907022)', 19),
+('a0000000-0001-4000-8000-000000000019', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-4/ Track-2 Online', NULL, '02:20 PM', '05:10 PM', 'LF03 (L Block)', 'Technical Session – II', 'Track-4/ Track-2', 'Online', 'Prof Ashish Sachdeva, Maharishi Markandeshwar (Deemed to be University), Mullana, +918950115050, er.ashishsachdeva@gmail.com (offline)', 'Dr Neetu Chauhan (9718238836), Dr Priyanka Bansal (9810907022)', 19),
 
 ('a0000000-0001-4000-8000-000000000020', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8 Offline', NULL, '02:20 PM', '05:10 PM', 'LF09 (L Block)', 'Technical Session – II', 'Track-8', 'Offline', 'Dr Kushagra Agrawal, MRIIRS, +91-9996185556, agrawal_kushagra@rediffmail.com; Ms Shaveta Jain, MRIIRS, +91-7018613431, Shavetajn120@gmail.com (offline)', 'Dr Monika Lamba (9711434143), Dr Sujata (9910096028)', 20),
 
-('a0000000-0001-4000-8000-000000000021', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-9/ Track-12 Online', NULL, '02:20 PM', '05:10 PM', 'LF10 (L Block)', 'Technical Session – II', 'Track-9/ Track-12', 'Online', 'Prof Md Irfanul Hasan, Graphic Era University, +91 95575 09130, irfanhasan25@rediffmail.com (offline)', 'Dr Pooja Sachdeva (9711380505), Dr Parneeta Dhaliwal (9871425044)', 21),
+('a0000000-0001-4000-8000-000000000021', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-9/ Track-12 Online', NULL, '02:20 PM', '05:10 PM', 'LF10 (L Block)', 'Technical Session – II', 'Track-9/ Track-12', 'Online', 'Dr Amrinder Kaur, Associate Professor, MRIIRS, amrinder.set@mriu.edu.in, 9990870253 (offline)', 'Dr Pooja Sachdeva (9711380505), Dr Parneeta Dhaliwal (9871425044)', 21),
 
-('a0000000-0001-4000-8000-000000000022', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8 Online', NULL, '02:20 PM', '05:10 PM', 'I Block Auditorium', 'Technical Session – II', 'Track-8', 'Online', 'Dr Budesh Kanwar, Poornima Institute of Engineering & Technology, Jaipur, 9460503316, budesh82@gmail.com (offline)', 'Dr Ranjana Jain (9871543454), Dr Sachin Lakra (9899400694)', 22),
+('a0000000-0001-4000-8000-000000000022', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8 Online', NULL, '02:20 PM', '05:10 PM', 'I Block Auditorium', 'Technical Session – II', 'Track-8', 'Online', 'Prof Mamta Dahiya, MRIIRS, 9996236339, mamtadahiya.set@mriu.edu.in (Offline)', 'Dr Ranjana Jain (9871543454), Dr Sachin Lakra (9899400694)', 22),
 
 ('a0000000-0001-4000-8000-000000000023', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8/ Track-2/ Track-4 Online', NULL, '02:20 PM', '05:10 PM', 'CADR Room G Block Basement', 'Technical Session – II', 'Track-8/ Track-2/ Track-4', 'Online', 'Prof Shilpi Agrawal, Galgotias University, 91-9971793102, shilpy15@gmail.com (offline)', 'Dr Piyush Charan (9559313115), Dr Awwab Mohammad (9990642712)', 23),
 
@@ -100,7 +100,7 @@ INSERT INTO public.schedule_events (id, day, date, event_type, title, descriptio
 
 ('a0000000-0002-4000-8000-000000000007', 2, '2026-02-13', 'technical_session', 'Technical Session – III: Track-9 Offline', NULL, '11:15 AM', '01:30 PM', 'LS09 (L Block)', 'Technical Session – III', 'Track-9', 'Offline', 'Dr Manvi Breja, NCU, Gurgaon, +919711248931, manvibreja@ncuindia.edu (offline)', 'Dr Pooja Sachdeva (9711380505), Dr Parneeta Dhaliwal (9871425044)', 7),
 
-('a0000000-0002-4000-8000-000000000008', 2, '2026-02-13', 'technical_session', 'Technical Session – III: Track-3 Offline', NULL, '11:15 AM', '01:30 PM', 'LS03 (L Block)', 'Technical Session – III', 'Track-3', 'Offline', 'Dr Rohit Tanwar, Shri Mata Vaishno Devi University, +91-9992257914, rohit.tanwar.cse@gmail.com (offline)', 'Dr Mamta Arora (9873599315), Dr Monika Garg (9650353336)', 8),
+('a0000000-0002-4000-8000-000000000008', 2, '2026-02-13', 'technical_session', 'Technical Session – III: Track-3/ Track-1 Offline', NULL, '11:15 AM', '01:30 PM', 'LS03 (L Block)', 'Technical Session – III', 'Track-3/ Track-1', 'Offline', 'Dr Rohit Tanwar, Shri Mata Vaishno Devi University, +91-9992257914, rohit.tanwar.cse@gmail.com (offline)', 'Dr Mamta Arora (9873599315), Dr Monika Garg (9650353336)', 8),
 
 ('a0000000-0002-4000-8000-000000000009', 2, '2026-02-13', 'technical_session', 'Technical Session – III: Track-1/ Track-6 Online', NULL, '11:15 AM', '01:30 PM', 'LF03 (L Block)', 'Technical Session – III', 'Track-1/ Track-6', 'Online', 'Prof Preeti Kaur, NSUT, Delhi, 9810870327, preeti.kaur@nsut.ac.in (offline)', 'Dr Rajnesh Kr Singh (7836901337), Dr Gurpreet Singh Matharou (9413067409)', 9),
 
@@ -137,13 +137,13 @@ INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, aut
 ('a0000000-0001-4000-8000-000000000004', '390', 'Adaptive Noise-Aware Variational Quantum Classifier for Robust Machine Learning on NISQ Devices', 'Pravin P', '1', 'online', '01:10 PM - 01:30 PM', 5),
 ('a0000000-0001-4000-8000-000000000004', '425', 'Inference of low-bit Deep Neural Networks on FPGAs using Hardcoded Dataflow-style methods', 'Anushka Sikarwar', '1', 'online', '01:30 PM - 01:50 PM', 6);
 
--- Session I Room 2: Track-1/Track-2 Offline, LT10
+-- Session I Room 2: Track-1/Track-2/Track-7 Offline, LT10
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
 ('a0000000-0001-4000-8000-000000000005', '283', 'Comparing LLMs for Phishing Email Detection', 'Praveen Kumar Sharma', '1', 'offline', '11:50 AM - 12:10 PM', 1),
 ('a0000000-0001-4000-8000-000000000005', '690', 'An AI-Centric Multimodal Framework for Cognitive Productivity and Digital Wellbeing', 'Ashima Garg', '1', 'offline', '12:10 PM - 12:30 PM', 2),
 ('a0000000-0001-4000-8000-000000000005', '1473', 'Hybrid Explainable Framework for Mammographic Breast Cancer Detection using ResNet with Integrated Gradients and Grad-CAM', 'Sugandha Kaur', '1', 'offline', '12:30 PM - 12:50 PM', 3),
 ('a0000000-0001-4000-8000-000000000005', '537', 'Dynamic Data-Driven Framework for Forecasting Employment Trends in the AI Era', 'Mayank Singh Negi', '2', 'offline', '12:50 PM - 01:10 PM', 4),
-('a0000000-0001-4000-8000-000000000005', '765', 'Enhancing Hybrid Recommendation Systems with CUR-based Matrix Decomposition and Deep Neural Network Architectures for Consumer Behaviour Prediction', 'Abhigyan', '2', 'offline', '01:10 PM - 01:30 PM', 5);
+('a0000000-0001-4000-8000-000000000005', '1268', 'Lung Cancer Diagnosis- Visualizing Deep Learning Decision Pathway', 'Osheen Sharma', '7', 'offline', '01:10 PM - 01:30 PM', 5);
 
 -- Session I Room 3: Track-2 Online, LS10
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
@@ -157,10 +157,10 @@ INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, aut
 -- Session I Room 4: Track-7 Offline, LS09
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
 ('a0000000-0001-4000-8000-000000000007', '65', 'Size and Strain Analysis of MgFe2O4 Obtained from Citric-acid Assisted Sol-gel route', 'Vinod Singh', '7', 'offline', '11:50 AM - 12:10 PM', 1),
-('a0000000-0001-4000-8000-000000000007', '870', 'Synergistic Optimization of Piezoelectric Transducers', 'Pankaj Jha', '7', 'offline', '12:10 PM - 12:30 PM', 2),
-('a0000000-0001-4000-8000-000000000007', '1099', 'Image Encryption and Decryption using AES and Pixel Shuffling Techniques', 'Dev Kumar Sharma', '7', 'offline', '12:50 PM - 01:10 PM', 3),
-('a0000000-0001-4000-8000-000000000007', '1268', 'Lung Cancer Diagnosis - Visualizing Deep Learning Decision Pathway', 'Osheen Sharma', '7', 'offline', '01:10 PM - 01:30 PM', 4),
-('a0000000-0001-4000-8000-000000000007', '1292', 'Synthesis of Ni-rich layered cathodes using Sol-gel Method', 'IFFAT KHAN', '7', 'offline', '01:30 PM - 01:50 PM', 5);
+('a0000000-0001-4000-8000-000000000007', '259', 'A STUDY ON MECHANICAL BEHAVIOUR OF TERNARY BLENDED GEOPOLYMER CONCRETE', 'Ayushi Gupta', '7', 'offline', '12:10 PM - 12:30 PM', 2),
+('a0000000-0001-4000-8000-000000000007', '870', 'Synergistic Optimization of Piezoelectric Transducers', 'Pankaj Jha', '7', 'offline', '12:30 PM - 12:50 PM', 3),
+('a0000000-0001-4000-8000-000000000007', '1099', 'Image Encryption and Decryption using AES and Pixel Shuffling Techniques', 'Dev Kumar Sharma', '7', 'offline', '12:50 PM - 01:10 PM', 4),
+('a0000000-0001-4000-8000-000000000007', '1292', 'Synthesis of Ni-rich layered cathodes using Sol-gel Method', 'IFFAT KHAN', '7', 'offline', '01:10 PM - 01:30 PM', 5);
 
 -- Session I Room 5: Track-3/Track-2 Offline, LS03
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
@@ -257,7 +257,7 @@ INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, aut
 ('a0000000-0001-4000-8000-000000000018', '1080', 'A Sustainable Approach to Climate Change Mitigation and Energy Security Enhancement Through Biofuels Integrated with IoT', 'Piyush Charan', '4', 'offline', '03:40 PM - 04:00 PM', 5),
 ('a0000000-0001-4000-8000-000000000018', '1206', 'Heterophily-Robust Patient-Similarity Graphs for Parkinson''s Screening from Voice', 'Siddhant Ujjain', '2', 'offline', '04:00 PM - 04:20 PM', 6);
 
--- Session II Room 5: Track-4 Online, LF03
+-- Session II Room 5: Track-4/Track-2 Online, LF03
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
 ('a0000000-0001-4000-8000-000000000019', '78', 'A Comprehensive Review of Advanced TFETs Architectures for Biosensing Applications', 'Dr. Kaushal Kumar', '4', 'online', '02:20 PM - 02:40 PM', 1),
 ('a0000000-0001-4000-8000-000000000019', '249', 'Performance Analysis of Equal Gain Combining and Maximal Ratio Combining over Correlated Weibull fading channels - A Review', 'Kirandeep Kaur', '4', 'online', '02:40 PM - 03:00 PM', 2),
@@ -265,7 +265,8 @@ INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, aut
 ('a0000000-0001-4000-8000-000000000019', '441', 'Performance Simulation Model under Nakagami-m Fading Channel', 'Manju Devrari', '4', 'online', '03:20 PM - 03:40 PM', 4),
 ('a0000000-0001-4000-8000-000000000019', '487', 'Analysis of Analog and RF Parameter Variations in JLTFETs Due to Different Work Functions', 'Dr. Kaushal Kumar', '4', 'online', '03:40 PM - 04:00 PM', 5),
 ('a0000000-0001-4000-8000-000000000019', '780', 'Interface and Transport-Layer Engineering for CdS/BaZrS3/CuSCN Solar Cells: Device Simulation, Band Alignment and Defect Effects', 'Chandni Tiwari', '4', 'online', '04:00 PM - 04:20 PM', 6),
-('a0000000-0001-4000-8000-000000000019', '781', 'Numerical Investigation of MASnBr3/CsSnGeI3/SnO2 Solar Cell: Understanding the Impact of Absorber Layer Parameters', 'Chandni Tiwari', '4', 'online', '04:20 PM - 04:40 PM', 7);
+('a0000000-0001-4000-8000-000000000019', '781', 'Numerical Investigation of MASnBr3/CsSnGeI3/SnO2 Solar Cell: Understanding the Impact of Absorber Layer Parameters', 'Chandni Tiwari', '4', 'online', '04:20 PM - 04:40 PM', 7),
+('a0000000-0001-4000-8000-000000000019', '765', 'Enhancing Hybrid Recommendation Systems with CUR-based Matrix Decomposition and Deep Neural Network Architectures for Consumer Behaviour Prediction', 'Abhigyan', '2', 'online', '04:40 PM - 05:00 PM', 8);
 
 -- Session II Room 6: Track-8 Offline, LF09
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
@@ -347,13 +348,15 @@ INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, aut
 ('a0000000-0002-4000-8000-000000000007', '934', 'Analysis of Different Cyberattacks on PMSG-Based Wind Turbine Control Systems', 'Nischay Rana', '9', 'offline', '12:15 PM - 12:35 PM', 4),
 ('a0000000-0002-4000-8000-000000000007', '1010', 'Active Expression-Driven Face Anti-Spoofing with Deep Reinforcement Learning Agents', 'Raj Singh', '9', 'offline', '12:35 PM - 12:55 PM', 5);
 
--- Session III Room 5: Track-3 Offline, LS03
+-- Session III Room 5: Track-3/Track-1 Offline, LS03
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
 ('a0000000-0002-4000-8000-000000000008', '61', 'Design of A FCRD9T SRAM cell for Low-Power Wireless Communications', 'Deepika Bansal', '3', 'offline', '11:15 AM - 11:35 AM', 1),
 ('a0000000-0002-4000-8000-000000000008', '1219', 'Graph Neural Networks for Causal Inference in Climate Science: A Novel Approach to Model Modeling Complex Interactions', 'Preeti Sethi', '3', 'offline', '11:35 AM - 11:55 AM', 2),
 ('a0000000-0002-4000-8000-000000000008', '1278', 'Threat Detection Through Honeypot Data', 'Priyanshi Sharma', '3', 'offline', '11:55 AM - 12:15 PM', 3),
 ('a0000000-0002-4000-8000-000000000008', '1394', 'A Rigorous Mathematical Comparison of Retrieval-Augmented Generation and Fine-Tuning for Domain-Specific Language Model Customization', 'Raghvendra Kumar Jha', '3', 'offline', '12:15 PM - 12:35 PM', 4),
-('a0000000-0002-4000-8000-000000000008', '1449', 'Spectrum Sensing Integration and Cross-Layer Optimisation in Cognitive Radio Routing Protocols', 'Neha Chaudhary', '3', 'offline', '12:35 PM - 12:55 PM', 5);
+('a0000000-0002-4000-8000-000000000008', '1449', 'Spectrum Sensing Integration and Cross-Layer Optimisation in Cognitive Radio Routing Protocols', 'Neha Chaudhary', '3', 'offline', '12:35 PM - 12:55 PM', 5),
+('a0000000-0002-4000-8000-000000000008', '1447', 'Farmers'' Transition to Organic Farming: Assessing the Impact of Markets, Policies, and Environmental Awareness', 'Dixit Kalra', '1', 'offline', '12:55 PM - 01:15 PM', 6),
+('a0000000-0002-4000-8000-000000000008', '1448', 'BUILDING A FINANCIALLY INCLUSIVE FUTURE: PATHWAYS TO LITERACY, RESILIENCE, AND SUSTAINABLE GROWTH', 'Dixit Kalra, Manisha Mittal', '1', 'offline', '01:15 PM - 01:35 PM', 7);
 
 -- Session III Room 6: Track-1/Track-6 Online, LF03
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
