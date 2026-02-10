@@ -199,7 +199,7 @@ INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, aut
 -- Session I Room 9: Track-11 Offline/Online, I Block Auditorium
 INSERT INTO public.session_papers (schedule_event_id, paper_id, paper_title, author_name, track_number, online_offline, timings, order_index) VALUES
 ('a0000000-0001-4000-8000-000000000012', '314', 'Able Vista: A Technology-Driven Platform for Enhancing Learning Outcomes Among Special Learners', 'Aditya Arora', '11', 'offline', '11:50 AM - 12:10 PM', 1),
-('a0000000-0001-4000-8000-000000000012', '421', 'Blockchain for Freelance Workforce Management in the Gig Economy', 'Dr. Aneesya Panicker', '11', 'offline', '12:10 PM - 12:30 PM', 2),
+('a0000000-0001-4000-8000-000000000012', '421', 'Blockchain for Freelance Workforce Management in the Gig Economy', 'Dr. Aneesya Panicker', '11', 'online', '12:10 PM - 12:30 PM', 2),
 ('a0000000-0001-4000-8000-000000000012', '472', 'Lesion-aware Transformer-based Deep Hybrid Model (LTDHM) for Explainable Diabetic Retinopathy Detection', 'Rashmi Bhardwaj', '11', 'online', '12:30 PM - 12:50 PM', 3),
 ('a0000000-0001-4000-8000-000000000012', '528', 'Real-Time Groundwater Resource Evaluation Using DWLR Data and AI Models', 'Sneha Kandacharam', '11', 'offline', '12:50 PM - 01:10 PM', 4),
 ('a0000000-0001-4000-8000-000000000012', '1086', 'Smart-VISION: A Deep Learning Based Real-Time Violence Detection System for CCTV Surveillance', 'Ravikant Jangid', '11', 'online', '01:10 PM - 01:30 PM', 5),
