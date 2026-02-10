@@ -105,7 +105,7 @@ export default function WorkshopPage() {
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              <span>Venue: N Block, Manav Rachna University, Faridabad</span>
+              <span>Venue: NG04 (N Block), Manav Rachna University, Faridabad</span>
             </div>
           </div>
         </motion.div>
