@@ -4,6 +4,7 @@ import AppLayout from '@/components/AppLayout'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Clock, MapPin, Mail, User } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function WorkshopPage() {
 
@@ -22,11 +23,29 @@ export default function WorkshopPage() {
         </div>
       </div>
 
-      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-4 pt-28">
+      <div className="bg-neutral-50 min-h-screen px-4 py-6 space-y-6 pt-28">
+        {/* Workshop Poster Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white overflow-hidden shadow-lg"
+        >
+          <div className="relative w-full aspect-[3/4]">
+            <Image
+              src="/images/pre-conference.jpg"
+              alt="Pre-Conference Workshop on Quantum Computing"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </motion.div>
+
         {/* Session Speakers Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
           className="bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-6 shadow-lg"
         >
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
@@ -65,7 +84,7 @@ export default function WorkshopPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ delay: 0.2 }}
           className="bg-gradient-to-br from-primary to-primary-dark text-white rounded-2xl p-5 shadow-lg"
         >
           <div className="flex items-center gap-3 mb-3">
@@ -95,7 +114,7 @@ export default function WorkshopPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.3 }}
           className="bg-white rounded-2xl shadow-lg overflow-hidden"
         >
           <div className="bg-gradient-primary text-white px-5 py-4">
@@ -110,7 +129,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.4 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-center border-r-2 border-neutral-200">
@@ -125,7 +144,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.35 }}
+              transition={{ delay: 0.45 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-center border-r-2 border-neutral-200">
@@ -140,7 +159,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.5 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-start border-r-2 border-neutral-200">
@@ -160,7 +179,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.45 }}
+              transition={{ delay: 0.55 }}
               className="flex items-stretch bg-gradient-to-r from-primary/10 to-secondary/10 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-center border-r-2 border-primary">
@@ -175,7 +194,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.6 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-start border-r-2 border-neutral-200">
@@ -195,7 +214,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.55 }}
+              transition={{ delay: 0.65 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-start border-r-2 border-neutral-200">
@@ -216,7 +235,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.7 }}
               className="flex items-stretch bg-gradient-to-r from-primary/10 to-secondary/10 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-center border-r-2 border-primary">
@@ -231,7 +250,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.65 }}
+              transition={{ delay: 0.75 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-start border-r-2 border-neutral-200">
@@ -250,7 +269,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.7 }}
+              transition={{ delay: 0.8 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-start border-r-2 border-neutral-200">
@@ -269,7 +288,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.75 }}
+              transition={{ delay: 0.85 }}
               className="flex items-stretch bg-gradient-to-r from-primary/10 to-secondary/10 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-center border-r-2 border-primary">
@@ -284,7 +303,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8 }}
+              transition={{ delay: 0.9 }}
               className="flex items-stretch bg-white hover:bg-neutral-50 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-start border-r-2 border-neutral-200">
@@ -303,7 +322,7 @@ export default function WorkshopPage() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.85 }}
+              transition={{ delay: 0.95 }}
               className="flex items-stretch bg-gradient-to-r from-primary/10 to-secondary/10 transition-colors"
             >
               <div className="flex-shrink-0 w-36 sm:w-40 px-4 py-4 flex items-center border-r-2 border-primary">
