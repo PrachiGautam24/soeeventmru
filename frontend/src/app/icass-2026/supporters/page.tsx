@@ -9,24 +9,24 @@ import Image from 'next/image'
 const supporters = [
   {
     id: 1,
+    name: 'STPI',
+    logo: '/supporters/stpi.png',
+  },
+  {
+    id: 2,
     name: 'Grandeur',
     logo: '/supporters/grandeur.jpg',
   },
   {
-    id: 2,
+    id: 3,
     name: 'OM Printers',
     logo: '/supporters/om-printers.png',
   },
   {
-    id: 3,
+    id: 4,
     name: 'Sonepar',
     logo: '/supporters/sonepar.jpg',
-  },
-  {
-    id: 4,
-    name: 'STPI',
-    logo: '/supporters/stpi.png',
-  },
+  }
 ]
 
 export default function SponsorsPage() {
