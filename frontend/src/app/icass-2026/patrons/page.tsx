@@ -47,7 +47,16 @@ export default function PatronsPage() {
     'Patron',
     'General Chair',
     'Conference Chair',
-    'Executive Chair'
+    'Executive Chair',
+    'Convener',
+    'Conference Secretary',
+    'Technical Program Chair',
+    'Steering Committee Chair',
+    'Finance Chair / Treasurer',
+    'Publication Chair',
+    'Track Chair',
+    'Special Session Chair',
+    'Publicity Chair'
   ]
 
   return (
