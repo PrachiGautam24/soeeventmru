@@ -72,7 +72,7 @@ INSERT INTO public.schedule_events (id, day, date, event_type, title, descriptio
 
 ('a0000000-0001-4000-8000-000000000022', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8 Online', NULL, '02:20 PM', '05:10 PM', 'I Block Auditorium', 'Technical Session – II', 'Track-8', 'Online', 'Prof Mamta Dahiya, MRIIRS, 9996236339, mamtadahiya.set@mriu.edu.in (Offline)', 'Dr Ranjana Jain (9871543454), Dr Sachin Lakra (9899400694)', 22),
 
-('a0000000-0001-4000-8000-000000000023', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8/ Track-2/ Track-4 Online', NULL, '02:20 PM', '05:10 PM', 'CADR Room G Block Basement', 'Technical Session – II', 'Track-8/ Track-2/ Track-4', 'Online', 'Prof Shilpi Agrawal, Galgotias University, 91-9971793102, shilpy15@gmail.com (offline)', 'Dr Piyush Charan (9559313115), Dr Awwab Mohammad (9990642712)', 23),
+('a0000000-0001-4000-8000-000000000023', 1, '2026-02-12', 'technical_session', 'Technical Session – II: Track-8/ Track-2/ Track-4 Online', NULL, '02:20 PM', '05:10 PM', 'CADR Room G Block Basement', 'Technical Session – II', 'Track-8/ Track-2/ Track-4', 'Online', 'Dr Puneet Garg, KIET Ghaziabad, 91-9996091999, puneet.garg@kiet.edu (offline)', 'Dr Piyush Charan (9559313115), Dr Awwab Mohammad (9990642712)', 23),
 
 -- Post Session II events Day 1
 ('a0000000-0001-4000-8000-000000000024', 1, '2026-02-12', 'tea_break', 'Tea/Coffee Break', NULL, '05:10 PM', '05:30 PM', NULL, NULL, NULL, NULL, NULL, NULL, 24),
