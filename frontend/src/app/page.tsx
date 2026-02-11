@@ -37,14 +37,19 @@ export default function SplashPage() {
               transition={{ duration: 0.5 }}
               className="text-center px-8"
             >
-              {/* SOE Logo */}
-              <div className="mb-8">
+              {/* SOE Logo + GPTW Logo */}
+              <div className="flex items-center justify-center gap-4 mb-8">
                 <Image
                   src="/images/soe-events-logo.jpg"
                   alt="School of Engineering - Manav Rachna University"
                   width={200}
                   height={200}
-                  className="mx-auto"
+                />
+                <Image
+                  src="/images/GPTW.jpg"
+                  alt="Great Place to Work"
+                  width={30}
+                  height={30}
                 />
               </div>
               {/* Loading spinner with gradient colors */}
