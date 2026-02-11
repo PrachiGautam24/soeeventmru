@@ -48,8 +48,8 @@ export default function SOEEventsHome() {
               <Image
                 src="/images/GPTW.jpg"
                 alt="Great Place to Work"
-                width={35}
-                height={35}
+                width={30}
+                height={30}
               />
               {/* <h1 className="text-xl font-bold text-gray-900 mb-2">
                 SOE EVENTS
