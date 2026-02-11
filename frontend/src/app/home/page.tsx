@@ -38,13 +38,18 @@ export default function SOEEventsHome() {
             transition={{ duration: 0.5 }}
             className="flex items-center justify-center py-8"
           >
-            <div className="text-center px-6">
+            <div className="flex items-center justify-center gap-4 px-6">
               <Image
                 src="/images/soe-events-logo.jpg"
                 alt="School of Engineering - Manav Rachna University"
                 width={200}
                 height={200}
-                className="mx-auto"
+              />
+              <Image
+                src="/images/GPTW.jpg"
+                alt="Great Place to Work"
+                width={35}
+                height={35}
               />
               {/* <h1 className="text-xl font-bold text-gray-900 mb-2">
                 SOE EVENTS
