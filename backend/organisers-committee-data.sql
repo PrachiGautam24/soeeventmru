@@ -19,7 +19,7 @@ INSERT INTO public.organisers (name, role, organization, order_index) VALUES
 INSERT INTO public.organisers (name, role, organization, order_index) VALUES
 ('Dr. Meenakshi Gupta', 'Registration Committee', 'Associate Professor, Associate Head, DoECE, MRU, Faridabad', 5),
 ('Ms. Daljeet Kaur', 'Registration Committee', 'Office Coordinator, DoECE, MRU, Faridabad', 6),
-('Ms. Ritika Saggi', 'Registration Committee', 'Office Coordinator, DoCST, MRU, Faridabad', 7),
+('Ms. Ritika Saggi', 'Registration Committee', 'Assistant Registrar, DoCST, MRU, Faridabad', 7),
 ('Dr. Niharika Thakur', 'Registration Committee', 'Associate Professor, DoECE, MRU, Faridabad', 8),
 ('Mr. Nazish Ahmad Samsi', 'Registration Committee', 'Assistant Professor, DoME, MRU, Faridabad', 9);
 
