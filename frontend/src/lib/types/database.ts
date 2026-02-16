@@ -297,66 +297,6 @@ export interface Database {
         }
         Relationships: []
       }
-      workshop: {
-        Row: {
-          id: string
-          title: string
-          description: string | null
-          instructor_name: string | null
-          date: string | null
-          start_time: string | null
-          end_time: string | null
-          duration_minutes: number | null
-          location: string | null
-          max_participants: number | null
-          topics: string[] | null
-          prerequisites: string[] | null
-          target_audience: string[] | null
-          benefits: string[] | null
-          registration_url: string | null
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          title: string
-          description?: string | null
-          instructor_name?: string | null
-          date?: string | null
-          start_time?: string | null
-          end_time?: string | null
-          duration_minutes?: number | null
-          location?: string | null
-          max_participants?: number | null
-          topics?: string[] | null
-          prerequisites?: string[] | null
-          target_audience?: string[] | null
-          benefits?: string[] | null
-          registration_url?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          title?: string
-          description?: string | null
-          instructor_name?: string | null
-          date?: string | null
-          start_time?: string | null
-          end_time?: string | null
-          duration_minutes?: number | null
-          location?: string | null
-          max_participants?: number | null
-          topics?: string[] | null
-          prerequisites?: string[] | null
-          target_audience?: string[] | null
-          benefits?: string[] | null
-          registration_url?: string | null
-          created_at?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       authors: {
         Row: {
           id: string

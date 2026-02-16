@@ -7,182 +7,232 @@
 -- 1. SPEAKERS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.speakers (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    title TEXT,
-    organization TEXT,
-    bio TEXT,
-    image_url TEXT,
-    twitter TEXT,
-    linkedin TEXT,
-    website TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    title text,
+    organization text,
+    bio text,
+    image_url text,
+    twitter text,
+    linkedin text,
+    website text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
+    session_type text,
+    participation_mode text
 );
 
 COMMENT ON TABLE public.speakers IS 'Conference speakers and presenters';
-COMMENT ON COLUMN public.speakers.title IS 'Job title or designation';
-COMMENT ON COLUMN public.speakers.order_index IS 'Display order (lower numbers first)';
 
 -- ------------------------------------------------------------
 -- 2. TRACKS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.tracks (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    code TEXT NOT NULL,
-    description TEXT,
-    topics TEXT[] DEFAULT '{}',
-    color TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    code text NOT NULL UNIQUE,
+    description text,
+    topics ARRAY,
+    color text DEFAULT '#1E3A8A'::text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now()
 );
 
 COMMENT ON TABLE public.tracks IS 'Conference tracks and themes';
-COMMENT ON COLUMN public.tracks.code IS 'Short code identifier (e.g., T1, T2)';
-COMMENT ON COLUMN public.tracks.topics IS 'Array of topics covered in this track';
-COMMENT ON COLUMN public.tracks.color IS 'Hex color code for UI display';
 
 -- ------------------------------------------------------------
 -- 3. SESSIONS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.sessions (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    title TEXT NOT NULL,
-    description TEXT,
-    speaker_name TEXT,
-    date DATE NOT NULL,
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
-    duration_minutes INTEGER,
-    location TEXT,
-    session_type TEXT,
-    track TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    title text NOT NULL,
+    description text,
+    speaker_name text,
+    date date NOT NULL,
+    start_time time without time zone NOT NULL,
+    end_time time without time zone NOT NULL,
+    duration_minutes integer,
+    location text,
+    session_type text,
+    track text,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now()
 );
 
 COMMENT ON TABLE public.sessions IS 'Conference sessions and schedule';
-COMMENT ON COLUMN public.sessions.speaker_name IS 'Session chair or speaker name (stored as text)';
-COMMENT ON COLUMN public.sessions.session_type IS 'Type: Technical Session, Plenary, Keynote, Workshop, etc.';
-COMMENT ON COLUMN public.sessions.track IS 'Track identifier (can be multiple: "Track 1, 2")';
 
 -- ------------------------------------------------------------
 -- 4. PATRONS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.patrons (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    title TEXT,
-    organization TEXT,
-    category TEXT NOT NULL,
-    image_url TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    designation text NOT NULL,
+    category text NOT NULL,
+    organization text NOT NULL,
+    image_url text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now())
 );
 
 COMMENT ON TABLE public.patrons IS 'Conference patrons and chairs';
-COMMENT ON COLUMN public.patrons.title IS 'Job title or designation';
-COMMENT ON COLUMN public.patrons.category IS 'Patron category: Chief Patron(s), Patron(s), General Chair, etc.';
 
 -- ------------------------------------------------------------
 -- 5. ORGANISERS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.organisers (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    role TEXT NOT NULL,
-    organization TEXT,
-    email TEXT,
-    phone TEXT,
-    image_url TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    role text NOT NULL,
+    organization text,
+    email text,
+    phone text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
+    image_url text
 );
 
 COMMENT ON TABLE public.organisers IS 'Conference organizing committee members';
-COMMENT ON COLUMN public.organisers.role IS 'Committee role: Registration Committee, Finance Committee, etc.';
 
 -- ------------------------------------------------------------
--- 6. WORKSHOP TABLE
--- ------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS public.workshop (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    title TEXT NOT NULL,
-    description TEXT,
-    instructor_name TEXT,
-    date DATE,
-    start_time TIME,
-    end_time TIME,
-    duration_minutes INTEGER,
-    location TEXT,
-    max_participants INTEGER,
-    topics TEXT[] DEFAULT '{}',
-    prerequisites TEXT[] DEFAULT '{}',
-    target_audience TEXT[] DEFAULT '{}',
-    benefits TEXT[] DEFAULT '{}',
-    registration_url TEXT,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
-);
-
-COMMENT ON TABLE public.workshop IS 'Pre-conference workshops';
-COMMENT ON COLUMN public.workshop.topics IS 'Array of topics covered in workshop';
-COMMENT ON COLUMN public.workshop.prerequisites IS 'Array of prerequisite requirements';
-COMMENT ON COLUMN public.workshop.target_audience IS 'Array of target audience types';
-COMMENT ON COLUMN public.workshop.benefits IS 'Array of participant benefits';
-
--- ------------------------------------------------------------
--- 7. AUTHORS TABLE
+-- 6. AUTHORS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.authors (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    affiliation TEXT,
-    email TEXT,
-    paper_title TEXT,
-    track TEXT,
-    country TEXT,
-    image_url TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    updated_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    affiliation text,
+    email text,
+    paper_title text,
+    track text,
+    country text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now(),
+    image_url text,
+    paper_id integer,
+    participation_mode text,
+    timings text,
+    session_chair text,
+    session_incharge text,
+    venue text,
+    session_name text,
+    track_no text
 );
 
 COMMENT ON TABLE public.authors IS 'Conference paper authors';
-COMMENT ON COLUMN public.authors.track IS 'Paper track identifier';
 
 -- ------------------------------------------------------------
--- 8. SPONSORS TABLE
+-- 7. SPONSORS TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.sponsors (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    logo_url TEXT,
-    website TEXT,
-    description TEXT,
-    order_index INTEGER DEFAULT 0,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    logo_url text,
+    website text,
+    description text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone DEFAULT now()
 );
 
 COMMENT ON TABLE public.sponsors IS 'Conference sponsors and partners';
-COMMENT ON COLUMN public.sponsors.order_index IS 'Display order for sponsor tiers';
 
 -- ------------------------------------------------------------
--- 9. ATTENDANCE TABLE
+-- 8. ATTENDANCE TABLE
 -- ------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS public.attendance (
-    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-    name TEXT NOT NULL,
-    timestamp TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    timestamp timestamp with time zone NOT NULL DEFAULT now(),
+    created_at timestamp with time zone DEFAULT now()
 );
 
 COMMENT ON TABLE public.attendance IS 'Session attendance tracking';
+
+-- ------------------------------------------------------------
+-- 9. CHIEF GUEST TABLE (New)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.chief_guest (
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    title text,
+    organization text,
+    bio text,
+    image_url text,
+    session_type text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+COMMENT ON TABLE public.chief_guest IS 'Conference chief guests';
+
+-- ------------------------------------------------------------
+-- 10. GUEST OF HONOR TABLE (New)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.guest_of_honor (
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    name text NOT NULL,
+    title text,
+    organization text,
+    bio text,
+    image_url text,
+    session_type text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+COMMENT ON TABLE public.guest_of_honor IS 'Conference guests of honor';
+
+-- ------------------------------------------------------------
+-- 11. SCHEDULE EVENTS TABLE (New)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.schedule_events (
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    day integer NOT NULL,
+    date date NOT NULL,
+    event_type text NOT NULL,
+    title text NOT NULL,
+    description text,
+    start_time text NOT NULL,
+    end_time text,
+    venue text,
+    session_name text,
+    tracks text,
+    mode text,
+    session_chair text,
+    session_incharge text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now())
+);
+
+COMMENT ON TABLE public.schedule_events IS 'Detailed conference schedule events';
+
+-- ------------------------------------------------------------
+-- 12. SESSION PAPERS TABLE (New)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS public.session_papers (
+    id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+    schedule_event_id uuid NOT NULL,
+    paper_id text NOT NULL,
+    paper_title text NOT NULL,
+    author_name text NOT NULL,
+    track_number text,
+    online_offline text,
+    timings text,
+    order_index integer DEFAULT 0,
+    created_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    updated_at timestamp with time zone NOT NULL DEFAULT timezone('utc'::text, now()),
+    CONSTRAINT session_papers_schedule_event_id_fkey FOREIGN KEY (schedule_event_id) REFERENCES public.schedule_events(id)
+);
+
+COMMENT ON TABLE public.session_papers IS 'Papers presented within schedule sessions';
+
 
 -- ============================================================
 -- PART 3: ENABLE ROW LEVEL SECURITY (RLS)
@@ -193,53 +243,45 @@ ALTER TABLE public.tracks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sessions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.patrons ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.organisers ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.workshop ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.authors ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sponsors ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.attendance ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.chief_guest ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.guest_of_honor ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.schedule_events ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.session_papers ENABLE ROW LEVEL SECURITY;
 
 -- ============================================================
 -- PART 4: CREATE RLS POLICIES (Public Read Access)
 -- ============================================================
 
--- Drop existing policies if they exist
+-- Drop existing policies if they exist (to ensure clean slate for new tables too)
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.speakers;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.tracks;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.sessions;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.patrons;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.organisers;
-DROP POLICY IF EXISTS "Enable read access for all users" ON public.workshop;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.authors;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.sponsors;
 DROP POLICY IF EXISTS "Enable read access for all users" ON public.attendance;
+DROP POLICY IF EXISTS "Enable read access for all users" ON public.chief_guest;
+DROP POLICY IF EXISTS "Enable read access for all users" ON public.guest_of_honor;
+DROP POLICY IF EXISTS "Enable read access for all users" ON public.schedule_events;
+DROP POLICY IF EXISTS "Enable read access for all users" ON public.session_papers;
 
 -- Create new public read policies
-CREATE POLICY "Enable read access for all users" ON public.speakers 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.tracks 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.sessions 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.patrons 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.organisers 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.workshop 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.authors 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.sponsors 
-    FOR SELECT USING (true);
-
-CREATE POLICY "Enable read access for all users" ON public.attendance 
-    FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.speakers FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.tracks FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.sessions FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.patrons FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.organisers FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.authors FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.sponsors FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.attendance FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.chief_guest FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.guest_of_honor FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.schedule_events FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON public.session_papers FOR SELECT USING (true);
 
 -- ============================================================
 -- PART 5: CREATE PERFORMANCE INDEXES
@@ -266,14 +308,12 @@ CREATE INDEX IF NOT EXISTS patrons_order_idx ON public.patrons(order_index);
 CREATE INDEX IF NOT EXISTS organisers_role_idx ON public.organisers(role);
 CREATE INDEX IF NOT EXISTS organisers_order_idx ON public.organisers(order_index);
 
--- Workshop indexes
-CREATE INDEX IF NOT EXISTS workshop_date_idx ON public.workshop(date);
-
 -- Authors indexes
 CREATE INDEX IF NOT EXISTS authors_name_idx ON public.authors(name);
 CREATE INDEX IF NOT EXISTS authors_email_idx ON public.authors(email);
 CREATE INDEX IF NOT EXISTS authors_order_idx ON public.authors(order_index);
 CREATE INDEX IF NOT EXISTS authors_track_idx ON public.authors(track);
+CREATE INDEX IF NOT EXISTS authors_paper_id_idx ON public.authors(paper_id);
 
 -- Sponsors indexes
 CREATE INDEX IF NOT EXISTS sponsors_order_idx ON public.sponsors(order_index);
@@ -282,37 +322,17 @@ CREATE INDEX IF NOT EXISTS sponsors_order_idx ON public.sponsors(order_index);
 CREATE INDEX IF NOT EXISTS attendance_timestamp_idx ON public.attendance(timestamp);
 CREATE INDEX IF NOT EXISTS attendance_name_idx ON public.attendance(name);
 
--- ============================================================
--- PART 6: VERIFICATION QUERIES (Optional)
--- ============================================================
+-- Chief Guest indexes
+CREATE INDEX IF NOT EXISTS chief_guest_order_idx ON public.chief_guest(order_index);
 
--- Check all tables exist
-SELECT 
-    schemaname,
-    tablename,
-    tableowner
-FROM pg_tables 
-WHERE schemaname = 'public'
-    AND tablename IN ('speakers', 'tracks', 'sessions', 'patrons', 'organisers', 'workshop', 'authors', 'sponsors', 'attendance')
-ORDER BY tablename;
+-- Guest of Honor indexes
+CREATE INDEX IF NOT EXISTS guest_of_honor_order_idx ON public.guest_of_honor(order_index);
 
--- Check all indexes exist
-SELECT 
-    schemaname,
-    tablename,
-    indexname
-FROM pg_indexes 
-WHERE schemaname = 'public'
-    AND tablename IN ('speakers', 'tracks', 'sessions', 'patrons', 'organisers', 'workshop', 'authors', 'sponsors', 'attendance')
-ORDER BY tablename, indexname;
+-- Schedule Events indexes
+CREATE INDEX IF NOT EXISTS schedule_events_day_idx ON public.schedule_events(day);
+CREATE INDEX IF NOT EXISTS schedule_events_date_idx ON public.schedule_events(date);
+CREATE INDEX IF NOT EXISTS schedule_events_order_idx ON public.schedule_events(order_index);
 
--- Check all RLS policies exist
-SELECT 
-    schemaname,
-    tablename,
-    policyname,
-    cmd,
-    qual
-FROM pg_policies
-WHERE schemaname = 'public'
-ORDER BY tablename;
+-- Session Papers indexes
+CREATE INDEX IF NOT EXISTS session_papers_schedule_id_idx ON public.session_papers(schedule_event_id);
+CREATE INDEX IF NOT EXISTS session_papers_paper_id_idx ON public.session_papers(paper_id);
