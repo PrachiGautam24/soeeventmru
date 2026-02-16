@@ -58,6 +58,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       chief_guest: {
         Row: {
@@ -96,6 +97,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       guest_of_honor: {
         Row: {
@@ -134,6 +136,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       sessions: {
         Row: {
@@ -181,6 +184,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       tracks: {
         Row: {
@@ -216,6 +220,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       patrons: {
         Row: {
@@ -251,6 +256,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       organisers: {
         Row: {
@@ -289,6 +295,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       workshop: {
         Row: {
@@ -348,6 +355,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       authors: {
         Row: {
@@ -392,6 +400,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       schedule_events: {
         Row: {
@@ -451,6 +460,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       session_papers: {
         Row: {
@@ -492,6 +502,7 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+        Relationships: []
       }
       attendance: {
         Row: {
@@ -512,6 +523,7 @@ export interface Database {
           timestamp?: string
           created_at?: string
         }
+        Relationships: []
       }
       sponsors: {
         Row: {
@@ -541,6 +553,7 @@ export interface Database {
           order_index?: number
           created_at?: string
         }
+        Relationships: []
       }
     }
     Views: {

@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import AppLayout from '@/components/AppLayout'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Globe, Navigation } from 'lucide-react'

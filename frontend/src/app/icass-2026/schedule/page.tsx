@@ -78,7 +78,7 @@ export default function SchedulePage() {
 
   // Filter events by day + search
   const filteredEvents = useMemo(() => {
-    let dayEvents = events.filter((e) => e.day === selectedDay)
+    const dayEvents = events.filter((e) => e.day === selectedDay)
 
     if (!searchQuery.trim()) return dayEvents
 
@@ -322,7 +322,7 @@ export default function SchedulePage() {
                               <FileText className="w-4 h-4 text-primary" />
                               Papers ({eventPapers.length})
                             </h4>
-                            {eventPapers.map((paper, pIdx) => (
+                            {eventPapers.map((paper) => (
                               <div
                                 key={paper.id}
                                 className="bg-neutral-50 rounded-xl p-3 border border-neutral-100"

@@ -122,7 +122,7 @@ At its heart, SITAYANA honours the spirit of women as reflections of divine ener
           className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-5 shadow-md"
         >
           <p className="text-sm text-neutral-700 italic">
-            <span className="font-semibold text-secondary">Inspired by:</span> Chitra Banerjee Divakaruni's <em>Forest of Enchantment</em>
+            <span className="font-semibold text-secondary">Inspired by:</span> Chitra Banerjee Divakaruni&apos;s <em>Forest of Enchantment</em>
           </p>
         </motion.div>
 

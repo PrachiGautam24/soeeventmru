@@ -10,7 +10,6 @@ import {
   MapPin,
   Globe,
   BookOpen,
-  Info,
   Share2,
   ArrowLeft,
   Music
@@ -206,7 +205,7 @@ export default function MorePage() {
               <p className="font-semibold">February 12-13, 2026</p>
               <p>Manav Rachna University, Faridabad</p>
               <p className="text-white/80 mt-3 italic">
-                "Harnessing AI for a Digital Future"
+                &quot;Harnessing AI for a Digital Future&quot;
               </p>
             </div>
           </motion.div>

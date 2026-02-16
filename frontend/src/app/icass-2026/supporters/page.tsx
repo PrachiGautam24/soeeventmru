@@ -2,7 +2,7 @@
 
 import AppLayout from '@/components/AppLayout'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Award } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -30,7 +30,6 @@ const supporters = [
 ]
 
 export default function SponsorsPage() {
-
   return (
     <AppLayout>
       {/* Header */}

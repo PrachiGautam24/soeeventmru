@@ -2,8 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Home, Search, Calendar, ArrowLeft } from 'lucide-react'
-import Image from 'next/image'
+import { Home } from 'lucide-react'
 
 export default function NotFound() {
   return (
@@ -36,7 +35,7 @@ export default function NotFound() {
               Page Not Found
             </h2>
             <p className="text-white/90 text-lg">
-              Oops! The page you're looking for doesn't exist.
+              Oops! The page you&apos;re looking for doesn&apos;t exist.
             </p>
           </motion.div>
 

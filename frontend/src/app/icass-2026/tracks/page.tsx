@@ -33,20 +33,6 @@ export default function TracksPage() {
     }
   }
 
-  const getTrackColor = (index: number) => {
-    const colors = [
-      'from-primary to-primary-dark',
-      'from-secondary to-secondary-dark',
-      'from-neutral-600 to-neutral-700',
-      'from-primary-light to-primary',
-      'from-secondary-light to-secondary',
-      'from-neutral-700 to-neutral-800',
-      'from-primary to-secondary',
-      'from-neutral-500 to-neutral-600',
-    ]
-    return colors[index % colors.length]
-  }
-
   return (
     <AppLayout>
       {/* Header */}

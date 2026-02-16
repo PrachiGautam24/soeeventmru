@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
 import HeroSection from '@/components/home/HeroSection'
 import QuickActions from '@/components/home/QuickActions'

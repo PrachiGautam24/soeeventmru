@@ -278,7 +278,7 @@ export default function WorkshopPage() {
               <div className="flex-1 px-4 py-4">
                 <p className="font-semibold text-sm text-neutral-800 mb-2">Hands-on Session III: Quantum Algorithms</p>
                 <ul className="text-xs text-neutral-600 space-y-1 ml-4 list-disc">
-                  <li>Grover's Search Algorithm</li>
+                  <li>Grover&apos;s Search Algorithm</li>
                   <li>Deutsch Algorithm</li>
                 </ul>
               </div>

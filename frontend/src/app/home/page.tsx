@@ -51,15 +51,6 @@ export default function SOEEventsHome() {
                 width={30}
                 height={30}
               />
-              {/* <h1 className="text-xl font-bold text-gray-900 mb-2">
-                SOE EVENTS
-              </h1>
-              <p className="text-gray-600">
-                School of Engineering
-              </p>
-              <p className="text-sm text-gray-500 mt-1">
-                Manav Rachna University
-              </p> */}
             </div>
           </motion.div>
 
@@ -165,4 +156,3 @@ export default function SOEEventsHome() {
     </div>
   )
 }
-

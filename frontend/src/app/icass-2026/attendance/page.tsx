@@ -25,14 +25,12 @@ export default function AttendancePage() {
     setError('')
 
     try {
-      const { error: insertError } = await (supabase as any)
+      const { error: insertError } = await supabase
         .from('attendance')
-        .insert([
-          {
-            name: name.trim(),
-            timestamp: new Date().toISOString()
-          }
-        ])
+        .insert({
+          name: name.trim(),
+          timestamp: new Date().toISOString()
+        })
 
       if (insertError) throw insertError
 
