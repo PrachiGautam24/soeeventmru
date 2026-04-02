@@ -1,4 +1,4 @@
-# SOE Events MRIIRS
+# SOE Events MRU
 
 SOE Events MRU is a mobile-first event platform for Manav Rachna University’s School of Engineering. It is built as a Next.js App Router frontend with Supabase as the data layer. The current event focus is ICASS 2026, with a structure that supports adding more events later.
 
