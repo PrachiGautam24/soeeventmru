@@ -3,8 +3,9 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { Calendar, MapPin, Trophy, LayoutGrid } from 'lucide-react'
+import { Calendar, MapPin, LayoutGrid } from 'lucide-react'
 import { useState, useRef } from 'react'
+import AchievementsSection from '@/components/home/AchievementsSection'
 
 const clubs = [
   { abbr: 'CC',  name: 'Coding Club' },
@@ -16,13 +17,24 @@ const clubs = [
   { abbr: 'ME',  name: 'ME' },
 ]
 
-const upcomingEvents = [
+interface EventItem {
+  title: string
+  slug: string
+  description: string
+  date: string
+  location: string
+  club: string | null
+  isActive: boolean
+  image?: string
+}
+
+const upcomingEvents: EventItem[] = [
   { title: 'Pre-Conference Workshop', slug: 'icass-2026/workshop', description: 'ICT Academy', date: 'April 8, 2026', location: 'Manav Rachna University', club: 'ICT', isActive: true },
   { title: 'IEEE Tech Talk', slug: 'icass-2026/workshop', description: 'Upcoming IEEE session on embedded systems.', date: 'April 15, 2026', location: 'Manav Rachna University', club: 'IE', isActive: false },
   { title: 'Coding Hackathon', slug: 'icass-2026/workshop', description: '24-hour hackathon organized by Coding Club.', date: 'April 20, 2026', location: 'Manav Rachna University', club: 'CC', isActive: false },
 ]
 
-const pastEvents = [
+const pastEvents: EventItem[] = [
   { title: 'ICASS 2026', slug: 'icass-2026', description: 'International Conference on Intelligent Computing and Automation for Sustainable Solutions', date: 'February 12-13, 2026', location: 'Manav Rachna University', image: '/images/logo.png', club: null, isActive: true },
 ]
 
@@ -64,7 +76,7 @@ function ClubBar({ active, onSelect }: { active: string | null; onSelect: (abbr:
 }
 
 function EventCarousel({ events, onEventClick, isPast = false }: {
-  events: typeof upcomingEvents | typeof pastEvents
+  events: EventItem[]
   onEventClick: (slug: string, isActive: boolean) => void
   isPast?: boolean
 }) {
@@ -92,7 +104,7 @@ function EventCarousel({ events, onEventClick, isPast = false }: {
     return <p className="text-sm text-neutral-400 text-center py-6">No events for this club.</p>
   }
 
-  const event = events[index] as typeof pastEvents[0] & typeof upcomingEvents[0]
+  const event = events[index]
 
   return (
     <div className="px-4">
@@ -160,6 +172,7 @@ export default function SOEEventsHome() {
   const router = useRouter()
   const [activeClub, setActiveClub] = useState<string | null>(null)
   const [activePastClub, setActivePastClub] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'events' | 'achievements'>('events')
 
   const filteredUpcoming = activeClub ? upcomingEvents.filter(e => e.club === activeClub) : upcomingEvents
   const filteredPast = activePastClub ? pastEvents.filter(e => e.club === activePastClub) : pastEvents
@@ -167,10 +180,6 @@ export default function SOEEventsHome() {
   const handleEventClick = (slug: string, isActive: boolean) => {
     if (isActive) router.push(`/${slug}/loading`)
   }
-
-  const studentAchievements = [
-    { name: 'Student Name', achievement: 'Achievement description goes here', category: 'Research / Innovation / Award' },
-  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -192,34 +201,38 @@ export default function SOEEventsHome() {
           </div>
         </div>
 
-        {/* Upcoming Events */}
-        <div className="py-5 bg-neutral-50">
-          <h3 className="text-xl font-bold text-neutral-800 mb-3 px-4 ml-2">Upcoming Events</h3>
-          <ClubBar active={activeClub} onSelect={setActiveClub} />
-          <div className="mt-4">
-            <EventCarousel key={activeClub + '-up'} events={filteredUpcoming} onEventClick={handleEventClick} />
-          </div>
+        {/* Tab Switcher */}
+        <div className="flex border-b border-neutral-200 bg-white">
+          <button
+            onClick={() => setActiveTab('events')}
+            className={`flex-1 py-3 text-sm font-semibold transition-all duration-200 ${activeTab === 'events' ? 'text-secondary border-b-2 border-secondary' : 'text-neutral-400'}`}
+          >
+            Upcoming Events
+          </button>
+          <button
+            onClick={() => setActiveTab('achievements')}
+            className={`flex-1 py-3 text-sm font-semibold transition-all duration-200 ${activeTab === 'achievements' ? 'text-secondary border-b-2 border-secondary' : 'text-neutral-400'}`}
+          >
+            Student Achievements
+          </button>
         </div>
 
-        {/* Student Achievements */}
-        <div className="px-4 py-6 bg-white">
-          <h3 className="text-xl font-bold text-neutral-800 mb-6 ml-2">Student Achievements</h3>
-          <div className="grid grid-cols-1 gap-4">
-            {studentAchievements.map((item, index) => (
-              <motion.div key={index} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                className="bg-neutral-50 rounded-2xl p-5 border border-neutral-200 flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shrink-0">
-                  <Trophy className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <p className="font-bold text-gray-900 text-sm">{item.name}</p>
-                  <p className="text-gray-600 text-sm mt-1">{item.achievement}</p>
-                  <span className="inline-block mt-2 text-xs font-medium text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">{item.category}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {/* Tab Content */}
+        <AnimatePresence mode="wait">
+          {activeTab === 'events' ? (
+            <motion.div key="events" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.2 }}
+              className="py-5 bg-neutral-50">
+              <ClubBar active={activeClub} onSelect={setActiveClub} />
+              <div className="mt-4">
+                <EventCarousel key={activeClub + '-up'} events={filteredUpcoming} onEventClick={handleEventClick} />
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div key="achievements" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} transition={{ duration: 0.2 }}>
+              <AchievementsSection />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Past Events */}
         <div className="py-5 bg-neutral-50">

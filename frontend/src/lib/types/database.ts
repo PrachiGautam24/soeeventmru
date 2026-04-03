@@ -465,6 +465,81 @@ export interface Database {
         }
         Relationships: []
       }
+      achievement_events: {
+        Row: {
+          id: string
+          title: string
+          category: 'ACADEMIC' | 'RESEARCH' | 'SPORTS' | 'CULTURAL' | 'INNOVATION'
+          year: number
+          icon: string
+          bg_color: string
+          student_count: number
+          is_featured: boolean
+          order_index: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          category: 'ACADEMIC' | 'RESEARCH' | 'SPORTS' | 'CULTURAL' | 'INNOVATION'
+          year: number
+          icon: string
+          bg_color: string
+          student_count: number
+          is_featured?: boolean
+          order_index?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          category?: 'ACADEMIC' | 'RESEARCH' | 'SPORTS' | 'CULTURAL' | 'INNOVATION'
+          year?: number
+          icon?: string
+          bg_color?: string
+          student_count?: number
+          is_featured?: boolean
+          order_index?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
+      achievement_students: {
+        Row: {
+          id: string
+          achievement_event_id: string
+          name: string
+          branch: string | null
+          year_of_study: string | null
+          description: string | null
+          image_url: string | null
+          order_index: number
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          achievement_event_id: string
+          name: string
+          branch?: string | null
+          year_of_study?: string | null
+          description?: string | null
+          image_url?: string | null
+          order_index?: number
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          achievement_event_id?: string
+          name?: string
+          branch?: string | null
+          year_of_study?: string | null
+          description?: string | null
+          image_url?: string | null
+          order_index?: number
+          created_at?: string
+        }
+        Relationships: []
+      }
       sponsors: {
         Row: {
           id: string

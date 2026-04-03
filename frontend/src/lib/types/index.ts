@@ -12,6 +12,8 @@ export type Attendance = Database['public']['Tables']['attendance']['Row']
 export type Sponsor = Database['public']['Tables']['sponsors']['Row']
 export type ScheduleEvent = Database['public']['Tables']['schedule_events']['Row']
 export type SessionPaper = Database['public']['Tables']['session_papers']['Row']
+export type AchievementEvent = Database['public']['Tables']['achievement_events']['Row']
+export type AchievementStudent = Database['public']['Tables']['achievement_students']['Row']
 
 export interface SocialLinks {
   twitter?: string
