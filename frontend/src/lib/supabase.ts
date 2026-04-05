@@ -1,15 +1,16 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { Database } from './types/database'
 
-let supabase: ReturnType<typeof createClient<Database>> | null = null
+let _supabase: SupabaseClient<Database> | null = null
 
-if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-  supabase = createClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  )
-} else {
-  console.warn("Supabase not configured - frontend will work without database features")
+function getSupabaseClient(): SupabaseClient<Database> | null {
+  if (!_supabase && process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    _supabase = createClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    )
+  }
+  return _supabase
 }
 
-export { supabase }
+export { getSupabaseClient as supabase }

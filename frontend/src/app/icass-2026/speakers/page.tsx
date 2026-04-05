@@ -26,7 +26,8 @@ export default function SpeakersPage() {
   }, [])
 
   const fetchSpeakers = async () => {
-    if (!supabase) {
+    const client = supabase()
+    if (!client) {
       console.warn('Supabase not configured - using mock data')
       setSpeakers([])
       setLoading(false)
@@ -34,7 +35,7 @@ export default function SpeakersPage() {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('speakers')
         .select('*')
         .order('order_index', { ascending: true })

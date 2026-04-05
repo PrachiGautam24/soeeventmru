@@ -24,7 +24,8 @@ export default function OrganisersPage() {
   }, [])
 
   const fetchOrganisers = async () => {
-    if (!supabase) {
+    const client = supabase()
+    if (!client) {
       console.warn('Supabase not configured - using mock data')
       setOrganisers([])
       setLoading(false)
@@ -32,7 +33,7 @@ export default function OrganisersPage() {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('organisers')
         .select('*')
         .order('order_index', { ascending: true })

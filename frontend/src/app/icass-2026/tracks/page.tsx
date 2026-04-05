@@ -23,7 +23,8 @@ export default function TracksPage() {
   }, [])
 
   const fetchTracks = async () => {
-    if (!supabase) {
+    const client = supabase()
+    if (!client) {
       console.warn('Supabase not configured - using mock data')
       setTracks([])
       setLoading(false)
@@ -31,7 +32,7 @@ export default function TracksPage() {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('tracks')
         .select('*')
         .order('order_index', { ascending: true })

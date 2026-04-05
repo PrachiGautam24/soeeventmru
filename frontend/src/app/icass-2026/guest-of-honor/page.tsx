@@ -24,7 +24,8 @@ export default function GuestOfHonorPage() {
   }, [])
 
   const fetchGuests = async () => {
-    if (!supabase) {
+    const client = supabase()
+    if (!client) {
       console.warn('Supabase not configured - using mock data')
       setGuests([])
       setLoading(false)
@@ -32,7 +33,7 @@ export default function GuestOfHonorPage() {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('guest_of_honor')
         .select('*')
         .order('order_index', { ascending: true })

@@ -24,7 +24,8 @@ export default function ChiefGuestPage() {
   }, [])
 
   const fetchChiefGuests = async () => {
-    if (!supabase) {
+    const client = supabase()
+    if (!client) {
       console.warn('Supabase not configured - using mock data')
       setChiefGuests([])
       setLoading(false)
@@ -32,7 +33,7 @@ export default function ChiefGuestPage() {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('chief_guest')
         .select('*')
         .order('order_index', { ascending: true })

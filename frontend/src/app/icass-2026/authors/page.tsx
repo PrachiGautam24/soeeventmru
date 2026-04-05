@@ -37,7 +37,8 @@ export default function AuthorsPage() {
   }, [])
 
   const fetchAuthors = async () => {
-    if (!supabase) {
+    const client = supabase()
+    if (!client) {
       console.warn('Supabase not configured - using mock data')
       setAuthors([])
       setLoading(false)
@@ -45,7 +46,7 @@ export default function AuthorsPage() {
     }
 
     try {
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('authors')
         .select('*')
         .order('name', { ascending: true })
