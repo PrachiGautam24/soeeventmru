@@ -24,8 +24,7 @@ export default function PatronsPage() {
   }, [])
 
   const fetchPatrons = async () => {
-    const client = supabase()
-    if (!client) {
+    if (!supabase) {
       console.warn('Supabase not configured - using mock data')
       setPatrons([])
       setLoading(false)
@@ -33,7 +32,7 @@ export default function PatronsPage() {
     }
 
     try {
-      const { data, error } = await client
+      const { data, error } = await supabase
         .from('patrons')
         .select('*')
         .order('order_index', { ascending: true })

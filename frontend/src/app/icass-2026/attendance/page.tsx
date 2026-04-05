@@ -21,8 +21,7 @@ export default function AttendancePage() {
       return
     }
 
-    const client = supabase()
-    if (!client) {
+    if (!supabase) {
       setError('Database not configured - attendance tracking unavailable')
       return
     }
@@ -31,7 +30,7 @@ export default function AttendancePage() {
     setError('')
 
     try {
-      const { error: insertError } = await client
+      const { error: insertError } = await supabase
         .from('attendance')
         .insert({
           name: name.trim(),

@@ -45,8 +45,7 @@ export default function SchedulePage() {
   }, [])
 
   const fetchSchedule = async () => {
-    const client = supabase()
-    if (!client) {
+    if (!supabase) {
       console.warn('Supabase not configured - using mock data')
       setEvents([])
       setPapers([])
@@ -56,11 +55,11 @@ export default function SchedulePage() {
 
     try {
       const [eventsRes, papersRes] = await Promise.all([
-        client
+        supabase
           .from('schedule_events')
           .select('*')
           .order('order_index', { ascending: true }),
-        client
+        supabase
           .from('session_papers')
           .select('*')
           .order('order_index', { ascending: true })

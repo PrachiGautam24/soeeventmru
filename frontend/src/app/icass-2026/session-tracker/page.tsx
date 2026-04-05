@@ -30,8 +30,7 @@ export default function SessionTrackerPage() {
   }, [])
 
   const fetchSessions = async () => {
-    const client = supabase()
-    if (!client) {
+    if (!supabase) {
       console.warn('Supabase not configured - using mock data')
       setSessions([])
       setLoading(false)
@@ -39,7 +38,7 @@ export default function SessionTrackerPage() {
     }
 
     try {
-      const { data, error } = await client
+      const { data, error } = await supabase
         .from('sessions')
         .select('*')
         .order('date', { ascending: true })
