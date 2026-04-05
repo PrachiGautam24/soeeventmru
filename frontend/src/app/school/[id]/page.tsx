@@ -128,8 +128,8 @@ export default function SchoolPage() {
                     onClick={() => router.push(`/school/${school.id}/${dept.id}`)}
                     className="flex items-center gap-3 bg-white border border-neutral-100 rounded-2xl p-3 shadow-sm text-left"
                   >
-                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${deptGradients[i % deptGradients.length]} flex items-center justify-center text-xl shadow shrink-0`}>
-                      {dept.icon}
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${deptGradients[i % deptGradients.length]} flex items-center justify-center shadow shrink-0`}>
+                      <span className="text-white font-bold text-xs text-center leading-tight px-1">{dept.code}</span>
                     </div>
                     <span className="text-xs text-gray-800 font-semibold leading-snug">
                       {dept.name}
