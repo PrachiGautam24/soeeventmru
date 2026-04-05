@@ -5,8 +5,19 @@ import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, Star, X, Map, Building2, Users, Phone, CalendarDays, BookOpen, CreditCard, Library } from 'lucide-react'
 import { schools } from '@/lib/schools'
+
+const fresherItems = [
+  { icon: Map,          label: 'Campus Map',               desc: 'Navigate the campus easily' },
+  { icon: Building2,    label: 'Hostel Information',        desc: 'Rooms, facilities & rules' },
+  { icon: Users,        label: 'Clubs & Societies',         desc: 'Find your community' },
+  { icon: Phone,        label: 'Important Faculty Contacts',desc: 'Key numbers to save' },
+  { icon: CalendarDays, label: 'Academic Calendar',         desc: 'Dates, exams & holidays' },
+  { icon: BookOpen,     label: 'First Day Instructions',    desc: 'What to do on day one' },
+  { icon: CreditCard,   label: 'ID Card Process',           desc: 'How to get your ID' },
+  { icon: Library,      label: 'Library Info',              desc: 'Access books & resources' },
+]
 
 // Gradient pairs per school for the app-icon style buttons
 const schoolColors: Record<string, string> = {
@@ -75,6 +86,8 @@ const schoolSVGs: Record<string, React.ReactNode> = {
 export default function HomePage() {
   const router = useRouter()
   const [aboutOpen, setAboutOpen] = useState(false)
+  const [fresherOpen, setFresherOpen] = useState(false)
+  const [floatingOpen, setFloatingOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-neutral-100">
@@ -154,18 +167,68 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* ── Fresher Guide ── */}
+        <div className="bg-white border-t border-neutral-100">
+          <button
+            onClick={() => setFresherOpen(o => !o)}
+            className="w-full flex items-center justify-between px-5 py-4"
+          >
+            <span className="text-sm font-semibold text-gray-800 flex items-center gap-2">
+              Fresher Guide <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+            </span>
+            <motion.div animate={{ rotate: fresherOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+              <ChevronDown className="w-4 h-4 text-neutral-400" />
+            </motion.div>
+          </button>
+          <AnimatePresence initial={false}>
+            {fresherOpen && (
+              <motion.div
+                key="fresher"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <div className="px-5 pb-5 grid grid-cols-2 gap-3">
+                  {fresherItems.map((item, i) => {
+                    const Icon = item.icon
+                    return (
+                      <motion.button
+                        key={item.label}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.05 }}
+                        className="flex items-start gap-3 bg-neutral-50 rounded-xl p-3 border border-neutral-100 text-left"
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center shrink-0">
+                          <Icon className="w-4 h-4 text-red-600" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-gray-800 leading-tight">{item.label}</p>
+                          <p className="text-[10px] text-neutral-400 mt-0.5">{item.desc}</p>
+                        </div>
+                      </motion.button>
+                    )
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
         {/* ── Footer links ── */}
-        <div className="bg-white border-t border-neutral-100 mt-auto">
+        <div className="bg-white border-t border-neutral-100 mt-auto py-4 space-y-4">
 
           {/* About Manav Rachna — collapsible accordion */}
-          <div className="border-b border-neutral-100">
+          <div className="mx-5 mb-2 rounded-2xl overflow-hidden shadow-sm">
             <button
               onClick={() => setAboutOpen(o => !o)}
-              className="w-full flex items-center justify-between px-5 py-4"
+              className={`w-full flex items-center justify-between px-5 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}
             >
-              <span className="text-sm font-semibold text-gray-800">About Manav Rachna University</span>
+              <span className="text-sm font-semibold text-white">About Manav Rachna University</span>
               <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                <ChevronDown className="w-4 h-4 text-neutral-400" />
+                <ChevronDown className="w-4 h-4 text-white/80" />
               </motion.div>
             </button>
             <AnimatePresence initial={false}>
@@ -176,9 +239,9 @@ export default function HomePage() {
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="overflow-hidden"
+                  className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100"
                 >
-                  <div className="px-5 pb-5 space-y-3">
+                  <div className="px-5 pb-5 pt-3 space-y-3">
                     {[
                       `Manav Rachna University (MRU) was established under the Haryana State Legislature Act No. 26 of 2014 and is one of the leading private state universities in Haryana, India.`,
                       `It is recognised by the University Grants Commission (UGC) under Section 2(f) of the UGC Act, 1956, and is dedicated to providing world-class education with a global outlook.`,
@@ -194,7 +257,7 @@ export default function HomePage() {
           </div>
 
           {/* Social links */}
-          <div className="px-5 py-4 space-y-3">
+          <div className="px-5 py-2 space-y-3">
             <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Follow Us</p>
             <div className="flex gap-5">
               <a href="https://www.instagram.com/manavrachnauniversity/" target="_blank" rel="noopener noreferrer"
@@ -218,6 +281,43 @@ export default function HomePage() {
           </div>
         </div>
 
+      </div>
+
+      {/* ── Floating Fresher Guide button ── */}
+      <div className="fixed bottom-20 right-4 z-50 flex flex-col items-end gap-2">
+        <AnimatePresence>
+          {floatingOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.85, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white rounded-2xl shadow-xl border border-neutral-100 p-3 w-56 space-y-1 mb-1"
+            >
+              {fresherItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <button key={item.label} className="flex items-center gap-3 w-full px-2 py-2 rounded-xl hover:bg-neutral-50 text-left">
+                    <div className="w-7 h-7 rounded-lg bg-red-100 flex items-center justify-center shrink-0">
+                      <Icon className="w-3.5 h-3.5 text-red-600" />
+                    </div>
+                    <span className="text-xs font-medium text-gray-700">{item.label}</span>
+                  </button>
+                )
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <motion.button
+          whileTap={{ scale: 0.92 }}
+          onClick={() => setFloatingOpen(o => !o)}
+          className="w-14 h-14 rounded-full bg-red-600 text-white shadow-lg flex items-center justify-center"
+        >
+          {floatingOpen
+            ? <X className="w-6 h-6" />
+            : <Star className="w-6 h-6 fill-white" />
+          }
+        </motion.button>
       </div>
     </div>
   )

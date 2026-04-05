@@ -77,13 +77,13 @@ The school has collaborations with leading industry and academic partners such a
               onClick={() => setExpandedSection(
                 expandedSection === section.id ? null : section.id
               )}
-              className="w-full px-5 py-4 flex items-center justify-between hover:bg-white transition-colors"
+              className="w-full px-5 py-4 flex items-center justify-between bg-red-600 hover:bg-red-700 transition-colors rounded-xl"
             >
-              <span className="font-semibold text-neutral-800 text-left">
+              <span className="font-semibold text-white text-left">
                 {section.title}
               </span>
               <ChevronRight
-                className={`w-5 h-5 text-neutral-400 transition-transform ${
+                className={`w-5 h-5 text-white/80 transition-transform ${
                   expandedSection === section.id ? 'rotate-90' : ''
                 }`}
               />

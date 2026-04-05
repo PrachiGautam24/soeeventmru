@@ -140,14 +140,14 @@ export default function SchoolPage() {
             </div>
 
             {/* ── About accordion ── */}
-            <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+            <div className="rounded-2xl overflow-hidden shadow-sm">
               <button
                 onClick={() => setAboutOpen(o => !o)}
-                className="w-full flex items-center justify-between px-4 py-4"
+                className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}
               >
-                <span className="font-bold text-gray-900 text-sm">About {school.name}</span>
+                <span className="font-bold text-white text-sm">About {school.name}</span>
                 <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                  <ChevronDown className="w-4 h-4 text-neutral-400" />
+                  <ChevronDown className="w-4 h-4 text-white/80" />
                 </motion.div>
               </button>
               <AnimatePresence initial={false}>
@@ -158,9 +158,9 @@ export default function SchoolPage() {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.25 }}
-                    className="overflow-hidden"
+                    className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100"
                   >
-                    <div className="px-4 pb-5 border-t border-neutral-100 space-y-3 pt-3">
+                    <div className="px-4 pb-5 space-y-3 pt-3">
                       {school.about.split('\n\n').map((para, i) => (
                         <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
                       ))}

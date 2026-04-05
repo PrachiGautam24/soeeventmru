@@ -108,37 +108,6 @@ export default function DepartmentPage() {
             <p className="text-sm text-gray-600 leading-relaxed">{department.description}</p>
           </div>
 
-          {/* About accordion */}
-          <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
-            <button
-              onClick={() => setAboutOpen(o => !o)}
-              className="w-full flex items-center justify-between px-4 py-4"
-            >
-              <span className="font-bold text-gray-900 text-sm">About {department.name}</span>
-              <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                <ChevronDown className="w-4 h-4 text-neutral-400" />
-              </motion.div>
-            </button>
-            <AnimatePresence initial={false}>
-              {aboutOpen && (
-                <motion.div
-                  key="about-dept"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                  className="overflow-hidden"
-                >
-                  <div className="px-4 pb-5 border-t border-neutral-100 space-y-3 pt-3">
-                    {department.about.split('\n\n').map((para, i) => (
-                      <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
           {/* Explore More — app-icon grid */}
           <div>
             <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-4 px-1">
@@ -164,6 +133,37 @@ export default function DepartmentPage() {
                 </motion.button>
               ))}
             </div>
+          </div>
+
+          {/* About accordion — at the bottom */}
+          <div className="rounded-2xl overflow-hidden shadow-sm">
+            <button
+              onClick={() => setAboutOpen(o => !o)}
+              className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}
+            >
+              <span className="font-bold text-white text-sm">About {department.name}</span>
+              <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown className="w-4 h-4 text-white/80" />
+              </motion.div>
+            </button>
+            <AnimatePresence initial={false}>
+              {aboutOpen && (
+                <motion.div
+                  key="about-dept"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100"
+                >
+                  <div className="px-4 pb-5 space-y-3 pt-3">
+                    {department.about.split('\n\n').map((para, i) => (
+                      <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
         </div>
