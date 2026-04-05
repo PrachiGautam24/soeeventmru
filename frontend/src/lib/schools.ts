@@ -1,4 +1,4 @@
-export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science'
+export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media'
 
 export interface Department {
   id: string
@@ -250,6 +250,39 @@ Faculty members have published in high-impact international journals and the sch
         description: 'Cutting-edge biotech research in genomics, bioinformatics, and pharmaceutical sciences.',
         about: `The Biotechnology department offers B.Tech Biotechnology, M.Sc. Biotechnology, and Ph.D. programmes. Research areas include genomics, bioinformatics, drug discovery, and agricultural biotechnology. The department has a BSL-2 certified microbiology lab and collaborates with biotech firms in the NCR region.`,
         upcomingEvents: [{ title: 'BioTech Expo', date: 'May 16, 2026' }],
+      },
+    ],
+  },
+  {
+    id: 'media',
+    name: 'School of Media Studies and Humanities',
+    tagline: 'Communication & Culture',
+    icon: '🎬',
+    color: 'bg-rose-600',
+    about: `The School of Media Studies and Humanities at Manav Rachna University offers dynamic programmes in journalism, mass communication, and humanities disciplines.
+
+It offers BA (Journalism & Mass Communication), BA (English), MA, and Ph.D. programmes. The school has state-of-the-art media labs, a campus radio station, and a digital newsroom for hands-on learning.
+
+Students benefit from industry collaborations with leading media houses and regular masterclasses from journalists, filmmakers, and communication professionals.`,
+    academicPartners: [],
+    departments: [
+      {
+        id: 'journalism', name: 'Journalism & Mass Communication', code: 'JMC', icon: '📰',
+        description: 'Trains future journalists and media professionals with hands-on newsroom experience.',
+        about: `The Journalism & Mass Communication department offers BA and MA programmes with specialisations in print, broadcast, and digital media. Students work in a fully equipped digital newsroom and campus radio station.`,
+        upcomingEvents: [{ title: 'Media Fest 2026', date: 'April 22, 2026' }],
+      },
+      {
+        id: 'english', name: 'English & Literary Studies', code: 'ENG', icon: '📖',
+        description: 'Explores literature, linguistics, and creative writing across global traditions.',
+        about: `The English & Literary Studies department offers BA and MA programmes covering British, American, and postcolonial literature, linguistics, and creative writing.`,
+        upcomingEvents: [],
+      },
+      {
+        id: 'film', name: 'Film & Digital Media', code: 'FDM', icon: '🎥',
+        description: 'Covers filmmaking, video production, and digital content creation.',
+        about: `The Film & Digital Media programme equips students with skills in screenwriting, direction, cinematography, and post-production with professional-grade studio facilities.`,
+        upcomingEvents: [{ title: 'Short Film Festival', date: 'May 9, 2026' }],
       },
     ],
   },

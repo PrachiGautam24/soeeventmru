@@ -38,15 +38,23 @@ export default function SchoolPage() {
     <div className="min-h-screen bg-neutral-100">
       <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
-        {/* Header */}
-        <div className="flex items-center gap-3 px-4 pt-5 pb-4 border-b border-neutral-100 bg-white">
-          <button onClick={() => router.back()}
-            className="w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center shrink-0">
-            <ArrowLeft className="w-4 h-4 text-neutral-700" />
+        {/* Header - curved red banner */}
+        <div className="relative bg-secondary overflow-hidden">
+          <button
+            onClick={() => router.back()}
+            className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"
+          >
+            <ArrowLeft className="w-4 h-4 text-white" />
           </button>
-          <div className="flex-1 min-w-0">
-            <h1 className="font-bold text-gray-900 text-base leading-tight">{school.name}</h1>
-            <p className="text-xs text-neutral-400">{school.departments.length} Departments</p>
+          <div className="px-6 pt-10 pb-8 text-center">
+            <h1 className="font-bold text-white text-xl leading-tight">{school.name}</h1>
+            <p className="text-white/70 text-xs mt-1">{school.departments.length} Departments</p>
+          </div>
+          {/* curved bottom */}
+          <div className="h-8">
+            <svg viewBox="0 0 390 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
+              <path d="M0 0 Q195 32 390 0 L390 32 L0 32 Z" fill="white" />
+            </svg>
           </div>
         </div>
 

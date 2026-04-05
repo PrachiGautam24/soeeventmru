@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -8,12 +9,67 @@ import { ChevronDown } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
 // Gradient pairs per school for the app-icon style buttons
-const schoolGradients: Record<string, string> = {
-  soe:        'from-primary to-primary-light',
-  law:        'from-amber-500 to-amber-400',
-  education:  'from-green-600 to-green-400',
-  business:   'from-secondary to-secondary-light',
-  science:    'from-purple-600 to-purple-400',
+const schoolColors: Record<string, string> = {
+  soe:        '#1e4ba9',
+  law:        '#b45309',
+  education:  '#16a34a',
+  business:   '#b12a2e',
+  science:    '#7c3aed',
+  media:      '#e11d48',
+}
+
+// SVG icons matching MRU website style (outlined, single color)
+const schoolSVGs: Record<string, React.ReactNode> = {
+  soe: (
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      {/* hard hat dome */}
+      <path d="M32 10 C20 10 14 20 14 28 L50 28 C50 20 44 10 32 10Z"/>
+      {/* vent block on top */}
+      <rect x="27" y="7" width="10" height="7" rx="1.5"/>
+      {/* brim */}
+      <path d="M10 28 L54 28 L54 32 Q54 34 52 34 L12 34 Q10 34 10 32 Z"/>
+      {/* gear ring */}
+      <circle cx="32" cy="46" r="7" strokeWidth={2.5}/>
+      {/* gear teeth - 8 teeth */}
+      <path d="M32 36 L32 33 M32 59 L32 56 M42 39 L44 37 M20 55 L22 53 M45 46 L48 46 M16 46 L19 46 M42 53 L44 55 M20 37 L22 39" strokeWidth={3}/>
+    </svg>
+  ),
+  law: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <path d="M12 3v18M3 9l4-4 5 2 5-2 4 4M6 20h12"/>
+      <path d="M5 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L7 9M17 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L19 9"/>
+    </svg>
+  ),
+  education: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <path d="M2 10l10-6 10 6-10 6-10-6z"/>
+      <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
+      <path d="M22 10v6"/>
+    </svg>
+  ),
+  business: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <rect x="2" y="7" width="20" height="14" rx="2"/>
+      <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+      <line x1="12" y1="12" x2="12" y2="16"/>
+      <line x1="10" y1="14" x2="14" y2="14"/>
+    </svg>
+  ),
+  science: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <path d="M9 3h6v10l3 8H6l3-8V3z"/>
+      <path d="M6 19h12"/>
+      <circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/>
+      <circle cx="14" cy="15" r="1" fill="currentColor" stroke="none"/>
+    </svg>
+  ),
+  media: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+      <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/>
+      <circle cx="12" cy="10" r="2"/>
+      <path d="M8 18c0-2.21 1.79-4 4-4s4 1.79 4 4"/>
+    </svg>
+  ),
 }
 
 export default function HomePage() {
@@ -83,12 +139,15 @@ export default function HomePage() {
                 className="flex flex-col items-center gap-2"
               >
                 {/* icon tile */}
-                <div className={`w-16 h-16 rounded-[22px] bg-gradient-to-br ${schoolGradients[school.id]} flex items-center justify-center text-3xl shadow-md`}>
-                  {school.icon}
+                <div
+                  className="w-16 h-16 rounded-[22px] bg-white border border-neutral-200 flex items-center justify-center shadow-sm"
+                  style={{ color: schoolColors[school.id] }}
+                >
+                  {schoolSVGs[school.id]}
                 </div>
                 {/* label */}
                 <span className="text-[11px] text-center text-gray-700 font-medium leading-tight px-1">
-                  {school.name.replace('School of ', '')}
+                  {school.name}
                 </span>
               </motion.button>
             ))}
