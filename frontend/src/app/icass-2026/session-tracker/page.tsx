@@ -14,8 +14,13 @@ export default function SessionTrackerPage() {
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {
-    fetchSessions()
-    
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchSessions()
+    } else {
+      setLoading(false)
+    }
+
     // Update current time every minute
     const interval = setInterval(() => {
       setCurrentTime(new Date())

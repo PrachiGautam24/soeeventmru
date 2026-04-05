@@ -15,7 +15,12 @@ export default function ChiefGuestPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchChiefGuests()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchChiefGuests()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchChiefGuests = async () => {

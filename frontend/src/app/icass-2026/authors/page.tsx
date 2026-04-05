@@ -28,7 +28,12 @@ export default function AuthorsPage() {
   const [expandedAuthor, setExpandedAuthor] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchAuthors()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchAuthors()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchAuthors = async () => {

@@ -15,7 +15,12 @@ export default function OrganisersPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchOrganisers()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchOrganisers()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchOrganisers = async () => {

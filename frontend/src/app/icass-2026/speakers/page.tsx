@@ -17,7 +17,12 @@ export default function SpeakersPage() {
   const [selectedSpeaker, setSelectedSpeaker] = useState<Speaker | null>(null)
 
   useEffect(() => {
-    fetchSpeakers()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchSpeakers()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchSpeakers = async () => {

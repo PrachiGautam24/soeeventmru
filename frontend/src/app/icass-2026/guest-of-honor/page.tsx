@@ -15,7 +15,12 @@ export default function GuestOfHonorPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchGuests()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchGuests()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchGuests = async () => {

@@ -36,7 +36,12 @@ export default function SchedulePage() {
   const [expandedEvent, setExpandedEvent] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchSchedule()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchSchedule()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchSchedule = async () => {

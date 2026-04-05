@@ -14,7 +14,12 @@ export default function TracksPage() {
   const [expandedTrack, setExpandedTrack] = useState<string | null>(null)
 
   useEffect(() => {
-    fetchTracks()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchTracks()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchTracks = async () => {

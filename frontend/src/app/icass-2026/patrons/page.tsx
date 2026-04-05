@@ -15,7 +15,12 @@ export default function PatronsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchPatrons()
+    // Only fetch data in browser environment, not during build/static generation
+    if (typeof window !== 'undefined') {
+      fetchPatrons()
+    } else {
+      setLoading(false)
+    }
   }, [])
 
   const fetchPatrons = async () => {
