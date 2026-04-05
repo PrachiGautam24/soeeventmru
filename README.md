@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SOE Events MRU
 
 SOE Events MRU is a mobile-first event platform for Manav Rachna University’s School of Engineering. It is built as a Next.js App Router frontend with Supabase as the data layer. The current event focus is ICASS 2026, with a structure that supports adding more events later.
@@ -99,3 +100,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY="<anon-key>"
 2. Add routes and data-fetching pages (copy patterns from `icass-2026`).
 3. Add any new tables to Supabase and update `src/lib/types/database.ts`.
 4. Add the event card in `src/app/home/page.tsx`.
+=======
+# soeeventmru
+>>>>>>> e5436b3b014516768c301f99d944ab0ccae4d9b7
