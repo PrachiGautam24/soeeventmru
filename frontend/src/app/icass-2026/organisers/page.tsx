@@ -19,6 +19,13 @@ export default function OrganisersPage() {
   }, [])
 
   const fetchOrganisers = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setOrganisers([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('organisers')

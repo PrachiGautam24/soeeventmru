@@ -21,6 +21,13 @@ export default function SpeakersPage() {
   }, [])
 
   const fetchSpeakers = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setSpeakers([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('speakers')

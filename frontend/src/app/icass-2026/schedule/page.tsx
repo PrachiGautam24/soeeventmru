@@ -40,6 +40,14 @@ export default function SchedulePage() {
   }, [])
 
   const fetchSchedule = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setEvents([])
+      setPapers([])
+      setLoading(false)
+      return
+    }
+
     try {
       const [eventsRes, papersRes] = await Promise.all([
         supabase

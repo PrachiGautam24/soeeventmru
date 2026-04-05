@@ -1,8 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
 import { Database } from './types/database'
 
-// Commented out the strict non-null assertions for now so Supabase config is not required during local work.
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
+let supabase: ReturnType<typeof createClient<Database>> | null = null
 
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
+if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+  supabase = createClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  )
+} else {
+  console.warn("Supabase not configured - frontend will work without database features")
+}
+
+export { supabase }

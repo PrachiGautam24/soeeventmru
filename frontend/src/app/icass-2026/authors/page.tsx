@@ -32,6 +32,13 @@ export default function AuthorsPage() {
   }, [])
 
   const fetchAuthors = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setAuthors([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('authors')

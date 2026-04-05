@@ -19,6 +19,13 @@ export default function ChiefGuestPage() {
   }, [])
 
   const fetchChiefGuests = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setChiefGuests([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('chief_guest')

@@ -21,6 +21,11 @@ export default function AttendancePage() {
       return
     }
 
+    if (!supabase) {
+      setError('Database not configured - attendance tracking unavailable')
+      return
+    }
+
     setLoading(true)
     setError('')
 

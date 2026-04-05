@@ -18,6 +18,13 @@ export default function TracksPage() {
   }, [])
 
   const fetchTracks = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setTracks([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('tracks')

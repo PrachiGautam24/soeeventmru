@@ -19,6 +19,13 @@ export default function PatronsPage() {
   }, [])
 
   const fetchPatrons = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setPatrons([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('patrons')

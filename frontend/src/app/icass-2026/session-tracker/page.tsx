@@ -25,6 +25,13 @@ export default function SessionTrackerPage() {
   }, [])
 
   const fetchSessions = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setSessions([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('sessions')

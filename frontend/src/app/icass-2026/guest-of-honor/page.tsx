@@ -19,6 +19,13 @@ export default function GuestOfHonorPage() {
   }, [])
 
   const fetchGuests = async () => {
+    if (!supabase) {
+      console.warn('Supabase not configured - using mock data')
+      setGuests([])
+      setLoading(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('guest_of_honor')
