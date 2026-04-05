@@ -46,14 +46,15 @@ The school is NBA accredited (valid till 2026) and NAAC accredited, and has coll
     departments: [
       {
         id: 'cse', name: 'Computer Science & Engineering', code: 'CSE', icon: '💻',
-        description: 'The CSE department offers comprehensive programmes with hands-on learning, industry exposure, and research opportunities. Join us to shape your future!',
+        description: 'The CSE department offers comprehensive programmes with hands-on learning, industry exposure, and research opportunities. Events organized by Coding Club.',
         about: `The Department of Computer Science & Engineering at SOE, MRU offers B.Tech, M.Tech, and Ph.D. programmes with specialisations in Artificial Intelligence & Machine Learning, Cyber Security & Threat Intelligence, and Cloud, DevOps & Full Stack Development.
 
 The department has active research labs in AI, IoT, and Data Science, and maintains MoUs with companies like Google, Microsoft, and IBM for curriculum enrichment and placement support.`,
         upcomingEvents: [
-          { title: 'AI & ML Workshop', date: 'April 12, 2026' },
-          { title: 'Hackathon 2026', date: 'April 20, 2026' },
-          { title: 'Industry Connect Talk', date: 'May 2, 2026' },
+          { title: 'Orientation: How to Start DSA', date: 'April 8, 2026' },
+          { title: 'ICT Academy Webinar: Blockchain', date: 'April 8, 2026 · 9:00–10:00 AM · B.Tech 6th Sem' },
+          { title: 'Coding Contest', date: 'April 20, 2026' },
+          { title: '1v1 Face-Off in CP', date: 'April 29, 2026' },
         ],
         completedEvents: [
           { title: 'ICASS 2026', date: 'February 12–13, 2026', description: 'International Conference on Intelligent Computing and Automation for Sustainable Solutions', slug: 'icass-2026' },

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
-import { ArrowLeft, Calendar, ChevronDown } from 'lucide-react'
+import { ArrowLeft, ChevronDown } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
 const gridItems = [
@@ -18,7 +18,7 @@ const gridItems = [
 export default function DepartmentPage() {
   const router = useRouter()
   const { id, dept } = useParams<{ id: string; dept: string }>()
-  const [showEvents, setShowEvents] = useState(false)
+  const [eventsOpen, setEventsOpen] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
 
   const school = schools.find(s => s.id === id)
@@ -34,74 +34,75 @@ export default function DepartmentPage() {
     <div className="min-h-screen bg-neutral-100">
       <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
-        {/* Header */}
-        <div className="flex items-center gap-3 px-4 pt-5 pb-4 border-b border-neutral-100 bg-white">
-          <button onClick={() => router.back()}
-            className="w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center shrink-0">
-            <ArrowLeft className="w-4 h-4 text-neutral-700" />
+        {/* Header - curved red banner */}
+        <div className="relative bg-secondary overflow-hidden">
+          <button
+            onClick={() => router.back()}
+            className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"
+          >
+            <ArrowLeft className="w-4 h-4 text-white" />
           </button>
-
-          {/* Title + upcoming events hover button */}
-          <div className="flex-1 min-w-0 flex items-center justify-between gap-2">
-            <div className="min-w-0">
-              <h1 className="font-bold text-gray-900 text-base leading-tight truncate">{department.name}</h1>
-              <p className="text-xs text-neutral-400">{school.name} — {department.code}</p>
-            </div>
-
-            {/* Upcoming events pill with hover popover */}
-            <div className="relative shrink-0"
-              onMouseEnter={() => setShowEvents(true)}
-              onMouseLeave={() => setShowEvents(false)}
-              onTouchStart={() => setShowEvents(v => !v)}
-            >
-              <button className="flex items-center gap-1.5 bg-red-50 border border-red-100 rounded-full px-3 py-1.5">
-                <Calendar className="w-3.5 h-3.5 text-secondary" />
-                <span className="text-xs font-semibold text-secondary">Events</span>
-                {department.upcomingEvents.length > 0 && (
-                  <span className="w-4 h-4 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center font-bold">
-                    {department.upcomingEvents.length}
-                  </span>
-                )}
-              </button>
-
-              {/* Popover */}
-              <AnimatePresence>
-                {showEvents && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-neutral-100 z-50 overflow-hidden"
-                  >
-                    <div className="px-4 py-2.5 bg-red-50 border-b border-red-100">
-                      <p className="text-xs font-bold text-secondary uppercase tracking-wide">Upcoming Events</p>
-                    </div>
-                    {department.upcomingEvents.length === 0 ? (
-                      <p className="text-xs text-neutral-400 text-center py-4">No upcoming events.</p>
-                    ) : (
-                      <div className="divide-y divide-neutral-50">
-                        {department.upcomingEvents.map((ev, i) => (
-                          <div key={i} className="flex items-start gap-3 px-4 py-3">
-                            <div className="w-7 h-7 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                              <Calendar className="w-3.5 h-3.5 text-primary" />
-                            </div>
-                            <div>
-                              <p className="text-xs font-semibold text-gray-800 leading-snug">{ev.title}</p>
-                              <p className="text-[10px] text-neutral-400 mt-0.5">{ev.date}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+          <div className="px-6 pt-10 pb-8 text-center">
+            <h1 className="font-bold text-white text-xl leading-tight">{department.name}</h1>
+            <p className="text-white/70 text-xs mt-1">{school.name} · {department.code}</p>
+          </div>
+          {/* curved bottom */}
+          <div className="h-8">
+            <svg viewBox="0 0 390 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
+              <path d="M0 0 Q195 32 390 0 L390 32 L0 32 Z" fill="white" />
+            </svg>
           </div>
         </div>
 
         <div className="flex-1 px-4 py-4 space-y-5 overflow-y-auto bg-neutral-50">
+
+          {/* Upcoming Events accordion */}
+          <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+            <button
+              onClick={() => setEventsOpen(o => !o)}
+              className="w-full flex items-center justify-between px-4 py-3.5"
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-gray-800">Upcoming Events</span>
+                {department.upcomingEvents.length > 0 && (
+                  <span className="w-5 h-5 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center font-bold">
+                    {department.upcomingEvents.length}
+                  </span>
+                )}
+              </div>
+              <motion.div animate={{ rotate: eventsOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown className="w-4 h-4 text-neutral-400" />
+              </motion.div>
+            </button>
+            <AnimatePresence initial={false}>
+              {eventsOpen && (
+                <motion.div
+                  key="events"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22 }}
+                  className="overflow-hidden border-t border-neutral-100"
+                >
+                  {department.upcomingEvents.length === 0 ? (
+                    <p className="text-xs text-neutral-400 text-center py-4">No upcoming events.</p>
+                  ) : (
+                    <div className="divide-y divide-neutral-50">
+                      {department.upcomingEvents.map((ev, i) => (
+                        <div key={i} className="flex items-start gap-3 px-4 py-3">
+                          <div className="w-2 h-2 rounded-full bg-secondary mt-1.5 shrink-0" />
+                          <div>
+                            <p className="text-xs font-semibold text-gray-800">{ev.title}</p>
+                            <p className="text-[10px] text-neutral-400 mt-0.5">{ev.date}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* Description */}
           <div className="bg-white rounded-2xl p-4 border border-neutral-100 shadow-sm">
