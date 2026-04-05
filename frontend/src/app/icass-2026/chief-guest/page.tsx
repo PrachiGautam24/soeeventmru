@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { ChiefGuest } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Star } from 'lucide-react'
@@ -24,26 +24,22 @@ export default function ChiefGuestPage() {
   }, [])
 
   const fetchChiefGuests = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setChiefGuests([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('chief_guest')
-        .select('*')
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setChiefGuests(data || [])
-    } catch (error) {
-      console.error('Error fetching chief guests:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockChiefGuests: ChiefGuest[] = [
+      {
+        id: '1',
+        name: 'Dr. Amitabh Sharma',
+        title: 'Former Director',
+        organization: 'IIT Bombay',
+        bio: 'Distinguished academician and researcher with expertise in computer science and engineering education.',
+        image_url: '/images/chief-guests/amitabh-sharma.jpg',
+        session_type: 'In-person',
+        order_index: 1
+      }
+    ]
+    setChiefGuests(mockChiefGuests)
+    setLoading(false)
   }
 
   return (

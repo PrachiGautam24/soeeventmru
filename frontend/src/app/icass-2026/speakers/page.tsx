@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { Speaker } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { Search, Twitter, Linkedin, Globe, ArrowLeft } from 'lucide-react'
@@ -26,26 +26,40 @@ export default function SpeakersPage() {
   }, [])
 
   const fetchSpeakers = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setSpeakers([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('speakers')
-        .select('*')
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setSpeakers(data || [])
-    } catch (error) {
-      console.error('Error fetching speakers:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockSpeakers: Speaker[] = [
+      {
+        id: '1',
+        name: 'Dr. Sarah Johnson',
+        title: 'Chief AI Officer',
+        organization: 'TechCorp Inc.',
+        bio: 'Leading expert in artificial intelligence with 15+ years of experience in machine learning and deep learning technologies.',
+        image_url: '/images/speakers/sarah-johnson.jpg',
+        twitter: 'https://twitter.com/sarah_ai',
+        linkedin: 'https://linkedin.com/in/sarahjohnson',
+        website: 'https://sarahjohnson.ai',
+        order_index: 1,
+        session_type: null,
+        participation_mode: null
+      },
+      {
+        id: '2',
+        name: 'Prof. Michael Chen',
+        title: 'Professor of Computer Science',
+        organization: 'MIT',
+        bio: 'Renowned researcher in cybersecurity and blockchain technology, author of multiple books on network security.',
+        image_url: '/images/speakers/michael-chen.jpg',
+        twitter: 'https://twitter.com/mchen_mit',
+        linkedin: 'https://linkedin.com/in/michaelchen',
+        website: 'https://michaelchen.mit.edu',
+        order_index: 2,
+        session_type: null,
+        participation_mode: null
+      }
+    ]
+    setSpeakers(mockSpeakers)
+    setLoading(false)
   }
 
   const filteredSpeakers = speakers.filter((speaker) =>

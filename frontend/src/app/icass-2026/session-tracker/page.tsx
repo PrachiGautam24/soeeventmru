@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { Session } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, MapPin, User, Calendar, CheckCircle2 } from 'lucide-react'
@@ -30,27 +30,51 @@ export default function SessionTrackerPage() {
   }, [])
 
   const fetchSessions = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setSessions([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('sessions')
-        .select('*')
-        .order('date', { ascending: true })
-        .order('start_time', { ascending: true })
-
-      if (error) throw error
-      setSessions(data || [])
-    } catch (error) {
-      console.error('Error fetching sessions:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockSessions: Session[] = [
+      {
+        id: '1',
+        title: 'Technical Session 1: AI & ML',
+        date: '2026-04-15',
+        start_time: '11:00',
+        end_time: '12:30',
+        location: 'Room 101',
+        speaker_name: 'Dr. Rajesh Kumar',
+        description: 'Presentations on Artificial Intelligence and Machine Learning',
+        session_type: 'technical',
+        duration_minutes: 90,
+        track: null
+      },
+      {
+        id: '2',
+        title: 'Technical Session 2: Cybersecurity',
+        date: '2026-04-15',
+        start_time: '14:00',
+        end_time: '15:30',
+        location: 'Room 201',
+        speaker_name: 'Prof. Anita Gupta',
+        description: 'Discussions on cybersecurity challenges and solutions',
+        session_type: 'technical',
+        duration_minutes: 90,
+        track: null
+      },
+      {
+        id: '3',
+        title: 'Plenary Session',
+        date: '2026-04-16',
+        start_time: '09:00',
+        end_time: '10:30',
+        location: 'Auditorium A',
+        speaker_name: 'Dr. Sanjay Sharma',
+        description: 'Keynote presentations and panel discussions',
+        session_type: 'plenary',
+        duration_minutes: 90,
+        track: null
+      }
+    ]
+    setSessions(mockSessions)
+    setLoading(false)
   }
 
   const isSessionCompleted = (session: Session) => {

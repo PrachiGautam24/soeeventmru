@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { motion } from 'framer-motion'
 import { ArrowLeft, CheckCircle, UserCheck } from 'lucide-react'
 import Link from 'next/link'
@@ -15,33 +15,23 @@ export default function AttendancePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!name.trim()) {
       setError('Please enter your full name')
       return
     }
 
-    if (!supabase) {
-      setError('Database not configured - attendance tracking unavailable')
-      return
-    }
-
+    // Simulate attendance marking without database
     setLoading(true)
     setError('')
 
     try {
-      const { error: insertError } = await supabase
-        .from('attendance')
-        .insert({
-          name: name.trim(),
-          timestamp: new Date().toISOString()
-        })
-
-      if (insertError) throw insertError
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000))
 
       setSuccess(true)
       setName('')
-      
+
       // Reset success message after 3 seconds
       setTimeout(() => {
         setSuccess(false)

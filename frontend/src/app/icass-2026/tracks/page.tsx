@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { Track } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ChevronDown, Target } from 'lucide-react'
@@ -23,26 +23,39 @@ export default function TracksPage() {
   }, [])
 
   const fetchTracks = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setTracks([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('tracks')
-        .select('*')
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setTracks(data || [])
-    } catch (error) {
-      console.error('Error fetching tracks:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockTracks: Track[] = [
+      {
+        id: '1',
+        name: 'Artificial Intelligence & Machine Learning',
+        code: 'AI-ML',
+        description: 'Explore cutting-edge AI and ML technologies and their applications in various domains.',
+        topics: null,
+        color: null,
+        order_index: 1
+      },
+      {
+        id: '2',
+        name: 'Cybersecurity & Data Privacy',
+        code: 'CYBER',
+        description: 'Discuss latest trends in cybersecurity, data protection, and privacy-preserving technologies.',
+        topics: null,
+        color: null,
+        order_index: 2
+      },
+      {
+        id: '3',
+        name: 'Cloud Computing & DevOps',
+        code: 'CLOUD',
+        description: 'Learn about cloud platforms, DevOps practices, and modern software deployment strategies.',
+        topics: null,
+        color: null,
+        order_index: 3
+      }
+    ]
+    setTracks(mockTracks)
+    setLoading(false)
   }
 
   return (

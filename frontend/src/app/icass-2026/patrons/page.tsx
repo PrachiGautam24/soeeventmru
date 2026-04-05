@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { Patron } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Award } from 'lucide-react'
@@ -24,26 +24,30 @@ export default function PatronsPage() {
   }, [])
 
   const fetchPatrons = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setPatrons([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('patrons')
-        .select('*')
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setPatrons(data || [])
-    } catch (error) {
-      console.error('Error fetching patrons:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockPatrons: Patron[] = [
+      {
+        id: '1',
+        name: 'Shri Ramesh Sharma',
+        designation: 'Honorable Minister',
+        organization: 'Government of India',
+        category: 'Chief Patron',
+        image_url: '/images/patrons/ramesh-sharma.jpg',
+        order_index: 1
+      },
+      {
+        id: '2',
+        name: 'Dr. Priya Singh',
+        designation: 'Director',
+        organization: 'MRU College',
+        category: 'Patron',
+        image_url: '/images/patrons/priya-singh.jpg',
+        order_index: 2
+      }
+    ]
+    setPatrons(mockPatrons)
+    setLoading(false)
   }
 
   const groupedPatrons = patrons.reduce((acc, patron) => {

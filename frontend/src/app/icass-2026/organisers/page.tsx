@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { Organiser } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Mail, UserCog } from 'lucide-react'
@@ -24,26 +24,42 @@ export default function OrganisersPage() {
   }, [])
 
   const fetchOrganisers = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setOrganisers([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('organisers')
-        .select('*')
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setOrganisers(data || [])
-    } catch (error) {
-      console.error('Error fetching organisers:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockOrganisers: Organiser[] = [
+      {
+        id: '1',
+        name: 'Dr. Rajesh Kumar',
+        role: 'Conference Chair',
+        organization: 'MRU College',
+        email: 'rajesh.kumar@mru.edu.in',
+        phone: null,
+        image_url: '/images/organisers/rajesh-kumar.jpg',
+        order_index: 1
+      },
+      {
+        id: '2',
+        name: 'Prof. Anita Gupta',
+        role: 'Technical Program Chair',
+        organization: 'MRU College',
+        email: 'anita.gupta@mru.edu.in',
+        phone: null,
+        image_url: '/images/organisers/anita-gupta.jpg',
+        order_index: 2
+      },
+      {
+        id: '3',
+        name: 'Dr. Sanjay Sharma',
+        role: 'Organizing Secretary',
+        organization: 'MRU College',
+        email: 'sanjay.sharma@mru.edu.in',
+        phone: null,
+        image_url: '/images/organisers/sanjay-sharma.jpg',
+        order_index: 3
+      }
+    ]
+    setOrganisers(mockOrganisers)
+    setLoading(false)
   }
 
   const groupedOrganisers = organisers.reduce((acc, organiser) => {

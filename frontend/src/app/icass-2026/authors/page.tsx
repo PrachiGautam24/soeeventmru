@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { Author } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Search, FileText, Mail, MapPin, ChevronDown, Clock, Hash, Wifi, User, Target } from 'lucide-react'
@@ -37,26 +37,50 @@ export default function AuthorsPage() {
   }, [])
 
   const fetchAuthors = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setAuthors([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('authors')
-        .select('*')
-        .order('name', { ascending: true })
-
-      if (error) throw error
-      setAuthors(data || [])
-    } catch (error) {
-      console.error('Error fetching authors:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockAuthors: AuthorWithSession[] = [
+      {
+        id: '1',
+        name: 'Dr. Priya Sharma',
+        affiliation: 'IIT Delhi',
+        country: 'India',
+        email: 'priya.sharma@iitd.ac.in',
+        paper_title: 'Advances in Machine Learning for Healthcare',
+        track: 'AI & ML',
+        track_no: '1',
+        image_url: '/images/authors/priya-sharma.jpg',
+        order_index: 1,
+        paper_id: 'ML-001',
+        timings: '10:00 AM - 11:00 AM',
+        participation_mode: 'In-person',
+        session_chair: 'Dr. Rajesh Kumar',
+        session_incharge: 'Prof. Anita Gupta',
+        venue: 'Auditorium A',
+        session_name: 'AI in Healthcare'
+      },
+      {
+        id: '2',
+        name: 'Prof. Ahmed Hassan',
+        affiliation: 'Cairo University',
+        country: 'Egypt',
+        email: 'ahmed.hassan@cu.edu.eg',
+        paper_title: 'Cybersecurity Challenges in IoT Networks',
+        track: 'Cybersecurity',
+        track_no: '2',
+        image_url: '/images/authors/ahmed-hassan.jpg',
+        order_index: 2,
+        paper_id: 'CS-002',
+        timings: '2:00 PM - 3:00 PM',
+        participation_mode: 'Virtual',
+        session_chair: 'Dr. Fatima Al-Zahra',
+        session_incharge: 'Dr. Mohamed El-Sayed',
+        venue: 'Room 201',
+        session_name: 'IoT Security'
+      }
+    ]
+    setAuthors(mockAuthors)
+    setLoading(false)
   }
 
   const filteredAuthors = authors.filter((author) =>

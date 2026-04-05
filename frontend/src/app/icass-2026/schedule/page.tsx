@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { ScheduleEvent, SessionPaper } from '@/lib/types'
 import { motion } from 'framer-motion'
 import {
@@ -45,36 +45,90 @@ export default function SchedulePage() {
   }, [])
 
   const fetchSchedule = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setEvents([])
-      setPapers([])
-      setLoading(false)
-      return
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockEvents: ScheduleEvent[] = [
+      {
+        id: '1',
+        title: 'Registration & Welcome',
+        event_type: 'registration',
+        date: '2026-04-15',
+        start_time: '08:00',
+        end_time: '09:00',
+        venue: 'Main Entrance',
+        description: 'Registration and welcome ceremony for ICASS 2026',
+        day: 1,
+        order_index: 1,
+        session_name: null,
+        tracks: null,
+        mode: null,
+        session_chair: null,
+        session_incharge: null
+      },
+      {
+        id: '2',
+        title: 'Inaugural Ceremony',
+        event_type: 'ceremony',
+        date: '2026-04-15',
+        start_time: '09:00',
+        end_time: '10:30',
+        venue: 'Auditorium A',
+        description: 'Official inauguration of ICASS 2026',
+        day: 1,
+        order_index: 2,
+        session_name: null,
+        tracks: null,
+        mode: null,
+        session_chair: null,
+        session_incharge: null
+      },
+      {
+        id: '3',
+        title: 'Technical Session 1: AI & ML',
+        event_type: 'technical_session',
+        date: '2026-04-15',
+        start_time: '11:00',
+        end_time: '12:30',
+        venue: 'Room 101',
+        description: 'Presentations on Artificial Intelligence and Machine Learning',
+        day: 1,
+        order_index: 3,
+        session_name: 'AI & ML',
+        tracks: null,
+        mode: null,
+        session_chair: null,
+        session_incharge: null
+      }
+    ]
 
-    try {
-      const [eventsRes, papersRes] = await Promise.all([
-        supabase
-          .from('schedule_events')
-          .select('*')
-          .order('order_index', { ascending: true }),
-        supabase
-          .from('session_papers')
-          .select('*')
-          .order('order_index', { ascending: true })
-      ])
+    const mockPapers: SessionPaper[] = [
+      {
+        id: '1',
+        paper_title: 'Deep Learning Applications in Healthcare',
+        author_name: 'Dr. Priya Sharma, Prof. Ahmed Hassan',
+        schedule_event_id: '3',
+        paper_id: 'ML-001',
+        track_number: null,
+        online_offline: null,
+        timings: null,
+        order_index: 1
+      },
+      {
+        id: '2',
+        paper_title: 'Cybersecurity in IoT Networks',
+        author_name: 'Dr. Rajesh Kumar, Dr. Anita Gupta',
+        schedule_event_id: '3',
+        paper_id: 'CS-001',
+        track_number: null,
+        online_offline: null,
+        timings: null,
+        order_index: 2
+      }
+    ]
 
-      if (eventsRes.error) throw eventsRes.error
-      if (papersRes.error) throw papersRes.error
-
-      setEvents(eventsRes.data || [])
-      setPapers(papersRes.data || [])
-    } catch (error) {
-      console.error('Error fetching schedule:', error)
-    } finally {
-      setLoading(false)
-    }
+    setEvents(mockEvents)
+    setPapers(mockPapers)
+    setLoading(false)
   }
 
   // Group papers by schedule_event_id

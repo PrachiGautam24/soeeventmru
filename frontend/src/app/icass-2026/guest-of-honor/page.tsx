@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AppLayout from '@/components/AppLayout'
-import { supabase } from '@/lib/supabase'
+// import { supabase } from '@/lib/supabase'
 import { GuestOfHonor } from '@/lib/types'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Trophy } from 'lucide-react'
@@ -24,26 +24,22 @@ export default function GuestOfHonorPage() {
   }, [])
 
   const fetchGuests = async () => {
-    if (!supabase) {
-      console.warn('Supabase not configured - using mock data')
-      setGuests([])
-      setLoading(false)
-      return
-    }
-
-    try {
-      const { data, error } = await supabase
-        .from('guest_of_honor')
-        .select('*')
-        .order('order_index', { ascending: true })
-
-      if (error) throw error
-      setGuests(data || [])
-    } catch (error) {
-      console.error('Error fetching guests of honor:', error)
-    } finally {
-      setLoading(false)
-    }
+    // Using mock data instead of database
+    console.warn('Using mock data - database not configured')
+    const mockGuests: GuestOfHonor[] = [
+      {
+        id: '1',
+        name: 'Prof. Rajendra Prasad',
+        title: 'Vice Chancellor',
+        organization: 'Delhi University',
+        bio: 'Renowned academic leader with extensive experience in higher education administration and research.',
+        image_url: '/images/guests-of-honor/rajendra-prasad.jpg',
+        session_type: 'In-person',
+        order_index: 1
+      }
+    ]
+    setGuests(mockGuests)
+    setLoading(false)
   }
 
   return (
