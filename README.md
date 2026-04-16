@@ -101,5 +101,6 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY="<anon-key>"
 3. Add any new tables to Supabase and update `src/lib/types/database.ts`.
 4. Add the event card in `src/app/home/page.tsx`.
 =======
-# soeeventmru
+# soeeventmru MRU 
+
 
