@@ -6,6 +6,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'drive.google.com' },
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
       { protocol: 'https', hostname: 'manavrachna.edu.in' },
+      { protocol: 'https', hostname: 'mriirs.edu.in' },
     ],
   },
   async redirects() {
