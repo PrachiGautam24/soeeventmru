@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import MobileOnly from '@/components/MobileOnly'
+import SessionProvider from '@/components/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -36,9 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans`}>
-        <MobileOnly>
-          {children}
-        </MobileOnly>
+        <SessionProvider>
+          <MobileOnly>
+            {children}
+          </MobileOnly>
+        </SessionProvider>
       </body>
     </html>
   )

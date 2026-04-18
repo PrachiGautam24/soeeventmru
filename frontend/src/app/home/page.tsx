@@ -5,10 +5,12 @@ import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useSession, signOut } from 'next-auth/react'
 import {
   ChevronDown, Star, X, Map, Building2, Users, Phone,
   CalendarDays, BookOpen, CreditCard, Library,
-  Mail, PhoneCall, MapPin, ChevronLeft, ChevronRight, Trophy
+  Mail, PhoneCall, MapPin, ChevronLeft, ChevronRight, Trophy,
+  LogIn, LogOut, User
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
@@ -77,19 +79,19 @@ const upcomingEvents = [
     title: 'Ideate. Build. Deploy.',
     subtitle: 'Build App in a Day · Win Cash Prizes · GUVI HCL',
     date: '18 May 2026',
-    image: '/images/events/ideate-build-deploy.jpg',
+    image: '/images/events/event-ideate.jpeg',
   },
   {
     title: 'Ethical Hacking Workshop',
     subtitle: 'Learn. Explore. Protect. · Quick Heal',
     date: '19–20 May 2026',
-    image: '/images/events/ethical-hacking.jpg',
+    image: '/images/events/event-ehacking.jpeg',
   },
   {
     title: 'Workshop on Robotics',
     subtitle: 'Design. Build. Program. · WRO India',
     date: '21–22 May 2026',
-    image: '/images/events/robotics-workshop.jpg',
+    image: '/images/events/event-robotics.jpeg',
   },
 ]
 
@@ -136,8 +138,167 @@ const recruiterLogos = [
 
 const visibleSchools = schools.filter(s => s.id !== 'media')
 
+function DiamondPlacements({ photos }: { photos: string[] }) {
+  const [active, setActive] = useState(0)
+  const total = photos.length
+
+  React.useEffect(() => {
+    const t = setInterval(() => setActive(i => (i + 1) % total), 3000)
+    return () => clearInterval(t)
+  }, [total])
+
+  const prev = () => setActive(i => (i - 1 + total) % total)
+  const next = () => setActive(i => (i + 1) % total)
+
+  return (
+    <div className="bg-white border-t border-neutral-100">
+      {/* Section header */}
+      <div className="flex items-center gap-2 px-5 pt-5 pb-3">
+        <Trophy className="w-4 h-4 text-amber-500" />
+        <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Diamond Placement Moments</p>
+      </div>
+
+      {/* Full-width cover card */}
+      <div className="relative mx-4 rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.35 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={photos[active]}
+              alt={`Placement ${active + 1}`}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Gradient overlay at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+        {/* Counter badge */}
+        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">
+          {active + 1} / {total}
+        </div>
+
+        {/* Prev / Next arrows */}
+        <button
+          onClick={prev}
+          className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
+          aria-label="Previous"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
+          aria-label="Next"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-1.5 py-3">
+        {photos.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[] }) {
+  const [active, setActive] = useState(0)
+  const total = logos.length
+
+  // Show 3 logos per slide
+  const perSlide = 3
+  const totalSlides = Math.ceil(total / perSlide)
+
+  React.useEffect(() => {
+    const t = setInterval(() => setActive(i => (i + 1) % totalSlides), 2800)
+    return () => clearInterval(t)
+  }, [totalSlides])
+
+  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
+  const next = () => setActive(i => (i + 1) % totalSlides)
+
+  const slideLogos = logos.slice(active * perSlide, active * perSlide + perSlide)
+
+  return (
+    <div className="bg-neutral-50 border-t border-neutral-100">
+      <div className="flex items-center justify-between px-5 pt-5 pb-3">
+        <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Top Recruiters</p>
+        <div className="flex items-center gap-1.5">
+          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
+            <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
+          </button>
+          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
+            <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
+          </button>
+        </div>
+      </div>
+
+      {/* Slide */}
+      <div className="px-4 pb-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.25 }}
+            className="grid grid-cols-3 gap-3"
+          >
+            {slideLogos.map((r, i) => (
+              <div
+                key={i}
+                className="bg-white border border-neutral-100 rounded-2xl shadow-sm flex flex-col items-center justify-center gap-2 py-5 px-3"
+              >
+                <div className="relative w-full h-14">
+                  <Image
+                    src={r.logo}
+                    alt={r.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                {r.name !== 'Recruiter' && (
+                  <p className="text-[10px] font-semibold text-neutral-500 text-center leading-tight">{r.name}</p>
+                )}
+              </div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-1.5 pb-4">
+        {Array.from({ length: totalSlides }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   const router = useRouter()
+  const { data: session } = useSession()
   const [aboutOpen, setAboutOpen] = useState(false)
   const [fresherOpen, setFresherOpen] = useState(false)
   const [floatingOpen, setFloatingOpen] = useState(false)
@@ -150,24 +311,60 @@ export default function HomePage() {
     <div className="min-h-screen bg-neutral-100">
       <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
-        {/* ── Header: SoE logo + NAAC badge ── */}
+        {/* ── Header: SoE logo + NAAC badge + login ── */}
         <div className="relative bg-white overflow-hidden">
-          <div className="flex items-center justify-center gap-4 px-6 py-4">
+          <div className="flex items-center justify-between px-4 py-3">
             <Image
               src="/images/soe-events-logo.jpg"
               alt="School of Engineering – Manav Rachna University"
-              width={200}
-              height={65}
+              width={160}
+              height={52}
               priority
               className="object-contain"
             />
-            <Image
-              src="https://manavrachna.edu.in/assets/images/mru-logo.png"
-              alt="NAAC A++ Accredited"
-              width={80}
-              height={40}
-              className="object-contain"
-            />
+            <div className="flex items-center gap-2">
+              <Image
+                src="https://manavrachna.edu.in/assets/images/mru-logo.png"
+                alt="NAAC A++ Accredited"
+                width={60}
+                height={32}
+                className="object-contain"
+              />
+              {/* Login / user button */}
+              {session ? (
+                <div className="flex items-center gap-1.5 ml-1">
+                  {session.user?.image ? (
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name ?? 'User'}
+                      width={30}
+                      height={30}
+                      className="rounded-full border border-neutral-200"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                      <User className="w-4 h-4 text-red-600" />
+                    </div>
+                  )}
+                  <button
+                    onClick={() => signOut({ callbackUrl: '/home' })}
+                    className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center"
+                    aria-label="Sign out"
+                  >
+                    <LogOut className="w-3.5 h-3.5 text-neutral-500" />
+                  </button>
+                </div>
+              ) : (
+                <motion.button
+                  whileTap={{ scale: 0.93 }}
+                  onClick={() => router.push('/login')}
+                  className="ml-1 flex items-center gap-1.5 bg-red-600 text-white text-xs font-semibold px-3 py-2 rounded-full shadow-sm"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  Login
+                </motion.button>
+              )}
+            </div>
           </div>
           <div className="h-6">
             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
@@ -214,6 +411,31 @@ export default function HomePage() {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+
+        {/* ── MREI Stats Overview ── */}
+        <div className="px-5 pt-5 pb-4 bg-white border-t border-neutral-100">
+          <p className="text-[11px] font-semibold text-red-600 uppercase tracking-widest mb-1">Overview</p>
+          <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+            Manav Rachna Educational Institutions (MREI) founded in 1997, are a visible symbol of knowledge &amp; experience providing high-quality education in various fields.
+          </p>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+            {[
+              { stat: '43000+', label: 'Alumni Imprints Globally' },
+              { stat: '135+',   label: 'Global Academic Collaborations' },
+              { stat: '5900+',  label: 'Research Papers in National/International Journals & Conferences' },
+              { stat: '600+',   label: 'Reputed MNCs & Indian Corporates Patronizing MREI' },
+              { stat: '900+',   label: 'Institutions Trust us' },
+              { stat: '250+',   label: 'Filed/Granted Patents' },
+              { stat: '80+',    label: 'Alumni & In campus Startups' },
+              { stat: '60Lakh', label: 'Highest CTC' },
+            ].map(({ stat, label }) => (
+              <div key={stat + label} className="border-t-2 border-neutral-300 pt-2">
+                <p className="text-2xl font-bold text-gray-800">{stat}</p>
+                <p className="text-[11px] text-gray-500 leading-tight mt-0.5">{label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* ── Schools grid ── */}
@@ -315,38 +537,14 @@ export default function HomePage() {
                 className={`rounded-full transition-all duration-200 ${i === eventIdx ? 'w-4 h-2 bg-secondary' : 'w-2 h-2 bg-neutral-300'}`} />
             ))}
           </div>
-          <p className="text-[10px] text-neutral-400 text-center mt-2">Save poster images to /public/images/events/ to display</p>
+
         </div>
 
         {/* ── Diamond Moments / Top Placements ── */}
-        <div className="px-4 pt-5 pb-4 bg-white border-t border-neutral-100">
-          <div className="flex items-center gap-2 mb-3">
-            <Trophy className="w-4 h-4 text-amber-500" />
-            <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Diamond Placement Moments</p>
-          </div>
-          {/* Scrollable photo strip */}
-          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-            {placementPhotos.map((src, i) => (
-              <div key={i} className="relative shrink-0 w-44 h-56 rounded-2xl overflow-hidden shadow-md">
-                <Image src={src} alt={`Placement ${i + 1}`} fill className="object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
-            ))}
-          </div>
-        </div>
+        <DiamondPlacements photos={placementPhotos} />
 
-        {/* ── Top Recruiters with logos ── */}
-        <div className="px-4 pt-5 pb-5 bg-neutral-50 border-t border-neutral-100">
-          <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3">Top Recruiters</p>
-          <div className="grid grid-cols-4 gap-3">
-            {recruiterLogos.map((r, i) => (
-              <motion.div key={i} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.03 }}
-                className="bg-white border border-neutral-100 rounded-xl p-2 shadow-sm flex items-center justify-center h-14">
-                <Image src={r.logo} alt={r.name} width={80} height={40} className="object-contain max-h-10 w-full" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {/* ── Top Recruiters slideshow ── */}
+        <RecruiterSlideshow logos={recruiterLogos} />
 
         {/* ── Footer ── */}
         <div className="bg-white border-t border-neutral-100 py-4 space-y-4">
