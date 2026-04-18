@@ -38,27 +38,29 @@ export default function LoginPage() {
     <div className="min-h-screen bg-neutral-100 flex items-center justify-center">
       <div className="max-w-md w-full mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
-        {/* Header */}
+        {/* Header — matches home page exactly */}
         <div className="relative bg-white overflow-hidden">
-          <div className="flex items-center justify-between px-5 py-4">
+          <div className="relative px-4 py-3 flex justify-center">
+            <div className="flex justify-center flex-1">
+              <Image
+                src="https://manavrachna.edu.in/assets/images/mru-logo.png"
+                alt="Manav Rachna University – NAAC A++ Accredited"
+                width={200}
+                height={128}
+                priority
+                className="object-contain"
+              />
+            </div>
+            {/* Back button on the left */}
             <button
               onClick={() => router.back()}
-              className="w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center"
               aria-label="Go back"
             >
               <ArrowLeft className="w-4 h-4 text-gray-700" />
             </button>
-            <Image
-              src="/images/soe-events-logo.jpg"
-              alt="SOE Events"
-              width={140}
-              height={45}
-              priority
-              className="object-contain"
-            />
-            <div className="w-9" />
           </div>
-          <div className="h-5">
+          <div className="h-6">
             <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
               <path d="M0,30 Q720,100 1440,30 L1440,120 L0,120 Z" fill="#b12a2e" />
             </svg>
