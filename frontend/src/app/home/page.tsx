@@ -188,7 +188,7 @@ function DiamondPlacements({ photos }: { photos: string[] }) {
       {/* Section header */}
       <div className="flex items-center gap-2 px-5 pt-5 pb-3">
         <Trophy className="w-4 h-4 text-amber-500" />
-        <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Diamond Placement Moments</p>
+        <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Diamond Placement Moments</p>
       </div>
 
       {/* Full-width cover card */}
@@ -271,7 +271,7 @@ function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[]
   return (
     <div className="bg-neutral-50 border-t border-neutral-100">
       <div className="flex items-center justify-between px-5 pt-5 pb-3">
-        <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Top Recruiters</p>
+        <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Recruiters</p>
         <div className="flex items-center gap-1.5">
           <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
             <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
@@ -467,23 +467,12 @@ export default function HomePage() {
 
         {/* ── Schools grid ── */}
         <div className="px-5 py-6 bg-neutral-50">
-          <p className="text-sm font-semibold text-neutral-400 uppercase tracking-widest mb-4">Explore Schools</p>
-          <div className="grid grid-cols-3 gap-5">
-            {visibleSchools.slice(0, 3).map((school, i) => (
+          <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-4">Explore Schools</p>
+          <div className="flex justify-center gap-5 flex-wrap">
+            {visibleSchools.map((school, i) => (
               <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} whileTap={{ scale: 0.95 }}
-                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
-                <div className="w-24 h-24 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
-                  {schoolSVGs[school.id]}
-                </div>
-                <span className="text-[12px] text-center text-gray-800 font-semibold leading-tight">{school.name}</span>
-              </motion.button>
-            ))}
-          </div>
-          <div className="flex justify-center gap-5 mt-5">
-            {visibleSchools.slice(3).map((school, i) => (
-              <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.07 }} whileTap={{ scale: 0.95 }}
                 onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 w-28 bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
-                <div className="w-24 h-24 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
+                <div className="w-20 h-20 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
                   {schoolSVGs[school.id]}
                 </div>
                 <span className="text-[12px] text-center text-gray-800 font-semibold leading-tight">{school.name}</span>
@@ -529,7 +518,7 @@ export default function HomePage() {
 
         {/* ── Upcoming Events carousel ── */}
         <div className="px-4 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
-          <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3">Upcoming Events</p>
+          <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-3">Upcoming Events</p>
           <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div key={eventIdx} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden shadow-lg">
@@ -574,7 +563,7 @@ export default function HomePage() {
         <div className="bg-neutral-50 px-5 py-5 border-t border-neutral-100">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Top Functionaries</p>
+              <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Functionaries</p>
               <p className="text-sm font-semibold text-gray-800">Meet the MRU leadership team</p>
             </div>
           </div>
