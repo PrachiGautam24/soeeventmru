@@ -490,19 +490,19 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {fresherOpen && (
               <motion.div key="fresher" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
-                <div className="px-5 pb-5 grid grid-cols-2 gap-3">
+                <div className="px-5 pb-5 grid grid-cols-2 gap-4">
                   {fresherItems.map((item, i) => {
                     const Icon = item.icon
                     return (
                       <motion.button key={item.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                         onClick={() => item.href && router.push(item.href)}
-                        className={`flex items-start gap-3 bg-neutral-50 rounded-xl p-3 border border-neutral-100 text-left ${item.href ? 'active:scale-95 transition-transform' : 'opacity-70'}`}>
-                        <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center shrink-0">
-                          <Icon className="w-4 h-4 text-red-600" />
+                        className={`flex flex-col items-start gap-3 bg-neutral-50 rounded-2xl p-4 border border-neutral-100 text-left ${item.href ? 'active:scale-95 transition-transform' : 'opacity-70'}`}>
+                        <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center shrink-0">
+                          <Icon className="w-6 h-6 text-red-600" />
                         </div>
                         <div>
-                          <p className="text-xs font-semibold text-gray-800 leading-tight">{item.label}</p>
-                          <p className="text-[10px] text-neutral-400 mt-0.5">{item.desc}</p>
+                          <p className="text-sm font-semibold text-gray-800 leading-tight">{item.label}</p>
+                          <p className="text-xs text-neutral-400 mt-1">{item.desc}</p>
                         </div>
                       </motion.button>
                     )
