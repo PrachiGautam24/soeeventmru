@@ -136,6 +136,39 @@ const recruiterLogos = [
   { name: 'Recruiter', logo: 'https://manavrachna.edu.in/assets/campus/mriirs/images/major-recruiters-logo15.webp' },
 ]
 
+const topFunctionaries = [
+  {
+    name: 'Prof. (Dr.) Deependra Kumar Jha',
+    title: 'Vice Chancellor',
+    photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Jha.jpg',
+  },
+  {
+    name: 'Prof. (Dr.) Sangita Banga',
+    title: 'Pro Vice Chancellor & Dean Education',
+    photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Sangita.jpg',
+  },
+  {
+    name: 'Mr. Ramesh Nair',
+    title: 'Registrar',
+    photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Ramesh-Nair.jpg',
+  },
+  {
+    name: 'Prof. (Dr.) Shruti Vashist',
+    title: 'Dean Academics, Dean Research & HOD-ECE',
+    photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg',
+  },
+  {
+    name: 'Prof. (Dr.) Dipali Bansal',
+    title: 'Dean Engineering',
+    photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Dipali.jpg',
+  },
+  {
+    name: 'Prof. (Dr.) Meena Kapahi',
+    title: 'Director International Relations',
+    photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Meena-Kapahi.jpg',
+  },
+]
+
 const visibleSchools = schools.filter(s => s.id !== 'media')
 
 function DiamondPlacements({ photos }: { photos: string[] }) {
@@ -221,8 +254,8 @@ function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[]
   const [active, setActive] = useState(0)
   const total = logos.length
 
-  // Show 3 logos per slide
-  const perSlide = 3
+  // Show 2 larger logos per slide for more impact
+  const perSlide = 2
   const totalSlides = Math.ceil(total / perSlide)
 
   React.useEffect(() => {
@@ -258,14 +291,14 @@ function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[]
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.25 }}
-            className="grid grid-cols-3 gap-3"
+            className="grid grid-cols-2 gap-3"
           >
             {slideLogos.map((r, i) => (
               <div
                 key={i}
-                className="bg-white border border-neutral-100 rounded-2xl shadow-sm flex flex-col items-center justify-center gap-2 py-5 px-3"
+                className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4"
               >
-                <div className="relative w-full h-14">
+                <div className="relative w-full h-24">
                   <Image
                     src={r.logo}
                     alt={r.name}
@@ -274,7 +307,7 @@ function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[]
                   />
                 </div>
                 {r.name !== 'Recruiter' && (
-                  <p className="text-[10px] font-semibold text-neutral-500 text-center leading-tight">{r.name}</p>
+                  <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>
                 )}
               </div>
             ))}
@@ -311,28 +344,22 @@ export default function HomePage() {
     <div className="min-h-screen bg-neutral-100">
       <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
-        {/* ── Header: SoE logo + NAAC badge + login ── */}
+        {/* ── Header: centered MRU logo + login on the side ── */}
         <div className="relative bg-white overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3">
-            <Image
-              src="/images/soe-events-logo.jpg"
-              alt="School of Engineering – Manav Rachna University"
-              width={160}
-              height={52}
-              priority
-              className="object-contain"
-            />
-            <div className="flex items-center gap-2">
+          <div className="relative px-4 py-3 flex justify-center">
+            <div className="flex justify-center flex-1">
               <Image
                 src="https://manavrachna.edu.in/assets/images/mru-logo.png"
                 alt="NAAC A++ Accredited"
-                width={60}
-                height={32}
+                width={200}
+                height={128}
+                priority
                 className="object-contain"
               />
-              {/* Login / user button */}
+            </div>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
               {session ? (
-                <div className="flex items-center gap-1.5 ml-1">
+                <div className="flex items-center gap-1.5">
                   {session.user?.image ? (
                     <Image
                       src={session.user.image}
@@ -358,7 +385,7 @@ export default function HomePage() {
                 <motion.button
                   whileTap={{ scale: 0.93 }}
                   onClick={() => router.push('/login')}
-                  className="ml-1 flex items-center gap-1.5 bg-red-600 text-white text-xs font-semibold px-3 py-2 rounded-full shadow-sm"
+                  className="flex items-center gap-1.5 bg-red-600 text-white text-xs font-semibold px-3 py-2 rounded-full shadow-sm"
                 >
                   <LogIn className="w-3.5 h-3.5" />
                   Login
@@ -419,7 +446,7 @@ export default function HomePage() {
           <p className="text-xs text-gray-500 mb-4 leading-relaxed">
             Manav Rachna Educational Institutions (MREI) founded in 1997, are a visible symbol of knowledge &amp; experience providing high-quality education in various fields.
           </p>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-4">
+          <div className="grid grid-cols-2 gap-3">
             {[
               { stat: '43000+', label: 'Alumni Imprints Globally' },
               { stat: '135+',   label: 'Global Academic Collaborations' },
@@ -430,9 +457,9 @@ export default function HomePage() {
               { stat: '80+',    label: 'Alumni & In campus Startups' },
               { stat: '60Lakh', label: 'Highest CTC' },
             ].map(({ stat, label }) => (
-              <div key={stat + label} className="border-t-2 border-neutral-300 pt-2">
-                <p className="text-2xl font-bold text-gray-800">{stat}</p>
-                <p className="text-[11px] text-gray-500 leading-tight mt-0.5">{label}</p>
+              <div key={stat + label} className="rounded-3xl bg-neutral-50 p-4 shadow-sm">
+                <p className="text-3xl font-bold text-gray-900">{stat}</p>
+                <p className="text-xs text-gray-500 leading-tight mt-2">{label}</p>
               </div>
             ))}
           </div>
@@ -542,6 +569,34 @@ export default function HomePage() {
 
         {/* ── Diamond Moments / Top Placements ── */}
         <DiamondPlacements photos={placementPhotos} />
+
+        {/* ── Top Functionaries ── */}
+        <div className="bg-neutral-50 px-5 py-5 border-t border-neutral-100">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Top Functionaries</p>
+              <p className="text-sm font-semibold text-gray-800">Meet the MRU leadership team</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {topFunctionaries.map((person) => (
+              <div key={person.name} className="rounded-3xl bg-white overflow-hidden shadow-sm">
+                <div className="relative h-32 bg-neutral-100">
+                  <Image
+                    src={person.photo}
+                    alt={person.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-3">
+                  <p className="text-sm font-semibold text-gray-900 leading-snug">{person.name}</p>
+                  <p className="text-[11px] text-neutral-500 mt-1 leading-tight">{person.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
         {/* ── Top Recruiters slideshow ── */}
         <RecruiterSlideshow logos={recruiterLogos} />
