@@ -289,20 +289,18 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       <div className="w-full min-h-screen bg-white flex flex-col">
 
-        {/* ── Header: centered MRU logo + login on the side ── */}
+        {/* ── Header: logo top-left + login on the right ── */}
         <div className="relative bg-white overflow-hidden">
-          <div className="relative px-6 py-3 flex justify-center max-w-7xl mx-auto w-full">
-            <div className="flex justify-center flex-1">
-              <Image
-                src="https://manavrachna.edu.in/assets/images/mru-logo.png"
-                alt="NAAC A++ Accredited"
-                width={200}
-                height={128}
-                priority
-                className="object-contain"
-              />
-            </div>
-            <div className="absolute right-6 top-1/2 -translate-y-1/2">
+          <div className="relative px-6 py-3 flex items-center justify-between max-w-7xl mx-auto w-full">
+            <Image
+              src="https://manavrachna.edu.in/assets/images/mru-logo.png"
+              alt="NAAC A++ Accredited"
+              width={200}
+              height={128}
+              priority
+              className="object-contain w-[140px] md:w-[220px] h-auto"
+            />
+            <div>
               {session ? (
                 <div className="flex items-center gap-1.5">
                   {session.user?.image ? (
@@ -346,7 +344,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Hero campus image ── */}
-        <div className="relative h-52 md:h-96 w-full overflow-hidden">
+        <div className="relative h-52 md:h-[480px] w-full overflow-hidden">
           <Image
             src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
             alt="Manav Rachna Campus"
@@ -371,14 +369,92 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {aboutOpen && (
               <motion.div key="about-mru" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
-                <div className="px-5 pb-5 pt-3 md:grid md:grid-cols-3 md:gap-4 space-y-3 md:space-y-0">
-                  {[
-                    `Manav Rachna University (MRU) was established under the Haryana State Legislature Act No. 26 of 2014 and is one of the leading private state universities in Haryana, India.`,
-                    `Recognised by UGC under Section 2(f), awarded NAAC A++ accreditation, and NBA accredited for B.Tech CSE (2023–2026).`,
-                    `MRU became the first university in India to be accredited by the International Baccalaureate (IB), underscoring its alignment with international educational standards.`,
-                  ].map((para, i) => (
-                    <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
-                  ))}
+                <div className="px-5 pb-5 pt-4 space-y-5">
+
+                  {/* Intro paras */}
+                  <div className="md:grid md:grid-cols-2 md:gap-4 space-y-3 md:space-y-0">
+                    <p className="text-sm text-gray-600 leading-relaxed">A premier private educational institution renowned for its cutting-edge curriculum, distinguished faculty, and state-of-the-art facilities. MRU is dedicated to providing a world-class education that prepares students for success in the modern workforce.</p>
+                    <p className="text-sm text-gray-600 leading-relaxed">Established under the Haryana State Legislature Act No. 26 of 2014, recognised by UGC under Section 2(f), awarded NAAC A++ accreditation, and NBA accredited for B.Tech CSE (2023–2026). First university in India accredited by the International Baccalaureate (IB).</p>
+                  </div>
+
+                  {/* Key stats from MRU */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {[
+                      { stat: '60 LPA', label: 'Highest Package' },
+                      { stat: '47', label: 'H-Index' },
+                      { stat: '₹12.5 Cr+', label: 'Research Funding' },
+                      { stat: '2000+', label: 'Publications' },
+                    ].map(({ stat, label }) => (
+                      <div key={label} className="bg-red-50 border border-red-100 rounded-xl p-3 text-center">
+                        <p className="text-lg font-bold text-red-600">{stat}</p>
+                        <p className="text-[11px] text-neutral-500 mt-0.5">{label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Academic highlights — desktop only */}
+                  <div className="hidden md:block">
+                    <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Academic Highlights</p>
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+                      {[
+                        'NEP 2020 Integration',
+                        'National Qualification Framework (NQF) Alignment',
+                        'National Credit Framework (NCrF) Implementation',
+                        'Multiple Entry & Exit Pathways',
+                        'Cutting-edge Educational Technology',
+                        'Innovative Major & Minor Options',
+                        'Holistic & Career-Focused Curriculum',
+                        'Interdisciplinary Opportunities',
+                        'Global Perspectives & Exchange Programs',
+                      ].map((item) => (
+                        <div key={item} className="flex items-start gap-2 bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 mt-1.5" />
+                          <p className="text-xs text-gray-600 leading-snug">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recognitions — desktop only */}
+                  <div className="hidden md:block">
+                    <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Recognitions & Awards</p>
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+                      {[
+                        { title: 'UGC Approved', desc: 'Under Section 2(f) of the UGC Act 1956' },
+                        { title: 'AICTE Approved', desc: 'All Engineering programmes approved for AY 2025–26' },
+                        { title: 'QS I-GAUGE Diamond', desc: 'Platinum in Teaching, Social Responsibility & Governance' },
+                        { title: 'QS I-Gauge Platinum', desc: 'Engineering subject rating — excellence in research & innovation' },
+                        { title: 'IIC 4-Star Rating', desc: 'Institute Innovation Council — 3 consecutive years (2019–2021)' },
+                        { title: 'Swayam–NPTEL Grade A', desc: 'Recognised as a valuable local chapter for online certification' },
+                      ].map((r) => (
+                        <div key={r.title} className="bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
+                          <p className="text-xs font-semibold text-gray-800">{r.title}</p>
+                          <p className="text-[11px] text-neutral-400 mt-0.5 leading-snug">{r.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Associations — desktop only */}
+                  <div className="hidden md:block">
+                    <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Associations & Collaborations</p>
+                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+                      {[
+                        'Founder Member — College Board Indian Global Higher Education Alliance',
+                        'Founder Member — LSAC Global Law Alliance',
+                        'Member — Association of Indian Universities (AIU)',
+                        'Nodal Centre for Virtual Labs (IIT Delhi)',
+                        'UNESCO MGIEP — Universal Human Values Courses',
+                        'Industry Partners: AWS, Quickheal, Altair, Xebia & more',
+                      ].map((item) => (
+                        <div key={item} className="flex items-start gap-2 bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
+                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 mt-1.5" />
+                          <p className="text-xs text-gray-600 leading-snug">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </motion.div>
             )}
