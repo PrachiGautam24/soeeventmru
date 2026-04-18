@@ -35,7 +35,7 @@ const schoolColors: Record<string, string> = {
 
 const schoolSVGs: Record<string, React.ReactNode> = {
   soe: (
-    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14">
       <path d="M32 10 C20 10 14 20 14 28 L50 28 C50 20 44 10 32 10Z"/>
       <rect x="27" y="7" width="10" height="7" rx="1.5"/>
       <path d="M10 28 L54 28 L54 32 Q54 34 52 34 L12 34 Q10 34 10 32 Z"/>
@@ -44,20 +44,20 @@ const schoolSVGs: Record<string, React.ReactNode> = {
     </svg>
   ),
   law: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14">
       <path d="M12 3v18M3 9l4-4 5 2 5-2 4 4M6 20h12"/>
       <path d="M5 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L7 9M17 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L19 9"/>
     </svg>
   ),
   education: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14">
       <path d="M2 10l10-6 10 6-10 6-10-6z"/>
       <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
       <path d="M22 10v6"/>
     </svg>
   ),
   business: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14">
       <rect x="2" y="7" width="20" height="14" rx="2"/>
       <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
       <line x1="12" y1="12" x2="12" y2="16"/>
@@ -65,7 +65,7 @@ const schoolSVGs: Record<string, React.ReactNode> = {
     </svg>
   ),
   science: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-14 h-14">
       <path d="M9 3h6v10l3 8H6l3-8V3z"/>
       <path d="M6 19h12"/>
       <circle cx="9" cy="13" r="1" fill="currentColor" stroke="none"/>
@@ -466,27 +466,27 @@ export default function HomePage() {
         </div>
 
         {/* ── Schools grid ── */}
-        <div className="px-5 py-5 bg-neutral-50">
-          <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-4">Explore Schools</p>
-          <div className="grid grid-cols-3 gap-4">
+        <div className="px-5 py-6 bg-neutral-50">
+          <p className="text-sm font-semibold text-neutral-400 uppercase tracking-widest mb-4">Explore Schools</p>
+          <div className="grid grid-cols-3 gap-5">
             {visibleSchools.slice(0, 3).map((school, i) => (
-              <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} whileTap={{ scale: 0.92 }}
-                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-2">
-                <div className="w-16 h-16 rounded-[22px] bg-white border border-neutral-200 flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
+              <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} whileTap={{ scale: 0.95 }}
+                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
+                <div className="w-24 h-24 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
                   {schoolSVGs[school.id]}
                 </div>
-                <span className="text-[11px] text-center text-gray-700 font-medium leading-tight px-1">{school.name}</span>
+                <span className="text-[12px] text-center text-gray-800 font-semibold leading-tight">{school.name}</span>
               </motion.button>
             ))}
           </div>
-          <div className="flex justify-center gap-4 mt-4">
+          <div className="flex justify-center gap-5 mt-5">
             {visibleSchools.slice(3).map((school, i) => (
-              <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.07 }} whileTap={{ scale: 0.92 }}
-                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-2 w-24">
-                <div className="w-16 h-16 rounded-[22px] bg-white border border-neutral-200 flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
+              <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.07 }} whileTap={{ scale: 0.95 }}
+                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 w-28 bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
+                <div className="w-24 h-24 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
                   {schoolSVGs[school.id]}
                 </div>
-                <span className="text-[11px] text-center text-gray-700 font-medium leading-tight px-1">{school.name}</span>
+                <span className="text-[12px] text-center text-gray-800 font-semibold leading-tight">{school.name}</span>
               </motion.button>
             ))}
           </div>
