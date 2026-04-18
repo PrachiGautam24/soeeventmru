@@ -76,7 +76,7 @@ export default function ClansPage() {
             <ChevronLeft className="w-4 h-4" /> Back
           </button>
           <h1 className="text-white text-xl font-bold">Clans</h1>
-          <p className="text-white/70 text-xs mt-1">MRU's unique student community structure</p>
+          <p className="text-white/70 text-xs mt-1">MRU&apos;s unique student community structure</p>
         </div>
 
         <div className="flex-1 overflow-y-auto pb-24">
@@ -85,7 +85,7 @@ export default function ClansPage() {
           <div className="px-5 py-5 border-b border-neutral-100">
             <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Why the Clans?</p>
             <p className="text-sm text-gray-600 leading-relaxed mb-4">
-              MRU's Clan structure provides students with opportunities to engage with teachers and management, developing practical skills through structured partnerships and healthy competition.
+              MRU&apos;s Clan structure provides students with opportunities to engage with teachers and management, developing practical skills through structured partnerships and healthy competition.
             </p>
             <div className="space-y-2">
               {whyClans.map((point, i) => (
@@ -168,7 +168,7 @@ export default function ClansPage() {
               <p className="text-xs font-semibold text-red-600 uppercase tracking-widest">Students Welfare</p>
             </div>
             <p className="text-sm text-gray-600 leading-relaxed">
-              The Department of Students Welfare acts as a liaison between students and administration, providing leadership, social, extracurricular, and academic counseling. It organizes the annual Cultural Fest "RESURRECTION" and collaborates with AICTE, UGC, and other bodies for programs like Unnat Bharat Abhiyan and Swacch Bharat Abhiyan.
+              The Department of Students Welfare acts as a liaison between students and administration, providing leadership, social, extracurricular, and academic counseling. It organizes the annual Cultural Fest &quot;RESURRECTION&quot; and collaborates with AICTE, UGC, and other bodies for programs like Unnat Bharat Abhiyan and Swacch Bharat Abhiyan.
             </p>
           </div>
 

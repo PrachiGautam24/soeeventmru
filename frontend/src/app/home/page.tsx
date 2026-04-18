@@ -7,8 +7,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import {
-  ChevronDown, Star, X, Map, Building2, Users, Phone,
-  CalendarDays, BookOpen, CreditCard, Library,
+  ChevronDown, Star, X, Building2, Users,
+  CalendarDays, BookOpen,
   Mail, PhoneCall, MapPin, ChevronLeft, ChevronRight, Trophy,
   LogIn, LogOut, User
 } from 'lucide-react'

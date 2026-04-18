@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import {
-  ChevronLeft, CheckCircle2, Clock, MapPin, FileText,
-  Users, Smartphone, AlertCircle, Phone, Shield
+  ChevronLeft, CheckCircle2, Clock, MapPin, 
+  Smartphone, AlertCircle, Phone, Shield
 } from 'lucide-react'
 
 const arrivalChecklist = [
@@ -160,7 +160,7 @@ export default function FirstDayPage() {
           <div className="px-5 py-5 border-b border-neutral-100">
             <div className="flex items-center gap-2 mb-3">
               <Shield className="w-4 h-4 text-red-600" />
-              <p className="text-xs font-semibold text-red-600 uppercase tracking-widest">Dos & Don'ts</p>
+              <p className="text-xs font-semibold text-red-600 uppercase tracking-widest">Dos &amp; Don&apos;ts</p>
             </div>
             <div className="space-y-4">
               <div>
@@ -175,7 +175,7 @@ export default function FirstDayPage() {
                 </div>
               </div>
               <div>
-                <p className="text-xs font-semibold text-red-600 mb-2">❌ Don't</p>
+                <p className="text-xs font-semibold text-red-600 mb-2">❌ Don&apos;t</p>
                 <div className="space-y-1.5">
                   {dosDonts.donts.map((d, i) => (
                     <div key={i} className="flex items-start gap-2">
