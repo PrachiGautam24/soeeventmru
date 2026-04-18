@@ -170,76 +170,47 @@ const visibleSchools = schools.filter(s => s.id !== 'media')
 function DiamondPlacements({ photos }: { photos: string[] }) {
   const [active, setActive] = useState(0)
   const total = photos.length
+  const prev = () => setActive(i => (i - 1 + total) % total)
+  const next = () => setActive(i => (i + 1) % total)
 
   React.useEffect(() => {
     const t = setInterval(() => setActive(i => (i + 1) % total), 3000)
     return () => clearInterval(t)
   }, [total])
 
-  const prev = () => setActive(i => (i - 1 + total) % total)
-  const next = () => setActive(i => (i + 1) % total)
-
   return (
     <div className="bg-white border-t border-neutral-100">
-      {/* Section header */}
-      <div className="flex items-center gap-2 px-5 pt-5 pb-3">
+      <div className="flex items-center gap-2 px-5 md:px-6 pt-5 pb-3">
         <Trophy className="w-4 h-4 text-amber-500" />
         <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Diamond Placement Moments</p>
       </div>
 
-      {/* Full-width cover card */}
-      <div className="relative mx-4 rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            transition={{ duration: 0.35 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={photos[active]}
-              alt={`Placement ${active + 1}`}
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Gradient overlay at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-        {/* Counter badge */}
-        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">
-          {active + 1} / {total}
+      {/* Mobile: carousel */}
+      <div className="md:hidden px-4 pb-5">
+        <div className="relative rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
+          <AnimatePresence mode="wait">
+            <motion.div key={active} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.35 }} className="absolute inset-0">
+              <Image src={photos[active]} alt={`Placement ${active + 1}`} fill className="object-cover" />
+            </motion.div>
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">{active + 1} / {total}</div>
+          <button onClick={prev} className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white" aria-label="Previous"><ChevronLeft className="w-5 h-5" /></button>
+          <button onClick={next} className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white" aria-label="Next"><ChevronRight className="w-5 h-5" /></button>
         </div>
-
-        {/* Prev / Next arrows */}
-        <button
-          onClick={prev}
-          className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
-          aria-label="Previous"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={next}
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
-          aria-label="Next"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        <div className="flex justify-center gap-1.5 pt-3">
+          {photos.map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`} />
+          ))}
+        </div>
       </div>
 
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-1.5 py-3">
-        {photos.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`}
-          />
+      {/* Desktop: grid */}
+      <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-6 gap-3 px-6 pb-5">
+        {photos.map((src, i) => (
+          <div key={i} className="relative rounded-2xl overflow-hidden shadow-sm" style={{ aspectRatio: '4/3' }}>
+            <Image src={src} alt={`Placement ${i + 1}`} fill className="object-cover" />
+          </div>
         ))}
       </div>
     </div>
@@ -248,77 +219,55 @@ function DiamondPlacements({ photos }: { photos: string[] }) {
 
 function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[] }) {
   const [active, setActive] = useState(0)
-  const total = logos.length
-
-  // Show 2 larger logos per slide for more impact
   const perSlide = 2
-  const totalSlides = Math.ceil(total / perSlide)
+  const totalSlides = Math.ceil(logos.length / perSlide)
+  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
+  const next = () => setActive(i => (i + 1) % totalSlides)
 
   React.useEffect(() => {
     const t = setInterval(() => setActive(i => (i + 1) % totalSlides), 2800)
     return () => clearInterval(t)
   }, [totalSlides])
 
-  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
-  const next = () => setActive(i => (i + 1) % totalSlides)
-
   const slideLogos = logos.slice(active * perSlide, active * perSlide + perSlide)
 
   return (
     <div className="bg-neutral-50 border-t border-neutral-100">
-      <div className="flex items-center justify-between px-5 pt-5 pb-3">
+      <div className="px-5 md:px-6 pt-5 pb-3 flex items-center justify-between">
         <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Recruiters</p>
-        <div className="flex items-center gap-1.5">
-          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
-            <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
-          </button>
-          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
-            <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
-          </button>
+        {/* Mobile-only nav arrows in header */}
+        <div className="flex items-center gap-1.5 md:hidden">
+          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center"><ChevronLeft className="w-3.5 h-3.5 text-gray-600" /></button>
+          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center"><ChevronRight className="w-3.5 h-3.5 text-gray-600" /></button>
         </div>
       </div>
 
-      {/* Slide */}
-      <div className="px-4 pb-4">
+      {/* Mobile: carousel */}
+      <div className="md:hidden px-4 pb-4">
         <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.25 }}
-            className="grid grid-cols-2 gap-3"
-          >
+          <motion.div key={active} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }} className="grid grid-cols-2 gap-3">
             {slideLogos.map((r, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4"
-              >
-                <div className="relative w-full h-24">
-                  <Image
-                    src={r.logo}
-                    alt={r.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                {r.name !== 'Recruiter' && (
-                  <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>
-                )}
+              <div key={i} className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4">
+                <div className="relative w-full h-24"><Image src={r.logo} alt={r.name} fill className="object-contain" /></div>
+                {r.name !== 'Recruiter' && <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>}
               </div>
             ))}
           </motion.div>
         </AnimatePresence>
+        <div className="flex justify-center gap-1.5 pt-3">
+          {Array.from({ length: totalSlides }).map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`} />
+          ))}
+        </div>
       </div>
 
-      {/* Dots */}
-      <div className="flex justify-center gap-1.5 pb-4">
-        {Array.from({ length: totalSlides }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`}
-          />
+      {/* Desktop: grid */}
+      <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-6 gap-3 px-6 pb-5">
+        {logos.map((r, i) => (
+          <div key={i} className="bg-white rounded-3xl shadow-sm flex flex-col items-center justify-center gap-2 py-4 px-3">
+            <div className="relative w-full h-16"><Image src={r.logo} alt={r.name} fill className="object-contain" /></div>
+            {r.name !== 'Recruiter' && <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>}
+          </div>
         ))}
       </div>
     </div>
@@ -337,12 +286,12 @@ export default function HomePage() {
   const nextEvent = () => setEventIdx(i => (i + 1) % upcomingEvents.length)
 
   return (
-    <div className="min-h-screen bg-neutral-100">
-      <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
+    <div className="min-h-screen bg-white">
+      <div className="w-full min-h-screen bg-white flex flex-col">
 
         {/* ── Header: centered MRU logo + login on the side ── */}
         <div className="relative bg-white overflow-hidden">
-          <div className="relative px-4 py-3 flex justify-center">
+          <div className="relative px-6 py-3 flex justify-center max-w-7xl mx-auto w-full">
             <div className="flex justify-center flex-1">
               <Image
                 src="https://manavrachna.edu.in/assets/images/mru-logo.png"
@@ -353,7 +302,7 @@ export default function HomePage() {
                 className="object-contain"
               />
             </div>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+            <div className="absolute right-6 top-1/2 -translate-y-1/2">
               {session ? (
                 <div className="flex items-center gap-1.5">
                   {session.user?.image ? (
@@ -397,21 +346,21 @@ export default function HomePage() {
         </div>
 
         {/* ── Hero campus image ── */}
-        <div className="relative h-52 w-full overflow-hidden">
+        <div className="relative h-52 md:h-96 w-full overflow-hidden">
           <Image
             src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
             alt="Manav Rachna Campus"
             fill className="object-cover" priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
-            <p className="text-[10px] font-semibold text-white/60 uppercase tracking-widest mb-0.5">Study at Manav Rachna</p>
-            <h2 className="text-white text-base font-bold leading-snug">Learning, Creativity &amp; Access to the latest research.</h2>
+          <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
+            <p className="text-[10px] md:text-xs font-semibold text-white/60 uppercase tracking-widest mb-0.5">Study at Manav Rachna</p>
+            <h2 className="text-white text-base md:text-2xl font-bold leading-snug">Learning, Creativity &amp; Access to the latest research.</h2>
           </div>
         </div>
 
         {/* ── About Manav Rachna (right after hero) ── */}
-        <div className="mx-4 mt-4 rounded-2xl overflow-hidden shadow-sm">
+        <div className="mx-4 md:mx-6 mt-4 rounded-2xl overflow-hidden shadow-sm">
           <button onClick={() => setAboutOpen(o => !o)}
             className={`w-full flex items-center justify-between px-5 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
             <span className="text-sm font-semibold text-white">About Manav Rachna University</span>
@@ -422,7 +371,7 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {aboutOpen && (
               <motion.div key="about-mru" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
-                <div className="px-5 pb-5 pt-3 space-y-3">
+                <div className="px-5 pb-5 pt-3 md:grid md:grid-cols-3 md:gap-4 space-y-3 md:space-y-0">
                   {[
                     `Manav Rachna University (MRU) was established under the Haryana State Legislature Act No. 26 of 2014 and is one of the leading private state universities in Haryana, India.`,
                     `Recognised by UGC under Section 2(f), awarded NAAC A++ accreditation, and NBA accredited for B.Tech CSE (2023–2026).`,
@@ -437,12 +386,12 @@ export default function HomePage() {
         </div>
 
         {/* ── MREI Stats Overview ── */}
-        <div className="px-5 pt-5 pb-4 bg-white border-t border-neutral-100">
+        <div className="px-5 md:px-6 pt-5 pb-4 bg-white border-t border-neutral-100">
           <p className="text-[11px] font-semibold text-red-600 uppercase tracking-widest mb-1">Overview</p>
           <p className="text-xs text-gray-500 mb-4 leading-relaxed">
             Manav Rachna Educational Institutions (MREI) founded in 1997, are a visible symbol of knowledge &amp; experience providing high-quality education in various fields.
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { stat: '43000+', label: 'Alumni Imprints Globally' },
               { stat: '135+',   label: 'Global Academic Collaborations' },
@@ -462,12 +411,12 @@ export default function HomePage() {
         </div>
 
         {/* ── Schools grid ── */}
-        <div className="px-5 py-6 bg-neutral-50">
+        <div className="px-5 md:px-6 py-6 bg-neutral-50">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-4">Explore Schools</p>
-          <div className="flex justify-center gap-5 flex-wrap">
+          <div className="flex justify-center gap-5 flex-wrap md:grid md:grid-cols-5">
             {visibleSchools.map((school, i) => (
               <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} whileTap={{ scale: 0.95 }}
-                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 w-28 bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
+                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 w-28 md:w-full bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
                 <div className="w-20 h-20 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
                   {schoolSVGs[school.id]}
                 </div>
@@ -479,7 +428,7 @@ export default function HomePage() {
 
         {/* ── Fresher Guide ── */}
         <div className="bg-white border-t border-neutral-100">
-          <button onClick={() => setFresherOpen(o => !o)} className="w-full flex items-center justify-between px-5 py-4">
+          <button onClick={() => setFresherOpen(o => !o)} className="w-full flex items-center justify-between px-5 md:px-6 py-4">
             <span className="text-sm font-semibold text-gray-800 flex items-center gap-2">
               Fresher Guide <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
             </span>
@@ -490,7 +439,7 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {fresherOpen && (
               <motion.div key="fresher" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
-                <div className="px-5 pb-5 grid grid-cols-2 gap-3">
+                <div className="px-5 md:px-6 pb-5 grid grid-cols-2 md:grid-cols-4 gap-3">
                   {fresherItems.map((item, i) => {
                     const Icon = item.icon
                     return (
@@ -514,19 +463,31 @@ export default function HomePage() {
         </div>
 
         {/* ── Upcoming Events carousel ── */}
-        <div className="px-4 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
+        <div className="px-4 md:px-6 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-3">Upcoming Events</p>
-          <div className="relative">
+          {/* Desktop: show all 3 side by side */}
+          <div className="hidden md:grid md:grid-cols-3 md:gap-4">
+            {upcomingEvents.map((ev, idx) => (
+              <div key={idx} className="rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
+                  <Image src={ev.image} alt={ev.title} fill className="object-cover" unoptimized />
+                </div>
+                <div className="bg-white px-4 py-3 flex items-center justify-between">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-gray-800 truncate">{ev.title}</p>
+                    <p className="text-xs text-neutral-500 mt-0.5 truncate">{ev.subtitle}</p>
+                  </div>
+                  <span className="text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full shrink-0 ml-2">{ev.date}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Mobile: carousel */}
+          <div className="md:hidden relative">
             <AnimatePresence mode="wait">
               <motion.div key={eventIdx} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden shadow-lg">
                 <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
-                  <Image
-                    src={upcomingEvents[eventIdx].image}
-                    alt={upcomingEvents[eventIdx].title}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
+                  <Image src={upcomingEvents[eventIdx].image} alt={upcomingEvents[eventIdx].title} fill className="object-cover" unoptimized />
                 </div>
                 <div className="bg-white px-4 py-3 flex items-center justify-between">
                   <div className="flex-1 min-w-0">
@@ -544,30 +505,29 @@ export default function HomePage() {
               <ChevronRight className="w-4 h-4 text-gray-700" />
             </button>
           </div>
-          <div className="flex justify-center gap-1.5 mt-3">
+          <div className="flex justify-center gap-1.5 mt-3 md:hidden">
             {upcomingEvents.map((_, i) => (
               <button key={i} onClick={() => setEventIdx(i)}
                 className={`rounded-full transition-all duration-200 ${i === eventIdx ? 'w-4 h-2 bg-secondary' : 'w-2 h-2 bg-neutral-300'}`} />
             ))}
           </div>
-
         </div>
 
         {/* ── Diamond Moments / Top Placements ── */}
         <DiamondPlacements photos={placementPhotos} />
 
         {/* ── Top Functionaries ── */}
-        <div className="bg-neutral-50 px-5 py-5 border-t border-neutral-100">
+        <div className="bg-neutral-50 px-5 md:px-6 py-5 border-t border-neutral-100">
           <div className="flex items-center justify-between mb-4">
             <div>
               <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Functionaries</p>
               <p className="text-sm font-semibold text-gray-800">Meet the MRU leadership team</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
             {topFunctionaries.map((person) => (
               <div key={person.name} className="rounded-3xl bg-white overflow-hidden shadow-sm">
-                <div className="relative h-32 bg-neutral-100">
+                <div className="relative h-32 md:h-44 bg-neutral-100">
                   <Image
                     src={person.photo}
                     alt={person.name}
@@ -588,47 +548,47 @@ export default function HomePage() {
         <RecruiterSlideshow logos={recruiterLogos} />
 
         {/* ── Footer ── */}
-        <div className="bg-white border-t border-neutral-100 py-4 space-y-4">
-          <div className="px-5 space-y-3">
-            <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Follow Us</p>
-            <div className="flex gap-5">
-              <a href="https://www.instagram.com/manavrachnauniversity/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                  <circle cx="12" cy="12" r="4"/>
-                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
-                </svg>
-                Instagram
-              </a>
-              <a href="https://www.linkedin.com/school/manav-rachna-university/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                  <circle cx="4" cy="4" r="2"/>
-                </svg>
-                LinkedIn
-              </a>
+        <div className="bg-white border-t border-neutral-100 py-4">
+          <div className="px-5 md:px-6 space-y-4">
+            <div className="space-y-3">
+              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Follow Us</p>
+              <div className="flex gap-5">
+                <a href="https://www.instagram.com/manavrachnauniversity/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+                  </svg>
+                  Instagram
+                </a>
+                <a href="https://www.linkedin.com/school/manav-rachna-university/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
             </div>
-          </div>
-
-          {/* Contact Us — same style as social links */}
-          <div className="px-5 space-y-3 border-t border-neutral-100 pt-4">
-            <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Contact Us</p>
-            <div className="flex flex-col gap-3">
-              <a href="tel:+911294268500" className="flex items-center gap-2 text-sm text-neutral-600">
-                <PhoneCall className="w-5 h-5 text-neutral-500" />
-                +91-129-426-8500 (General)
-              </a>
-              <a href="tel:+911294259000" className="flex items-center gap-2 text-sm text-neutral-600">
-                <PhoneCall className="w-5 h-5 text-neutral-500" />
-                +91-129-425-9000 (Admissions)
-              </a>
-              <a href="mailto:admissions@manavrachna.edu.in" className="flex items-center gap-2 text-sm text-neutral-600">
-                <Mail className="w-5 h-5 text-neutral-500" />
-                admissions@manavrachna.edu.in
-              </a>
-              <div className="flex items-start gap-2 text-sm text-neutral-600">
-                <MapPin className="w-5 h-5 text-neutral-500 shrink-0 mt-0.5" />
-                <span>Sector 43, Aravalli Hills, Delhi–Surajkund Road, Faridabad, Haryana 121004</span>
+            <div className="space-y-3 border-t border-neutral-100 pt-4">
+              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Contact Us</p>
+              <div className="flex flex-col gap-3">
+                <a href="tel:+911294268500" className="flex items-center gap-2 text-sm text-neutral-600">
+                  <PhoneCall className="w-5 h-5 text-neutral-500" />
+                  +91-129-426-8500 (General)
+                </a>
+                <a href="tel:+911294259000" className="flex items-center gap-2 text-sm text-neutral-600">
+                  <PhoneCall className="w-5 h-5 text-neutral-500" />
+                  +91-129-425-9000 (Admissions)
+                </a>
+                <a href="mailto:admissions@manavrachna.edu.in" className="flex items-center gap-2 text-sm text-neutral-600">
+                  <Mail className="w-5 h-5 text-neutral-500" />
+                  admissions@manavrachna.edu.in
+                </a>
+                <div className="flex items-start gap-2 text-sm text-neutral-600">
+                  <MapPin className="w-5 h-5 text-neutral-500 shrink-0 mt-0.5" />
+                  <span>Sector 43, Aravalli Hills, Delhi–Surajkund Road, Faridabad, Haryana 121004</span>
+                </div>
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@ export default function BottomNav() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 shadow-lg z-40 safe-area-bottom">
-      <div className="max-w-md mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex justify-around items-center h-16">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href === '/home' && pathname === '/home')
