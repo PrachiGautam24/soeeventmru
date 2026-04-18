@@ -278,7 +278,7 @@ function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[]
         </div>
       </div>
 
-      {/* Slide */}
+      {/* Slide — 2 big cards side by side */}
       <div className="px-4 pb-4">
         <AnimatePresence mode="wait">
           <motion.div
@@ -287,7 +287,7 @@ function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[]
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.25 }}
-            className="grid grid-cols-2 gap-3"
+            className="grid grid-cols-2 gap-4"
           >
             {slideLogos.map((r, i) => (
               <div
