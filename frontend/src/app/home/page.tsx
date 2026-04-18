@@ -338,7 +338,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-neutral-100">
-      <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
+      <div className="max-w-md mx-auto md:max-w-5xl min-h-screen bg-white shadow-xl flex flex-col">
 
         {/* ── Header: centered MRU logo + login on the side ── */}
         <div className="relative bg-white overflow-hidden">
@@ -442,7 +442,7 @@ export default function HomePage() {
           <p className="text-xs text-gray-500 mb-4 leading-relaxed">
             Manav Rachna Educational Institutions (MREI) founded in 1997, are a visible symbol of knowledge &amp; experience providing high-quality education in various fields.
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { stat: '43000+', label: 'Alumni Imprints Globally' },
               { stat: '135+',   label: 'Global Academic Collaborations' },
@@ -490,7 +490,7 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {fresherOpen && (
               <motion.div key="fresher" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
-                <div className="px-5 pb-5 grid grid-cols-2 gap-4">
+                <div className="px-5 pb-5 grid grid-cols-2 md:grid-cols-4 gap-4">
                   {fresherItems.map((item, i) => {
                     const Icon = item.icon
                     return (
@@ -516,41 +516,50 @@ export default function HomePage() {
         {/* ── Upcoming Events carousel ── */}
         <div className="px-4 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-3">Upcoming Events</p>
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <motion.div key={eventIdx} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden shadow-lg">
-                <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
-                  <Image
-                    src={upcomingEvents[eventIdx].image}
-                    alt={upcomingEvents[eventIdx].title}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
-                </div>
-                <div className="bg-white px-4 py-3 flex items-center justify-between">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-800 truncate">{upcomingEvents[eventIdx].title}</p>
-                    <p className="text-xs text-neutral-500 mt-0.5 truncate">{upcomingEvents[eventIdx].subtitle}</p>
+          <div className="md:grid md:grid-cols-3 md:gap-4">
+            {/* Mobile: carousel */}
+            <div className="relative md:hidden">
+              <AnimatePresence mode="wait">
+                <motion.div key={eventIdx} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden shadow-lg">
+                  <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
+                    <Image src={upcomingEvents[eventIdx].image} alt={upcomingEvents[eventIdx].title} fill className="object-cover" unoptimized />
                   </div>
-                  <span className="text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full shrink-0 ml-2">{upcomingEvents[eventIdx].date}</span>
+                  <div className="bg-white px-4 py-3 flex items-center justify-between">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-gray-800 truncate">{upcomingEvents[eventIdx].title}</p>
+                      <p className="text-xs text-neutral-500 mt-0.5 truncate">{upcomingEvents[eventIdx].subtitle}</p>
+                    </div>
+                    <span className="text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full shrink-0 ml-2">{upcomingEvents[eventIdx].date}</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+              <button onClick={prevEvent} className="absolute left-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
+                <ChevronLeft className="w-4 h-4 text-gray-700" />
+              </button>
+              <button onClick={nextEvent} className="absolute right-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
+                <ChevronRight className="w-4 h-4 text-gray-700" />
+              </button>
+            </div>
+            <div className="flex justify-center gap-1.5 mt-3 md:hidden">
+              {upcomingEvents.map((_, i) => (
+                <button key={i} onClick={() => setEventIdx(i)}
+                  className={`rounded-full transition-all duration-200 ${i === eventIdx ? 'w-4 h-2 bg-secondary' : 'w-2 h-2 bg-neutral-300'}`} />
+              ))}
+            </div>
+            {/* Desktop: all cards visible */}
+            {upcomingEvents.map((ev) => (
+              <div key={ev.title} className="hidden md:block rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
+                  <Image src={ev.image} alt={ev.title} fill className="object-cover" unoptimized />
                 </div>
-              </motion.div>
-            </AnimatePresence>
-            <button onClick={prevEvent} className="absolute left-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
-              <ChevronLeft className="w-4 h-4 text-gray-700" />
-            </button>
-            <button onClick={nextEvent} className="absolute right-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
-              <ChevronRight className="w-4 h-4 text-gray-700" />
-            </button>
-          </div>
-          <div className="flex justify-center gap-1.5 mt-3">
-            {upcomingEvents.map((_, i) => (
-              <button key={i} onClick={() => setEventIdx(i)}
-                className={`rounded-full transition-all duration-200 ${i === eventIdx ? 'w-4 h-2 bg-secondary' : 'w-2 h-2 bg-neutral-300'}`} />
+                <div className="bg-white px-4 py-3">
+                  <p className="text-sm font-bold text-gray-800">{ev.title}</p>
+                  <p className="text-xs text-neutral-500 mt-0.5">{ev.subtitle}</p>
+                  <span className="inline-block mt-2 text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full">{ev.date}</span>
+                </div>
+              </div>
             ))}
           </div>
-
         </div>
 
         {/* ── Diamond Moments / Top Placements ── */}
@@ -564,10 +573,10 @@ export default function HomePage() {
               <p className="text-sm font-semibold text-gray-800">Meet the MRU leadership team</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {topFunctionaries.map((person) => (
               <div key={person.name} className="rounded-3xl bg-white overflow-hidden shadow-sm">
-                <div className="relative h-32 bg-neutral-100">
+                <div className="relative h-32 md:h-48 bg-neutral-100">
                   <Image
                     src={person.photo}
                     alt={person.name}
