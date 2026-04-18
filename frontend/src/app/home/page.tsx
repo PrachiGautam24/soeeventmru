@@ -15,14 +15,10 @@ import {
 import { schools } from '@/lib/schools'
 
 const fresherItems = [
-  { icon: Map,          label: 'Campus Map',                desc: 'Navigate the campus easily' },
-  { icon: Building2,    label: 'Hostel Information',         desc: 'Rooms, facilities & rules' },
-  { icon: Users,        label: 'Clubs & Societies',          desc: 'Find your community' },
-  { icon: Phone,        label: 'Important Faculty Contacts', desc: 'Key numbers to save' },
-  { icon: CalendarDays, label: 'Academic Calendar',          desc: 'Dates, exams & holidays' },
-  { icon: BookOpen,     label: 'First Day Instructions',     desc: 'What to do on day one' },
-  { icon: CreditCard,   label: 'ID Card Process',            desc: 'How to get your ID' },
-  { icon: Library,      label: 'Library Info',               desc: 'Access books & resources' },
+  { icon: Building2,    label: 'Hostel Information',     desc: 'Rooms, facilities & rules',  href: '/fresher/hostel' },
+  { icon: Users,        label: 'Clans',                  desc: 'Find your community',         href: '/fresher/clans' },
+  { icon: CalendarDays, label: 'Academic Calendar',      desc: 'Dates, exams & holidays',     href: '/fresher/academic-calendar' },
+  { icon: BookOpen,     label: 'First Day Instructions', desc: 'What to do on day one',       href: '/fresher/first-day' },
 ]
 
 const schoolColors: Record<string, string> = {
@@ -499,7 +495,8 @@ export default function HomePage() {
                     const Icon = item.icon
                     return (
                       <motion.button key={item.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                        className="flex items-start gap-3 bg-neutral-50 rounded-xl p-3 border border-neutral-100 text-left">
+                        onClick={() => item.href && router.push(item.href)}
+                        className={`flex items-start gap-3 bg-neutral-50 rounded-xl p-3 border border-neutral-100 text-left ${item.href ? 'active:scale-95 transition-transform' : 'opacity-70'}`}>
                         <div className="w-8 h-8 rounded-lg bg-red-100 flex items-center justify-center shrink-0">
                           <Icon className="w-4 h-4 text-red-600" />
                         </div>
