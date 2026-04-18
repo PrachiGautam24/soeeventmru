@@ -170,76 +170,47 @@ const visibleSchools = schools.filter(s => s.id !== 'media')
 function DiamondPlacements({ photos }: { photos: string[] }) {
   const [active, setActive] = useState(0)
   const total = photos.length
+  const prev = () => setActive(i => (i - 1 + total) % total)
+  const next = () => setActive(i => (i + 1) % total)
 
   React.useEffect(() => {
     const t = setInterval(() => setActive(i => (i + 1) % total), 3000)
     return () => clearInterval(t)
   }, [total])
 
-  const prev = () => setActive(i => (i - 1 + total) % total)
-  const next = () => setActive(i => (i + 1) % total)
-
   return (
     <div className="bg-white border-t border-neutral-100">
-      {/* Section header */}
-      <div className="flex items-center gap-2 px-5 pt-5 pb-3">
+      <div className="flex items-center gap-2 px-5 md:px-6 pt-5 pb-3">
         <Trophy className="w-4 h-4 text-amber-500" />
         <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Diamond Placement Moments</p>
       </div>
 
-      {/* Full-width cover card */}
-      <div className="relative mx-4 rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, scale: 1.04 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            transition={{ duration: 0.35 }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={photos[active]}
-              alt={`Placement ${active + 1}`}
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Gradient overlay at bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-
-        {/* Counter badge */}
-        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">
-          {active + 1} / {total}
+      {/* Mobile: carousel */}
+      <div className="md:hidden px-4 pb-5">
+        <div className="relative rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
+          <AnimatePresence mode="wait">
+            <motion.div key={active} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.35 }} className="absolute inset-0">
+              <Image src={photos[active]} alt={`Placement ${active + 1}`} fill className="object-cover" />
+            </motion.div>
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">{active + 1} / {total}</div>
+          <button onClick={prev} className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white" aria-label="Previous"><ChevronLeft className="w-5 h-5" /></button>
+          <button onClick={next} className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white" aria-label="Next"><ChevronRight className="w-5 h-5" /></button>
         </div>
-
-        {/* Prev / Next arrows */}
-        <button
-          onClick={prev}
-          className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
-          aria-label="Previous"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={next}
-          className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
-          aria-label="Next"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+        <div className="flex justify-center gap-1.5 pt-3">
+          {photos.map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`} />
+          ))}
+        </div>
       </div>
 
-      {/* Dot indicators */}
-      <div className="flex justify-center gap-1.5 py-3">
-        {photos.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`}
-          />
+      {/* Desktop: full grid of all photos */}
+      <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-6 gap-3 px-6 pb-5">
+        {photos.map((src, i) => (
+          <div key={i} className="relative rounded-2xl overflow-hidden shadow-sm" style={{ aspectRatio: '4/3' }}>
+            <Image src={src} alt={`Placement ${i + 1}`} fill className="object-cover" />
+          </div>
         ))}
       </div>
     </div>
@@ -248,77 +219,55 @@ function DiamondPlacements({ photos }: { photos: string[] }) {
 
 function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[] }) {
   const [active, setActive] = useState(0)
-  const total = logos.length
-
-  // Show 2 larger logos per slide for more impact
   const perSlide = 2
-  const totalSlides = Math.ceil(total / perSlide)
+  const totalSlides = Math.ceil(logos.length / perSlide)
+  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
+  const next = () => setActive(i => (i + 1) % totalSlides)
 
   React.useEffect(() => {
     const t = setInterval(() => setActive(i => (i + 1) % totalSlides), 2800)
     return () => clearInterval(t)
   }, [totalSlides])
 
-  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
-  const next = () => setActive(i => (i + 1) % totalSlides)
-
   const slideLogos = logos.slice(active * perSlide, active * perSlide + perSlide)
 
   return (
     <div className="bg-neutral-50 border-t border-neutral-100">
-      <div className="flex items-center justify-between px-5 pt-5 pb-3">
+      <div className="px-5 md:px-6 pt-5 pb-3 flex items-center justify-between">
         <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Recruiters</p>
-        <div className="flex items-center gap-1.5">
-          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
-            <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
-          </button>
-          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
-            <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
-          </button>
+        {/* Mobile-only nav arrows */}
+        <div className="flex items-center gap-1.5 md:hidden">
+          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center"><ChevronLeft className="w-3.5 h-3.5 text-gray-600" /></button>
+          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center"><ChevronRight className="w-3.5 h-3.5 text-gray-600" /></button>
         </div>
       </div>
 
-      {/* Slide — 2 big cards side by side */}
-      <div className="px-4 pb-4">
+      {/* Mobile: 2-up carousel */}
+      <div className="md:hidden px-4 pb-4">
         <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.25 }}
-            className="grid grid-cols-2 gap-4"
-          >
+          <motion.div key={active} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }} className="grid grid-cols-2 gap-4">
             {slideLogos.map((r, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4"
-              >
-                <div className="relative w-full h-24">
-                  <Image
-                    src={r.logo}
-                    alt={r.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-                {r.name !== 'Recruiter' && (
-                  <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>
-                )}
+              <div key={i} className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4">
+                <div className="relative w-full h-24"><Image src={r.logo} alt={r.name} fill className="object-contain" /></div>
+                {r.name !== 'Recruiter' && <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>}
               </div>
             ))}
           </motion.div>
         </AnimatePresence>
+        <div className="flex justify-center gap-1.5 pt-3">
+          {Array.from({ length: totalSlides }).map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`} />
+          ))}
+        </div>
       </div>
 
-      {/* Dots */}
-      <div className="flex justify-center gap-1.5 pb-4">
-        {Array.from({ length: totalSlides }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`}
-          />
+      {/* Desktop: full grid */}
+      <div className="hidden md:grid md:grid-cols-5 lg:grid-cols-6 gap-4 px-6 pb-6">
+        {logos.map((r, i) => (
+          <div key={i} className="bg-white rounded-2xl shadow-sm flex flex-col items-center justify-center gap-2 py-4 px-3">
+            <div className="relative w-full h-16"><Image src={r.logo} alt={r.name} fill className="object-contain" /></div>
+            {r.name !== 'Recruiter' && <p className="text-[10px] font-semibold text-neutral-500 text-center leading-tight">{r.name}</p>}
+          </div>
         ))}
       </div>
     </div>
