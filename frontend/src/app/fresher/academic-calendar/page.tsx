@@ -80,23 +80,25 @@ export default function AcademicCalendarPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
+      <div className="w-full min-h-screen bg-white flex flex-col">
 
         {/* Header */}
-        <div className="bg-red-600 px-4 pt-12 pb-6">
-          <button onClick={() => router.back()} className="flex items-center gap-1.5 text-white/80 text-sm mb-4">
-            <ChevronLeft className="w-4 h-4" /> Back
-          </button>
-          <h1 className="text-white text-xl font-bold">Academic Calendar</h1>
-          <p className="text-white/70 text-xs mt-1">Dates, exams & important circulars</p>
+        <div className="bg-red-600 px-6 pt-12 pb-6">
+          <div className="max-w-5xl mx-auto">
+            <button onClick={() => router.back()} className="flex items-center gap-1.5 text-white/80 text-sm mb-4">
+              <ChevronLeft className="w-4 h-4" /> Back
+            </button>
+            <h1 className="text-white text-xl md:text-3xl font-bold">Academic Calendar</h1>
+            <p className="text-white/70 text-xs md:text-sm mt-1">Dates, exams & important circulars</p>
+          </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto pb-24">
+        <div className="flex-1 pb-24 max-w-5xl mx-auto w-full">
 
           {/* Semester Overview */}
-          <div className="px-5 py-5 border-b border-neutral-100">
+          <div className="px-5 md:px-6 py-5 border-b border-neutral-100">
             <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Semester Overview</p>
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {semesterInfo.map((s) => (
                 <div key={s.label} className="flex items-center justify-between bg-neutral-50 rounded-xl px-4 py-3 border border-neutral-100">
                   <div className="flex items-center gap-2.5">
@@ -110,7 +112,7 @@ export default function AcademicCalendarPage() {
           </div>
 
           {/* Circulars */}
-          <div className="px-5 py-5 border-b border-neutral-100">
+          <div className="px-5 md:px-6 py-5 border-b border-neutral-100">
             <div className="flex items-center justify-between mb-3">
               <p className="text-xs font-semibold text-red-600 uppercase tracking-widest">Circulars & Notices</p>
               <a href="https://manavrachna.edu.in/mru/academics/circular" target="_blank" rel="noopener noreferrer"
@@ -118,7 +120,7 @@ export default function AcademicCalendarPage() {
                 View All <ExternalLink className="w-3 h-3" />
               </a>
             </div>
-            <div className="space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {circulars.map((c, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
                   className="flex items-start gap-3 bg-neutral-50 rounded-xl px-4 py-3 border border-neutral-100">
@@ -135,7 +137,7 @@ export default function AcademicCalendarPage() {
           </div>
 
           {/* Note */}
-          <div className="px-5 py-5">
+          <div className="px-5 md:px-6 py-5">
             <div className="bg-red-50 border border-red-100 rounded-xl px-4 py-3">
               <p className="text-xs font-semibold text-red-700 mb-1">Stay Updated</p>
               <p className="text-[11px] text-red-500 leading-relaxed">

@@ -9,13 +9,10 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="min-h-screen bg-neutral-50">
-      {/* Main content with bottom padding for nav */}
-      <main className="pb-16 max-w-md mx-auto min-h-screen bg-white shadow-xl">
+    <div className="min-h-screen bg-white">
+      <main className="pb-16 w-full min-h-screen bg-white">
         {children}
       </main>
-      
-      {/* Bottom Navigation */}
       <BottomNav />
     </div>
   )
