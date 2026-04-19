@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
 import { ArrowLeft, Trophy, Filter } from 'lucide-react'
 import { schools } from '@/lib/schools'
-import PageTransition from '@/components/PageTransition'
 
 type Category = 'All' | 'Hackathon' | 'Research' | 'Sports' | 'Cultural' | 'Certification'
 

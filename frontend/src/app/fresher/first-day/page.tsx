@@ -6,7 +6,6 @@ import {
   ChevronLeft, CheckCircle2, Clock, MapPin,
   Smartphone, AlertCircle, Phone, Shield
 } from 'lucide-react'
-import PageTransition from '@/components/PageTransition'
 
 const arrivalChecklist = [
   'Carry your admission letter / offer letter',

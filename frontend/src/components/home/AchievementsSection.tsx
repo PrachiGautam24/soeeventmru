@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Star, X, User } from 'lucide-react'
+import Image from 'next/image'
 
 // --- Types (mirrors Supabase schema, swap with real fetch later) ---
 type AchievementCategory = 'ACADEMIC' | 'RESEARCH' | 'SPORTS' | 'CULTURAL' | 'INNOVATION'
@@ -186,7 +187,7 @@ function StudentModal({ event, onClose }: { event: AchievementEvent; onClose: ()
             >
               <div className="w-10 h-10 rounded-full bg-neutral-200 flex items-center justify-center shrink-0">
                 {student.image_url
-                  ? <img src={student.image_url} alt={student.name} className="w-10 h-10 rounded-full object-cover" />
+                  ? <Image src={student.image_url} alt={student.name} width={40} height={40} className="w-10 h-10 rounded-full object-cover" />
                   : <User className="w-5 h-5 text-neutral-400" />
                 }
               </div>

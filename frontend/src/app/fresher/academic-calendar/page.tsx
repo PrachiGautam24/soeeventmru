@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, CalendarDays, FileText, ExternalLink } from 'lucide-react'
-import PageTransition from '@/components/PageTransition'
 
 const circulars = [
   {
