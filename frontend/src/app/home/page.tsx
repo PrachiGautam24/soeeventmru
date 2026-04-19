@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import PageTransition from '@/components/PageTransition'
+import SlideUp from '@/components/SlideUp'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
@@ -170,47 +172,76 @@ const visibleSchools = schools.filter(s => s.id !== 'media')
 function DiamondPlacements({ photos }: { photos: string[] }) {
   const [active, setActive] = useState(0)
   const total = photos.length
-  const prev = () => setActive(i => (i - 1 + total) % total)
-  const next = () => setActive(i => (i + 1) % total)
 
   React.useEffect(() => {
     const t = setInterval(() => setActive(i => (i + 1) % total), 3000)
     return () => clearInterval(t)
   }, [total])
 
+  const prev = () => setActive(i => (i - 1 + total) % total)
+  const next = () => setActive(i => (i + 1) % total)
+
   return (
     <div className="bg-white border-t border-neutral-100">
-      <div className="flex items-center gap-2 px-5 md:px-6 pt-5 pb-3">
+      {/* Section header */}
+      <div className="flex items-center gap-2 px-5 pt-5 pb-3">
         <Trophy className="w-4 h-4 text-amber-500" />
         <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Diamond Placement Moments</p>
       </div>
 
-      {/* Mobile: carousel */}
-      <div className="md:hidden px-4 pb-5">
-        <div className="relative rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
-          <AnimatePresence mode="wait">
-            <motion.div key={active} initial={{ opacity: 0, scale: 1.04 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.35 }} className="absolute inset-0">
-              <Image src={photos[active]} alt={`Placement ${active + 1}`} fill className="object-cover" />
-            </motion.div>
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-          <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">{active + 1} / {total}</div>
-          <button onClick={prev} className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white" aria-label="Previous"><ChevronLeft className="w-5 h-5" /></button>
-          <button onClick={next} className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white" aria-label="Next"><ChevronRight className="w-5 h-5" /></button>
+      {/* Full-width cover card */}
+      <div className="relative mx-4 rounded-2xl overflow-hidden shadow-lg" style={{ height: 260 }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.35 }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={photos[active]}
+              alt={`Placement ${active + 1}`}
+              fill
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Gradient overlay at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+        {/* Counter badge */}
+        <div className="absolute top-3 right-3 bg-black/40 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-1 rounded-full">
+          {active + 1} / {total}
         </div>
-        <div className="flex justify-center gap-1.5 pt-3">
-          {photos.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`} />
-          ))}
-        </div>
+
+        {/* Prev / Next arrows */}
+        <button
+          onClick={prev}
+          className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
+          aria-label="Previous"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={next}
+          className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-sm flex items-center justify-center text-white"
+          aria-label="Next"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
       </div>
 
-      {/* Desktop: grid */}
-      <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-6 gap-3 px-6 pb-5">
-        {photos.map((src, i) => (
-          <div key={i} className="relative rounded-2xl overflow-hidden shadow-sm" style={{ aspectRatio: '4/3' }}>
-            <Image src={src} alt={`Placement ${i + 1}`} fill className="object-cover" />
-          </div>
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-1.5 py-3">
+        {photos.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-amber-500' : 'w-2 h-2 bg-neutral-300'}`}
+          />
         ))}
       </div>
     </div>
@@ -219,55 +250,77 @@ function DiamondPlacements({ photos }: { photos: string[] }) {
 
 function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[] }) {
   const [active, setActive] = useState(0)
+  const total = logos.length
+
+  // Show 2 larger logos per slide for more impact
   const perSlide = 2
-  const totalSlides = Math.ceil(logos.length / perSlide)
-  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
-  const next = () => setActive(i => (i + 1) % totalSlides)
+  const totalSlides = Math.ceil(total / perSlide)
 
   React.useEffect(() => {
     const t = setInterval(() => setActive(i => (i + 1) % totalSlides), 2800)
     return () => clearInterval(t)
   }, [totalSlides])
 
+  const prev = () => setActive(i => (i - 1 + totalSlides) % totalSlides)
+  const next = () => setActive(i => (i + 1) % totalSlides)
+
   const slideLogos = logos.slice(active * perSlide, active * perSlide + perSlide)
 
   return (
     <div className="bg-neutral-50 border-t border-neutral-100">
-      <div className="px-5 md:px-6 pt-5 pb-3 flex items-center justify-between">
+      <div className="flex items-center justify-between px-5 pt-5 pb-3">
         <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Recruiters</p>
-        {/* Mobile-only nav arrows in header */}
-        <div className="flex items-center gap-1.5 md:hidden">
-          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center"><ChevronLeft className="w-3.5 h-3.5 text-gray-600" /></button>
-          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center"><ChevronRight className="w-3.5 h-3.5 text-gray-600" /></button>
+        <div className="flex items-center gap-1.5">
+          <button onClick={prev} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
+            <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
+          </button>
+          <button onClick={next} className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
+            <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
+          </button>
         </div>
       </div>
 
-      {/* Mobile: carousel */}
-      <div className="md:hidden px-4 pb-4">
+      {/* Slide */}
+      <div className="px-4 pb-4">
         <AnimatePresence mode="wait">
-          <motion.div key={active} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }} className="grid grid-cols-2 gap-3">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.25 }}
+            className="grid grid-cols-2 gap-3"
+          >
             {slideLogos.map((r, i) => (
-              <div key={i} className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4">
-                <div className="relative w-full h-24"><Image src={r.logo} alt={r.name} fill className="object-contain" /></div>
-                {r.name !== 'Recruiter' && <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>}
+              <div
+                key={i}
+                className="bg-white rounded-3xl shadow-lg flex flex-col items-center justify-center gap-3 py-5 px-4"
+              >
+                <div className="relative w-full h-24">
+                  <Image
+                    src={r.logo}
+                    alt={r.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                {r.name !== 'Recruiter' && (
+                  <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>
+                )}
               </div>
             ))}
           </motion.div>
         </AnimatePresence>
-        <div className="flex justify-center gap-1.5 pt-3">
-          {Array.from({ length: totalSlides }).map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`} />
-          ))}
-        </div>
       </div>
 
-      {/* Desktop: grid */}
-      <div className="hidden md:grid md:grid-cols-4 lg:grid-cols-6 gap-3 px-6 pb-5">
-        {logos.map((r, i) => (
-          <div key={i} className="bg-white rounded-3xl shadow-sm flex flex-col items-center justify-center gap-2 py-4 px-3">
-            <div className="relative w-full h-16"><Image src={r.logo} alt={r.name} fill className="object-contain" /></div>
-            {r.name !== 'Recruiter' && <p className="text-[11px] font-semibold text-neutral-600 text-center leading-tight">{r.name}</p>}
-          </div>
+      {/* Dots */}
+      <div className="flex justify-center gap-1.5 pb-4">
+        {Array.from({ length: totalSlides }).map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`rounded-full transition-all duration-200 ${i === active ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`}
+          />
         ))}
       </div>
     </div>
@@ -280,27 +333,35 @@ export default function HomePage() {
   const [aboutOpen, setAboutOpen] = useState(false)
   const [fresherOpen, setFresherOpen] = useState(false)
   const [floatingOpen, setFloatingOpen] = useState(false)
-  const [eventIdx, setEventIdx] = useState(0)
-
-  const prevEvent = () => setEventIdx(i => (i - 1 + upcomingEvents.length) % upcomingEvents.length)
-  const nextEvent = () => setEventIdx(i => (i + 1) % upcomingEvents.length)
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="w-full min-h-screen bg-white flex flex-col">
+    <PageTransition>
+    <div className="min-h-screen bg-neutral-100">
+      <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
-        {/* ── Header: logo top-left + login on the right ── */}
+        {/* ── Header: centered MRU logo + login on the side ── */}
         <div className="relative bg-white overflow-hidden">
-          <div className="relative px-6 py-3 flex items-center justify-between max-w-7xl mx-auto w-full">
-            <Image
-              src="https://manavrachna.edu.in/assets/images/mru-logo.png"
-              alt="NAAC A++ Accredited"
-              width={200}
-              height={128}
-              priority
-              className="object-contain w-[140px] md:w-[220px] h-auto"
-            />
-            <div>
+          <div className="relative px-4 py-3 flex justify-center">
+            <div className="flex justify-center items-center gap-3 flex-1">
+              <Image
+                src="https://manavrachna.edu.in/assets/images/mru-logo.png"
+                alt="NAAC A++ Accredited"
+                width={200}
+                height={128}
+                priority
+                className="object-contain"
+              />
+              <div className="w-px h-10 bg-neutral-200" />
+              <Image
+                src="/images/GPTW.jpg"
+                alt="Great Place To Work"
+                width={44}
+                height={56}
+                priority
+                className="object-contain rounded-sm"
+              />
+            </div>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
               {session ? (
                 <div className="flex items-center gap-1.5">
                   {session.user?.image ? (
@@ -344,21 +405,22 @@ export default function HomePage() {
         </div>
 
         {/* ── Hero campus image ── */}
-        <div className="relative h-52 md:h-[480px] w-full overflow-hidden">
+        <div className="relative h-52 w-full overflow-hidden">
           <Image
             src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
             alt="Manav Rachna Campus"
             fill className="object-cover" priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
-            <p className="text-[10px] md:text-xs font-semibold text-white/60 uppercase tracking-widest mb-0.5">Study at Manav Rachna</p>
-            <h2 className="text-white text-base md:text-2xl font-bold leading-snug">Learning, Creativity &amp; Access to the latest research.</h2>
+          <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
+            <p className="text-[10px] font-semibold text-white/60 uppercase tracking-widest mb-0.5">Study at Manav Rachna</p>
+            <h2 className="text-white text-base font-bold leading-snug">Learning, Creativity &amp; Access to the latest research.</h2>
           </div>
         </div>
 
         {/* ── About Manav Rachna (right after hero) ── */}
-        <div className="mx-4 md:mx-6 mt-4 rounded-2xl overflow-hidden shadow-sm">
+        <SlideUp>
+        <div className="mx-4 mt-4 rounded-2xl overflow-hidden shadow-sm">
           <button onClick={() => setAboutOpen(o => !o)}
             className={`w-full flex items-center justify-between px-5 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
             <span className="text-sm font-semibold text-white">About Manav Rachna University</span>
@@ -369,105 +431,29 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {aboutOpen && (
               <motion.div key="about-mru" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
-                <div className="px-5 pb-5 pt-4 space-y-5">
-
-                  {/* Intro paras */}
-                  <div className="md:grid md:grid-cols-2 md:gap-4 space-y-3 md:space-y-0">
-                    <p className="text-sm text-gray-600 leading-relaxed">A premier private educational institution renowned for its cutting-edge curriculum, distinguished faculty, and state-of-the-art facilities. MRU is dedicated to providing a world-class education that prepares students for success in the modern workforce.</p>
-                    <p className="text-sm text-gray-600 leading-relaxed">Established under the Haryana State Legislature Act No. 26 of 2014, recognised by UGC under Section 2(f), awarded NAAC A++ accreditation, and NBA accredited for B.Tech CSE (2023–2026). First university in India accredited by the International Baccalaureate (IB).</p>
-                  </div>
-
-                  {/* Key stats from MRU */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {[
-                      { stat: '60 LPA', label: 'Highest Package' },
-                      { stat: '47', label: 'H-Index' },
-                      { stat: '₹12.5 Cr+', label: 'Research Funding' },
-                      { stat: '2000+', label: 'Publications' },
-                    ].map(({ stat, label }) => (
-                      <div key={label} className="bg-red-50 border border-red-100 rounded-xl p-3 text-center">
-                        <p className="text-lg font-bold text-red-600">{stat}</p>
-                        <p className="text-[11px] text-neutral-500 mt-0.5">{label}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Academic highlights — desktop only */}
-                  <div className="hidden md:block">
-                    <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Academic Highlights</p>
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                      {[
-                        'NEP 2020 Integration',
-                        'National Qualification Framework (NQF) Alignment',
-                        'National Credit Framework (NCrF) Implementation',
-                        'Multiple Entry & Exit Pathways',
-                        'Cutting-edge Educational Technology',
-                        'Innovative Major & Minor Options',
-                        'Holistic & Career-Focused Curriculum',
-                        'Interdisciplinary Opportunities',
-                        'Global Perspectives & Exchange Programs',
-                      ].map((item) => (
-                        <div key={item} className="flex items-start gap-2 bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
-                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 mt-1.5" />
-                          <p className="text-xs text-gray-600 leading-snug">{item}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Recognitions — desktop only */}
-                  <div className="hidden md:block">
-                    <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Recognitions & Awards</p>
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                      {[
-                        { title: 'UGC Approved', desc: 'Under Section 2(f) of the UGC Act 1956' },
-                        { title: 'AICTE Approved', desc: 'All Engineering programmes approved for AY 2025–26' },
-                        { title: 'QS I-GAUGE Diamond', desc: 'Platinum in Teaching, Social Responsibility & Governance' },
-                        { title: 'QS I-Gauge Platinum', desc: 'Engineering subject rating — excellence in research & innovation' },
-                        { title: 'IIC 4-Star Rating', desc: 'Institute Innovation Council — 3 consecutive years (2019–2021)' },
-                        { title: 'Swayam–NPTEL Grade A', desc: 'Recognised as a valuable local chapter for online certification' },
-                      ].map((r) => (
-                        <div key={r.title} className="bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
-                          <p className="text-xs font-semibold text-gray-800">{r.title}</p>
-                          <p className="text-[11px] text-neutral-400 mt-0.5 leading-snug">{r.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Associations — desktop only */}
-                  <div className="hidden md:block">
-                    <p className="text-xs font-semibold text-red-600 uppercase tracking-widest mb-3">Associations & Collaborations</p>
-                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-                      {[
-                        'Founder Member — College Board Indian Global Higher Education Alliance',
-                        'Founder Member — LSAC Global Law Alliance',
-                        'Member — Association of Indian Universities (AIU)',
-                        'Nodal Centre for Virtual Labs (IIT Delhi)',
-                        'UNESCO MGIEP — Universal Human Values Courses',
-                        'Industry Partners: AWS, Quickheal, Altair, Xebia & more',
-                      ].map((item) => (
-                        <div key={item} className="flex items-start gap-2 bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
-                          <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0 mt-1.5" />
-                          <p className="text-xs text-gray-600 leading-snug">{item}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
+                <div className="px-5 pb-5 pt-3 space-y-3">
+                  {[
+                    `Manav Rachna University (MRU) was established under the Haryana State Legislature Act No. 26 of 2014 and is one of the leading private state universities in Haryana, India.`,
+                    `Recognised by UGC under Section 2(f), awarded NAAC A++ accreditation, and NBA accredited for B.Tech CSE (2023–2026).`,
+                    `MRU became the first university in India to be accredited by the International Baccalaureate (IB), underscoring its alignment with international educational standards.`,
+                  ].map((para, i) => (
+                    <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
+                  ))}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
+        </SlideUp>
 
         {/* ── MREI Stats Overview ── */}
-        <div className="px-5 md:px-6 pt-5 pb-4 bg-white border-t border-neutral-100">
+        <SlideUp delay={0.05}>
+        <div className="px-5 pt-5 pb-4 bg-white border-t border-neutral-100">
           <p className="text-[11px] font-semibold text-red-600 uppercase tracking-widest mb-1">Overview</p>
           <p className="text-xs text-gray-500 mb-4 leading-relaxed">
             Manav Rachna Educational Institutions (MREI) founded in 1997, are a visible symbol of knowledge &amp; experience providing high-quality education in various fields.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {[
               { stat: '43000+', label: 'Alumni Imprints Globally' },
               { stat: '135+',   label: 'Global Academic Collaborations' },
@@ -485,14 +471,16 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Schools grid ── */}
-        <div className="px-5 md:px-6 py-6 bg-neutral-50">
+        <SlideUp delay={0.05}>
+        <div className="px-5 py-6 bg-neutral-50">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-4">Explore Schools</p>
-          <div className="flex justify-center gap-5 flex-wrap md:grid md:grid-cols-5">
+          <div className="flex justify-center gap-5 flex-wrap">
             {visibleSchools.map((school, i) => (
               <motion.button key={school.id} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }} whileTap={{ scale: 0.95 }}
-                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 w-28 md:w-full bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
+                onClick={() => router.push(`/school/${school.id}`)} className="flex flex-col items-center gap-3 w-28 bg-white rounded-3xl p-4 shadow-sm border border-neutral-200">
                 <div className="w-20 h-20 rounded-[26px] bg-white flex items-center justify-center shadow-sm" style={{ color: schoolColors[school.id] }}>
                   {schoolSVGs[school.id]}
                 </div>
@@ -501,10 +489,12 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Fresher Guide ── */}
+        <SlideUp>
         <div className="bg-white border-t border-neutral-100">
-          <button onClick={() => setFresherOpen(o => !o)} className="w-full flex items-center justify-between px-5 md:px-6 py-4">
+          <button onClick={() => setFresherOpen(o => !o)} className="w-full flex items-center justify-between px-5 py-4">
             <span className="text-sm font-semibold text-gray-800 flex items-center gap-2">
               Fresher Guide <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
             </span>
@@ -515,7 +505,7 @@ export default function HomePage() {
           <AnimatePresence initial={false}>
             {fresherOpen && (
               <motion.div key="fresher" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden">
-                <div className="px-5 md:px-6 pb-5 grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="px-5 pb-5 grid grid-cols-2 gap-3">
                   {fresherItems.map((item, i) => {
                     const Icon = item.icon
                     return (
@@ -537,73 +527,57 @@ export default function HomePage() {
             )}
           </AnimatePresence>
         </div>
+        </SlideUp>
 
-        {/* ── Upcoming Events carousel ── */}
-        <div className="px-4 md:px-6 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
+        {/* ── Upcoming Events compact list ── */}
+        <SlideUp>
+        <div className="px-4 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-3">Upcoming Events</p>
-          {/* Desktop: show all 3 side by side */}
-          <div className="hidden md:grid md:grid-cols-3 md:gap-4">
-            {upcomingEvents.map((ev, idx) => (
-              <div key={idx} className="rounded-2xl overflow-hidden shadow-lg">
-                <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
+          <div className="space-y-2">
+            {upcomingEvents.map((ev, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }}
+                className="flex items-center gap-3 bg-white rounded-2xl px-3 py-3 border border-neutral-100 shadow-sm">
+                {/* Thumbnail */}
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0">
                   <Image src={ev.image} alt={ev.title} fill className="object-cover" unoptimized />
                 </div>
-                <div className="bg-white px-4 py-3 flex items-center justify-between">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-800 truncate">{ev.title}</p>
-                    <p className="text-xs text-neutral-500 mt-0.5 truncate">{ev.subtitle}</p>
-                  </div>
-                  <span className="text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full shrink-0 ml-2">{ev.date}</span>
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-gray-800 leading-snug truncate">{ev.title}</p>
+                  <p className="text-[10px] text-neutral-400 mt-0.5 truncate">{ev.subtitle}</p>
                 </div>
-              </div>
-            ))}
-          </div>
-          {/* Mobile: carousel */}
-          <div className="md:hidden relative">
-            <AnimatePresence mode="wait">
-              <motion.div key={eventIdx} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden shadow-lg">
-                <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
-                  <Image src={upcomingEvents[eventIdx].image} alt={upcomingEvents[eventIdx].title} fill className="object-cover" unoptimized />
-                </div>
-                <div className="bg-white px-4 py-3 flex items-center justify-between">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-800 truncate">{upcomingEvents[eventIdx].title}</p>
-                    <p className="text-xs text-neutral-500 mt-0.5 truncate">{upcomingEvents[eventIdx].subtitle}</p>
-                  </div>
-                  <span className="text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full shrink-0 ml-2">{upcomingEvents[eventIdx].date}</span>
+                {/* Date + link on right */}
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  <span className="text-[10px] font-semibold text-white bg-secondary px-2 py-0.5 rounded-full">{ev.date}</span>
+                  <a href="https://manavrachna.edu.in/mru" target="_blank" rel="noopener noreferrer"
+                    className="text-[10px] font-semibold text-red-600 underline underline-offset-2">
+                    Details →
+                  </a>
                 </div>
               </motion.div>
-            </AnimatePresence>
-            <button onClick={prevEvent} className="absolute left-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
-              <ChevronLeft className="w-4 h-4 text-gray-700" />
-            </button>
-            <button onClick={nextEvent} className="absolute right-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
-              <ChevronRight className="w-4 h-4 text-gray-700" />
-            </button>
-          </div>
-          <div className="flex justify-center gap-1.5 mt-3 md:hidden">
-            {upcomingEvents.map((_, i) => (
-              <button key={i} onClick={() => setEventIdx(i)}
-                className={`rounded-full transition-all duration-200 ${i === eventIdx ? 'w-4 h-2 bg-secondary' : 'w-2 h-2 bg-neutral-300'}`} />
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Diamond Moments / Top Placements ── */}
+        <SlideUp>
         <DiamondPlacements photos={placementPhotos} />
+        </SlideUp>
 
         {/* ── Top Functionaries ── */}
-        <div className="bg-neutral-50 px-5 md:px-6 py-5 border-t border-neutral-100">
+        <SlideUp>
+        <div className="bg-neutral-50 px-5 py-5 border-t border-neutral-100">
           <div className="flex items-center justify-between mb-4">
             <div>
               <p className="text-sm font-semibold text-red-600 uppercase tracking-widest">Top Functionaries</p>
               <p className="text-sm font-semibold text-gray-800">Meet the MRU leadership team</p>
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {topFunctionaries.map((person) => (
               <div key={person.name} className="rounded-3xl bg-white overflow-hidden shadow-sm">
-                <div className="relative h-32 md:h-44 bg-neutral-100">
+                <div className="relative h-32 bg-neutral-100">
                   <Image
                     src={person.photo}
                     alt={person.name}
@@ -619,56 +593,61 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Top Recruiters slideshow ── */}
+        <SlideUp>
         <RecruiterSlideshow logos={recruiterLogos} />
+        </SlideUp>
 
         {/* ── Footer ── */}
-        <div className="bg-white border-t border-neutral-100 py-4">
-          <div className="px-5 md:px-6 space-y-4">
-            <div className="space-y-3">
-              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Follow Us</p>
-              <div className="flex gap-5">
-                <a href="https://www.instagram.com/manavrachnauniversity/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                    <circle cx="12" cy="12" r="4"/>
-                    <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
-                  </svg>
-                  Instagram
-                </a>
-                <a href="https://www.linkedin.com/school/manav-rachna-university/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-                    <circle cx="4" cy="4" r="2"/>
-                  </svg>
-                  LinkedIn
-                </a>
-              </div>
+        <SlideUp>
+        <div className="bg-white border-t border-neutral-100 py-4 space-y-4">
+          <div className="px-5 space-y-3">
+            <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Follow Us</p>
+            <div className="flex gap-5">
+              <a href="https://www.instagram.com/manavrachnauniversity/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+                </svg>
+                Instagram
+              </a>
+              <a href="https://www.linkedin.com/school/manav-rachna-university/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-neutral-600">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
+                LinkedIn
+              </a>
             </div>
-            <div className="space-y-3 border-t border-neutral-100 pt-4">
-              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Contact Us</p>
-              <div className="flex flex-col gap-3">
-                <a href="tel:+911294268500" className="flex items-center gap-2 text-sm text-neutral-600">
-                  <PhoneCall className="w-5 h-5 text-neutral-500" />
-                  +91-129-426-8500 (General)
-                </a>
-                <a href="tel:+911294259000" className="flex items-center gap-2 text-sm text-neutral-600">
-                  <PhoneCall className="w-5 h-5 text-neutral-500" />
-                  +91-129-425-9000 (Admissions)
-                </a>
-                <a href="mailto:admissions@manavrachna.edu.in" className="flex items-center gap-2 text-sm text-neutral-600">
-                  <Mail className="w-5 h-5 text-neutral-500" />
-                  admissions@manavrachna.edu.in
-                </a>
-                <div className="flex items-start gap-2 text-sm text-neutral-600">
-                  <MapPin className="w-5 h-5 text-neutral-500 shrink-0 mt-0.5" />
-                  <span>Sector 43, Aravalli Hills, Delhi–Surajkund Road, Faridabad, Haryana 121004</span>
-                </div>
+          </div>
+
+          {/* Contact Us — same style as social links */}
+          <div className="px-5 space-y-3 border-t border-neutral-100 pt-4">
+            <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Contact Us</p>
+            <div className="flex flex-col gap-3">
+              <a href="tel:+911294268500" className="flex items-center gap-2 text-sm text-neutral-600">
+                <PhoneCall className="w-5 h-5 text-neutral-500" />
+                +91-129-426-8500 (General)
+              </a>
+              <a href="tel:+911294259000" className="flex items-center gap-2 text-sm text-neutral-600">
+                <PhoneCall className="w-5 h-5 text-neutral-500" />
+                +91-129-425-9000 (Admissions)
+              </a>
+              <a href="mailto:admissions@manavrachna.edu.in" className="flex items-center gap-2 text-sm text-neutral-600">
+                <Mail className="w-5 h-5 text-neutral-500" />
+                admissions@manavrachna.edu.in
+              </a>
+              <div className="flex items-start gap-2 text-sm text-neutral-600">
+                <MapPin className="w-5 h-5 text-neutral-500 shrink-0 mt-0.5" />
+                <span>Sector 43, Aravalli Hills, Delhi–Surajkund Road, Faridabad, Haryana 121004</span>
               </div>
             </div>
           </div>
         </div>
+        </SlideUp>
 
       </div>
 
@@ -698,5 +677,6 @@ export default function HomePage() {
         </motion.button>
       </div>
     </div>
+    </PageTransition>
   )
 }

@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { ArrowLeft, ChevronDown, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { schools } from '@/lib/schools'
+import PageTransition from '@/components/PageTransition'
 
 const deptGradients = [
   'from-primary to-primary-light',
@@ -35,6 +36,7 @@ export default function SchoolPage() {
   )
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-neutral-100">
       <div className="w-full min-h-screen bg-white flex flex-col">
 
@@ -152,5 +154,6 @@ export default function SchoolPage() {
         </div>
       </div>
     </div>
+    </PageTransition>
   )
 }

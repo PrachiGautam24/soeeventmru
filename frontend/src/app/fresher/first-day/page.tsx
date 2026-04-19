@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import {
-  ChevronLeft, CheckCircle2, Clock, MapPin, 
+  ChevronLeft, CheckCircle2, Clock, MapPin,
   Smartphone, AlertCircle, Phone, Shield
 } from 'lucide-react'
 
