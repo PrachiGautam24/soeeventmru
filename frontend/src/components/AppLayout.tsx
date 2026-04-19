@@ -1,6 +1,7 @@
 'use client'
 
 import { ReactNode } from 'react'
+import { motion } from 'framer-motion'
 import BottomNav from './BottomNav'
 
 interface AppLayoutProps {
@@ -10,12 +11,14 @@ interface AppLayoutProps {
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="min-h-screen bg-neutral-50">
-      {/* Main content with bottom padding for nav */}
-      <main className="pb-16 max-w-md mx-auto min-h-screen bg-white shadow-xl">
+      <motion.main
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+        className="pb-16 max-w-md mx-auto min-h-screen bg-white shadow-xl"
+      >
         {children}
-      </main>
-      
-      {/* Bottom Navigation */}
+      </motion.main>
       <BottomNav />
     </div>
   )

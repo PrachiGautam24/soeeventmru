@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import PageTransition from '@/components/PageTransition'
+import SlideUp from '@/components/SlideUp'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
@@ -331,19 +333,16 @@ export default function HomePage() {
   const [aboutOpen, setAboutOpen] = useState(false)
   const [fresherOpen, setFresherOpen] = useState(false)
   const [floatingOpen, setFloatingOpen] = useState(false)
-  const [eventIdx, setEventIdx] = useState(0)
-
-  const prevEvent = () => setEventIdx(i => (i - 1 + upcomingEvents.length) % upcomingEvents.length)
-  const nextEvent = () => setEventIdx(i => (i + 1) % upcomingEvents.length)
 
   return (
+    <PageTransition>
     <div className="min-h-screen bg-neutral-100">
       <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl flex flex-col">
 
         {/* ── Header: centered MRU logo + login on the side ── */}
         <div className="relative bg-white overflow-hidden">
           <div className="relative px-4 py-3 flex justify-center">
-            <div className="flex justify-center flex-1">
+            <div className="flex justify-center items-center gap-3 flex-1">
               <Image
                 src="https://manavrachna.edu.in/assets/images/mru-logo.png"
                 alt="NAAC A++ Accredited"
@@ -351,6 +350,15 @@ export default function HomePage() {
                 height={128}
                 priority
                 className="object-contain"
+              />
+              <div className="w-px h-10 bg-neutral-200" />
+              <Image
+                src="/images/GPTW.jpg"
+                alt="Great Place To Work"
+                width={44}
+                height={56}
+                priority
+                className="object-contain rounded-sm"
               />
             </div>
             <div className="absolute right-4 top-1/2 -translate-y-1/2">
@@ -411,6 +419,7 @@ export default function HomePage() {
         </div>
 
         {/* ── About Manav Rachna (right after hero) ── */}
+        <SlideUp>
         <div className="mx-4 mt-4 rounded-2xl overflow-hidden shadow-sm">
           <button onClick={() => setAboutOpen(o => !o)}
             className={`w-full flex items-center justify-between px-5 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
@@ -435,8 +444,10 @@ export default function HomePage() {
             )}
           </AnimatePresence>
         </div>
+        </SlideUp>
 
         {/* ── MREI Stats Overview ── */}
+        <SlideUp delay={0.05}>
         <div className="px-5 pt-5 pb-4 bg-white border-t border-neutral-100">
           <p className="text-[11px] font-semibold text-red-600 uppercase tracking-widest mb-1">Overview</p>
           <p className="text-xs text-gray-500 mb-4 leading-relaxed">
@@ -460,8 +471,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Schools grid ── */}
+        <SlideUp delay={0.05}>
         <div className="px-5 py-6 bg-neutral-50">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-4">Explore Schools</p>
           <div className="flex justify-center gap-5 flex-wrap">
@@ -476,8 +489,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Fresher Guide ── */}
+        <SlideUp>
         <div className="bg-white border-t border-neutral-100">
           <button onClick={() => setFresherOpen(o => !o)} className="w-full flex items-center justify-between px-5 py-4">
             <span className="text-sm font-semibold text-gray-800 flex items-center gap-2">
@@ -512,51 +527,46 @@ export default function HomePage() {
             )}
           </AnimatePresence>
         </div>
+        </SlideUp>
 
-        {/* ── Upcoming Events carousel ── */}
+        {/* ── Upcoming Events compact list ── */}
+        <SlideUp>
         <div className="px-4 pt-5 pb-4 bg-neutral-50 border-t border-neutral-100">
           <p className="text-sm font-semibold text-red-600 uppercase tracking-widest mb-3">Upcoming Events</p>
-          <div className="relative">
-            <AnimatePresence mode="wait">
-              <motion.div key={eventIdx} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }} className="rounded-2xl overflow-hidden shadow-lg">
-                <div className="relative w-full bg-neutral-200" style={{ aspectRatio: '3/4' }}>
-                  <Image
-                    src={upcomingEvents[eventIdx].image}
-                    alt={upcomingEvents[eventIdx].title}
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
+          <div className="space-y-2">
+            {upcomingEvents.map((ev, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }}
+                className="flex items-center gap-3 bg-white rounded-2xl px-3 py-3 border border-neutral-100 shadow-sm">
+                {/* Thumbnail */}
+                <div className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0">
+                  <Image src={ev.image} alt={ev.title} fill className="object-cover" unoptimized />
                 </div>
-                <div className="bg-white px-4 py-3 flex items-center justify-between">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-800 truncate">{upcomingEvents[eventIdx].title}</p>
-                    <p className="text-xs text-neutral-500 mt-0.5 truncate">{upcomingEvents[eventIdx].subtitle}</p>
-                  </div>
-                  <span className="text-xs font-semibold text-white bg-secondary px-3 py-1 rounded-full shrink-0 ml-2">{upcomingEvents[eventIdx].date}</span>
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-gray-800 leading-snug truncate">{ev.title}</p>
+                  <p className="text-[10px] text-neutral-400 mt-0.5 truncate">{ev.subtitle}</p>
+                </div>
+                {/* Date + link on right */}
+                <div className="flex flex-col items-end gap-1 shrink-0">
+                  <span className="text-[10px] font-semibold text-white bg-secondary px-2 py-0.5 rounded-full">{ev.date}</span>
+                  <a href="https://manavrachna.edu.in/mru" target="_blank" rel="noopener noreferrer"
+                    className="text-[10px] font-semibold text-red-600 underline underline-offset-2">
+                    Details →
+                  </a>
                 </div>
               </motion.div>
-            </AnimatePresence>
-            <button onClick={prevEvent} className="absolute left-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
-              <ChevronLeft className="w-4 h-4 text-gray-700" />
-            </button>
-            <button onClick={nextEvent} className="absolute right-2 top-[45%] -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 shadow-md flex items-center justify-center z-10">
-              <ChevronRight className="w-4 h-4 text-gray-700" />
-            </button>
-          </div>
-          <div className="flex justify-center gap-1.5 mt-3">
-            {upcomingEvents.map((_, i) => (
-              <button key={i} onClick={() => setEventIdx(i)}
-                className={`rounded-full transition-all duration-200 ${i === eventIdx ? 'w-4 h-2 bg-secondary' : 'w-2 h-2 bg-neutral-300'}`} />
             ))}
           </div>
-
         </div>
+        </SlideUp>
 
         {/* ── Diamond Moments / Top Placements ── */}
+        <SlideUp>
         <DiamondPlacements photos={placementPhotos} />
+        </SlideUp>
 
         {/* ── Top Functionaries ── */}
+        <SlideUp>
         <div className="bg-neutral-50 px-5 py-5 border-t border-neutral-100">
           <div className="flex items-center justify-between mb-4">
             <div>
@@ -583,11 +593,15 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        </SlideUp>
 
         {/* ── Top Recruiters slideshow ── */}
+        <SlideUp>
         <RecruiterSlideshow logos={recruiterLogos} />
+        </SlideUp>
 
         {/* ── Footer ── */}
+        <SlideUp>
         <div className="bg-white border-t border-neutral-100 py-4 space-y-4">
           <div className="px-5 space-y-3">
             <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">Follow Us</p>
@@ -633,6 +647,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+        </SlideUp>
 
       </div>
 
@@ -662,5 +677,6 @@ export default function HomePage() {
         </motion.button>
       </div>
     </div>
+    </PageTransition>
   )
 }

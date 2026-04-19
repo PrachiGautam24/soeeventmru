@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { ArrowLeft, Calendar, CheckCircle2, Clock } from 'lucide-react'
 import Image from 'next/image'
 import { schools } from '@/lib/schools'
+import PageTransition from '@/components/PageTransition'
 
 export default function DeptEventsPage() {
   const router = useRouter()

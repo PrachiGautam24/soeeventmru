@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, Bed, Wifi, Utensils, Shield, Phone, AlertCircle } from 'lucide-react'
+import PageTransition from '@/components/PageTransition'
 
 const roomCategories = [
   {

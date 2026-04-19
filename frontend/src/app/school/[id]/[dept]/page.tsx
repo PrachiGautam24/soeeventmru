@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
 import { ArrowLeft, ChevronDown } from 'lucide-react'
 import { schools } from '@/lib/schools'
+import PageTransition from '@/components/PageTransition'
 
 const gridItems = [
   { label: 'Student\nAchievements', icon: '🏆', gradient: 'from-amber-500 to-amber-400',     route: 'student-achievements' },

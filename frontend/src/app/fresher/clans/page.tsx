@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { ChevronLeft, Users, Star, Trophy, Heart } from 'lucide-react'
+import PageTransition from '@/components/PageTransition'
 
 const clans = [
   {

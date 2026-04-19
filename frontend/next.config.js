@@ -9,15 +9,6 @@ const nextConfig = {
       { protocol: 'https', hostname: 'mriirs.edu.in' },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/home',
-        permanent: true,
-      },
-    ]
-  },
 }
 
 module.exports = nextConfig
