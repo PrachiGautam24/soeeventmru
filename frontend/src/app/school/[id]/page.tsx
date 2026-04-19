@@ -198,5 +198,6 @@ export default function SchoolPage() {
         </div>
       </div>
     </div>
+    </PageTransition>
   )
 }
