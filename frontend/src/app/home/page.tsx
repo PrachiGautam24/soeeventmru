@@ -9,7 +9,7 @@ import { useSession, signOut } from 'next-auth/react'
 import {
   Search, Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
-  ChevronLeft, Star, X, Mail, PhoneCall, MapPin, Trophy
+  Star, X, Mail, PhoneCall, MapPin, Trophy
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
