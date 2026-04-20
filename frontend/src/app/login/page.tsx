@@ -35,12 +35,27 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-100 flex items-center justify-center">
-      <div className="max-w-md w-full mx-auto min-h-screen bg-white shadow-xl flex flex-col">
+    <div className="min-h-screen flex items-center justify-center"
+      style={{ background: 'linear-gradient(160deg, #c0392b 0%, #e74c3c 50%, #c0392b 100%)' }}>
 
-        {/* Header — matches home page exactly */}
-        <div className="relative bg-white overflow-hidden">
-          <div className="relative px-4 py-3 flex justify-center">
+      {/* Decorative radial glow */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full opacity-20"
+          style={{ background: 'radial-gradient(circle, #ff6b6b 0%, transparent 70%)' }} />
+        <div className="absolute bottom-1/3 left-1/3 w-48 h-48 rounded-full opacity-15"
+          style={{ background: 'radial-gradient(circle, #ffb347 0%, transparent 70%)' }} />
+        {/* Bottom waves */}
+        <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+          <path d="M0,60 Q360,120 720,60 Q1080,0 1440,60 L1440,120 L0,120 Z" fill="rgba(0,0,0,0.08)" />
+          <path d="M0,80 Q360,40 720,80 Q1080,120 1440,80 L1440,120 L0,120 Z" fill="rgba(0,0,0,0.06)" />
+        </svg>
+      </div>
+
+      <div className="max-w-md w-full mx-auto min-h-screen flex flex-col relative z-10">
+
+        {/* Header */}
+        <div className="relative overflow-hidden">
+          <div className="relative px-4 py-5 flex justify-center">
             <div className="flex justify-center flex-1">
               <Image
                 src="https://manavrachna.edu.in/assets/images/mru-logo.png"
@@ -48,33 +63,29 @@ export default function LoginPage() {
                 width={200}
                 height={128}
                 priority
-                className="object-contain"
+                className="object-contain brightness-0 invert"
               />
             </div>
-            {/* Back button on the left */}
+            {/* Back button */}
             <button
               onClick={() => router.back()}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-neutral-100 flex items-center justify-center"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"
               aria-label="Go back"
             >
-              <ArrowLeft className="w-4 h-4 text-gray-700" />
+              <ArrowLeft className="w-4 h-4 text-white" />
             </button>
-          </div>
-          <div className="h-6">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
-              <path d="M0,30 Q720,100 1440,30 L1440,120 L0,120 Z" fill="#b12a2e" />
-            </svg>
           </div>
         </div>
 
-        {/* Body */}
-        <div className="flex-1 flex flex-col px-7 py-8 gap-6">
+        {/* Body — white card */}
+        <div className="flex-1 flex flex-col mx-4 mb-4 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden">
+          <div className="flex-1 flex flex-col px-7 py-8 gap-6">
 
-          {/* Title */}
-          <div className="space-y-1">
-            <h1 className="text-2xl font-bold text-gray-800">Welcome back</h1>
-            <p className="text-sm text-gray-500">Sign in to your SOE Events account</p>
-          </div>
+            {/* Title */}
+            <div className="space-y-1">
+              <h1 className="text-2xl font-bold text-gray-800">Welcome back</h1>
+              <p className="text-sm text-gray-500">Sign in to your SOE Events account</p>
+            </div>
 
           {/* Email / Password form */}
           <form onSubmit={handleEmailLogin} className="space-y-4">
@@ -194,7 +205,15 @@ export default function LoginPage() {
             © {new Date().getFullYear()} Manav Rachna University · School of Engineering
           </p>
         </div>
-      </div>
+      </div>{/* end white card */}
+
+        {/* Footer outside card */}
+        <div className="px-5 py-4 text-center">
+          <p className="text-[10px] text-white/60">
+            © {new Date().getFullYear()} Manav Rachna University · School of Engineering
+          </p>
+        </div>
+      </div>{/* end max-w-md */}
     </div>
   )
 }
