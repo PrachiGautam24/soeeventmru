@@ -27,48 +27,46 @@ export default function LandingPage() {
       {/* Main content — centered on red bg */}
       <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
 
-        {/* Logos */}
+        {/* Logos + title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-4"
+          className="flex flex-col items-center gap-5"
         >
-          <Image
-            src="https://manavrachna.edu.in/assets/images/mru-logo.png"
-            alt="MRU Logo"
-            width={180}
-            height={80}
-            priority
-            className="object-contain drop-shadow-lg brightness-0 invert"
-          />
-          <div className="w-px h-14 bg-white/40" />
-          <Image
-            src="/images/GPTW.jpg"
-            alt="Great Place To Work Certified"
-            width={60}
-            height={78}
-            priority
-            className="object-contain drop-shadow-lg rounded-sm"
-          />
-        </motion.div>
+          {/* Logos row */}
+          <div className="flex items-center gap-4">
+            <Image
+              src="https://manavrachna.edu.in/assets/images/mru-logo.png"
+              alt="MRU Logo"
+              width={180}
+              height={80}
+              priority
+              className="object-contain drop-shadow-lg brightness-0 invert"
+            />
+            <div className="w-px h-14 bg-white/40" />
+            <Image
+              src="/images/GPTW.jpg"
+              alt="Great Place To Work Certified"
+              width={60}
+              height={78}
+              priority
+              className="object-contain drop-shadow-lg rounded-sm"
+            />
+          </div>
 
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center"
-        >
-          <h1 className="text-3xl font-extrabold text-white drop-shadow-md leading-snug">
-            Manav Rachna University
-          </h1>
-          <p className="text-white/80 text-sm mt-2 font-medium tracking-wide">
-            Your First Step into University Life
-          </p>
-          <p className="text-white/70 text-xs mt-3 leading-relaxed px-4">
-            Shape Your Future at Manav Rachna University —{'\n'}Where Innovation Meets Excellence
-          </p>
+          {/* Title */}
+          <div className="text-center">
+            <h1 className="text-3xl font-extrabold text-white drop-shadow-md leading-snug">
+              Manav Rachna University
+            </h1>
+            <p className="text-white/80 text-sm mt-2 font-medium tracking-wide">
+              Your First Step into University Life
+            </p>
+            <p className="text-white/70 text-xs mt-3 leading-relaxed px-4">
+              Shape Your Future at Manav Rachna University —{'\n'}Where Innovation Meets Excellence
+            </p>
+          </div>
         </motion.div>
 
         {/* Tagline */}

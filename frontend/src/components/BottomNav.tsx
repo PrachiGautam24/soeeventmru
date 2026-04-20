@@ -2,11 +2,10 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Star, Share2 } from 'lucide-react'
+import { Home, CalendarDays, Building2, Zap, User, Star, Share2 } from 'lucide-react'
 
 export default function BottomNav() {
   const pathname = usePathname()
-  
   const isInEventContext = pathname.startsWith('/icass-2026')
   const eventPrefix = isInEventContext ? '/icass-2026' : ''
 
@@ -17,36 +16,36 @@ export default function BottomNav() {
         { name: 'More',     href: `${eventPrefix}/more`,     icon: Share2 },
       ]
     : [
-        { name: 'Home',          href: '/home',          icon: Home },
-        { name: 'Fresher Guide', href: '/home#fresher',  icon: Star },
-        { name: 'Social',        href: '/home#social',   icon: Share2 },
+        { name: 'Home',        href: '/home',        icon: Home },
+        { name: 'Events',      href: '/events',      icon: CalendarDays },
+        { name: 'Departments', href: '/departments', icon: Building2 },
+        { name: 'Quick Links', href: '/quick-links', icon: Zap },
+        { name: 'Profile',     href: '/profile',     icon: User },
       ]
 
+  // Hide on landing page
+  if (pathname === '/') return null
+
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 shadow-lg z-40 safe-area-bottom">
-      <div className="w-full max-w-7xl mx-auto px-4 md:px-8">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 flex justify-center">
+      <div className="w-full max-w-md bg-white border-t border-neutral-200 shadow-lg">
         <div className="flex justify-around items-center h-16">
           {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href === '/home' && pathname === '/home')
+            const isActive = pathname === item.href
             const Icon = item.icon
-            
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`flex flex-col items-center justify-center flex-1 h-full transition-all duration-200 ${
-                  isActive
-                    ? 'text-primary scale-105'
-                    : 'text-neutral-500 hover:text-neutral-700'
-                }`}
-              >
-                <Icon className="w-6 h-6 mb-1" />
-                <span className={`text-xs font-medium ${isActive ? 'font-semibold' : ''}`}>
+              <Link key={item.name} href={item.href}
+                className={`flex flex-col items-center justify-center flex-1 h-full gap-0.5 transition-all duration-200 ${
+                  isActive ? 'text-secondary' : 'text-neutral-400'
+                }`}>
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all ${
+                  isActive ? 'bg-red-50 scale-110' : ''
+                }`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+                <span className={`text-[9px] leading-none ${isActive ? 'font-bold text-secondary' : 'font-medium'}`}>
                   {item.name}
                 </span>
-                {isActive && (
-                  <div className="absolute bottom-0 w-12 h-1 bg-primary rounded-t-full" />
-                )}
               </Link>
             )
           })}

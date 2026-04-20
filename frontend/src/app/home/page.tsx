@@ -9,7 +9,7 @@ import { useSession, signOut } from 'next-auth/react'
 import {
   Search, Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
-  ChevronLeft, Star, X, Mail, PhoneCall, MapPin
+  ChevronLeft, Star, X, Mail, PhoneCall, MapPin, Trophy
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
@@ -118,13 +118,14 @@ const topFunctionaries = [
 const visibleSchools = schools.filter(s => s.id !== 'media')
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'functionaries' | 'placements' | 'campus'
+type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'recruiters'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
   { id: 'departments',    label: 'Departments',    emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
   { id: 'functionaries',  label: 'Functionaries',  emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
   { id: 'placements',     label: 'Placements',     emoji: '🏆', color: '#b45309', bg: '#fef3e2' },
   { id: 'campus',         label: 'Campus Life',    emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
+  { id: 'recruiters',     label: 'Top Recruiters', emoji: '🤝', color: '#b12a2e', bg: '#fde8e8' },
 ]
 
 // ─── Placement Slideshow — 2 photos at a time ─────────────────────────────────
@@ -231,7 +232,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
-      <div className="max-w-2xl mx-auto">
+      <div className="max-w-md mx-auto">
 
         {/* ── Header ── */}
         <div className="bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">
@@ -385,9 +386,6 @@ export default function HomePage() {
                 </div>
                 {/* Placement photos — 2 at a time */}
                 <PlacementSlideshow photos={placementPhotos} />
-                {/* Top Recruiters — 2-up slideshow */}
-                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Top Recruiters</p>
-                <RecruiterSlideshow logos={recruiterLogos} />
               </motion.div>
             )}
 
@@ -431,6 +429,54 @@ export default function HomePage() {
                         <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1">{ev.subtitle}</p>
                       </div>
                     </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* TOP RECRUITERS */}
+            {activeTab === 'recruiters' && (
+              <motion.div key="recruiters"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }} className="space-y-4">
+                {/* Banner image */}
+                <div className="relative w-full rounded-2xl overflow-hidden shadow-md" style={{ height: 140 }}>
+                  <Image
+                    src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
+                    alt="Top Recruiters"
+                    fill className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary/80 to-secondary/40" />
+                  <div className="absolute inset-0 flex items-end px-4 pb-4">
+                    <div>
+                      <p className="text-white font-extrabold text-xl drop-shadow">Top Recruiters</p>
+                      <p className="text-white/80 text-xs mt-0.5">600+ MNCs & Indian Corporates</p>
+                    </div>
+                    <div className="ml-auto flex gap-2">
+                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                        <Trophy className="w-4 h-4 text-white" />
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                        <Star className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Recruiter logos grid — horizontally scrollable rows */}
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Our Recruiters</p>
+                <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                  {recruiterLogos.map((r, i) => (
+                    <motion.div key={i}
+                      initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.04 }}
+                      className="shrink-0 bg-white rounded-2xl shadow-sm border border-neutral-100 flex flex-col items-center justify-center gap-2 py-4 px-3 w-28">
+                      <div className="relative w-full h-12">
+                        <Image src={r.logo} alt={r.name} fill className="object-contain" />
+                      </div>
+                      {r.name !== 'Recruiter' && (
+                        <p className="text-[10px] font-semibold text-neutral-500 text-center leading-tight">{r.name}</p>
+                      )}
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
