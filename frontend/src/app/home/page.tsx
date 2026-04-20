@@ -7,9 +7,9 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import {
-  Search, Bell, ChevronRight, LogIn, LogOut, User,
+  Search, Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
-  ChevronLeft, Trophy, Star, X, Mail, PhoneCall, MapPin
+  ChevronLeft, Star, X, Mail, PhoneCall, MapPin
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
