@@ -165,61 +165,6 @@ function PlacementSlideshow({ photos }: { photos: string[] }) {
   )
 }
 
-// ─── Recruiter Slideshow — 2 logos at a time ──────────────────────────────────
-function RecruiterSlideshow({ logos }: { logos: { name: string; logo: string }[] }) {
-  const [idx, setIdx] = useState(0)
-  const total = Math.ceil(logos.length / 2)
-
-  React.useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % total), 2800)
-    return () => clearInterval(t)
-  }, [total])
-
-  const pair = logos.slice(idx * 2, idx * 2 + 2)
-
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex gap-1.5">
-          <button onClick={() => setIdx(i => (i - 1 + total) % total)}
-            className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
-            <ChevronLeft className="w-3.5 h-3.5 text-gray-600" />
-          </button>
-          <button onClick={() => setIdx(i => (i + 1) % total)}
-            className="w-7 h-7 rounded-full bg-white border border-neutral-200 shadow-sm flex items-center justify-center">
-            <ChevronRight className="w-3.5 h-3.5 text-gray-600" />
-          </button>
-        </div>
-        <span className="text-[11px] text-neutral-400 font-medium">{idx * 2 + 1}–{Math.min(idx * 2 + 2, logos.length)} of {logos.length}</span>
-      </div>
-      <AnimatePresence mode="wait">
-        <motion.div key={idx}
-          initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.25 }}
-          className="grid grid-cols-2 gap-4">
-          {pair.map((r, i) => (
-            <div key={i} className="bg-white rounded-2xl shadow-sm border border-neutral-100 flex flex-col items-center justify-center gap-3 py-6 px-4">
-              <div className="relative w-full h-16">
-                <Image src={r.logo} alt={r.name} fill className="object-contain" />
-              </div>
-              {r.name !== 'Recruiter' && (
-                <p className="text-xs font-semibold text-neutral-500 text-center leading-tight">{r.name}</p>
-              )}
-            </div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
-      {/* Dots */}
-      <div className="flex justify-center gap-1.5 pt-1">
-        {Array.from({ length: total }).map((_, i) => (
-          <button key={i} onClick={() => setIdx(i)}
-            className={`rounded-full transition-all duration-200 ${i === idx ? 'w-5 h-2 bg-neutral-500' : 'w-2 h-2 bg-neutral-300'}`} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function HomePage() {
   const router = useRouter()

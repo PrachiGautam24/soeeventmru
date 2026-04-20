@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, ExternalLink } from 'lucide-react'
+import { Calendar, MapPin, ExternalLink } from 'lucide-react'
 
 const upcomingEvents = [
   { title: 'Ideate. Build. Deploy.', subtitle: 'Build App in a Day · Win Cash Prizes · GUVI HCL', date: '18 May 2026', location: 'Manav Rachna University', image: '/images/events/event-ideate.jpeg' },
