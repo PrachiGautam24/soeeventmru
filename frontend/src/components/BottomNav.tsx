@@ -23,8 +23,8 @@ export default function BottomNav() {
         { name: 'Profile',     href: '/profile',     icon: User },
       ]
 
-  // Hide on landing page
-  if (pathname === '/') return null
+  // Hide on landing page and login page
+  if (pathname === '/' || pathname === '/login') return null
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 flex justify-center">
