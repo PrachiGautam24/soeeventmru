@@ -34,24 +34,24 @@ export default function LandingPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-5"
         >
-          {/* Logos row */}
-          <div className="flex items-center gap-4">
+          {/* Logos row — white pill background so both are visible on red */}
+          <div className="flex items-center gap-4 bg-white/95 rounded-2xl px-6 py-4 shadow-lg">
             <Image
               src="https://manavrachna.edu.in/assets/images/mru-logo.png"
               alt="MRU Logo"
-              width={180}
-              height={80}
+              width={160}
+              height={72}
               priority
-              className="object-contain drop-shadow-lg brightness-0 invert"
+              className="object-contain"
             />
-            <div className="w-px h-14 bg-white/40" />
+            <div className="w-px h-12 bg-neutral-200" />
             <Image
               src="/images/GPTW.jpg"
               alt="Great Place To Work Certified"
-              width={60}
-              height={78}
+              width={56}
+              height={72}
               priority
-              className="object-contain drop-shadow-lg rounded-sm"
+              className="object-contain rounded-sm"
             />
           </div>
 
