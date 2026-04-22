@@ -7,12 +7,11 @@ import { ArrowLeft, ChevronDown } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
 const gridItems = [
-  { label: 'Student\nAchievements', icon: '🏆', gradient: 'from-amber-500 to-amber-400',     route: 'student-achievements' },
-  { label: 'Faculty\nAchievements', icon: '🎓', gradient: 'from-primary to-primary-light',   route: 'faculty-achievements' },
-  { label: 'Curriculum\nUpdates',   icon: '📖', gradient: 'from-teal-600 to-teal-400',       route: 'curriculum' },
-  { label: 'Event\nUpdates',        icon: '📅', gradient: 'from-secondary to-secondary-light', route: 'events' },
-  { label: 'Webcast',               icon: '🎥', gradient: 'from-purple-600 to-purple-400',   route: 'webcast' },
-  { label: 'Podcast',               icon: '🎧', gradient: 'from-slate-600 to-slate-500',     route: 'podcast' },
+  { label: 'Student\nAchievements', icon: '🏆', route: 'student-achievements' },
+  { label: 'Upcoming\nEvents',      icon: '📅', route: 'events' },
+  { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
+  { label: 'Curriculum',            icon: '📖', route: 'curriculum' },
+  { label: 'Podcasts &\nVideos',    icon: '🎧', route: 'podcast' },
 ]
 
 export default function DepartmentPage() {
@@ -32,7 +31,7 @@ export default function DepartmentPage() {
 
   return (
     <div className="min-h-screen bg-neutral-100">
-      <div className="w-full min-h-screen bg-white flex flex-col">
+      <div className="max-w-md mx-auto min-h-screen bg-white flex flex-col">
 
         {/* Header */}
         <div className="relative bg-secondary overflow-hidden">
@@ -50,8 +49,8 @@ export default function DepartmentPage() {
           </div>
         </div>
 
-        <div className="flex-1 bg-neutral-50">
-          <div className="max-w-5xl mx-auto px-4 md:px-6 py-4 space-y-5">
+        <div className="flex-1 bg-neutral-50 overflow-y-auto pb-24">
+          <div className="px-4 py-4 space-y-5">
 
             {/* Upcoming Events accordion */}
             <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
@@ -94,18 +93,32 @@ export default function DepartmentPage() {
               <p className="text-sm text-gray-600 leading-relaxed">{department.description}</p>
             </div>
 
-            {/* Explore More grid */}
+            {/* Explore More — list layout */}
             <div>
-              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-4 px-1">Explore More</p>
-              <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-                {gridItems.map((item, i) => (
-                  <motion.button key={item.label} initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }} whileTap={{ scale: 0.91 }}
+              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
+              {/* Row 1: 3 items */}
+              <div className="grid grid-cols-3 gap-2 mb-2">
+                {gridItems.slice(0, 3).map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => router.push(`/school/${id}/${dept}/${item.route}`)}
-                    className="flex flex-col items-center gap-2">
-                    <div className={`w-16 h-16 rounded-[22px] bg-gradient-to-br ${item.gradient} flex items-center justify-center text-3xl shadow-md`}>
-                      {item.icon}
-                    </div>
-                    <span className="text-[11px] text-center text-gray-700 font-medium leading-tight px-1 whitespace-pre-line">{item.label}</span>
+                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100">
+                    <span className="text-2xl">{item.icon}</span>
+                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
+                  </motion.button>
+                ))}
+              </div>
+              {/* Row 2: 2 items centered */}
+              <div className="flex justify-center gap-2">
+                {gridItems.slice(3).map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => router.push(`/school/${id}/${dept}/${item.route}`)}
+                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100 w-[31%]">
+                    <span className="text-2xl">{item.icon}</span>
+                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
                   </motion.button>
                 ))}
               </div>
@@ -122,9 +135,9 @@ export default function DepartmentPage() {
               <AnimatePresence initial={false}>
                 {aboutOpen && (
                   <motion.div key="about-dept" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
-                    <div className="px-4 pb-5 pt-3 md:columns-2 md:gap-6 space-y-3">
+                    <div className="px-4 pb-5 pt-3 space-y-3">
                       {department.about.split('\n\n').map((para, i) => (
-                        <p key={i} className="text-sm text-gray-600 leading-relaxed break-inside-avoid">{para}</p>
+                        <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
                       ))}
                     </div>
                   </motion.div>

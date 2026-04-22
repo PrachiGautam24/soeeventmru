@@ -6,12 +6,11 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import {
   ChevronLeft, Settings, ChevronRight,
-  Building2, Bookmark, Calendar, Bell, LogIn, LogOut, User
+  Building2, Calendar, Bell, LogIn, LogOut, User
 } from 'lucide-react'
 
 const menuItems = [
   { icon: Building2, label: 'Departments',     color: 'bg-red-500',    href: '/departments' },
-  { icon: Bookmark,  label: 'My Bookmarks',    color: 'bg-amber-400',  href: '/home' },
   { icon: Calendar,  label: 'Upcoming Events', color: 'bg-green-600',  href: '/events' },
   { icon: Bell,      label: 'Notifications',   color: 'bg-neutral-500',href: '/home' },
 ]

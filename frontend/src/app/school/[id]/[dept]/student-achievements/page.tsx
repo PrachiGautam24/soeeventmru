@@ -124,7 +124,7 @@ export default function StudentAchievementsPage() {
 
   return (
     <div className="min-h-screen bg-neutral-100">
-      <div className="w-full min-h-screen bg-white flex flex-col">
+      <div className="max-w-md mx-auto min-h-screen bg-white flex flex-col">
 
         {/* Header */}
         <div className="relative bg-secondary overflow-hidden">
@@ -144,7 +144,7 @@ export default function StudentAchievementsPage() {
 
         {/* Filter chips */}
         <div className="bg-white border-b border-neutral-100 px-4 py-3">
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar max-w-5xl mx-auto">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <Filter className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
             {categories.map(cat => (
               <button key={cat} onClick={() => setActive(cat)}
@@ -157,9 +157,9 @@ export default function StudentAchievementsPage() {
 
         {/* List */}
         <div className="flex-1 bg-neutral-50">
-          <div className="max-w-5xl mx-auto px-4 md:px-6 py-4">
+          <div className="px-4 py-4">
             <AnimatePresence mode="popLayout">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="space-y-3">
                 {filtered.map((item, i) => (
                   <motion.div key={item.rollNo} layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ delay: i * 0.04 }}
                     className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden flex">

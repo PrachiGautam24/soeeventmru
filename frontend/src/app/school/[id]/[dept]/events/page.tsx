@@ -26,7 +26,7 @@ export default function DeptEventsPage() {
 
   return (
     <div className="min-h-screen bg-neutral-100">
-      <div className="w-full min-h-screen bg-white flex flex-col">
+      <div className="max-w-md mx-auto min-h-screen bg-white flex flex-col">
 
         {/* Header */}
         <div className="relative bg-secondary overflow-hidden">
@@ -55,7 +55,7 @@ export default function DeptEventsPage() {
         </div>
 
         <div className="flex-1 bg-neutral-50">
-          <div className="max-w-5xl mx-auto px-4 md:px-6 py-4">
+          <div className="px-4 py-4">
             <AnimatePresence mode="wait">
               {tab === 'upcoming' ? (
                 <motion.div key="upcoming" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.2 }}
