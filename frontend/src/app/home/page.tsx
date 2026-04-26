@@ -121,18 +121,21 @@ const visibleSchools = schools.filter(s => s.id !== 'media')
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0)
   const ref = React.useRef<HTMLSpanElement>(null)
-  const started = React.useRef(false)
 
   React.useEffect(() => {
+    let timer: ReturnType<typeof setInterval>
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true
+        if (entry.isIntersecting) {
+          // Reset and re-animate every time it enters view
+          setCount(0)
           const duration = 1500
           const steps = 50
           const increment = target / steps
           let current = 0
-          const timer = setInterval(() => {
+          clearInterval(timer)
+          timer = setInterval(() => {
             current += increment
             if (current >= target) {
               setCount(target)
@@ -141,12 +144,17 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
               setCount(Math.floor(current))
             }
           }, duration / steps)
+        } else {
+          // Reset when scrolled out so it replays next time
+          clearInterval(timer)
+          setCount(0)
         }
       },
       { threshold: 0.3 }
     )
+
     if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
+    return () => { observer.disconnect(); clearInterval(timer) }
   }, [target])
 
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>
