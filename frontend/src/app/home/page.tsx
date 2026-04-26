@@ -265,14 +265,14 @@ export default function HomePage() {
                 key={tab.id}
                 whileTap={{ scale: 0.93 }}
                 onClick={() => setActiveTab(tab.id)}
-                className={`shrink-0 flex flex-col items-center gap-2 rounded-2xl px-5 py-3.5 shadow-sm transition-all duration-200 border-2 ${
+                className={`shrink-0 flex flex-col items-center gap-1.5 rounded-2xl px-4 py-2.5 shadow-sm transition-all duration-200 border-2 ${
                   activeTab === tab.id
                     ? 'border-transparent shadow-md scale-105'
                     : 'bg-white border-transparent'
                 }`}
                 style={activeTab === tab.id ? { backgroundColor: tab.bg, borderColor: tab.color + '40' } : {}}
               >
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm"
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-sm"
                   style={{ backgroundColor: activeTab === tab.id ? tab.color + '20' : '#f3f4f6' }}>
                   {tab.emoji}
                 </div>
