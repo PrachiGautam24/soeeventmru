@@ -257,22 +257,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Hero campus image ── */}
-        <div className="relative w-full overflow-hidden" style={{ height: 200 }}>
-          <Image
-            src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
-            alt="Manav Rachna Campus"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
-            <p className="text-[10px] font-semibold text-white/60 uppercase tracking-widest mb-0.5">Study at Manav Rachna</p>
-            <h2 className="text-white text-base font-bold leading-snug">Learning, Creativity &amp; Access to the latest research.</h2>
-          </div>
-        </div>
-
         {/* ── Horizontal Scrollable Category Tabs ── */}
         <div className="px-4 mt-5">
           <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
