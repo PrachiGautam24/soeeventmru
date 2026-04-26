@@ -23,7 +23,7 @@ const fresherItems = [
 ]
 
 const schoolColors: Record<string, string> = {
-  soe: '#1e4ba9', law: '#b45309', education: '#16a34a', business: '#b12a2e', science: '#7c3aed',
+  soe: '#1e4ba9', law: '#b45309', education: '#16a34a', business: '#b12a2e', science: '#7c3aed', dsw: '#db2777',
 }
 
 const schoolSVGs: Record<string, React.ReactNode> = {
@@ -57,6 +57,15 @@ const schoolSVGs: Record<string, React.ReactNode> = {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
       <path d="M9 3h6v10l3 8H6l3-8V3z"/>
       <path d="M6 19h12"/>
+    </svg>
+  ),
+  dsw: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      {/* Music note + person dancing */}
+      <circle cx="8" cy="18" r="2"/>
+      <circle cx="16" cy="16" r="2"/>
+      <path d="M10 18V8l8-2v10"/>
+      <path d="M10 12l8-2"/>
     </svg>
   ),
 }
@@ -318,6 +327,28 @@ export default function HomePage() {
                     <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
                   </motion.button>
                 ))}
+                {/* DSW card */}
+                <motion.button
+                  initial={{ opacity: 0, x: -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: visibleSchools.length * 0.08, type: 'spring', stiffness: 260, damping: 22 }}
+                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.02 }}
+                  onClick={() => router.push('/home')}
+                  className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
+                  <motion.div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: '#db277718', color: '#db2777' }}
+                    whileHover={{ rotate: [0, -10, 10, -6, 6, 0], transition: { duration: 0.5 } }}
+                  >
+                    {schoolSVGs['dsw']}
+                  </motion.div>
+                  <div className="flex-1 text-left">
+                    <p className="text-sm font-semibold text-gray-800">DSW</p>
+                    <p className="text-xs text-neutral-400 mt-0.5">Student Welfare & Campus Life</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
+                </motion.button>
               </motion.div>
             )}
 
