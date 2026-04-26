@@ -74,6 +74,13 @@ const upcomingEvents = [
   { title: 'Ideate. Build. Deploy.', subtitle: 'Build App in a Day · GUVI HCL', date: '18 May 2026', image: '/images/events/event-ideate.jpeg' },
   { title: 'Ethical Hacking Workshop', subtitle: 'Learn. Explore. Protect. · Quick Heal', date: '19–20 May 2026', image: '/images/events/event-ehacking.jpeg' },
   { title: 'Workshop on Robotics', subtitle: 'Design. Build. Program. · WRO India', date: '21–22 May 2026', image: '/images/events/event-robotics.jpeg' },
+  { title: 'Mental Health Awareness Talk', subtitle: 'DSW · Student Wellness Initiative', date: '23 Apr 2026', image: '/images/events/event-ideate.jpeg' },
+  { title: 'Sampling Steps', subtitle: 'DSW · Dance & Movement Workshop', date: '23 Apr 2026', image: '/images/events/event-robotics.jpeg' },
+  { title: 'Culture Couture', subtitle: 'DSW · Cultural Fashion & Expression', date: '23 Apr 2026', image: '/images/events/event-ehacking.jpeg' },
+  { title: 'Anti-Ragging Week', subtitle: 'DSW · Awareness & Pledge Campaign', date: '30 Apr 2026', image: '/images/events/event-ideate.jpeg' },
+  { title: 'Digital Doodlers', subtitle: 'DSW · Digital Art & Design Contest', date: '30 Apr 2026', image: '/images/events/event-robotics.jpeg' },
+  { title: 'Riyaaz-E-Mehfil', subtitle: 'DSW · Music & Poetry Evening', date: '30 Apr 2026', image: '/images/events/event-ehacking.jpeg' },
+  { title: 'Cyber Crime Awareness Camp', subtitle: 'DSW · Stay Safe Online', date: '30 Apr 2026', image: '/images/events/event-ideate.jpeg' },
 ]
 
 const placementPhotos = [
@@ -334,7 +341,7 @@ export default function HomePage() {
                   transition={{ delay: visibleSchools.length * 0.08, type: 'spring', stiffness: 260, damping: 22 }}
                   whileTap={{ scale: 0.97 }}
                   whileHover={{ scale: 1.02 }}
-                  onClick={() => router.push('/home')}
+                  onClick={() => router.push('/dsw')}
                   className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
                   <motion.div
                     className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"

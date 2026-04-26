@@ -25,12 +25,36 @@ export default function ClansPage() {
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
       <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
-        <div className="bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">
+        <div className="px-5 pt-10 pb-6 rounded-b-3xl shadow-lg" style={{ background: '#db2777' }}>
           <button onClick={() => router.back()} className="flex items-center gap-1.5 text-white/80 text-sm mb-3"><ChevronLeft className="w-4 h-4" /> Back</button>
-          <h1 className="text-white text-xl font-bold">Clans</h1>
-          <p className="text-white/70 text-xs mt-1">MRU&apos;s unique student community structure</p>
+          <h1 className="text-white text-2xl font-bold">Clans</h1>
+          <p className="text-white/80 text-sm mt-1 font-medium">Your First Identity on Campus</p>
+          <p className="text-white/60 text-xs mt-2 leading-relaxed">4 Elements. 1 Spirit. Infinite Possibilities.</p>
         </div>
         <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+
+          {/* Hero intro */}
+          <div className="rounded-2xl p-4 border border-pink-100 shadow-sm" style={{ background: '#fdf2f8' }}>
+            <p className="text-sm text-gray-700 leading-relaxed mb-3">
+              Clans are structured student groups that promote community building, teamwork, and engagement. They serve as a foundation for participation through inter-clan competitions, collaborative activities, and continuous involvement throughout the academic year.
+            </p>
+            <div className="space-y-2">
+              {['Inter-clan competitions', 'Team-based engagement', 'Leadership exposure'].map((point) => (
+                <div key={point} className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full shrink-0" style={{ background: '#db2777' }} />
+                  <p className="text-sm font-medium text-gray-700">{point}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm font-bold mt-3" style={{ color: '#db2777' }}>Every student belongs. Every voice matters.</p>
+          </div>
+
+          {/* What clans do */}
+          <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm p-4 space-y-2">
+            <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-1">What Clans Do</p>
+            <p className="text-sm text-gray-600 leading-relaxed">Clans organize high-energy events, competitions, and opportunities to grow in confidence and teamwork.</p>
+            <p className="text-sm text-gray-600 leading-relaxed">At MRU, every student is part of a Clan — a spirited community that drives identity, leadership, and engagement.</p>
+          </div>
 
           {/* Why Clans */}
           <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
