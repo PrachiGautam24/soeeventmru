@@ -117,6 +117,41 @@ const topFunctionaries = [
 
 const visibleSchools = schools.filter(s => s.id !== 'media')
 
+// ─── CountUp component ────────────────────────────────────────────────────────
+function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0)
+  const ref = React.useRef<HTMLSpanElement>(null)
+  const started = React.useRef(false)
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true
+          const duration = 1500
+          const steps = 50
+          const increment = target / steps
+          let current = 0
+          const timer = setInterval(() => {
+            current += increment
+            if (current >= target) {
+              setCount(target)
+              clearInterval(timer)
+            } else {
+              setCount(Math.floor(current))
+            }
+          }, duration / steps)
+        }
+      },
+      { threshold: 0.3 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [target])
+
+  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>
+}
+
 // ─── Category tabs config ──────────────────────────────────────────────────────
 type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events'
 
@@ -413,15 +448,17 @@ export default function HomePage() {
           <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">MRU at a Glance</p>
           <div className="grid grid-cols-3 gap-3">
             {[
-              { stat: '43000+', label: 'Alumni Globally' },
-              { stat: '135+',   label: 'Collaborations' },
-              { stat: '5900+',  label: 'Research Papers' },
-              { stat: '600+',   label: 'Recruiting MNCs' },
-              { stat: '250+',   label: 'Patents' },
-              { stat: '60L',    label: 'Highest CTC' },
-            ].map(({ stat, label }) => (
+              { target: 43000, suffix: '+', label: 'Alumni Globally' },
+              { target: 135,   suffix: '+', label: 'Collaborations' },
+              { target: 5900,  suffix: '+', label: 'Research Papers' },
+              { target: 600,   suffix: '+', label: 'Recruiting MNCs' },
+              { target: 250,   suffix: '+', label: 'Patents' },
+              { target: 60,    suffix: 'L', label: 'Highest CTC' },
+            ].map(({ target, suffix, label }) => (
               <div key={label} className="bg-white rounded-2xl p-3.5 shadow-sm border border-neutral-100 text-center">
-                <p className="text-lg font-extrabold text-secondary">{stat}</p>
+                <p className="text-lg font-extrabold text-secondary">
+                  <CountUp target={target} suffix={suffix} />
+                </p>
                 <p className="text-[10px] text-neutral-500 mt-1 leading-tight">{label}</p>
               </div>
             ))}
