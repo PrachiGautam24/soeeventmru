@@ -352,13 +352,15 @@ export default function HomePage() {
                   <p className="text-white font-bold text-sm mb-3">Placement Highlights</p>
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { stat: '120+', label: 'Total Recruiters', icon: '🏢' },
-                      { stat: '600+', label: 'Placement Offers', icon: '📋' },
-                      { stat: '94%', label: 'Placement Rate', icon: '🎯' },
-                    ].map(({ stat, label, icon }) => (
+                      { target: 120, suffix: '+', label: 'Total Recruiters', icon: '🏢' },
+                      { target: 600, suffix: '+', label: 'Placement Offers', icon: '📋' },
+                      { target: 94,  suffix: '%', label: 'Placement Rate',   icon: '🎯' },
+                    ].map(({ target, suffix, label, icon }) => (
                       <div key={label} className="bg-white/15 rounded-xl p-3 text-center">
                         <p className="text-lg">{icon}</p>
-                        <p className="text-white font-bold text-base mt-1">{stat}</p>
+                        <p className="text-white font-bold text-base mt-1">
+                          <CountUp target={target} suffix={suffix} />
+                        </p>
                         <p className="text-white/70 text-[10px] mt-0.5 leading-tight">{label}</p>
                       </div>
                     ))}
