@@ -2,45 +2,38 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { ArrowLeft, ChevronDown } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
 const gridItems = [
   { label: 'Student\nAchievements', icon: '🏆', route: 'student-achievements' },
-  { label: 'Events\nOrganised',     icon: '📅', route: 'events' },
+  { label: 'Upcoming\nEvents',      icon: '📅', route: 'events' },
   { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
   { label: 'Curriculum',            icon: '📖', route: 'curriculum' },
   { label: 'Podcasts &\nVideos',    icon: '🎧', route: 'podcast' },
 ]
 
-export default function DepartmentPage() {
+export default function LawSchoolPage() {
   const router = useRouter()
-  const { id, dept } = useParams<{ id: string; dept: string }>()
-  const [eventsOpen, setEventsOpen] = useState(false)
+  const school = schools.find(s => s.id === 'law')!
   const [aboutOpen, setAboutOpen] = useState(false)
+  const [eventsOpen, setEventsOpen] = useState(false)
 
-  const school = schools.find(s => s.id === id)
-  const department = school?.departments.find(d => d.id === dept)
-
-  if (!school || !department) return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <p className="text-neutral-400">Department not found.</p>
-    </div>
-  )
+  const allEvents = school.departments.flatMap(d => d.upcomingEvents.map(e => ({ ...e })))
 
   return (
-    <div className="min-h-screen bg-neutral-100">
-      <div className="max-w-md mx-auto min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-neutral-100 pb-24">
+      <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
 
         {/* Header */}
-        <div className="relative bg-secondary overflow-hidden">
+        <div className="relative bg-secondary">
           <button onClick={() => router.back()} className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
             <ArrowLeft className="w-4 h-4 text-white" />
           </button>
           <div className="px-6 pt-10 pb-8 text-center">
-            <h1 className="font-bold text-white text-xl md:text-3xl leading-tight">{department.name}</h1>
-            <p className="text-white/70 text-xs md:text-sm mt-1">{school.name} · {department.code}</p>
+            <h1 className="font-bold text-white text-xl leading-tight">School of Law</h1>
+            <p className="text-white/70 text-xs mt-1">Justice & Governance · MRU</p>
           </div>
           <div className="h-8">
             <svg viewBox="0 0 390 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
@@ -49,16 +42,16 @@ export default function DepartmentPage() {
           </div>
         </div>
 
-        <div className="flex-1 bg-neutral-50 overflow-y-auto pb-24">
-          <div className="px-4 py-4 space-y-5">
+        <div className="flex-1 bg-neutral-50 overflow-y-auto">
+          <div className="px-4 py-4 space-y-4">
 
             {/* Upcoming Events accordion */}
             <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
               <button onClick={() => setEventsOpen(o => !o)} className="w-full flex items-center justify-between px-4 py-3.5">
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-semibold text-gray-800">Upcoming Events</span>
-                  {department.upcomingEvents.length > 0 && (
-                    <span className="w-5 h-5 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center font-bold">{department.upcomingEvents.length}</span>
+                  {allEvents.length > 0 && (
+                    <span className="w-5 h-5 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center font-bold">{allEvents.length}</span>
                   )}
                 </div>
                 <motion.div animate={{ rotate: eventsOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
@@ -67,22 +60,21 @@ export default function DepartmentPage() {
               </button>
               <AnimatePresence initial={false}>
                 {eventsOpen && (
-                  <motion.div key="events" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden border-t border-neutral-100">
-                    {department.upcomingEvents.length === 0 ? (
-                      <p className="text-xs text-neutral-400 text-center py-4">No upcoming events.</p>
-                    ) : (
-                      <div className="divide-y divide-neutral-100 border-t border-neutral-100">
-                        {department.upcomingEvents.map((ev, i) => (
-                          <div key={i} className="flex items-start gap-3 px-4 py-3.5">
-                            <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1" />
-                            <div>
-                              <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
-                              <p className="text-xs text-neutral-400 mt-0.5">{ev.date}</p>
+                  <motion.div key="ev" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden border-t border-neutral-100">
+                    {allEvents.length === 0
+                      ? <p className="text-xs text-neutral-400 text-center py-4">No upcoming events.</p>
+                      : <div className="divide-y divide-neutral-100 border-t border-neutral-100">
+                          {allEvents.map((ev, i) => (
+                            <div key={i} className="flex items-start gap-3 px-4 py-3.5">
+                              <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1" />
+                              <div>
+                                <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
+                                <p className="text-xs text-neutral-400 mt-0.5">{ev.date}</p>
+                              </div>
                             </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                          ))}
+                        </div>
+                    }
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -90,10 +82,10 @@ export default function DepartmentPage() {
 
             {/* Description */}
             <div className="bg-white rounded-2xl p-4 border border-neutral-100 shadow-sm">
-              <p className="text-sm text-gray-600 leading-relaxed">{department.description}</p>
+              <p className="text-sm text-gray-600 leading-relaxed">Practice-driven and application-based legal education with a transdisciplinary approach. Ranked 51st among law schools in India (India Today 2025) and 4th in Haryana.</p>
             </div>
 
-            {/* Explore More — list layout */}
+            {/* Explore More — 3+2 grid */}
             <div>
               <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
               {/* Row 1: 3 items */}
@@ -102,7 +94,7 @@ export default function DepartmentPage() {
                   <motion.button key={item.label}
                     initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => router.push(`/school/${id}/${dept}/${item.route}`)}
+                    onClick={() => router.push(`/school/law/overview/${item.route}`)}
                     className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100">
                     <span className="text-2xl">{item.icon}</span>
                     <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
@@ -115,7 +107,7 @@ export default function DepartmentPage() {
                   <motion.button key={item.label}
                     initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => router.push(`/school/${id}/${dept}/${item.route}`)}
+                    onClick={() => router.push(`/school/law/overview/${item.route}`)}
                     className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100 w-[31%]">
                     <span className="text-2xl">{item.icon}</span>
                     <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
@@ -127,16 +119,16 @@ export default function DepartmentPage() {
             {/* About accordion */}
             <div className="rounded-2xl overflow-hidden shadow-sm">
               <button onClick={() => setAboutOpen(o => !o)} className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
-                <span className="font-bold text-white text-sm">About {department.name}</span>
+                <span className="font-bold text-white text-sm">About School of Law</span>
                 <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                   <ChevronDown className="w-4 h-4 text-white/80" />
                 </motion.div>
               </button>
               <AnimatePresence initial={false}>
                 {aboutOpen && (
-                  <motion.div key="about-dept" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
+                  <motion.div key="about" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
                     <div className="px-4 pb-5 pt-3 space-y-3">
-                      {department.about.split('\n\n').map((para, i) => (
+                      {school.about.split('\n\n').map((para, i) => (
                         <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
                       ))}
                     </div>

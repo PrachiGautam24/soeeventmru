@@ -1,5 +1,14 @@
 export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media'
 
+export interface Achievement {
+  name: string
+  program?: string
+  category: 'Research' | 'Competition' | 'Sports' | 'Award' | 'Publication' | 'MUN'
+  title: string
+  desc: string
+  badge: string
+}
+
 export interface Department {
   id: string
   name: string
@@ -9,6 +18,8 @@ export interface Department {
   about: string
   upcomingEvents: { title: string; date: string }[]
   completedEvents?: { title: string; date: string; description?: string; slug?: string }[]
+  studentAchievements?: Achievement[]
+  facultyAchievements?: Achievement[]
 }
 
 export interface School {
@@ -17,9 +28,11 @@ export interface School {
   tagline: string
   icon: string
   color: string
-  about: string          // collapsible about text
+  about: string
   academicPartners: { name: string; image: string }[]
   departments: Department[]
+  studentAchievements?: Achievement[]
+  facultyAchievements?: Achievement[]
 }
 
 export const schools: School[] = [
@@ -67,8 +80,21 @@ The department has active research labs in AI, IoT, and Data Science, and mainta
 
 It has state-of-the-art labs for signal processing, microelectronics, and IoT, and collaborates with Truechip and CISCO for industry-aligned learning.`,
         upcomingEvents: [
+          { title: '2-Day Workshop: Smart Controller Design using Soft Computing (MATLAB)', date: 'April 15–16, 2026' },
           { title: 'VLSI Design Seminar', date: 'April 18, 2026' },
           { title: 'IoT Bootcamp', date: 'May 5, 2026' },
+        ],
+        completedEvents: [
+          { title: '2-Day Workshop: Smart Controller Design using Soft Computing', date: 'April 15–16, 2026', description: 'Students trained on MATLAB to design Smart Controllers using Soft Computing — focused on practice and high-level concepts to improve technical competencies.', slug: 'ece-workshop-apr2026' },
+        ],
+        studentAchievements: [
+          { name: 'R. Uday Kiran', program: 'ECE 4th Semester', category: 'Competition', badge: '🥇', title: '1st Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 1st prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026. Reflects creativity and technical understanding.' },
+          { name: 'Jayasankar', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 2nd prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
+          { name: 'Anjesh Kumar, Daksh & Kapil', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Build the Circuit, Inno-Skill 2026', desc: 'Secured 2nd prize in the "Build the Circuit" competition at Inno-Skill 2026, April 3–4, 2026.' },
+          { name: 'Ankita Mahapatra & Reeyal', program: 'B.Tech ECE 4th Semester', category: 'Competition', badge: '🥉', title: '3rd Position — State-Level India Skills Competition (Industry 4.0)', desc: 'Participated in the State-Level India Skills Competition (Industry 4.0). Completed tasks based on PLC (Programmable Logic Controller) within a limited time, gaining hands-on experience in industrial automation systems.' },
+          { name: 'Harsh Malik, Nitin Pandey, Jhalak Dhingra & G. Kumar Swami', program: 'ECE 2nd & 3rd Year', category: 'Award', badge: '🏅', title: 'Dean\'s List — Top 5% of Class', desc: 'Identified in the Dean\'s List for securing a place in the top 5% of their respective classes. Awarded by the Vice Chancellor, Dean Academics, and Dean Engineering.' },
+          { name: 'Sai Devesh Reddy', program: 'ECE 4th Semester', category: 'Award', badge: '⭐', title: 'Dual Internships, Campus Ambassador & AIU Football Representative', desc: 'Pursuing stipend-based internships in Video Editing at MRIIF and Data Fluxion. Campus Ambassador at MRU, President of Digital Nexus, and represented MRU in the AIU North-West Zone football tournament.' },
+          { name: 'Manvitha, I V Sanjeev, Anmol & Ranveer', program: 'ECE / CST', category: 'Competition', badge: '🥉', title: '3rd Prize — IDE Bootcamp', desc: 'Won 3rd prize at the IDE Bootcamp along with their team from CST.' },
         ],
       },
       {
@@ -141,6 +167,42 @@ The school is accredited by the Bar Council of India (BCI) and has NAAC A++ accr
         about: `The International Law stream covers public international law, human rights law, international trade law, and dispute resolution mechanisms. Students participate in Model UN conferences and international moot court competitions.`,
         upcomingEvents: [{ title: 'Model UN Conference', date: 'May 14, 2026' }],
       },
+    ],
+    studentAchievements: [
+      { name: 'Himanshu Jindal & Vishal Bansal', program: 'LLB Sem 3 / BA LLB Sem I', category: 'Competition', badge: '🥈', title: 'Runner-Up — Maharishi Mahesh Yogi National Client Counseling Competition 2025', desc: 'Secured runner-up position at Maharishi Law School, MUIT Noida, November 20–22, 2025.' },
+      { name: 'Riya Suri', program: 'BBA LLB Semester X', category: 'Publication', badge: '📖', title: 'Book Chapter Published — Bharti Publications 2026', desc: '"LGBQTIA+: The Unfold History" in "75 years of the Supreme Court of India: Upholding Democracy and Delivering Justice".' },
+      { name: 'Anshika Bansal', program: 'School of Law', category: 'Publication', badge: '📖', title: 'Book Chapter — Khwaab Publication 2025', desc: '"Landmark Judgment Addressing Acid Attacks: An Analysis of Laxmi v. Union of India (2014)" in Socio-Legal and Contemporary Issues, Vol. VII.' },
+      { name: 'Yuvika Garg', program: 'School of Law', category: 'Publication', badge: '📖', title: 'Book Chapter — Khwaab Publication 2025', desc: '"Transgender Rights and the Indian Constitution: Post-Nalsa Developments" in Socio-Legal and Contemporary Issues, Vol. VII.' },
+      { name: 'Adriel Lawrence', program: 'BA LLB Semester 2', category: 'Publication', badge: '✍️', title: 'Article Published — Record of Law, December 2025', desc: '"The Right to a Healthy Environment: From Principle to Enforcement Right" published on December 09, 2025.' },
+      { name: 'Vanshika', program: 'BA LLB Semester IV', category: 'MUN', badge: '🌐', title: 'MUN Participation — AMIFEST\'26, Amity University', desc: 'Represented portfolio of Shri Kalyan Singh Kalvi in the Historic Lok Sabha Committee, February 12–13, 2026.' },
+      { name: 'Muskan Gupta', program: 'BBA LLB Semester VIII', category: 'Research', badge: '📄', title: 'Paper Presented — National Conference, Faculty of Law, University of Delhi', desc: '"From Conflict to Harmony: Integrating Gita\'s Dharma & Resolution Mechanisms Dialogue at Workplace Disputes", November 13–15, 2025.' },
+      { name: 'Tushar Awana & Aditya Chaudhary', program: 'LLB 2nd Year', category: 'Competition', badge: '🥇', title: '1st Prize — Debate Competition, University of Pécs, Hungary', desc: 'Won first prize in the Debate competition organized by University of Pécs – PECS Summer School, Hungary.' },
+      { name: 'Akhilesh Singh', program: 'BA LLB Sem VII', category: 'Sports', badge: '🏏', title: 'Best Bowler & Best Fielder — Cricket Tournament, July 2025', desc: 'Won titles of Best Bowler and Best Fielder at Blue Birds Sports Complex Faridabad, July 27, 2025.' },
+      { name: 'Akhilesh Singh', program: 'BA LLB Sem VII', category: 'Sports', badge: '🏆', title: 'Valuable Player — Cricket Tournament, July 2025', desc: 'Won title of Valuable Player at Cricket Club tournament, July 20, 2025.' },
+      { name: 'Adriel Lawrence', program: 'BA LLB Semester II', category: 'Award', badge: '🎖️', title: 'Academic Excellence Award — Delhi YMCA, September 2025', desc: 'Received Academic Excellence Award for excellent Board Exam Result, September 26, 2025.' },
+    ],
+    facultyAchievements: [
+      { name: 'Prof. (Dr.) Asha Verma', category: 'Research', badge: '🎤', title: 'Presented at Legal Education Research Conference, UNSW Sydney', desc: '"Revolutionizing Course Design: Decolonizing Content and Enhancing Learning without Curriculum Saturation", November 24–25, 2025.' },
+      { name: 'Prof. (Dr.) Asha Verma', category: 'Research', badge: '🪑', title: 'Session Chair — Global Summit on AI, Emerging Tech Law & Governance 2025', desc: 'Chaired a session at GSAIET 2025, India International Centre, New Delhi, July 24, 2025.' },
+      { name: 'Prof. (Dr.) Asha Verma', category: 'Award', badge: '🏆', title: 'Outstanding Dean Leadership Award — National Education Conclave', desc: 'Received the Outstanding Dean Leadership Award at Thyagaraj Sports Complex, Delhi, August 06–07, 2025.' },
+      { name: 'Prof. (Dr.) Shaharyar Asaf Khan & Dr. Ghazala Abidin', category: 'Research', badge: '🪑', title: 'Session Chairs — International Conference, Asian Law College', desc: '"Globally Changing Facets of Law: Dialogue between Multidisciplinary & Interdisciplinary Approach", November 08, 2025.' },
+      { name: 'Dr. Chhavi Kulshreshtha', category: 'Research', badge: '📄', title: 'Paper Presented — SPARK 2026, Career College Bhopal', desc: '"From Human Expression to Machine Mediation: AI\'s Expanding Role in Literary Studies", February 20–21, 2026.' },
+      { name: 'Dr. Ghazala Abidin', category: 'Research', badge: '📄', title: 'Paper Presented — Lex Ex Machina 2025, SRM University', desc: '"Rethinking Emerging Technologies: Bitcoin and the Indian Context", November 14–15, 2025.' },
+      { name: 'Dr. Ghazala Abidin', category: 'Research', badge: '📄', title: 'Paper Presented — ICLT 2026, MANUU Law School Hyderabad', desc: '"The Illusion of Data Protection in India: A Study of the Digital Personal Data Protection Act", February 03, 2026.' },
+      { name: 'Dr. Ghazala Abidin', category: 'Publication', badge: '📰', title: 'Published — Scopus Journal of Environmental Sciences (2 papers)', desc: '"Environmental Factors, Trade Openness and Investment Determinants of Economic Growth in BRICS Nations" & "Sustainability & Urban Planning in India", 2025.' },
+      { name: 'Dr. Ghazala Abidin & Dr. Chhavi Kulshreshtha', category: 'Publication', badge: '💡', title: 'Patent Published — Autonomous Biometric Monitoring Wrist-Wearable Device', desc: 'Application No. 202511074241 A, Patent Office Journal No. 35/2025, August 29, 2025.' },
+      { name: 'Dr. Superna Venaik', category: 'Competition', badge: '⚖️', title: 'Judge — Philip C. Jessup International Law Moot Court Competition 2026', desc: 'Judged India National Qualifying Rounds at O.P. Jindal Global University, Sonipat, February 13, 2026.' },
+      { name: 'Dr. Aarushi Malik', category: 'Award', badge: '🎓', title: 'Completed EDP on ESG, Carbon Markets & Sustainability', desc: 'Executive Development Programme by Dhirubhai Ambani University, School of Law, September 29 – December 20, 2025.' },
+      { name: 'Dr. Apala Vatsa & Mr. Aditya Verma', category: 'Research', badge: '📄', title: 'Paper Presented — University of Warwick Conference', desc: '"Imagining Feminist Futures through Protest Cycles and Transnational Solidarity in Ni Una Menos", November 29, 2025.' },
+      { name: 'Dr. Yamini Atreya', category: 'Research', badge: '🎤', title: 'Moderator — International Conference, Tantia University', desc: 'Panel discussion on "Reimagining Fundamental Rights under the Indian Constitution in 21st century", November 22, 2025.' },
+      { name: 'Dr. Yamini Atreya & Ms. Saloni Mishra', category: 'Research', badge: '📄', title: 'Paper Presented — Benett University & University of Leeds/Birmingham', desc: '"The Role of AI and the Reconceptualization of the Right Against Exploitation of Women in the 21st century", November 24–25, 2025.' },
+      { name: 'Dr. Aaratrika Pandey', category: 'Publication', badge: '📖', title: 'Book Chapter Published — Routledge, February 2026', desc: '"Conceptualizing the Anatomy of Green Criminology in South Asia" in "Green Criminology and Climate Justice: A South-Asia Perspective".' },
+      { name: 'Ms. Garima Pahwa', category: 'Research', badge: '📄', title: 'Paper Presented — Sharda University International Conference', desc: '"Integrating Traditional Ecological Knowledge of Gond & Baiga Tribes into Wildlife Protection Law Enforcement", January 16–17, 2026.' },
+      { name: 'Ms. Garima Pahwa', category: 'Research', badge: '📄', title: 'Paper Presented — 1st International Conference on Clean and Safe Sports, NLU Delhi', desc: '"The Interface between Competition Law and Safe Sport: A Comparative Case Law Analysis", February 14, 2026.' },
+      { name: 'Prof. (Dr.) S.K. Bose', category: 'Research', badge: '🎤', title: 'Resource Person — 94th Online Refresher Course: Law', desc: '"From Privacy to Principle: Embedding Data Protection in the Rule of Law", August 25, 2025.' },
+      { name: 'Ms. Chaitali Wadhwa', category: 'Publication', badge: '📖', title: 'Multiple Book Chapters & Design Patent Published — 2025', desc: 'Chapters in "The Justice She Deserves", "Bharatiya Jurisprudence and Indian Knowledge System", and "Criminal Minds and Media Trials". Design patent "Interactive Legal Assistance Device" granted August 06, 2025.' },
+      { name: 'Ms. Chaitali Wadhwa', category: 'Competition', badge: '⚖️', title: 'Guest Arbitrator — FDI Investment Arbitration International Moot Court Competition 2025', desc: 'Invited as Guest Arbitrator for Regional Rounds, August 2025.' },
+      { name: 'Dr. Tarundeep Kaur', category: 'Publication', badge: '📰', title: 'Paper Published — Journal of School of Language, Literature and Culture Studies', desc: '"The Soul of Wellbeing: Integrating Spirituality into the Science of Happiness", ISSN: 0972-9682, 2025.' },
     ],
   },
   {

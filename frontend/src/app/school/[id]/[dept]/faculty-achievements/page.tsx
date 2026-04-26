@@ -3,32 +3,28 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
-import { ArrowLeft, Trophy, Filter } from 'lucide-react'
+import { ArrowLeft, Award, Filter } from 'lucide-react'
 import { schools, Achievement } from '@/lib/schools'
 
-type Category = 'All' | 'Research' | 'Competition' | 'Sports' | 'Award' | 'Publication' | 'MUN'
+type Category = 'All' | 'Research' | 'Competition' | 'Award' | 'Publication'
 
-const categories: Category[] = ['All', 'Publication', 'Competition', 'Research', 'Sports', 'Award', 'MUN']
+const categories: Category[] = ['All', 'Publication', 'Research', 'Award', 'Competition']
 
 const categoryColors: Record<Category, string> = {
   All:         'bg-neutral-800 text-white',
   Publication: 'bg-blue-600 text-white',
-  Competition: 'bg-amber-500 text-white',
   Research:    'bg-purple-600 text-white',
-  Sports:      'bg-green-600 text-white',
   Award:       'bg-red-600 text-white',
-  MUN:         'bg-teal-600 text-white',
+  Competition: 'bg-amber-500 text-white',
 }
 
-export default function StudentAchievementsPage() {
+export default function FacultyAchievementsPage() {
   const router = useRouter()
-  const { id, dept } = useParams<{ id: string; dept: string }>()
+  const { id } = useParams<{ id: string; dept: string }>()
   const [active, setActive] = useState<Category>('All')
 
   const school = schools.find(s => s.id === id)
-  const department = school?.departments.find(d => d.id === dept)
-  // Use department-level achievements if available, else fall back to school-level
-  const data: Achievement[] = department?.studentAchievements ?? school?.studentAchievements ?? []
+  const data: Achievement[] = school?.facultyAchievements ?? []
 
   const filtered = active === 'All' ? data : data.filter(a => a.category === active)
 
@@ -42,8 +38,8 @@ export default function StudentAchievementsPage() {
             <ArrowLeft className="w-4 h-4 text-white" />
           </button>
           <div className="px-6 pt-10 pb-8 text-center">
-            <h1 className="font-bold text-white text-xl leading-tight">Student Achievements</h1>
-            <p className="text-white/70 text-xs mt-1">{department?.name ?? school?.name ?? 'Department'}</p>
+            <h1 className="font-bold text-white text-xl leading-tight">Faculty Achievements</h1>
+            <p className="text-white/70 text-xs mt-1">{school?.name ?? 'School'}</p>
           </div>
           <div className="h-8">
             <svg viewBox="0 0 390 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
@@ -70,8 +66,8 @@ export default function StudentAchievementsPage() {
           <div className="px-4 py-4">
             {data.length === 0 ? (
               <div className="text-center py-16">
-                <Trophy className="w-10 h-10 text-neutral-200 mx-auto mb-3" />
-                <p className="text-sm text-neutral-400">No achievements added yet.</p>
+                <Award className="w-10 h-10 text-neutral-200 mx-auto mb-3" />
+                <p className="text-sm text-neutral-400">No faculty achievements added yet.</p>
               </div>
             ) : (
               <AnimatePresence mode="popLayout">
@@ -80,15 +76,12 @@ export default function StudentAchievementsPage() {
                     <motion.div key={i} layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }} transition={{ delay: i * 0.03 }}
                       className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden flex">
-                      <div className="w-14 bg-secondary/10 flex items-center justify-center shrink-0">
+                      <div className="w-14 bg-primary/10 flex items-center justify-center shrink-0">
                         <span className="text-2xl">{item.badge}</span>
                       </div>
                       <div className="p-3 flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0">
-                            <p className="text-sm font-bold text-gray-900 leading-snug">{item.name}</p>
-                            {item.program && <p className="text-[10px] text-neutral-400 mt-0.5">{item.program}</p>}
-                          </div>
+                          <p className="text-sm font-bold text-gray-900 leading-snug flex-1 min-w-0">{item.name}</p>
                           <span className={`shrink-0 text-[9px] font-semibold px-2 py-0.5 rounded-full ${categoryColors[item.category as Category]}`}>{item.category}</span>
                         </div>
                         <p className="text-xs font-semibold text-gray-700 mt-1.5 leading-snug">{item.title}</p>
@@ -101,7 +94,7 @@ export default function StudentAchievementsPage() {
             )}
             {data.length > 0 && filtered.length === 0 && (
               <div className="text-center py-16">
-                <Trophy className="w-10 h-10 text-neutral-200 mx-auto mb-3" />
+                <Award className="w-10 h-10 text-neutral-200 mx-auto mb-3" />
                 <p className="text-sm text-neutral-400">No achievements in this category.</p>
               </div>
             )}

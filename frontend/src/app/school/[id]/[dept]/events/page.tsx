@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
-import { ArrowLeft, Calendar, CheckCircle2, Clock } from 'lucide-react'
+import { ArrowLeft, Calendar, Clock } from 'lucide-react'
 import Image from 'next/image'
 import { schools } from '@/lib/schools'
 
@@ -49,7 +49,7 @@ export default function DeptEventsPage() {
           {(['upcoming', 'completed'] as const).map(t => (
             <button key={t} onClick={() => setTab(t)}
               className={`flex-1 py-3 text-sm font-semibold transition-all duration-200 ${tab === t ? 'text-secondary border-b-2 border-secondary' : 'text-neutral-400'}`}>
-              {t === 'upcoming' ? 'Upcoming' : 'Completed'}
+              {t === 'upcoming' ? 'Upcoming' : 'Events Organised'}
             </button>
           ))}
         </div>
@@ -81,29 +81,47 @@ export default function DeptEventsPage() {
                 </motion.div>
               ) : (
                 <motion.div key="completed" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 16 }} transition={{ duration: 0.2 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  className="space-y-3">
                   {completed.length === 0 ? (
-                    <p className="text-sm text-neutral-400 text-center py-12 col-span-full">No completed events.</p>
+                    <p className="text-sm text-neutral-400 text-center py-12">No events organised yet.</p>
                   ) : (
                     completed.map((ev, i) => (
                       <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                        onClick={() => ev.slug && router.push(`/${ev.slug}/loading`)}
-                        className={`bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden ${ev.slug ? 'cursor-pointer active:scale-[0.98] transition-transform' : ''}`}>
-                        {ev.slug === 'icass-2026' && (
-                          <div className="relative h-36 bg-neutral-50 flex items-center justify-center border-b border-neutral-100">
-                            <Image src="/images/logo.png" alt={ev.title} width={120} height={120} className="object-contain" />
-                            <span className="absolute top-3 right-3 bg-neutral-700 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">Completed</span>
-                          </div>
-                        )}
-                        <div className="p-4 flex items-start gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center shrink-0">
-                            <CheckCircle2 className="w-5 h-5 text-green-600" />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
-                            {ev.description && <p className="text-xs text-neutral-500 mt-0.5 leading-snug">{ev.description}</p>}
-                            <p className="text-xs text-neutral-400 mt-1 flex items-center gap-1"><Calendar className="w-3 h-3" /> {ev.date}</p>
-                            {ev.slug && <span className="inline-block mt-2 text-xs font-semibold text-secondary">View Details →</span>}
+                        className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+                        {/* Image area */}
+                        <div className="relative bg-neutral-50 flex items-center justify-center border-b border-neutral-100" style={{ minHeight: 160 }}>
+                          {ev.slug === 'icass-2026' ? (
+                            <Image src="/images/logo.png" alt={ev.title} width={140} height={100} className="object-contain py-6" />
+                          ) : ev.slug === 'ece-workshop-apr2026' ? (
+                            <div className="relative w-full h-48">
+                              <Image src="/images/ece/workshop-apr2026.jpg" alt={ev.title} fill className="object-cover" />
+                            </div>
+                          ) : (
+                            <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center my-6">
+                              <span className="text-3xl">📅</span>
+                            </div>
+                          )}
+                          {/* Completed badge — top right */}
+                          <span className="absolute top-3 right-3 bg-neutral-700 text-white text-[11px] font-semibold px-3 py-1 rounded-full">
+                            Completed
+                          </span>
+                        </div>
+                        {/* Details */}
+                        <div className="px-4 py-4">
+                          <p className="text-sm font-bold text-gray-900">{ev.title}</p>
+                          {ev.description && (
+                            <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{ev.description}</p>
+                          )}
+                          <div className="flex items-center justify-between mt-2">
+                            <p className="text-xs text-neutral-400 flex items-center gap-1">
+                              <Calendar className="w-3 h-3" /> {ev.date}
+                            </p>
+                            {ev.slug === 'icass-2026' && (
+                              <button onClick={() => router.push('/icass-2026/loading')}
+                                className="text-xs font-semibold text-secondary flex items-center gap-1">
+                                View Details ↗
+                              </button>
+                            )}
                           </div>
                         </div>
                       </motion.div>
