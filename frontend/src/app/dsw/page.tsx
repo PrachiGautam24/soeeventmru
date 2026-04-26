@@ -118,7 +118,7 @@ export default function DSWPage() {
       label: 'Events',
       emoji: '🎉',
       desc: 'Fests, competitions & workshops',
-      href: '/home',
+      href: '/dsw/events',
       color: '#b45309',
       bg: '#fef3e2',
     },
@@ -182,14 +182,33 @@ export default function DSWPage() {
               <p className="text-sm font-bold text-gray-800">About DSW</p>
             </div>
             <div className="px-4 pb-4 space-y-3">
-              <p className="text-sm text-gray-600 leading-relaxed">
-                The Department of Student Welfare (DSW) at Manav Rachna University is the heartbeat of campus life. It nurtures holistic student development through cultural, sports, and social initiatives.
+              <p className="text-base font-extrabold text-gray-900 leading-snug">
+                Beyond Classrooms. Into the Real World.{' '}
+                <span style={{ color: '#db2777' }}>Welcome to MRU Life</span>
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                DSW organizes the annual Cultural Fest <span className="font-semibold text-pink-600">&quot;RESURRECTION&quot;</span> and collaborates with AICTE and UGC for programs like Unnat Bharat Abhiyan and Swacch Bharat Abhiyan.
+                At Manav Rachna University, your journey doesn&apos;t end at textbooks — it begins with real-world experiences that shape leaders, creators, and change-makers.
               </p>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Through the unique <span className="font-semibold text-pink-600">Clan system</span> — Air Falcons, Water Sharks, Forest Rhinos, and Wild Cats — students develop leadership, teamwork, and life skills that go beyond the classroom.
+                Here, every hallway, event, and initiative is a chance to discover yourself, lead boldly, and make a difference.
+              </p>
+              <div className="rounded-xl p-3 space-y-2" style={{ background: '#fdf2f8' }}>
+                {[
+                  { emoji: '💡', text: "You're not just a student. You're the spark behind the next big idea." },
+                  { emoji: '🎭', text: 'A performer lighting up the stage.' },
+                  { emoji: '🌍', text: 'A changemaker driving impact.' },
+                ].map((item) => (
+                  <div key={item.text} className="flex items-start gap-2">
+                    <span className="text-base shrink-0">{item.emoji}</span>
+                    <p className="text-sm font-medium text-gray-700 leading-snug">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                DSW organizes the annual Cultural Fest <span className="font-semibold" style={{ color: '#db2777' }}>&quot;RESURRECTION&quot;</span> and collaborates with AICTE and UGC for programs like Unnat Bharat Abhiyan and Swacch Bharat Abhiyan.
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Through the unique <span className="font-semibold" style={{ color: '#db2777' }}>Clan system</span> — Air Falcons, Water Sharks, Forest Rhinos, and Wild Cats — students develop leadership, teamwork, and life skills that go beyond the classroom.
               </p>
             </div>
           </div>
@@ -213,6 +232,39 @@ export default function DSWPage() {
                 <div key={i} className="flex items-center gap-3 px-4 py-3">
                   <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: '#db2777' }} />
                   <p className="text-sm text-gray-700">{skill}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Upcoming Events preview */}
+          <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+            <div className="flex items-center justify-between px-4 pt-4 pb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">🎉</span>
+                <p className="text-sm font-bold text-gray-800">Upcoming Events</p>
+              </div>
+              <button onClick={() => router.push('/dsw/events')}
+                className="text-xs font-semibold flex items-center gap-0.5" style={{ color: '#b45309' }}>
+                View All <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+            <div className="divide-y divide-neutral-100 border-t border-neutral-100">
+              {[
+                { date: '23 Apr 2026', title: 'Mental Health Awareness Talk', emoji: '🧠' },
+                { date: '23 Apr 2026', title: 'Sampling Steps', emoji: '💃' },
+                { date: '23 Apr 2026', title: 'Culture Couture', emoji: '🎭' },
+                { date: '30 Apr 2026', title: 'Anti-Ragging Week', emoji: '🤝' },
+                { date: '30 Apr 2026', title: 'Digital Doodlers', emoji: '🎨' },
+                { date: '30 Apr 2026', title: 'Riyaaz-E-Mehfil', emoji: '🎵' },
+                { date: '30 Apr 2026', title: 'Cyber Crime Awareness Camp', emoji: '🔐' },
+              ].map((ev) => (
+                <div key={ev.title} className="flex items-center gap-3 px-4 py-3">
+                  <span className="text-lg shrink-0">{ev.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-gray-800 truncate">{ev.title}</p>
+                    <p className="text-xs text-neutral-400 mt-0.5">{ev.date}</p>
+                  </div>
                 </div>
               ))}
             </div>
