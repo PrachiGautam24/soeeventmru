@@ -295,14 +295,22 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }} className="space-y-2.5">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">Explore Schools</p>
-                {visibleSchools.map((school) => (
-                  <motion.button key={school.id} whileTap={{ scale: 0.98 }}
+                {visibleSchools.map((school, i) => (
+                  <motion.button key={school.id}
+                    initial={{ opacity: 0, x: -24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.08, type: 'spring', stiffness: 260, damping: 22 }}
+                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ scale: 1.02 }}
                     onClick={() => router.push(`/school/${school.id}`)}
                     className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: schoolColors[school.id] + '18', color: schoolColors[school.id] }}>
+                    <motion.div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: schoolColors[school.id] + '18', color: schoolColors[school.id] }}
+                      whileHover={{ rotate: [0, -10, 10, -6, 6, 0], transition: { duration: 0.5 } }}
+                    >
                       {schoolSVGs[school.id]}
-                    </div>
+                    </motion.div>
                     <div className="flex-1 text-left">
                       <p className="text-sm font-semibold text-gray-800">{school.name}</p>
                       <p className="text-xs text-neutral-400 mt-0.5">{school.tagline}</p>
