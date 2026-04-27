@@ -25,9 +25,11 @@ export default function SchoolPage() {
 
   const school = schools.find(s => s.id === id)
 
-  // School of Law has no sub-departments — redirect to its dedicated page
+  // Schools with no sub-departments — redirect to dedicated pages
   useEffect(() => {
     if (id === 'law') router.replace('/school/law/overview')
+    if (id === 'education') router.replace('/school/education/overview')
+    if (id === 'business') router.replace('/school/business/overview')
   }, [id, router])
 
   if (!school) return (
@@ -36,7 +38,7 @@ export default function SchoolPage() {
     </div>
   )
 
-  if (id === 'law') return null
+  if (id === 'law' || id === 'education' || id === 'business') return null
 
   // Collect all upcoming events across all departments
   const allUpcoming = school.departments.flatMap(d =>
