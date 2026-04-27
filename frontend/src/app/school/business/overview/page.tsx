@@ -8,8 +8,12 @@ import { ArrowLeft, ChevronDown } from 'lucide-react'
 const gridItems = [
   { label: 'Testimonials',          icon: '💬', route: 'testimonials' },
   { label: 'School\nEvents',        icon: '📅', route: 'events' },
+  { label: 'Research\nExcellence',  icon: '🔬', route: 'research' },
+  { label: 'MDP',                   icon: '🤝', route: 'mdp' },
+  { label: 'Industrial\nVisits',    icon: '🏭', route: 'industrial-visits' },
   { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
   { label: 'Student\nAchievements', icon: '🏆', route: 'student-achievements' },
+  { label: 'Placements',            icon: '💼', route: 'placements' },
   { label: 'Programs\nOffered',     icon: '📖', route: 'programs' },
 ]
 
@@ -84,14 +88,22 @@ export default function BusinessOverviewPage() {
               </p>
             </div>
 
-            {/* Explore More — 3+2 grid */}
+            {/* Explore More — 3+3+2 grid */}
             <div>
               <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
               <div className="grid grid-cols-3 gap-2 mb-2">
                 {gridItems.slice(0, 3).map((item, i) => (
-                  <motion.button key={item.label}
-                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  <motion.button key={item.label} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} whileTap={{ scale: 0.95 }}
+                    onClick={() => router.push(`/school/business/overview/${item.route}`)}
+                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100">
+                    <span className="text-2xl">{item.icon}</span>
+                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
+                  </motion.button>
+                ))}
+              </div>
+              <div className="grid grid-cols-3 gap-2 mb-2">
+                {gridItems.slice(3, 6).map((item, i) => (
+                  <motion.button key={item.label} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.05 }} whileTap={{ scale: 0.95 }}
                     onClick={() => router.push(`/school/business/overview/${item.route}`)}
                     className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100">
                     <span className="text-2xl">{item.icon}</span>
@@ -100,10 +112,8 @@ export default function BusinessOverviewPage() {
                 ))}
               </div>
               <div className="flex justify-center gap-2">
-                {gridItems.slice(3).map((item, i) => (
-                  <motion.button key={item.label}
-                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.05 }}
-                    whileTap={{ scale: 0.95 }}
+                {gridItems.slice(6).map((item, i) => (
+                  <motion.button key={item.label} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 6) * 0.05 }} whileTap={{ scale: 0.95 }}
                     onClick={() => router.push(`/school/business/overview/${item.route}`)}
                     className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100 w-[31%]">
                     <span className="text-2xl">{item.icon}</span>
