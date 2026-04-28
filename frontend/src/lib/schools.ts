@@ -118,16 +118,6 @@ Students work in dedicated robotics labs equipped with collaborative robots, dro
           { title: 'Drone Tech Expo', date: 'May 18, 2026' },
         ],
       },
-      {
-        id: 'ce', name: 'Civil Engineering', code: 'CE', icon: '🏗️',
-        description: 'CE department covers structural engineering, environmental systems, and smart infrastructure for sustainable urban development.',
-        about: `The Civil Engineering department offers B.Tech, M.Tech, and Ph.D. programmes with focus areas in Structural Engineering, Environmental Engineering, and Smart Infrastructure.
-
-The department has well-equipped labs for geotechnical testing, concrete technology, and GIS mapping, with collaborations with CPWD and L&T Construction.`,
-        upcomingEvents: [
-          { title: 'Green Building Symposium', date: 'April 30, 2026' },
-        ],
-      },
     ],
   },
   {

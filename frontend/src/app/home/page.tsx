@@ -23,7 +23,7 @@ const fresherItems = [
 ]
 
 const schoolColors: Record<string, string> = {
-  soe: '#1e4ba9', law: '#b45309', education: '#16a34a', business: '#b12a2e', science: '#7c3aed', dsw: '#db2777',
+  soe: '#1e4ba9', law: '#b45309', education: '#16a34a', business: '#b12a2e', science: '#7c3aed',
 }
 
 const schoolSVGs: Record<string, React.ReactNode> = {
@@ -126,12 +126,15 @@ const topFunctionaries = [
   { name: 'Prof. (Dr.) Deependra Kumar Jha', title: 'Vice Chancellor', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Jha.jpg' },
   { name: 'Prof. (Dr.) Sangita Banga', title: 'Pro Vice Chancellor & Dean Education', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Sangita.jpg' },
   { name: 'Mr. Ramesh Nair', title: 'Registrar', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Ramesh-Nair.jpg' },
-  { name: 'Prof. (Dr.) Shruti Vashist', title: 'Dean Academics & HOD-ECE', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg' },
+  { name: 'Prof. (Dr.) Shruti Vashist', title: 'Dean Academics & Dean Research, HOD-ECE', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg' },
   { name: 'Prof. (Dr.) Dipali Bansal', title: 'Dean Engineering', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Dipali.jpg' },
   { name: 'Prof. (Dr.) Meena Kapahi', title: 'Director International Relations', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Meena-Kapahi.jpg' },
+  { name: 'Prof. (Dr.) Asha Verma', title: 'Dean, School of Law', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Asha-Verma.jpg' },
+  { name: 'Prof. (Dr.) Rashee Singh', title: 'Dean, School of Education & Humanities', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Rashee-Singh.jpg' },
+  { name: 'Prof. (Dr.) Yogita Sharma', title: 'Dean Students Welfare', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Yogita-Sharma.jpg' },
 ]
 
-const visibleSchools = schools.filter(s => s.id !== 'media')
+const visibleSchools = schools.filter(s => s.id !== 'media' && s.id !== 'dsw')
 
 // ─── CountUp component ────────────────────────────────────────────────────────
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
@@ -177,12 +180,13 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 }
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events'
+type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
   { id: 'departments',    label: 'Departments',    emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
   { id: 'functionaries',  label: 'Functionaries',  emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
-  { id: 'placements',     label: 'Placements',     emoji: '🏆', color: '#b45309', bg: '#fef3e2' },
+  { id: 'awards',         label: 'Awards',         emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
+  { id: 'placements',     label: 'Placements',     emoji: '💼', color: '#b45309', bg: '#fef3e2' },
   { id: 'campus',         label: 'Campus Life',    emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
   { id: 'events',         label: 'Events',         emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
 ]
@@ -232,19 +236,21 @@ export default function HomePage() {
   const [search, setSearch] = useState('')
   const [floatingOpen, setFloatingOpen] = useState(false)
 
-  const userName = session?.user?.name?.split(' ')[0] ?? 'Guest'
-
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
       <div className="max-w-md mx-auto">
 
-        {/* ── Header ── */}
+        {/* ── Header with MRU 30 Years Logo ── */}
         <div className="bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="text-white/70 text-xs font-medium">Welcome back 👋</p>
-              <h1 className="text-white text-xl font-bold">{userName}</h1>
-            </div>
+            <Image
+              src="/images/mru-30-years-logo.png"
+              alt="Manav Rachna University — 30 Years"
+              width={180}
+              height={70}
+              priority
+              className="object-contain"
+            />
             <div className="flex items-center gap-2">
               <button className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
                 <Bell className="w-4 h-4 text-white" />
@@ -275,24 +281,22 @@ export default function HomePage() {
 
         {/* ── Horizontal Scrollable Category Tabs ── */}
         <div className="px-4 mt-5">
-          <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {tabs.map((tab) => (
               <motion.button
                 key={tab.id}
                 whileTap={{ scale: 0.93 }}
                 onClick={() => setActiveTab(tab.id)}
-                className={`shrink-0 flex flex-col items-center gap-1 rounded-xl px-3 py-2 shadow-sm transition-all duration-200 border-2 ${
-                  activeTab === tab.id
-                    ? 'border-transparent shadow-md scale-105'
-                    : 'bg-white border-transparent'
+                className={`shrink-0 flex flex-col items-center gap-1 rounded-xl py-2.5 shadow-sm transition-all duration-200 border-2 w-20 ${
+                  activeTab === tab.id ? 'border-transparent shadow-md' : 'bg-white border-transparent'
                 }`}
                 style={activeTab === tab.id ? { backgroundColor: tab.bg, borderColor: tab.color + '40' } : {}}
               >
-                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base shadow-sm"
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
                   style={{ backgroundColor: activeTab === tab.id ? tab.color + '20' : '#f3f4f6' }}>
                   {tab.emoji}
                 </div>
-                <span className="text-xs font-bold whitespace-nowrap"
+                <span className="text-[10px] font-bold text-center leading-tight px-1"
                   style={{ color: activeTab === tab.id ? tab.color : '#6b7280' }}>
                   {tab.label}
                 </span>
@@ -368,8 +372,9 @@ export default function HomePage() {
                 {topFunctionaries.map((person) => (
                   <div key={person.name}
                     className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-neutral-100">
-                      <Image src={person.photo} alt={person.name} fill className="object-cover" />
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-neutral-100 bg-secondary/10 flex items-center justify-center">
+                      <Image src={person.photo} alt={person.name} fill className="object-cover" unoptimized />
+                      <span className="absolute text-sm font-bold text-secondary/40">{person.name[0]}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-gray-800 leading-tight">{person.name}</p>
@@ -377,6 +382,10 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
+                <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/functionaries')}
+                  className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-200 rounded-2xl py-3 text-sm font-semibold text-secondary shadow-sm">
+                  View All Functionaries <ChevronRight className="w-4 h-4" />
+                </motion.button>
               </motion.div>
             )}
 
@@ -420,6 +429,36 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
+              </motion.div>
+            )}
+
+            {/* AWARDS & RECOGNITIONS */}
+            {activeTab === 'awards' && (
+              <motion.div key="awards"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }} className="space-y-3">
+                {[
+                  { emoji: '💎', title: 'QS I-GAUGE Diamond Rating', desc: 'Conferred at institutional level. Platinum in Teaching & Learning, Social Responsibility, Governance & Structure, and Academic Development.' },
+                  { emoji: '🏅', title: 'QS I-Gauge Platinum — Engineering', desc: 'Prestigious Platinum Badge in QS I-Gauge Subject Ratings for Engineering, recognising excellence in education, research, and technological innovation.' },
+                  { emoji: '😊', title: 'Institution of Happiness', desc: 'Recognised as an "Institution of Happiness" by QS I-GAUGE at the QS I-Gauge Institution of Happiness Conclave 2024.' },
+                  { emoji: '📊', title: 'Platinum Band — OBE Ranking 2025', desc: 'Ranked in the Platinum band in the Outcome-Based Education Ranking 2025 for excellence in outcome-based education.' },
+                  { emoji: '📰', title: 'THE WEEK Ranking 2024', desc: 'Ranked 5th in Delhi NCR & 20th in North India (Private & Deemed Multidisciplinary). 13th nationally and 9th in North India among Emerging Multidisciplinary Universities.' },
+                  { emoji: '⚖️', title: 'GHRDC — School of Law Rankings', desc: 'Rank 3 in Top Outstanding Law School of Excellence, Rank 3 in Haryana, Rank 8 in Northern Region.' },
+                  { emoji: '☁️', title: 'Google Cloud Digital Campus 2.0', desc: 'Partnership with Google Cloud enabling AI-powered tools, digital learning infrastructure, and no-code app creation across campus.' },
+                  { emoji: '⭐', title: 'IIC 3.5-Star Rating 2023–24', desc: 'Awarded 3.5-Star Rating on IIC Activities for promoting Innovation & Startup culture. Ministry of Education, MoE\'s Innovation Cell, AICTE.' },
+                  { emoji: '🔬', title: 'Nodal Centre for Virtual Labs', desc: 'Recognised as Designated Nodal Centre for Virtual Labs — an initiative of HRD under National Mission of Education through ICT, IIT Delhi.' },
+                  { emoji: '🎓', title: 'NAAC A++ Accreditation', desc: 'Awarded NAAC A++ grade, the highest accreditation by the National Assessment and Accreditation Council.' },
+                  { emoji: '🌐', title: 'International Baccalaureate (IB)', desc: 'First university in India to be accredited by the International Baccalaureate Organization, aligning with international educational standards.' },
+                ].map((award, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
+                    className="bg-white rounded-2xl border border-neutral-100 shadow-sm px-4 py-3.5 flex items-start gap-3">
+                    <span className="text-2xl shrink-0">{award.emoji}</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-800">{award.title}</p>
+                      <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{award.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             )}
 
