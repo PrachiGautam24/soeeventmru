@@ -1,3 +1,4 @@
+import Chatbot from '@/components/Chatbot'
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -42,6 +43,7 @@ export default function RootLayout({
           <MobileOnly>
             {children}
             <BottomNav />
+            <Chatbot />
           </MobileOnly>
         </SessionProvider>
       </body>
