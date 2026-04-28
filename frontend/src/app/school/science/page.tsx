@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, ChevronDown, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import { schools } from '@/lib/schools'
 import PageTransition from '@/components/PageTransition'
