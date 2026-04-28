@@ -180,10 +180,11 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 }
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards'
+type TabId = 'departments' | 'elearning' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
   { id: 'departments',    label: 'Departments',    emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
+  { id: 'elearning',      label: 'E-Learning',     emoji: '💻', color: '#0891b2', bg: '#e0f7fa' },
   { id: 'functionaries',  label: 'Functionaries',  emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
   { id: 'awards',         label: 'Awards',         emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
   { id: 'placements',     label: 'Placements',     emoji: '💼', color: '#b45309', bg: '#fef3e2' },
@@ -360,6 +361,18 @@ export default function HomePage() {
                   </div>
                   <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
                 </motion.button>
+              </motion.div>
+            )}
+
+            {/* E-LEARNING */}
+            {activeTab === 'elearning' && (
+              <motion.div key="elearning"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="flex flex-col items-center justify-center py-20 space-y-4">
+                <span className="text-6xl">💻</span>
+                <p className="text-base font-bold text-gray-700">E-Learning</p>
+                <p className="text-sm text-neutral-400 text-center px-8">Content coming soon. E-learning resources will be available here.</p>
               </motion.div>
             )}
 
