@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { MessageCircle, X, Send, Mic } from 'lucide-react'
-import { chatbotKnowledge } from '@/lib/chatbotKnowledge'
+import { chatbotKnowledge } from '@/lib/chatbotknowledge'
 import { schools } from '@/lib/schools'
 
 type Message = {
@@ -11,11 +11,39 @@ type Message = {
   text: string
 }
 
+type SpeechRecognitionResultEvent = {
+  results: {
+    [key: number]: {
+      [key: number]: {
+        transcript: string
+      }
+    }
+  }
+}
+
+type SpeechRecognitionInstance = {
+  lang: string
+  continuous: boolean
+  interimResults: boolean
+  start: () => void
+  onresult: ((event: SpeechRecognitionResultEvent) => void) | null
+  onerror: (() => void) | null
+  onend: (() => void) | null
+}
+
+type SpeechRecognitionConstructor = new () => SpeechRecognitionInstance
+
+type WindowWithSpeechRecognition = Window & {
+  SpeechRecognition?: SpeechRecognitionConstructor
+  webkitSpeechRecognition?: SpeechRecognitionConstructor
+}
+
 export default function Chatbot() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [input, setInput] = useState('')
   const [isListening, setIsListening] = useState(false)
+
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'bot',
@@ -56,9 +84,12 @@ export default function Chatbot() {
   }
 
   const handleVoiceInput = () => {
+    if (typeof window === 'undefined') return
+
+    const speechWindow = window as WindowWithSpeechRecognition
+
     const SpeechRecognition =
-      (window as any).SpeechRecognition ||
-      (window as any).webkitSpeechRecognition
+      speechWindow.SpeechRecognition || speechWindow.webkitSpeechRecognition
 
     if (!SpeechRecognition) {
       alert('Use Chrome or Edge browser for voice support')
@@ -74,7 +105,7 @@ export default function Chatbot() {
     setIsListening(true)
     recognition.start()
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionResultEvent) => {
       const transcript = event.results[0][0].transcript
 
       setMessages(prev => [...prev, { role: 'user', text: transcript }])
@@ -242,6 +273,7 @@ In global rankings, MRU is placed in the 1501+ bracket in the Times Higher Educa
                 {msg.text}
               </div>
             ))}
+
             <div ref={bottomRef} />
           </div>
 
