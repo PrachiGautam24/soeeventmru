@@ -456,23 +456,24 @@ export default function HomePage() {
             {activeTab === 'events' && (
               <motion.div key="events"
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }} className="space-y-3">
-                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Upcoming Events</p>
-                {upcomingEvents.map((ev, i) => (
-                  <motion.div key={ev.title} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                    className="bg-white rounded-2xl overflow-hidden shadow-sm border border-neutral-100 flex">
-                    <div className="relative w-24 shrink-0">
-                      <Image src={ev.image} alt={ev.title} fill className="object-cover" unoptimized />
-                    </div>
-                    <div className="flex-1 px-3 py-3">
-                      <span className="inline-block bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">{ev.date}</span>
-                      <p className="text-sm font-bold text-gray-800 leading-tight">{ev.title}</p>
-                      <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1">{ev.subtitle}</p>
-                    </div>
-                  </motion.div>
-                ))}
+                transition={{ duration: 0.2 }}>
+                <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+                  <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest px-4 pt-4 pb-2">Upcoming Events</p>
+                  <div className="divide-y divide-neutral-100 border-t border-neutral-100">
+                    {upcomingEvents.map((ev, i) => (
+                      <motion.div key={ev.title} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
+                        className="flex items-start gap-3 px-4 py-3.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1" />
+                        <div>
+                          <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
+                          <p className="text-xs text-neutral-400 mt-0.5">{ev.subtitle} · {ev.date}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
                 <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/events')}
-                  className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-200 rounded-2xl py-3 text-sm font-semibold text-secondary shadow-sm">
+                  className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-200 rounded-2xl py-3 text-sm font-semibold text-secondary shadow-sm mt-3">
                   View All Events <ChevronRight className="w-4 h-4" />
                 </motion.button>
               </motion.div>

@@ -1,4 +1,4 @@
-export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media'
+export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media' | 'dsw'
 
 export interface Achievement {
   name: string
@@ -346,6 +346,59 @@ Students benefit from industry collaborations with leading media houses and regu
         description: 'Covers filmmaking, video production, and digital content creation.',
         about: `The Film & Digital Media programme equips students with skills in screenwriting, direction, cinematography, and post-production with professional-grade studio facilities.`,
         upcomingEvents: [{ title: 'Short Film Festival', date: 'May 9, 2026' }],
+      },
+    ],
+  },
+  {
+    id: 'dsw',
+    name: 'Department of Student Welfare',
+    tagline: 'Student Life & Community',
+    icon: '🎭',
+    color: 'bg-rose-600',
+    about: `Manav Rachna University's Department of Student Welfare (DSW) manages the Life Skills Programme through its unique Clan-based structure — four clans: Wild Cats, Forest Rhinos, Water Sharks, and Air Falcons.
+
+The department serves as a liaison between students and the administration, providing leadership, social, extracurricular, and academic counseling programmes. It aims to develop the overall personality of students and bring out their hidden talents in music, dance, literature, fashion, arts, social responsibility, theatre, photography, and health.
+
+The Student Council, under the Dean of Students Welfare, handles various committees for technical and cultural events. Societies include: Felicia (Art), Rehnuma (Literary), Noora (Fashion), Tech Soul (Tech), Gamenix (Gaming), Drishti (Media), Rudra (Dance), AthElites (Sports), Moksh (Music), Khalbali (Drama), ISR, and CSR.
+
+DSW collaborates with AICTE and UGC for programmes like Unnat Bharat Abhiyan, Ek Bharat Shrestha Bharat, Swachh Bharat Abhiyan, FIT India Movement, and various anti-ragging seminars, Red Cross, human rights, and road safety initiatives.
+
+The annual Cultural Fest "RESURRECTION" promotes the rich culture and heritage of India through music, dance, theatre, literary, fine arts, and fashion events. National and international festivals like Holi, Diwali, Navratri, Christmas, Independence Day, and Republic Day are celebrated with full zeal and enthusiasm.
+
+Office: J Block, First Floor, Sector 43, Aravalli Hills, Manav Rachna Campus Rd, Faridabad, Haryana 121004.`,
+    academicPartners: [],
+    departments: [
+      {
+        id: 'student-council', name: 'Student Council & Societies', code: 'SC', icon: '🏛️',
+        description: 'The Student Council manages technical and cultural committees. Societies include Art, Media, Fashion, Music, Dance, Drama, Literary, Tech, Gaming, CSR, and Sports.',
+        about: `The Student Council under the Dean of Students Welfare handles various committees for technical and cultural events, electing a President, Vice President, Member Secretary, PRO, and Treasurer.
+
+Societies: Felicia (Art), Rehnuma (Literary), Noora (Fashion), Tech Soul (Tech), Gamenix (Gaming), Drishti (Media), Rudra (Dance), AthElites (Sports), Moksh (Music), Khalbali (Drama), ISR, and CSR.`,
+        upcomingEvents: [],
+      },
+      {
+        id: 'clans', name: 'Clans & Life Skills', code: 'CLS', icon: '🦁',
+        description: 'Four clans — Wild Cats, Forest Rhinos, Water Sharks, Air Falcons — drive the Life Skills Programme focused on leadership, communication, and personal development.',
+        about: `The Clan-based Life Skills Programme facilitates an environment for students to engage across physical infrastructures, promoting academic excellence and personal development.
+
+The four clans are Wild Cats, Forest Rhinos, Water Sharks, and Air Falcons. Each clan fosters friendship, respect, responsibility, loyalty, and tolerance among students.`,
+        upcomingEvents: [],
+      },
+      {
+        id: 'cultural-events', name: 'Cultural Events & Fests', code: 'CEF', icon: '🎪',
+        description: 'Annual Cultural Fest RESURRECTION, Holi Haat, Republic Day, and other national/international festival celebrations organized by DSW.',
+        about: `DSW organizes the annual Cultural Fest "RESURRECTION" featuring music, dance, theatre, literary, fine arts, and fashion events promoting India's rich culture and heritage.
+
+Recent highlights include: MRU at FISU World University Championship Shooting Sport 2025 (cultural performances by Moksh, Felicia, Rudra), Holi Haat 2025, Beat the Battle dance competition, and Ganesh Chaturthi celebrations.`,
+        upcomingEvents: [],
+      },
+      {
+        id: 'isr-csr', name: 'ISR & CSR Initiatives', code: 'ISR', icon: '🌱',
+        description: 'Institutional and Corporate Social Responsibility initiatives in collaboration with NGOs, government bodies, and community organizations.',
+        about: `MRU's ISR reflects its commitment to holistic development beyond academics. By collaborating with NGOs, government bodies, and community organizations, MRU actively contributes to health, education, environment, and welfare initiatives.
+
+Programmes include: Unnat Bharat Abhiyan, Ek Bharat Shrestha Bharat, Swachh Bharat Abhiyan, FIT India Movement, NSS, Red Cross, anti-ragging seminars, and road safety initiatives.`,
+        upcomingEvents: [],
       },
     ],
   },
