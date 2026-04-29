@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Flame, Target, Trophy, BrainCircuit,
-  Vote, Gift, CalendarCheck, Sparkles, ChevronRight, Rss
+  Vote, Gift, CalendarCheck, Sparkles, ChevronRight, Rss, GraduationCap
 } from 'lucide-react'
 import StatBar from '@/components/engage/StatBar'
 import { useMe } from '@/components/engage/MeProvider'
@@ -30,6 +30,7 @@ const quickActions = [
   { icon: BrainCircuit,  label: 'Quiz',         href: '/engage/quiz',        color: 'from-fuchsia-500 to-purple-600' },
   { icon: Vote,          label: 'Polls',        href: '/engage/polls',       color: 'from-sky-500 to-blue-600' },
   { icon: Rss,           label: 'Feed',         href: '/engage/feed',        color: 'from-rose-500 to-pink-600' },
+  { icon: GraduationCap, label: 'Learning',     href: '/engage/learning',    color: 'from-blue-500 to-cyan-600' },
   { icon: CalendarCheck, label: 'Check-in',     href: '/engage/events',      color: 'from-indigo-500 to-violet-600' },
   { icon: Gift,          label: 'Rewards',      href: '/engage/rewards',     color: 'from-yellow-500 to-amber-500' },
   { icon: Sparkles,      label: 'Profile',      href: '/engage/profile',     color: 'from-slate-600 to-slate-800' },

@@ -35,6 +35,8 @@ export default function PollsPage() {
 
   async function vote(poll: Poll, optionId: string) {
     if (poll.myVote === optionId) return
+    const previousPoll = polls.find((p) => p.id === poll.id)
+    if (!previousPoll) return
     // Optimistic update
     setPolls((prev) =>
       prev.map((p) => {
@@ -61,6 +63,7 @@ export default function PollsPage() {
       body: JSON.stringify({ pollId: poll.id, optionId }),
     })
     if (!res.ok) {
+      setPolls((prev) => prev.map((p) => (p.id === previousPoll.id ? previousPoll : p)))
       push({ kind: 'xp', title: 'Sign in to vote', detail: 'Votes earn XP.' })
       return
     }

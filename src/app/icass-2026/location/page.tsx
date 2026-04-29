@@ -38,17 +38,12 @@ export default function LocationPage() {
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-2xl shadow-lg overflow-hidden"
           >
-            <div className="h-64 bg-neutral-200 relative">
-              {/* Embedded Google Map */}
-              <iframe
-                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJJTSKBKvgDDkR675bSGgv0aQ&key=AIzaSyClZxfln6R0Jjk53Y6tydshM46JP6MU-pE"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+            <div className="h-64 bg-gradient-to-br from-blue-50 to-sky-100 relative flex items-center justify-center">
+              <div className="text-center px-6">
+                <MapPin className="w-12 h-12 mx-auto text-primary mb-3" />
+                <p className="text-sm font-semibold text-neutral-800">Map preview hidden for security</p>
+                <p className="text-xs text-neutral-600 mt-1">Use the button below to open Google Maps.</p>
+              </div>
               
               {/* Open in Maps Button */}
               <button

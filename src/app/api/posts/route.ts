@@ -4,9 +4,15 @@ import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/session'
 import { awardXp, progressChallengesByTag } from '@/lib/gamification'
 
+function parseLimit(raw: string | null, fallback: number, max: number) {
+  const parsed = Number.parseInt(raw ?? '', 10)
+  if (!Number.isFinite(parsed) || parsed <= 0) return fallback
+  return Math.min(parsed, max)
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
-  const limit = Math.min(Number(searchParams.get('limit') ?? 30), 50)
+  const limit = parseLimit(searchParams.get('limit'), 30, 50)
   const cursor = searchParams.get('cursor') ?? undefined
 
   const me = await getCurrentUser()

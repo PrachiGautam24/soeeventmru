@@ -17,7 +17,7 @@ export type MeData = {
   rank: number
   progress: { level: number; inLevel: number; forLevel: number; percent: number }
   badges: { id: string; name: string; emoji: string; color: string; rarity: string }[]
-  stats: { posts: number; quizAttempts: number; eventCheckins: number }
+  stats: { posts: number; quizAttempts: number; eventCheckins: number; learningCompletions: number }
 }
 
 type Ctx = {

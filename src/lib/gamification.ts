@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import type { XpSource } from '@prisma/client'
+import type { Prisma, XpSource } from '@prisma/client'
 
 /**
  * Level curve: level N requires N * 100 XP cumulative (simple, predictable).
@@ -57,11 +57,13 @@ export async function awardXp(params: {
   coins?: number
   source: XpSource
   reason?: string
+  tx?: Prisma.TransactionClient
 }) {
-  const { userId, xp, coins = 0, source, reason } = params
+  const { userId, xp, coins = 0, source, reason, tx } = params
+  const db = tx ?? prisma
 
-  return prisma.$transaction(async (tx) => {
-    const user = await tx.user.findUnique({ where: { id: userId } })
+  if (tx) {
+    const user = await db.user.findUnique({ where: { id: userId } })
     if (!user) throw new Error('User not found')
 
     const newXp = user.xp + xp
@@ -69,11 +71,39 @@ export async function awardXp(params: {
     const prevLevel = user.level
     const newLevel = levelFromXp(newXp)
 
-    await tx.xpEvent.create({
+    await db.xpEvent.create({
       data: { userId, amount: xp, coins, source, reason },
     })
 
-    const updated = await tx.user.update({
+    const updated = await db.user.update({
+      where: { id: userId },
+      data: { xp: newXp, coins: newCoins, level: newLevel },
+    })
+
+    return {
+      xpDelta: xp,
+      coinsDelta: coins,
+      xp: updated.xp,
+      coins: updated.coins,
+      level: updated.level,
+      leveledUp: newLevel > prevLevel,
+    }
+  }
+
+  return prisma.$transaction(async (transactionClient) => {
+    const user = await transactionClient.user.findUnique({ where: { id: userId } })
+    if (!user) throw new Error('User not found')
+
+    const newXp = user.xp + xp
+    const newCoins = user.coins + coins
+    const prevLevel = user.level
+    const newLevel = levelFromXp(newXp)
+
+    await transactionClient.xpEvent.create({
+      data: { userId, amount: xp, coins, source, reason },
+    })
+
+    const updated = await transactionClient.user.update({
       where: { id: userId },
       data: { xp: newXp, coins: newCoins, level: newLevel },
     })
@@ -187,4 +217,25 @@ export async function progressChallengesByTag(userId: string, tag: string, amoun
       },
     })
   }
+}
+
+export async function grantBadgeIfMissing(params: {
+  userId: string
+  badgeSlug: string
+  tx?: Prisma.TransactionClient
+}) {
+  const db = params.tx ?? prisma
+  const badge = await db.badge.findUnique({ where: { slug: params.badgeSlug } })
+  if (!badge) return { granted: false, badge: null }
+
+  const existing = await db.userBadge.findFirst({
+    where: { userId: params.userId, badgeId: badge.id },
+    select: { id: true },
+  })
+  if (existing) return { granted: false, badge }
+
+  await db.userBadge.create({
+    data: { userId: params.userId, badgeId: badge.id },
+  })
+  return { granted: true, badge }
 }

@@ -11,13 +11,13 @@ const upcomingEvents = [
 ]
 
 const completedEvents = [
-  { title: 'ICASS 2026', subtitle: 'International Conference on Intelligent Computing & Automation', date: 'Feb 12–13, 2026', location: 'MRU Auditorium', image: '/images/logo.png', slug: '/icass-2026' },
+  { title: 'ICASS 2026', subtitle: 'International Conference on Intelligent Computing & Automation', date: 'Feb 12–13, 2026', location: 'MRU Auditorium', image: '/images/logo.png', slug: '/icass-2026/home' },
 ]
 
 export default function EventsPage() {
   return (
-    <div className="min-h-screen bg-neutral-100 pb-24">
-      <div className="max-w-md mx-auto">
+    <div className="min-h-screen bg-neutral-100 pb-24 md:pb-10">
+      <div className="mx-auto w-full max-w-md md:max-w-5xl">
 
         {/* Header */}
         <div className="bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">

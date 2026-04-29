@@ -16,6 +16,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [info, setInfo] = useState('')
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -62,6 +63,15 @@ export default function LoginPage() {
     signIn('google', { callbackUrl: '/engage' })
   }
 
+  const handleForgotPassword = () => {
+    if (!email.trim()) {
+      setError('Enter your email first to recover your password.')
+      return
+    }
+    setError('')
+    setInfo('Password recovery is not live yet. Please contact support@mru.edu.in from your registered email.')
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center"
       style={{ background: 'linear-gradient(160deg, #c0392b 0%, #e74c3c 50%, #c0392b 100%)' }}>
@@ -79,7 +89,7 @@ export default function LoginPage() {
         </svg>
       </div>
 
-      <div className="max-w-md w-full mx-auto min-h-screen flex flex-col relative z-10">
+      <div className="w-full max-w-md md:max-w-5xl mx-auto min-h-screen flex flex-col relative z-10 md:justify-center md:py-8">
 
         {/* Header */}
         <div className="relative overflow-hidden">
@@ -106,7 +116,7 @@ export default function LoginPage() {
         </div>
 
         {/* Body — white card */}
-        <div className="flex-1 flex flex-col mx-4 mb-4 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden">
+        <div className="flex-1 flex flex-col mx-4 mb-4 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden md:max-w-xl md:mx-auto md:w-full">
           <div className="flex-1 flex flex-col px-7 py-8 gap-6">
 
             {/* Title */}
@@ -182,7 +192,7 @@ export default function LoginPage() {
 
             {/* Forgot password */}
             <div className="flex justify-end">
-              <button type="button" className="text-xs text-red-600 font-medium">
+              <button type="button" onClick={handleForgotPassword} className="text-xs text-red-600 font-medium">
                 Forgot password?
               </button>
             </div>
@@ -195,6 +205,15 @@ export default function LoginPage() {
                 className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-xl px-4 py-2.5"
               >
                 {error}
+              </motion.p>
+            )}
+            {info && (
+              <motion.p
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-xl px-4 py-2.5"
+              >
+                {info}
               </motion.p>
             )}
 
@@ -244,14 +263,14 @@ export default function LoginPage() {
             {mode === 'signin' ? (
               <>
                 Don&apos;t have an account?{' '}
-                <button type="button" onClick={() => { setMode('signup'); setError('') }} className="text-red-600 font-semibold">
+                <button type="button" onClick={() => { setMode('signup'); setError(''); setInfo('') }} className="text-red-600 font-semibold">
                   Sign up
                 </button>
               </>
             ) : (
               <>
                 Already a member?{' '}
-                <button type="button" onClick={() => { setMode('signin'); setError('') }} className="text-red-600 font-semibold">
+                <button type="button" onClick={() => { setMode('signin'); setError(''); setInfo('') }} className="text-red-600 font-semibold">
                   Sign in
                 </button>
               </>

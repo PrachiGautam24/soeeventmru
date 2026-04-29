@@ -2,10 +2,16 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/session'
 
+function parseLimit(raw: string | null, fallback: number, max: number) {
+  const parsed = Number.parseInt(raw ?? '', 10)
+  if (!Number.isFinite(parsed) || parsed <= 0) return fallback
+  return Math.min(parsed, max)
+}
+
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const scope = searchParams.get('scope') ?? 'all' // all | week | day
-  const limit = Math.min(Number(searchParams.get('limit') ?? 50), 100)
+  const limit = parseLimit(searchParams.get('limit'), 50, 100)
 
   let users: Array<{ id: string; name: string | null; image: string | null; xp: number; level: number; streakCount: number; department: string | null }>
 

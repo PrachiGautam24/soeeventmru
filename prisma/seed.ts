@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+import 'dotenv/config'
 import bcrypt from 'bcryptjs'
-
-const prisma = new PrismaClient()
+import prisma from '@/lib/prisma'
 
 async function main() {
   console.log('🌱 Seeding SOE Engage database…')
@@ -15,6 +14,10 @@ async function main() {
     { slug: 'social-star',   name: 'Social Star',      description: '50 likes on your posts',     emoji: '⭐', color: '#eab308', rarity: 'epic',      xpReward: 150 },
     { slug: 'event-hunter',  name: 'Event Hunter',     description: 'Check in to 5 events',        emoji: '🎟️', color: '#14b8a6', rarity: 'rare',      xpReward: 100 },
     { slug: 'top-10',        name: 'Top 10',           description: 'Break into the top 10',       emoji: '🏆', color: '#f59e0b', rarity: 'legendary', xpReward: 250 },
+    { slug: 'linkedin-dsa',  name: 'DSA Learner',      description: 'Completed DSA learning pathway', emoji: '🌳', color: '#16a34a', rarity: 'rare', xpReward: 80 },
+    { slug: 'linkedin-os',   name: 'OS Operator',      description: 'Completed Operating Systems pathway', emoji: '⚙️', color: '#0284c7', rarity: 'rare', xpReward: 80 },
+    { slug: 'linkedin-ml',   name: 'ML Explorer',      description: 'Completed AI/ML pathway', emoji: '🤖', color: '#7c3aed', rarity: 'epic', xpReward: 120 },
+    { slug: 'linkedin-cloud',name: 'Cloud Starter',    description: 'Completed cloud foundations pathway', emoji: '☁️', color: '#2563eb', rarity: 'rare', xpReward: 90 },
   ]
   for (const b of badges) {
     await prisma.badge.upsert({ where: { slug: b.slug }, create: b, update: b })
@@ -39,6 +42,7 @@ async function main() {
       update: {
         name: u.name, department: u.department,
         xp: u.xp, level: u.level, coins: u.coins, streakCount: u.streak,
+        role: 'STUDENT',
       },
       create: {
         email: u.email,
@@ -50,6 +54,7 @@ async function main() {
         coins: u.coins,
         streakCount: u.streak,
         lastActiveDay: new Date(),
+        role: 'STUDENT',
       },
     })
   }
@@ -70,6 +75,30 @@ async function main() {
       coins: 30,
       streakCount: 1,
       lastActiveDay: new Date(),
+      role: 'STUDENT',
+    },
+  })
+
+  // Admin user for completion review: admin@mru.edu.in / admin1234
+  await prisma.user.upsert({
+    where: { email: 'admin@mru.edu.in' },
+    update: {
+      name: 'SOE Admin',
+      role: 'ADMIN',
+      department: 'SOE',
+    },
+    create: {
+      email: 'admin@mru.edu.in',
+      name: 'SOE Admin',
+      passwordHash: await bcrypt.hash('admin1234', 10),
+      department: 'SOE',
+      role: 'ADMIN',
+      year: 'Staff',
+      bio: 'Learning pathways reviewer',
+      xp: 0,
+      level: 1,
+      coins: 0,
+      streakCount: 0,
     },
   })
 
@@ -207,6 +236,109 @@ async function main() {
     const existing = await prisma.reward.findFirst({ where: { title: r.title } })
     if (existing) await prisma.reward.update({ where: { id: existing.id }, data: r })
     else await prisma.reward.create({ data: r })
+  }
+
+  // ── E-learning pathways (curated LinkedIn Learning) ───────────────────
+  const pathways = [
+    {
+      slug: 'cse-sem4-core',
+      title: 'CSE Core — Semester 4',
+      description: 'Essential semester-4 LinkedIn Learning tracks for core CSE foundations.',
+      department: 'CSE',
+      semester: '4',
+      tags: ['cse', 'semester-4', 'core'],
+      courses: [
+        { title: 'Arrays and Hashing Fundamentals', description: 'Core DSA patterns for indexing and lookup.', url: 'https://www.linkedin.com/learning/paths/arrays-and-hashing-fundamentals', duration: '2h 10m', difficulty: 'Beginner', xpReward: 40, badgeSlug: 'linkedin-dsa' },
+        { title: 'Linked Lists and Pointer Logic', description: 'Build linked list intuition with coding walkthroughs.', url: 'https://www.linkedin.com/learning/paths/linked-lists-and-pointer-logic', duration: '1h 40m', difficulty: 'Beginner', xpReward: 45, badgeSlug: 'linkedin-dsa' },
+        { title: 'Trees and Graphs Essentials', description: 'Understand BFS/DFS and graph modeling.', url: 'https://www.linkedin.com/learning/paths/trees-and-graphs-essentials', duration: '2h 35m', difficulty: 'Intermediate', xpReward: 50, badgeSlug: 'linkedin-dsa' },
+        { title: 'Dynamic Programming Basics', description: 'Solve optimization-style interview problems.', url: 'https://www.linkedin.com/learning/paths/dynamic-programming-basics', duration: '1h 55m', difficulty: 'Intermediate', xpReward: 55, badgeSlug: 'linkedin-dsa' },
+      ],
+    },
+    {
+      slug: 'ai-ml-track',
+      title: 'AI / ML Track',
+      description: 'Recommended AI/ML learning path using free access from MRU domain accounts.',
+      department: 'CSE',
+      semester: '5',
+      tags: ['ai', 'ml', 'data'],
+      courses: [
+        { title: 'Machine Learning Foundations', description: 'Supervised/unsupervised concepts and pipelines.', url: 'https://www.linkedin.com/learning/paths/machine-learning-foundations', duration: '4h 30m', difficulty: 'Beginner', xpReward: 60, badgeSlug: 'linkedin-ml' },
+        { title: 'Python for Data Science', description: 'Numpy/Pandas workflows for data analysis.', url: 'https://www.linkedin.com/learning/paths/python-for-data-science', duration: '3h 15m', difficulty: 'Beginner', xpReward: 50, badgeSlug: 'linkedin-ml' },
+        { title: 'Applied Neural Networks', description: 'Core deep learning architecture concepts.', url: 'https://www.linkedin.com/learning/paths/applied-neural-networks', duration: '2h 45m', difficulty: 'Intermediate', xpReward: 70, badgeSlug: 'linkedin-ml' },
+      ],
+    },
+    {
+      slug: 'cloud-foundations',
+      title: 'Cloud Foundations',
+      description: 'Cloud literacy and deployment basics for modern engineering roles.',
+      department: 'CSE',
+      semester: '4',
+      tags: ['cloud', 'devops', 'aws'],
+      courses: [
+        { title: 'AWS Cloud Foundations', description: 'Compute/storage/networking essentials.', url: 'https://www.linkedin.com/learning/paths/aws-cloud-foundations', duration: '5h', difficulty: 'Beginner', xpReward: 55, badgeSlug: 'linkedin-cloud' },
+        { title: 'Intro to DevOps Practices', description: 'CI/CD, environments, and release basics.', url: 'https://www.linkedin.com/learning/paths/introduction-to-devops-practices', duration: '2h 20m', difficulty: 'Intermediate', xpReward: 45, badgeSlug: 'linkedin-cloud' },
+      ],
+    },
+  ] as const
+
+  for (const p of pathways) {
+    const pathway = await prisma.learningPathway.upsert({
+      where: { slug: p.slug },
+      update: {
+        title: p.title,
+        description: p.description,
+        department: p.department,
+        semester: p.semester,
+        tags: [...p.tags],
+        active: true,
+      },
+      create: {
+        slug: p.slug,
+        title: p.title,
+        description: p.description,
+        department: p.department,
+        semester: p.semester,
+        tags: [...p.tags],
+        active: true,
+      },
+    })
+
+    for (const [index, c] of p.courses.entries()) {
+      const existing = await prisma.learningCourse.findFirst({
+        where: { pathwayId: pathway.id, title: c.title },
+      })
+      if (existing) {
+        await prisma.learningCourse.update({
+          where: { id: existing.id },
+          data: {
+            description: c.description,
+            url: c.url,
+            duration: c.duration,
+            difficulty: c.difficulty,
+            order: index,
+            xpReward: c.xpReward,
+            badgeSlug: c.badgeSlug,
+            active: true,
+          },
+        })
+      } else {
+        await prisma.learningCourse.create({
+          data: {
+            pathwayId: pathway.id,
+            title: c.title,
+            description: c.description,
+            provider: 'LINKEDIN',
+            url: c.url,
+            duration: c.duration,
+            difficulty: c.difficulty,
+            order: index,
+            xpReward: c.xpReward,
+            badgeSlug: c.badgeSlug,
+            active: true,
+          },
+        })
+      }
+    }
   }
 
   // ── Seed some demo posts ─────────────────────────────────────────────

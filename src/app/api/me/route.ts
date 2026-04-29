@@ -15,7 +15,7 @@ export async function GET() {
     include: {
       earnedBadges: { include: { badge: true }, orderBy: { earnedAt: 'desc' }, take: 10 },
       _count: {
-        select: { posts: true, quizAttempts: true, eventCheckins: true },
+        select: { posts: true, quizAttempts: true, eventCheckins: true, learningCompletions: true },
       },
     },
   })

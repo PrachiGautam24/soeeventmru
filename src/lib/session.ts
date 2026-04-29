@@ -20,3 +20,13 @@ export async function requireUser() {
   }
   return user
 }
+
+export async function requireAdminUser() {
+  const user = await requireUser()
+  if (user.role !== 'ADMIN') {
+    const err = new Error('FORBIDDEN')
+    ;(err as Error & { status?: number }).status = 403
+    throw err
+  }
+  return user
+}

@@ -177,10 +177,10 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
-      <div className="max-w-md mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
 
         {/* ── Header ── */}
-        <div className="bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">
+        <div className="bg-secondary px-5 md:px-8 lg:px-10 pt-10 pb-6 rounded-b-3xl shadow-lg">
           <div className="flex items-center justify-between mb-4">
             <div>
               <p className="text-white/70 text-xs font-medium">Welcome back 👋</p>
@@ -215,7 +215,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Hero campus image ── */}
-        <div className="relative w-full overflow-hidden" style={{ height: 200 }}>
+        <div className="relative w-full overflow-hidden lg:rounded-3xl lg:mt-4" style={{ height: 200 }}>
           <Image
             src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
             alt="Manav Rachna Campus"
@@ -234,7 +234,7 @@ export default function HomePage() {
         <motion.button
           whileTap={{ scale: 0.98 }}
           onClick={() => router.push('/engage')}
-          className="mx-4 mt-4 w-[calc(100%-2rem)] rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-fuchsia-600 text-white p-4 shadow-lg relative"
+          className="mx-4 md:mx-8 lg:mx-10 mt-4 w-auto rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-fuchsia-600 text-white p-4 shadow-lg relative"
         >
           <div className="absolute -right-6 -top-6 w-28 h-28 bg-white/10 rounded-full blur-2xl" />
           <div className="flex items-center gap-3 relative">
@@ -255,9 +255,27 @@ export default function HomePage() {
             <ChevronRight className="w-5 h-5" />
           </div>
         </motion.button>
+        <div className="mx-4 md:mx-8 lg:mx-10 mt-2">
+          <button
+            onClick={() => router.push('/engage/learning')}
+            className="w-full rounded-xl border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold py-2.5"
+          >
+            Explore E-Learning Pathways
+          </button>
+        </div>
+
+        <section className="mx-4 md:mx-8 lg:mx-10 mt-4 rounded-2xl bg-white border border-neutral-200 shadow-sm p-5 md:p-6">
+          <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Platform Vision</p>
+          <p className="mt-2 text-sm md:text-base text-neutral-700 leading-relaxed">
+            Build a student engagement platform driven by gamification, social interaction, and daily habits, where users earn points through activities like match predictions, social media tasks, content uploads, and course completion. Add leaderboards (individual and school-level), XP-based leveling, streak tracking, and badges to create competition and retention.
+          </p>
+          <p className="mt-3 text-sm md:text-base text-neutral-700 leading-relaxed">
+            Strengthen social features with user-generated content, missions, communities, and public profiles for visibility, then reinforce daily engagement with tasks, polls, flash challenges, random rewards, and notifications. Integrate e-learning so course completion directly contributes to rankings and overall progress, tightly connecting learning, competition, and consistent activity.
+          </p>
+        </section>
 
         {/* ── Horizontal Scrollable Category Tabs ── */}
-        <div className="px-4 mt-5">
+        <div className="px-4 md:px-8 lg:px-10 mt-5">
           <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
             {tabs.map((tab) => (
               <motion.button
@@ -285,7 +303,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Tab Content ── */}
-        <div className="px-4 mt-4">
+        <div className="px-4 md:px-8 lg:px-10 mt-4">
           <AnimatePresence mode="wait">
 
             {/* DEPARTMENTS */}
@@ -434,7 +452,7 @@ export default function HomePage() {
 
         {/* ── MRU at a Glance + Contact (departments tab only) ── */}
         {activeTab === 'departments' && (
-        <div className="px-4 mt-6 space-y-4">
+        <div className="px-4 md:px-8 lg:px-10 mt-6 space-y-4">
           {/* MRU Stats */}
           <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">MRU at a Glance</p>
           <div className="grid grid-cols-3 gap-3">

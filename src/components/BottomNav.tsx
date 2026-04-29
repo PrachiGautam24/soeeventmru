@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import type { ElementType } from 'react'
 import {
   Home, CalendarDays, Zap, User, Star, Share2,
   Target, Trophy, Rss, Gift, Sparkles,
 } from 'lucide-react'
 
-type NavItem = { name: string; href: string; icon: React.ElementType }
+type NavItem = { name: string; href: string; icon: ElementType }
 
 export default function BottomNav() {
   const pathname = usePathname()
@@ -43,7 +44,7 @@ export default function BottomNav() {
   if (pathname === '/' || pathname === '/login') return null
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 flex justify-center">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 flex justify-center md:hidden">
       <div className="w-full max-w-md bg-white border-t border-neutral-200 shadow-lg">
         <div className="flex justify-around items-center h-16">
           {navItems.map((item) => {
