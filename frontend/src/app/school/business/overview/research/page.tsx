@@ -68,7 +68,7 @@ export default function ResearchPage() {
         <div className="relative bg-secondary">
           <button onClick={() => router.back()} className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"><ArrowLeft className="w-4 h-4 text-white" /></button>
           <div className="px-6 pt-10 pb-8 text-center">
-            <h1 className="font-bold text-white text-xl">Hall of Research Excellence</h1>
+            <h1 className="font-bold text-white text-xl">Paper Publications</h1>
             <p className="text-white/70 text-xs mt-1">School of Business · MRU</p>
           </div>
           <div className="h-8"><svg viewBox="0 0 390 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none"><path d="M0 0 Q195 32 390 0 L390 32 L0 32 Z" fill="white" /></svg></div>

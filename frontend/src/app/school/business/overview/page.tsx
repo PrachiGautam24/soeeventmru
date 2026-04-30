@@ -8,7 +8,7 @@ import { ArrowLeft, ChevronDown } from 'lucide-react'
 const gridItems = [
   { label: 'Testimonials',          icon: '💬', route: 'testimonials' },
   { label: 'School\nEvents',        icon: '📅', route: 'events' },
-  { label: 'Research\nExcellence',  icon: '🔬', route: 'research' },
+  { label: 'Paper\nPublications',   icon: '📄', route: 'research' },
   { label: 'MDP',                   icon: '🤝', route: 'mdp' },
   { label: 'Industrial\nVisits',    icon: '🏭', route: 'industrial-visits' },
   { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
