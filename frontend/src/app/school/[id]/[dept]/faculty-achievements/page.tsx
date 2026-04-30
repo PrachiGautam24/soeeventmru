@@ -5,6 +5,82 @@ import { ChevronLeft } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { schools } from '@/lib/schools'
 
+// ─── CSE specific faculty achievements ───────────────────────────────────────
+const cseFacultyAchievements = [
+  {
+    name: '9 Faculty Members · CSE Dept',
+    role: 'School of Engineering',
+    badge: '🎓',
+    category: 'Certification',
+    title: 'Google Certified Educators — Level 2',
+    desc: 'Nine faculty members earned globally recognized Google Certified Educator Level 2 certification, embracing digital transformation for interactive and inclusive classrooms.',
+  },
+  {
+    name: 'Dr. Abhishek Saxena',
+    role: 'Faculty · CSE',
+    badge: '🏅',
+    category: 'Fellowship',
+    title: 'Fellow — SCRS · IANE · Research Fellow, Inti International University Malaysia',
+    desc: '• Fellow, Soft Computing Research Society (SCRS)\n• Research Fellow, Inti International University, Malaysia\n• Senior Member, Indian National Academy of Engineering (IANE), DST Govt. of India\n• Fellow Member, Soft Computing Research Society',
+  },
+  {
+    name: 'Ms. Gunjan Chandwani',
+    role: 'Faculty · CSE',
+    badge: '🏆',
+    category: 'Award',
+    title: 'Best Paper Award — ICCCT 2022–23 · Google Android Educator (2020–22)',
+    desc: '• Best Paper, 5th International Conference on Communication & Computational Technologies (2022–23)\n• Certificate of Appreciation, Google Android Educator Program (2021–22 & 2020–21)',
+  },
+  {
+    name: 'Dr. Mamta Arora',
+    role: 'Faculty · CSE',
+    badge: '🌟',
+    category: 'Award',
+    title: 'Young Researcher Award — STEM Research Society 2022',
+    desc: 'Received Young Researcher Award 2022 from STEM Research Society.',
+  },
+  {
+    name: 'Dr. Mrinal Pandey',
+    role: 'Faculty · CSE',
+    badge: '🏅',
+    category: 'Award',
+    title: 'Session Chair — SMART GENCON 2022 · AI Grand Challenge Mentor',
+    desc: '• Certificate of Appreciation as Session Chair, SMART GENCON 2022, Bangalore\n• Appreciation Letter as Mentor for CDAC Kolkata team — Winners, AI Grand Challenge (Real-Time Price Prediction 2021), Telangana Govt & Nasscom',
+  },
+  {
+    name: 'Ms. Chandni Magoo',
+    role: 'Faculty · CSE',
+    badge: '🌏',
+    category: 'Award',
+    title: 'Appreciation — MRU–Seikei University Japan Exchange Program (EAGLE)',
+    desc: 'Recognized for mentoring students in international exchange program between MRU India & Seikei University Japan, Oracle Japan (2022–23).',
+  },
+  {
+    name: 'Dr. Manpreet Kaur',
+    role: 'Faculty · CSE',
+    badge: '⚡',
+    category: 'IEEE Award',
+    title: 'IEEE Best Branch Counsellor · Women in Engineering · NPTEL SPOC',
+    desc: '• Special Mention — Best IEEE Branch Counsellor, IEEE Delhi Section (2021–22)\n• Honorary Women in Engineering Recognition, IEEE Delhi Section (2021–22)\n• Certificate of Appreciation as SWAYAM-NPTEL SPOC (Jan–Dec 2021 & Jan–Apr 2020)',
+  },
+  {
+    name: 'Ms. Anu Priya Sharma',
+    role: 'Faculty · CSE',
+    badge: '🏅',
+    category: 'Award',
+    title: 'I2OR National Elite Teacher Award 2022 · SIH Mentor 2020',
+    desc: '• I2OR National Elite Teacher Award, 5 Sept 2022\n• Certificate of Mentor, Smart India Hackathon 2020, MHRD (1–3 Aug 2020)',
+  },
+  {
+    name: 'Dr. Sanjay Singh',
+    role: 'Faculty · CSE',
+    badge: '🎓',
+    category: 'Certification',
+    title: 'Google Android Educator Program — Certificate of Appreciation (2020–21)',
+    desc: 'Awarded Certificate of Appreciation for Leading Android Educator Program by Google Developers (2020–21).',
+  },
+]
+
 // ─── R&A specific faculty achievements ───────────────────────────────────────
 const raFacultyAchievements = [
   {
@@ -49,7 +125,10 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   'IEEE Senior Member':     { bg: '#fef3e2', text: '#b45309' },
   'Conference':             { bg: '#e8edf8', text: '#1e4ba9' },
   'Conference + Award':     { bg: '#fde8e8', text: '#b12a2e' },
-  'Conference':             { bg: '#e8edf8', text: '#1e4ba9' },
+  'Multiple Achievements':  { bg: '#fef3e2', text: '#b45309' },
+  'Certification':          { bg: '#e8f5ee', text: '#16a34a' },
+  'Fellowship':             { bg: '#f3eeff', text: '#7c3aed' },
+  'IEEE Award':             { bg: '#e8edf8', text: '#1e4ba9' },
 }
 
 export default function FacultyAchievementsPage() {
@@ -59,7 +138,7 @@ export default function FacultyAchievementsPage() {
   const school = schools.find(s => s.id === id)
   const department = school?.departments.find(d => d.id === dept)
 
-  const achievements = dept === 'ra' ? raFacultyAchievements : []
+  const achievements = dept === 'ra' ? raFacultyAchievements : dept === 'cse' ? cseFacultyAchievements : []
 
   if (!school || !department) return (
     <div className="flex items-center justify-center min-h-screen bg-white">

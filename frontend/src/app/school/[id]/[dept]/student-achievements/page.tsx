@@ -5,6 +5,108 @@ import { ChevronLeft } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { schools } from '@/lib/schools'
 
+// ─── CSE specific achievements ────────────────────────────────────────────────
+const cseAchievements = [
+  {
+    name: 'Bhargavi Devapatla, Manas Jha, Manikanta Kancharla & Sankit Singhal',
+    badge: '🥇',
+    category: 'Hackathon',
+    title: '1st Place — Code Sangam, SGT University (Feb 2024)',
+    desc: '36-hour hackathon with 3 rounds. Won ₹15,000 prize.',
+  },
+  {
+    name: 'Bhargavi Devapatla',
+    badge: '🥉',
+    category: 'Competition',
+    title: '3rd Prize — Altair Data Science Contest, E-Summit\'25 (IIITDM Kancheepuram)',
+    desc: 'Under guidance of Dr. Mamta Arora. Showcased exceptional skills in data science and analytics.',
+  },
+  {
+    name: 'Bhargavi Devapatla & Manikanta Kancharla',
+    badge: '🏆',
+    category: 'Hackathon',
+    title: 'Top 6 — SOLVE-A-THON',
+    desc: 'Reached Top 6 teams. Demonstrated creativity, problem-solving, and collaboration skills.',
+  },
+  {
+    name: 'Narapureddy Durga Prasad Reddy, Manikanta Kancharla, Dogga Pavan Sekhar & Kodati Sai Teja',
+    badge: '🤖',
+    category: 'Hackathon',
+    title: 'Hackaccino 2024 — Bennett University',
+    desc: 'Developed an ML-based chatbot for health management providing tailored wellness insights.',
+  },
+  {
+    name: 'Bhargavi Devapatla',
+    badge: '🧠',
+    category: 'Research',
+    title: 'Health Tech Innovations Fest — TinyLife: Fetal Segmentation',
+    desc: 'Presented deep learning research on fetal brain tumor detection using CNN-based U-Net & SegNet architectures for early prenatal diagnosis.',
+  },
+  {
+    name: 'Rishav, Harsh & Avdhesh (Team Bring Hope) — AIML 6th Sem',
+    badge: '🥉',
+    category: 'Competition',
+    title: '3rd Place — Sociothon, IIT Roorkee (Feb 2024)',
+    desc: 'Secured 3rd among ~500 participants at National Social Summit\'24. Guided by Dr. Parneeta, Dr. Yogita, Mr. Vijay Gill & Dr. J.P. Sharma.',
+  },
+  {
+    name: 'Charu Goyal & Drishti Kemni',
+    badge: '📄',
+    category: 'Best Paper',
+    title: 'Best Paper Award — ICICC24 (Feb 2024)',
+    desc: '"Evaluation of ML Techniques for Personality Classification using Myers-Briggs Assessment" — 7th International Conference on Innovative Computing & Communication. Guided by Dr. Mrinal Pandey.',
+  },
+  {
+    name: 'Team Shinchan — Harsh Bhardwaj, Swayam Arora, Chhaya Sharma & Khushboo Mehta',
+    badge: '🥉',
+    category: 'Hackathon',
+    title: '3rd Prize — HackItUp 1.0, MRSDC MRI (Feb 2024)',
+    desc: '12-hour hackathon. Team led by Harsh Bhardwaj (CSE4A).',
+  },
+  {
+    name: 'Narapureddy Durga Prasad Reddy',
+    badge: '🤝',
+    category: 'Social',
+    title: 'Volunteer — Faridabad Wheelchair Cricket Tournament (Mar 2024)',
+    desc: 'Volunteered at Premier League 2.0 supported by Dr. O.P. Bhalla Foundation & Radio Manav Rachna.',
+  },
+  {
+    name: 'Durga Prasad',
+    badge: '🏅',
+    category: 'Academic',
+    title: 'Exceptional Performance Award — MR IMPACT Phase 1',
+    desc: 'B.Tech CSE AIML 5th Semester. Facilitated for exceptional academic performance.',
+  },
+  {
+    name: 'Jayram',
+    badge: '🏐',
+    category: 'Sports',
+    title: '1st Position — Volleyball, 1st MREI Hostel Sports Tournament',
+    desc: 'Achieved first position in Volleyball at the inaugural MREI Hostel Sports Tournament.',
+  },
+  {
+    name: 'Kanan Arora & Poonam Biswas',
+    badge: '🔬',
+    category: 'Research',
+    title: 'Becon 2024 — IIT Delhi (Research Quest & Inkshpire)',
+    desc: 'Presented "Automated Plant Disease Detection using AI" at Research Quest. Poonam also participated in Inkshpire doodle-making competition.',
+  },
+  {
+    name: 'Poonam Biswas, Kanan Arora & Mansi Gusian',
+    badge: '🏏',
+    category: 'Sports',
+    title: 'Winners — Cricket, 10th MREI Girls Sports Meet (Feb 2024)',
+    desc: 'Emerged victorious in cricket match at the 10th MREI Girls Sports Meet.',
+  },
+  {
+    name: 'Shivani Sharma',
+    badge: '🥇',
+    category: 'Competition',
+    title: '1st Place — Health Innovation Fest (40+ teams)',
+    desc: '"Indoor Navigation for Visually Impaired Using Real-Time Object Detection" — leveraging AI for safer, accessible navigation.',
+  },
+]
+
 // ─── R&A specific achievements ────────────────────────────────────────────────
 const raAchievements = [
   {
@@ -79,6 +181,11 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   'Internship':  { bg: '#e8edf8', text: '#1e4ba9' },
   'NPTEL':       { bg: '#e8f5ee', text: '#16a34a' },
   'Academic':    { bg: '#fef3e2', text: '#b45309' },
+  'Hackathon':   { bg: '#fde8e8', text: '#b12a2e' },
+  'Research':    { bg: '#f3eeff', text: '#7c3aed' },
+  'Best Paper':  { bg: '#e8f5ee', text: '#16a34a' },
+  'Social':      { bg: '#e8edf8', text: '#1e4ba9' },
+  'Sports':      { bg: '#e8f5ee', text: '#16a34a' },
 }
 
 export default function StudentAchievementsPage() {
@@ -89,7 +196,7 @@ export default function StudentAchievementsPage() {
   const department = school?.departments.find(d => d.id === dept)
 
   // Use R&A specific data if this is the ra dept, otherwise show generic
-  const achievements = dept === 'ra' ? raAchievements : []
+  const achievements = dept === 'ra' ? raAchievements : dept === 'cse' ? cseAchievements : []
 
   if (!school || !department) return (
     <div className="flex items-center justify-center min-h-screen bg-white">
