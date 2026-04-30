@@ -107,6 +107,108 @@ const cseAchievements = [
   },
 ]
 
+// ─── ME specific student achievements ────────────────────────────────────────
+const meAchievements = [
+  {
+    name: 'Vinay Kumar & Team',
+    badge: '🥇',
+    category: 'Competition',
+    title: '1st Prize — E-Yantra, IIT Bombay',
+    desc: '3rd year ME student won first prize with team at E-Yantra robotics competition, IIT Bombay.',
+  },
+  {
+    name: 'Gurpreet Singh, Fateh Singh, Tushar Gupta & Tushar Sehgal',
+    badge: '💰',
+    category: 'Grant',
+    title: 'CSR Funding ₹10,544 — E-Vehicle Startup',
+    desc: 'Received CSR grant for E-vehicle startup under mentorship of Dr. J.P. Sharma.',
+  },
+  {
+    name: 'Karan Khanjuja',
+    badge: '⛳',
+    category: 'Sports',
+    title: 'FIA JCB Tournament Winner · PGTI Pro-AM Runner-Up',
+    desc: 'Group winner at FIA JCB Tournament, Aravali Golf Club. Runner-up at PGTI Pro-AM Delhi NCR Golf Tournament.',
+  },
+  {
+    name: 'Vikram Sharma & Yash Choudhary',
+    badge: '🏋️',
+    category: 'Sports',
+    title: 'Bronze (93KG+) & Gold (74KG) — BOSM 2019, BITS',
+    desc: 'Vikram won Bronze in Free Weight 93KG+; Yash won Gold under 74KG at BITS Open Sports Meet 2019.',
+  },
+  {
+    name: 'Shivam Kumar',
+    badge: '💃',
+    category: 'Cultural',
+    title: 'National Level Dance Competitions',
+    desc: 'B.Tech ME student performed in multiple national level dance competitions.',
+  },
+  {
+    name: 'Prateek Sachdeva & Rajendra Tiruwa',
+    badge: '📄',
+    category: 'Publication',
+    title: 'Scopus Paper — "Jet Engine Mounting Bracket", MRU Feb 2022',
+    desc: 'Published in Scopus-indexed conference organized by MRU.',
+  },
+  {
+    name: 'Anshul Tripathi & Pritam',
+    badge: '📄',
+    category: 'Publication',
+    title: 'Paper — "Carbon Fiber Composites", MRU Feb 2022',
+    desc: 'Published at MRU conference, February 2022.',
+  },
+  {
+    name: 'Sahil Thakur & Tushar Aggarwal',
+    badge: '📄',
+    category: 'Publication',
+    title: 'Paper — "Structural Analysis of Iron Bridge", MRU Feb 2022',
+    desc: 'Published at MRU conference, February 2022.',
+  },
+  {
+    name: 'Mukesh Das',
+    badge: '📄',
+    category: 'Publication',
+    title: 'Paper — Occupational Health Hazards in Sheet Metal Industry (REBA & RULA)',
+    desc: 'Published at MRU conference, February 2022.',
+  },
+  {
+    name: 'Dheeraj Malik, Mohd. Tariq Saifi & Ankit Sharma',
+    badge: '🥉',
+    category: 'Competition',
+    title: '3rd Prize — Anveshan 2019–20 North Zone · Selected for Nationals',
+    desc: 'Won 3rd prize in Engineering & Technology category at North Zone Anveshan 2019–20.',
+  },
+  {
+    name: 'Himanshu Garg',
+    badge: '📄',
+    category: 'Publication',
+    title: '2 International Conference Papers + Lecture Notes in ME, Springer (2019 batch)',
+    desc: 'Published 2 papers in international conferences and 1 in Lecture Notes in Mechanical Engineering, Springer. Received Outstanding Achievement Award in Research.',
+  },
+  {
+    name: 'Somesh S',
+    badge: '📄',
+    category: 'Publication',
+    title: '2 Papers in International Peer-Reviewed Journals (2020 batch)',
+    desc: 'Published 2 papers including at NHTSEE2017, YMCA Faridabad (Mar 9–10, 2017).',
+  },
+  {
+    name: 'ME Team',
+    badge: '🥉',
+    category: 'Competition',
+    title: '3rd Prize — Anveshan 19–20 North Zone (Geothermal Energy Project)',
+    desc: '"Use of Geothermal Energy for Cooling & Heat Transfer" — 3rd prize at Student Research Convention, North Zone.',
+  },
+  {
+    name: 'Karan Sehgal',
+    badge: '💰',
+    category: 'Grant',
+    title: 'AICTE New Gen IEDC Grant ₹2.5 Lakhs — Electric Tractor',
+    desc: '2019 batch ME student. Electric Tractor project sanctioned by AICTE-sponsored New Gen IEDC with ₹2.5 lakh grant.',
+  },
+]
+
 // ─── R&A specific achievements ────────────────────────────────────────────────
 const raAchievements = [
   {
@@ -186,6 +288,8 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   'Best Paper':  { bg: '#e8f5ee', text: '#16a34a' },
   'Social':      { bg: '#e8edf8', text: '#1e4ba9' },
   'Sports':      { bg: '#e8f5ee', text: '#16a34a' },
+  'Cultural':    { bg: '#f3eeff', text: '#7c3aed' },
+  'Grant':       { bg: '#e8edf8', text: '#1e4ba9' },
 }
 
 export default function StudentAchievementsPage() {
@@ -196,7 +300,7 @@ export default function StudentAchievementsPage() {
   const department = school?.departments.find(d => d.id === dept)
 
   // Use R&A specific data if this is the ra dept, otherwise show generic
-  const achievements = dept === 'ra' ? raAchievements : dept === 'cse' ? cseAchievements : []
+  const achievements = dept === 'ra' ? raAchievements : dept === 'cse' ? cseAchievements : dept === 'me' ? meAchievements : []
 
   if (!school || !department) return (
     <div className="flex items-center justify-center min-h-screen bg-white">

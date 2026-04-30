@@ -5,8 +5,57 @@ import { ChevronLeft } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { schools } from '@/lib/schools'
 
-// ─── CSE specific faculty achievements ───────────────────────────────────────
-const cseFacultyAchievements = [
+// ─── ME specific faculty achievements ────────────────────────────────────────
+const meFacultyAchievements = [
+  {
+    name: 'Dr. Piyush Mahendru',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '🏆',
+    category: 'Award',
+    title: 'Karma Kaushalam Award 2022 · Man of the Match (3x)',
+    desc: '• Academic Excellence "Karma Kaushalam" Award 2022\n• "Man of the Match" 3 times in MREI Corporate Cricket Series (2015, 2020, 2023) — vs Dainik Jagran, Supreme Court & Knorr-Bremse',
+  },
+  {
+    name: 'Dr. Gianender Kajal',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '🏅',
+    category: 'Award',
+    title: 'Karma Kaushalam Award 2023 · Certificate of Appreciation, MRU',
+    desc: '• Academic Excellence "Karma Kaushalam" Award 2023\n• Certificate of Appreciation for contribution to MRU progress (12 Oct 2022)',
+  },
+  {
+    name: 'Dr. Prashant Bhardwaj',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '⭐',
+    category: 'Multiple Awards',
+    title: 'Karma Kaushalam 2024 · Best Poster · Keynote Speaker · 10-Year Service Award',
+    desc: '• Karma Kaushalam Award 2024\n• 10-Year Service Completion Award, MRU (1 Jan 2025)\n• Best Poster Award — SOLARIS-2024 ("Conservation of 3E\'s")\n• Keynote Speaker — SOLARIS-2024\n• Session Chair — ICRACI-4.0, MRU 2022\n• Certificate of Appreciation, MRU (12 Oct 2022)\n• Altair Solid Thinking Inspire Cast Advanced Certification (Apr 2020)',
+  },
+  {
+    name: 'Dr. Ajit',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '🎤',
+    category: 'Award',
+    title: 'Keynote Speaker — SOLARIS-2024 · Best Paper — ICRACI-4.0',
+    desc: '• Keynote Speaker, SOLARIS-2024\n• Best Paper Award, ICRACI-4.0, MRU 2022\n• Certificate of Appreciation, MRU (12 Oct 2022)',
+  },
+  {
+    name: 'Dr. Jai Prakash Sharma',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '🏅',
+    category: 'Award',
+    title: 'Teaching Excellence Award — CONVERSHINE 2024',
+    desc: 'Awarded Teaching Excellence Award by Department of Mechanical Engineering at CONVERSHINE 2024.',
+  },
+  {
+    name: 'Dr. Joginder Singh',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '📄',
+    category: 'Award',
+    title: 'NPTEL Discipline Star Award (Jan–Jun 2022) · Best Paper Award',
+    desc: '• NPTEL Discipline Star Award for session Jan–June 2022\n• Best Paper Award at Conference on Trends and Advances in Mechanical Engineering',
+  },
+]
   {
     name: '9 Faculty Members · CSE Dept',
     role: 'School of Engineering',
@@ -126,6 +175,7 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   'Conference':             { bg: '#e8edf8', text: '#1e4ba9' },
   'Conference + Award':     { bg: '#fde8e8', text: '#b12a2e' },
   'Multiple Achievements':  { bg: '#fef3e2', text: '#b45309' },
+  'Multiple Awards':        { bg: '#fef3e2', text: '#b45309' },
   'Certification':          { bg: '#e8f5ee', text: '#16a34a' },
   'Fellowship':             { bg: '#f3eeff', text: '#7c3aed' },
   'IEEE Award':             { bg: '#e8edf8', text: '#1e4ba9' },
@@ -138,7 +188,7 @@ export default function FacultyAchievementsPage() {
   const school = schools.find(s => s.id === id)
   const department = school?.departments.find(d => d.id === dept)
 
-  const achievements = dept === 'ra' ? raFacultyAchievements : dept === 'cse' ? cseFacultyAchievements : []
+  const achievements = dept === 'ra' ? raFacultyAchievements : dept === 'cse' ? cseFacultyAchievements : dept === 'me' ? meFacultyAchievements : []
 
   if (!school || !department) return (
     <div className="flex items-center justify-center min-h-screen bg-white">
