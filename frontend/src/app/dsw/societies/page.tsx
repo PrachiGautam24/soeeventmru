@@ -12,9 +12,10 @@ const societies = [
     color: '#db2777',
     bg: '#fdf2f8',
     items: [
-      { name: 'The Dramatics Society', desc: 'Theatre, street plays & storytelling', emoji: '🎬' },
-      { name: 'The Music & Dance Society', desc: 'Classical, western & fusion performances', emoji: '💃' },
-      { name: 'The Cultural Society', desc: 'Festivals, traditions & cultural showcases', emoji: '🎊' },
+      { name: 'The Music Society', desc: 'Mo!sh — Vocals, instruments & performances', emoji: '🎵' },
+      { name: 'The Dance Society', desc: 'Rudra — Classical, western & fusion dance', emoji: '💃' },
+      { name: 'The Drama Society', desc: 'Khalbali — Theatre, street plays & storytelling', emoji: '🎬' },
+      { name: 'The Fashion Society', desc: 'Noora — Fashion shows & styling events', emoji: '👗' },
     ],
   },
   {
@@ -23,29 +24,29 @@ const societies = [
     color: '#1e4ba9',
     bg: '#e8edf8',
     items: [
-      { name: 'The Technical Society', desc: 'Innovation, projects & tech competitions', emoji: '💻' },
-      { name: 'The Media Society', desc: 'Journalism, photography & digital media', emoji: '📸' },
-      { name: 'The Gaming Society', desc: 'Esports, game design & tournaments', emoji: '🎮' },
+      { name: 'The Technical Society', desc: 'TechSoul — Innovation, projects & tech competitions', emoji: '💻' },
+      { name: 'The Media Society', desc: 'Drishti — Journalism, photography & digital media', emoji: '📸' },
+      { name: 'The Gaming Society', desc: 'Gamenix — Esports, game design & tournaments', emoji: '🎮' },
     ],
   },
   {
-    category: 'Sports & Adventure',
+    category: 'Sports & Social',
     emoji: '🏆',
     color: '#16a34a',
     bg: '#e8f5ee',
     items: [
-      { name: 'The Sports Society', desc: 'Inter-college & intra-college tournaments', emoji: '⚽' },
-      { name: 'The Adventure Society', desc: 'Trekking, outdoor & adventure activities', emoji: '🧗' },
+      { name: 'The Sports Society', desc: 'AthElites — Inter-college & intra-college tournaments', emoji: '⚽' },
+      { name: 'The ISR Club', desc: 'Institutional Social Responsibility initiatives', emoji: '🤲' },
+      { name: 'The NSS Unit', desc: 'National Service Scheme — community & social work', emoji: '🌍' },
     ],
   },
   {
-    category: 'Social & Literary',
+    category: 'Literary',
     emoji: '📚',
     color: '#b45309',
     bg: '#fef3e2',
     items: [
-      { name: 'The Literary Society', desc: 'Debates, quizzes & creative writing', emoji: '✍️' },
-      { name: 'CSR Society', desc: 'Community service & social responsibility', emoji: '🤝' },
+      { name: 'The Literary Society', desc: 'Rehnuma — Debates, quizzes & creative writing', emoji: '✍️' },
     ],
   },
 ]
