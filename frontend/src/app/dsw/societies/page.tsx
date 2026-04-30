@@ -12,7 +12,7 @@ const societies = [
     color: '#db2777',
     bg: '#fdf2f8',
     items: [
-      { name: 'The Music Society', desc: 'Mo!sh — Vocals, instruments & performances', emoji: '🎵' },
+      { name: 'The Music Society', desc: 'Moksh — Vocals, instruments & performances', emoji: '🎵' },
       { name: 'The Dance Society', desc: 'Rudra — Classical, western & fusion dance', emoji: '💃' },
       { name: 'The Drama Society', desc: 'Khalbali — Theatre, street plays & storytelling', emoji: '🎬' },
       { name: 'The Fashion Society', desc: 'Noora — Fashion shows & styling events', emoji: '👗' },
