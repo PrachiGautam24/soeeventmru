@@ -369,10 +369,37 @@ export default function HomePage() {
               <motion.div key="elearning"
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }}
-                className="flex flex-col items-center justify-center py-20 space-y-4">
-                <span className="text-6xl">💻</span>
-                <p className="text-base font-bold text-gray-700">E-Learning</p>
-                <p className="text-sm text-neutral-400 text-center px-8">Content coming soon. E-learning resources will be available here.</p>
+                className="space-y-3">
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">SOE Engage Platform</p>
+                {[
+                  { icon: '🎯', label: 'Quests & Challenges', desc: 'Daily & weekly challenges to earn XP', href: '/engage/challenges' },
+                  { icon: '🏆', label: 'Leaderboard', desc: 'See where you rank among students', href: '/engage/leaderboard' },
+                  { icon: '🧠', label: 'Quiz', desc: 'Play daily trivia and earn up to 100 XP', href: '/engage/quiz' },
+                  { icon: '🗳️', label: 'Polls', desc: 'Vote on campus topics', href: '/engage/polls' },
+                  { icon: '📡', label: 'Feed', desc: 'Student activity feed', href: '/engage/feed' },
+                  { icon: '🎓', label: 'Learning Modules', desc: 'Structured learning content', href: '/engage/learning' },
+                  { icon: '📅', label: 'Event Check-in', desc: 'Check in to events for XP', href: '/engage/events' },
+                  { icon: '🎁', label: 'Rewards', desc: 'Redeem coins for rewards', href: '/engage/rewards' },
+                ].map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => router.push(item.href)}
+                    className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
+                    <div className="w-11 h-11 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0 text-xl">
+                      {item.icon}
+                    </div>
+                    <div className="flex-1 text-left">
+                      <p className="text-sm font-semibold text-gray-800">{item.label}</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">{item.desc}</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
+                  </motion.button>
+                ))}
+                <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/engage')}
+                  className="w-full flex items-center justify-center gap-2 bg-cyan-600 rounded-2xl py-3.5 text-sm font-bold text-white shadow-md">
+                  Open Engage Hub 🚀
+                </motion.button>
               </motion.div>
             )}
 
