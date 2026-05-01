@@ -80,7 +80,7 @@ The department has active research labs in AI, IoT, and Data Science, and mainta
 
 It has state-of-the-art labs for signal processing, microelectronics, and IoT, and collaborates with Truechip and CISCO for industry-aligned learning.`,
         upcomingEvents: [
-          { title: '2-Day Workshop: Smart Controller Design using Soft Computing', date: 'April 15–16, 2026', description: 'Students trained on MATLAB to design Smart Controllers using Soft Computing — focused on practice and high-level concepts to improve technical competencies.', slug: 'ece-workshop-apr2026' },
+          { title: '2-Day Workshop: Smart Controller Design using Soft Computing', date: 'April 15–16, 2026' },
         ],
         studentAchievements: [
           { name: 'R. Uday Kiran', program: 'ECE 4th Semester', category: 'Competition', badge: '🥇', title: '1st Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 1st prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
