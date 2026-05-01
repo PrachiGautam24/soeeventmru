@@ -9,7 +9,7 @@ export default function LandingPage() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen flex flex-col w-full relative overflow-hidden"
+    <div className="min-h-screen flex flex-col max-w-md mx-auto relative overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #c0392b 0%, #e74c3c 55%, #c0392b 100%)' }}>
 
       {/* Decorative glow blobs */}
@@ -25,7 +25,7 @@ export default function LandingPage() {
       </svg>
 
       {/* Main content — centered on red bg */}
-      <div className="relative flex-1 w-full max-w-6xl mx-auto flex flex-col items-center justify-center px-6 md:px-10 lg:px-16 gap-8 z-10 py-16">
+      <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
 
         {/* Logos + title */}
         <motion.div
@@ -88,7 +88,7 @@ export default function LandingPage() {
         >
           <button
             onClick={() => router.push('/home')}
-            className="w-full md:max-w-sm mx-auto flex items-center justify-center gap-3 bg-white rounded-2xl py-4 text-base font-bold text-red-600 shadow-lg active:scale-95 transition-transform"
+            className="w-full flex items-center justify-center gap-3 bg-white rounded-2xl py-4 text-base font-bold text-red-600 shadow-lg active:scale-95 transition-transform"
           >
             Get Started
             <ArrowRight className="w-5 h-5" />

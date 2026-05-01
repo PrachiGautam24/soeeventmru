@@ -8,7 +8,7 @@ import { ArrowLeft, CheckCircle, UserCheck } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AttendancePage() {
-  const [checkinCode, setCheckinCode] = useState('ICASS26')
+  const [name, setName] = useState('')
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
@@ -16,30 +16,21 @@ export default function AttendancePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!checkinCode.trim()) {
-      setError('Please enter your attendance code')
+    if (!name.trim()) {
+      setError('Please enter your full name')
       return
     }
 
+    // Simulate attendance marking without database
     setLoading(true)
     setError('')
 
     try {
-      const res = await fetch('/api/events/checkin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: checkinCode.trim() }),
-      })
-      const data = await res.json().catch(() => ({}))
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000))
 
-      if (!res.ok) {
-        setError(data.error === 'UNAUTHORIZED' ? 'Please sign in first to mark attendance.' : data.error ?? 'Failed to mark attendance. Please try again.')
-        return
-      }
       setSuccess(true)
-      if (data.alreadyCheckedIn) {
-        setError('Attendance already marked for this event.')
-      }
+      setName('')
 
       // Reset success message after 3 seconds
       setTimeout(() => {
@@ -80,24 +71,24 @@ export default function AttendancePage() {
               Welcome to ICASS 2026
             </h2>
             <p className="text-sm text-neutral-600">
-              Mark your attendance using the ICASS event code
+              Please mark your presence for the conference
             </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label 
-                htmlFor="checkinCode" 
+                htmlFor="name" 
                 className="block text-sm font-semibold text-neutral-700 mb-2"
               >
-                Attendance Code
+                Full Name
               </label>
               <input
                 type="text"
-                id="checkinCode"
-                value={checkinCode}
-                onChange={(e) => setCheckinCode(e.target.value.toUpperCase())}
-                placeholder="Enter ICASS code"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your full name"
                 className="w-full px-4 py-3 border border-neutral-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-neutral-800"
                 disabled={loading}
               />
@@ -117,14 +108,14 @@ export default function AttendancePage() {
               >
                 <CheckCircle className="w-5 h-5" />
                 <span className="text-sm font-medium">
-                  Attendance marked successfully!
+                  Thanks for Joining us !!
                 </span>
               </motion.div>
             )}
 
             <button
               type="submit"
-              disabled={loading || !checkinCode.trim()}
+              disabled={loading || !name.trim()}
               className="w-full bg-gradient-to-r from-primary to-primary-dark text-white py-4 rounded-xl font-semibold text-lg shadow-md hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
@@ -140,7 +131,7 @@ export default function AttendancePage() {
 
           <div className="mt-6 pt-6 border-t border-neutral-200">
             <p className="text-xs text-neutral-500 text-center">
-              Attendance is recorded directly in your SOE Engage profile.
+              Your attendance will be recorded with a timestamp
             </p>
           </div>
         </motion.div>

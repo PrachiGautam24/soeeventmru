@@ -99,7 +99,7 @@ export default function ProfilePage() {
       </motion.section>
 
       {/* Stats row */}
-      <section className="mx-4 mt-4 grid grid-cols-2 md:grid-cols-4 gap-2">
+      <section className="mx-4 mt-4 grid grid-cols-2 gap-2">
         <SmallStat icon={<Rss className="w-4 h-4 text-rose-500" />} label="Posts" value={me.stats.posts} />
         <SmallStat icon={<BrainCircuit className="w-4 h-4 text-fuchsia-500" />} label="Quizzes" value={me.stats.quizAttempts} />
         <SmallStat icon={<CalendarCheck className="w-4 h-4 text-indigo-500" />} label="Events" value={me.stats.eventCheckins} />

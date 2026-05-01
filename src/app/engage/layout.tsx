@@ -11,8 +11,10 @@ export default function EngageLayout({ children }: { children: ReactNode }) {
   return (
     <XpToastProvider>
       <MeProvider>
-        <div className="min-h-screen bg-neutral-50 pb-24 md:pb-10">
-          <div className="mx-auto w-full max-w-md px-0 md:max-w-6xl md:px-6 lg:px-8">{children}</div>
+        <div className="min-h-screen bg-neutral-100 pb-24">
+          <div className="max-w-md mx-auto min-h-screen bg-white shadow-xl">
+            {children}
+          </div>
         </div>
       </MeProvider>
     </XpToastProvider>

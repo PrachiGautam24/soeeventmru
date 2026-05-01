@@ -82,7 +82,7 @@ export default function LearningPathwaysPage() {
         </div>
       </section>
 
-      <section className="mx-4 mt-4 grid gap-3 md:grid-cols-3">
+      <section className="mx-4 mt-4 grid gap-3">
         {highlighted.map((p) => (
           <motion.div key={p.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="rounded-2xl bg-white border border-neutral-200 p-4 shadow-sm">
             <div className="flex items-start gap-3">

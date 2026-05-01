@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
 import { ArrowLeft, ChevronDown, Calendar } from 'lucide-react'
@@ -24,11 +24,21 @@ export default function SchoolPage() {
   const [eventsOpen, setEventsOpen] = useState(false)
 
   const school = schools.find(s => s.id === id)
+
+  // Schools with no sub-departments — redirect to dedicated pages
+  useEffect(() => {
+    if (id === 'law') router.replace('/school/law/overview')
+    if (id === 'education') router.replace('/school/education/overview')
+    if (id === 'business') router.replace('/school/business/overview')
+  }, [id, router])
+
   if (!school) return (
     <div className="flex items-center justify-center min-h-screen bg-white">
       <p className="text-neutral-400">School not found.</p>
     </div>
   )
+
+  if (id === 'law' || id === 'education' || id === 'business') return null
 
   // Collect all upcoming events across all departments
   const allUpcoming = school.departments.flatMap(d =>
@@ -79,15 +89,13 @@ export default function SchoolPage() {
                     {allUpcoming.length === 0 ? (
                       <p className="text-xs text-neutral-400 text-center py-4">No upcoming events.</p>
                     ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:gap-2 md:p-3 divide-neutral-50 border-t border-neutral-100">
+                      <div className="divide-y divide-neutral-100 border-t border-neutral-100">
                         {allUpcoming.map((ev, i) => (
-                          <div key={i} className="flex items-start gap-3 px-4 py-3 md:bg-neutral-50 md:rounded-xl">
-                            <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                              <Calendar className="w-3.5 h-3.5 text-primary" />
-                            </div>
+                          <div key={i} className="flex items-start gap-3 px-4 py-3.5">
+                            <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1" />
                             <div>
-                              <p className="text-xs font-semibold text-gray-800">{ev.title}</p>
-                              <p className="text-[10px] text-neutral-400 mt-0.5">{ev.dept} · {ev.date}</p>
+                              <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
+                              <p className="text-xs text-neutral-400 mt-0.5">{ev.dept} · {ev.date}</p>
                             </div>
                           </div>
                         ))}

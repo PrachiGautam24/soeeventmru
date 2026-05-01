@@ -8,7 +8,7 @@ import { schools } from '@/lib/schools'
 
 const gridItems = [
   { label: 'Student\nAchievements', icon: '🏆', route: 'student-achievements' },
-  { label: 'Upcoming\nEvents',      icon: '📅', route: 'events' },
+  { label: 'Events\nOrganised',     icon: '📅', route: 'events' },
   { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
   { label: 'Curriculum',            icon: '📖', route: 'curriculum' },
   { label: 'Podcasts &\nVideos',    icon: '🎧', route: 'podcast' },
@@ -71,13 +71,13 @@ export default function DepartmentPage() {
                     {department.upcomingEvents.length === 0 ? (
                       <p className="text-xs text-neutral-400 text-center py-4">No upcoming events.</p>
                     ) : (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:gap-2 md:p-3 divide-neutral-50">
+                      <div className="divide-y divide-neutral-100 border-t border-neutral-100">
                         {department.upcomingEvents.map((ev, i) => (
-                          <div key={i} className="flex items-start gap-3 px-4 py-3 md:bg-neutral-50 md:rounded-xl">
-                            <div className="w-2 h-2 rounded-full bg-secondary mt-1.5 shrink-0" />
+                          <div key={i} className="flex items-start gap-3 px-4 py-3.5">
+                            <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1" />
                             <div>
-                              <p className="text-xs font-semibold text-gray-800">{ev.title}</p>
-                              <p className="text-[10px] text-neutral-400 mt-0.5">{ev.date}</p>
+                              <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
+                              <p className="text-xs text-neutral-400 mt-0.5">{ev.date}</p>
                             </div>
                           </div>
                         ))}

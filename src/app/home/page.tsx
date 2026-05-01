@@ -9,7 +9,7 @@ import { useSession, signOut } from 'next-auth/react'
 import {
   Search, Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
-  Star, X, Mail, PhoneCall, MapPin, Sparkles, Flame, Trophy
+  Star, X, Mail, PhoneCall, MapPin
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
@@ -59,12 +59,28 @@ const schoolSVGs: Record<string, React.ReactNode> = {
       <path d="M6 19h12"/>
     </svg>
   ),
+  dsw: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+      {/* Music note + person dancing */}
+      <circle cx="8" cy="18" r="2"/>
+      <circle cx="16" cy="16" r="2"/>
+      <path d="M10 18V8l8-2v10"/>
+      <path d="M10 12l8-2"/>
+    </svg>
+  ),
 }
 
 const upcomingEvents = [
   { title: 'Ideate. Build. Deploy.', subtitle: 'Build App in a Day · GUVI HCL', date: '18 May 2026', image: '/images/events/event-ideate.jpeg' },
   { title: 'Ethical Hacking Workshop', subtitle: 'Learn. Explore. Protect. · Quick Heal', date: '19–20 May 2026', image: '/images/events/event-ehacking.jpeg' },
   { title: 'Workshop on Robotics', subtitle: 'Design. Build. Program. · WRO India', date: '21–22 May 2026', image: '/images/events/event-robotics.jpeg' },
+  { title: 'Mental Health Awareness Talk', subtitle: 'DSW · Student Wellness Initiative', date: '23 Apr 2026', image: '/images/events/event-ideate.jpeg' },
+  { title: 'Sampling Steps', subtitle: 'DSW · Dance & Movement Workshop', date: '23 Apr 2026', image: '/images/events/event-robotics.jpeg' },
+  { title: 'Culture Couture', subtitle: 'DSW · Cultural Fashion & Expression', date: '23 Apr 2026', image: '/images/events/event-ehacking.jpeg' },
+  { title: 'Anti-Ragging Week', subtitle: 'DSW · Awareness & Pledge Campaign', date: '30 Apr 2026', image: '/images/events/event-ideate.jpeg' },
+  { title: 'Digital Doodlers', subtitle: 'DSW · Digital Art & Design Contest', date: '30 Apr 2026', image: '/images/events/event-robotics.jpeg' },
+  { title: 'Riyaaz-E-Mehfil', subtitle: 'DSW · Music & Poetry Evening', date: '30 Apr 2026', image: '/images/events/event-ehacking.jpeg' },
+  { title: 'Cyber Crime Awareness Camp', subtitle: 'DSW · Stay Safe Online', date: '30 Apr 2026', image: '/images/events/event-ideate.jpeg' },
 ]
 
 const placementPhotos = [
@@ -110,20 +126,68 @@ const topFunctionaries = [
   { name: 'Prof. (Dr.) Deependra Kumar Jha', title: 'Vice Chancellor', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Jha.jpg' },
   { name: 'Prof. (Dr.) Sangita Banga', title: 'Pro Vice Chancellor & Dean Education', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Sangita.jpg' },
   { name: 'Mr. Ramesh Nair', title: 'Registrar', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Ramesh-Nair.jpg' },
-  { name: 'Prof. (Dr.) Shruti Vashist', title: 'Dean Academics & HOD-ECE', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg' },
+  { name: 'Prof. (Dr.) Shruti Vashist', title: 'Dean Academics & Dean Research, HOD-ECE', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg' },
   { name: 'Prof. (Dr.) Dipali Bansal', title: 'Dean Engineering', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Dipali.jpg' },
   { name: 'Prof. (Dr.) Meena Kapahi', title: 'Director International Relations', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Meena-Kapahi.jpg' },
+  { name: 'Prof. (Dr.) Asha Verma', title: 'Dean, School of Law', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Asha-Verma.jpg' },
+  { name: 'Prof. (Dr.) Rashee Singh', title: 'Dean, School of Education & Humanities', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Rashee-Singh.jpg' },
+  { name: 'Prof. (Dr.) Yogita Sharma', title: 'Dean Students Welfare', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Yogita-Sharma.jpg' },
 ]
 
-const visibleSchools = schools.filter(s => s.id !== 'media')
+const visibleSchools = schools.filter(s => s.id !== 'media' && s.id !== 'dsw')
+
+// ─── CountUp component ────────────────────────────────────────────────────────
+function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0)
+  const ref = React.useRef<HTMLSpanElement>(null)
+
+  React.useEffect(() => {
+    let timer: ReturnType<typeof setInterval>
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Reset and re-animate every time it enters view
+          setCount(0)
+          const duration = 1500
+          const steps = 50
+          const increment = target / steps
+          let current = 0
+          clearInterval(timer)
+          timer = setInterval(() => {
+            current += increment
+            if (current >= target) {
+              setCount(target)
+              clearInterval(timer)
+            } else {
+              setCount(Math.floor(current))
+            }
+          }, duration / steps)
+        } else {
+          // Reset when scrolled out so it replays next time
+          clearInterval(timer)
+          setCount(0)
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    if (ref.current) observer.observe(ref.current)
+    return () => { observer.disconnect(); clearInterval(timer) }
+  }, [target])
+
+  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>
+}
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events'
+type TabId = 'departments' | 'elearning' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
   { id: 'departments',    label: 'Departments',    emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
+  { id: 'elearning',      label: 'E-Learning',     emoji: '💻', color: '#0891b2', bg: '#e0f7fa' },
   { id: 'functionaries',  label: 'Functionaries',  emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
-  { id: 'placements',     label: 'Placements',     emoji: '🏆', color: '#b45309', bg: '#fef3e2' },
+  { id: 'awards',         label: 'Awards',         emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
+  { id: 'placements',     label: 'Placements',     emoji: '💼', color: '#b45309', bg: '#fef3e2' },
   { id: 'campus',         label: 'Campus Life',    emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
   { id: 'events',         label: 'Events',         emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
 ]
@@ -173,19 +237,21 @@ export default function HomePage() {
   const [search, setSearch] = useState('')
   const [floatingOpen, setFloatingOpen] = useState(false)
 
-  const userName = session?.user?.name?.split(' ')[0] ?? 'Guest'
-
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="max-w-md mx-auto">
 
-        {/* ── Header ── */}
-        <div className="bg-secondary px-5 md:px-8 lg:px-10 pt-10 pb-6 rounded-b-3xl shadow-lg">
+        {/* ── Header with MRU 30 Years Logo ── */}
+        <div className="bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <p className="text-white/70 text-xs font-medium">Welcome back 👋</p>
-              <h1 className="text-white text-xl font-bold">{userName}</h1>
-            </div>
+            <Image
+              src="/images/mru-30-years-logo.png"
+              alt="Manav Rachna University — 30 Years"
+              width={180}
+              height={70}
+              priority
+              className="object-contain"
+            />
             <div className="flex items-center gap-2">
               <button className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
                 <Bell className="w-4 h-4 text-white" />
@@ -214,86 +280,24 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Hero campus image ── */}
-        <div className="relative w-full overflow-hidden lg:rounded-3xl lg:mt-4" style={{ height: 200 }}>
-          <Image
-            src="https://manavrachna.edu.in/uploads/campus/65715f28889b31701928744.webp"
-            alt="Manav Rachna Campus"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-4">
-            <p className="text-[10px] font-semibold text-white/60 uppercase tracking-widest mb-0.5">Study at Manav Rachna</p>
-            <h2 className="text-white text-base font-bold leading-snug">Learning, Creativity &amp; Access to the latest research.</h2>
-          </div>
-        </div>
-
-        {/* ── Engage banner ── */}
-        <motion.button
-          whileTap={{ scale: 0.98 }}
-          onClick={() => router.push('/engage')}
-          className="mx-4 md:mx-8 lg:mx-10 mt-4 w-auto rounded-2xl overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-fuchsia-600 text-white p-4 shadow-lg relative"
-        >
-          <div className="absolute -right-6 -top-6 w-28 h-28 bg-white/10 rounded-full blur-2xl" />
-          <div className="flex items-center gap-3 relative">
-            <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <div className="flex-1 text-left">
-              <p className="font-black text-sm">SOE Engage — earn XP every day</p>
-              <p className="text-[11px] opacity-90 leading-snug">
-                Daily quests, quizzes, polls, leaderboard & rewards.
-              </p>
-              <div className="flex items-center gap-3 mt-1 text-[10px] font-bold">
-                <span className="flex items-center gap-1"><Flame className="w-3 h-3" /> Streaks</span>
-                <span className="flex items-center gap-1"><Trophy className="w-3 h-3" /> Leaderboard</span>
-                <span className="flex items-center gap-1"><Sparkles className="w-3 h-3" /> XP</span>
-              </div>
-            </div>
-            <ChevronRight className="w-5 h-5" />
-          </div>
-        </motion.button>
-        <div className="mx-4 md:mx-8 lg:mx-10 mt-2">
-          <button
-            onClick={() => router.push('/engage/learning')}
-            className="w-full rounded-xl border border-blue-200 bg-blue-50 text-blue-700 text-xs font-semibold py-2.5"
-          >
-            Explore E-Learning Pathways
-          </button>
-        </div>
-
-        <section className="mx-4 md:mx-8 lg:mx-10 mt-4 rounded-2xl bg-white border border-neutral-200 shadow-sm p-5 md:p-6">
-          <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Platform Vision</p>
-          <p className="mt-2 text-sm md:text-base text-neutral-700 leading-relaxed">
-            Build a student engagement platform driven by gamification, social interaction, and daily habits, where users earn points through activities like match predictions, social media tasks, content uploads, and course completion. Add leaderboards (individual and school-level), XP-based leveling, streak tracking, and badges to create competition and retention.
-          </p>
-          <p className="mt-3 text-sm md:text-base text-neutral-700 leading-relaxed">
-            Strengthen social features with user-generated content, missions, communities, and public profiles for visibility, then reinforce daily engagement with tasks, polls, flash challenges, random rewards, and notifications. Integrate e-learning so course completion directly contributes to rankings and overall progress, tightly connecting learning, competition, and consistent activity.
-          </p>
-        </section>
-
         {/* ── Horizontal Scrollable Category Tabs ── */}
-        <div className="px-4 md:px-8 lg:px-10 mt-5">
-          <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
+        <div className="px-4 mt-5">
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
             {tabs.map((tab) => (
               <motion.button
                 key={tab.id}
                 whileTap={{ scale: 0.93 }}
                 onClick={() => setActiveTab(tab.id)}
-                className={`shrink-0 flex flex-col items-center gap-2 rounded-2xl px-5 py-3.5 shadow-sm transition-all duration-200 border-2 ${
-                  activeTab === tab.id
-                    ? 'border-transparent shadow-md scale-105'
-                    : 'bg-white border-transparent'
+                className={`shrink-0 flex flex-col items-center gap-1 rounded-xl py-2.5 shadow-sm transition-all duration-200 border-2 w-20 ${
+                  activeTab === tab.id ? 'border-transparent shadow-md' : 'bg-white border-transparent'
                 }`}
                 style={activeTab === tab.id ? { backgroundColor: tab.bg, borderColor: tab.color + '40' } : {}}
               >
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm"
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
                   style={{ backgroundColor: activeTab === tab.id ? tab.color + '20' : '#f3f4f6' }}>
                   {tab.emoji}
                 </div>
-                <span className="text-xs font-bold whitespace-nowrap"
+                <span className="text-[10px] font-bold text-center leading-tight px-1"
                   style={{ color: activeTab === tab.id ? tab.color : '#6b7280' }}>
                   {tab.label}
                 </span>
@@ -303,7 +307,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Tab Content ── */}
-        <div className="px-4 md:px-8 lg:px-10 mt-4">
+        <div className="px-4 mt-4">
           <AnimatePresence mode="wait">
 
             {/* DEPARTMENTS */}
@@ -312,14 +316,22 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }} className="space-y-2.5">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">Explore Schools</p>
-                {visibleSchools.map((school) => (
-                  <motion.button key={school.id} whileTap={{ scale: 0.98 }}
+                {visibleSchools.map((school, i) => (
+                  <motion.button key={school.id}
+                    initial={{ opacity: 0, x: -24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.08, type: 'spring', stiffness: 260, damping: 22 }}
+                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ scale: 1.02 }}
                     onClick={() => router.push(`/school/${school.id}`)}
                     className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
-                    <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: schoolColors[school.id] + '18', color: schoolColors[school.id] }}>
+                    <motion.div
+                      className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: schoolColors[school.id] + '18', color: schoolColors[school.id] }}
+                      whileHover={{ rotate: [0, -10, 10, -6, 6, 0], transition: { duration: 0.5 } }}
+                    >
                       {schoolSVGs[school.id]}
-                    </div>
+                    </motion.div>
                     <div className="flex-1 text-left">
                       <p className="text-sm font-semibold text-gray-800">{school.name}</p>
                       <p className="text-xs text-neutral-400 mt-0.5">{school.tagline}</p>
@@ -327,6 +339,67 @@ export default function HomePage() {
                     <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
                   </motion.button>
                 ))}
+                {/* DSW card */}
+                <motion.button
+                  initial={{ opacity: 0, x: -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: visibleSchools.length * 0.08, type: 'spring', stiffness: 260, damping: 22 }}
+                  whileTap={{ scale: 0.97 }}
+                  whileHover={{ scale: 1.02 }}
+                  onClick={() => router.push('/dsw')}
+                  className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
+                  <motion.div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: '#db277718', color: '#db2777' }}
+                    whileHover={{ rotate: [0, -10, 10, -6, 6, 0], transition: { duration: 0.5 } }}
+                  >
+                    {schoolSVGs['dsw']}
+                  </motion.div>
+                  <div className="flex-1 text-left">
+                    <p className="text-sm font-semibold text-gray-800">DSW</p>
+                    <p className="text-xs text-neutral-400 mt-0.5">Student Welfare & Campus Life</p>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
+                </motion.button>
+              </motion.div>
+            )}
+
+            {/* E-LEARNING */}
+            {activeTab === 'elearning' && (
+              <motion.div key="elearning"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-3">
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">SOE Engage Platform</p>
+                {[
+                  { icon: '🎯', label: 'Quests & Challenges', desc: 'Daily & weekly challenges to earn XP', href: '/engage/challenges' },
+                  { icon: '🏆', label: 'Leaderboard', desc: 'See where you rank among students', href: '/engage/leaderboard' },
+                  { icon: '🧠', label: 'Quiz', desc: 'Play daily trivia and earn up to 100 XP', href: '/engage/quiz' },
+                  { icon: '🗳️', label: 'Polls', desc: 'Vote on campus topics', href: '/engage/polls' },
+                  { icon: '📡', label: 'Feed', desc: 'Student activity feed', href: '/engage/feed' },
+                  { icon: '🎓', label: 'Learning Modules', desc: 'Structured learning content', href: '/engage/learning' },
+                  { icon: '📅', label: 'Event Check-in', desc: 'Check in to events for XP', href: '/engage/events' },
+                  { icon: '🎁', label: 'Rewards', desc: 'Redeem coins for rewards', href: '/engage/rewards' },
+                ].map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => router.push(item.href)}
+                    className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
+                    <div className="w-11 h-11 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0 text-xl">
+                      {item.icon}
+                    </div>
+                    <div className="flex-1 text-left">
+                      <p className="text-sm font-semibold text-gray-800">{item.label}</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">{item.desc}</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
+                  </motion.button>
+                ))}
+                <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/engage')}
+                  className="w-full flex items-center justify-center gap-2 bg-cyan-600 rounded-2xl py-3.5 text-sm font-bold text-white shadow-md">
+                  Open Engage Hub 🚀
+                </motion.button>
               </motion.div>
             )}
 
@@ -339,8 +412,9 @@ export default function HomePage() {
                 {topFunctionaries.map((person) => (
                   <div key={person.name}
                     className="flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-neutral-100">
-                      <Image src={person.photo} alt={person.name} fill className="object-cover" />
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-neutral-100 bg-secondary/10 flex items-center justify-center">
+                      <Image src={person.photo} alt={person.name} fill className="object-cover" unoptimized />
+                      <span className="absolute text-sm font-bold text-secondary/40">{person.name[0]}</span>
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-gray-800 leading-tight">{person.name}</p>
@@ -348,6 +422,10 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
+                <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/functionaries')}
+                  className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-200 rounded-2xl py-3 text-sm font-semibold text-secondary shadow-sm">
+                  View All Functionaries <ChevronRight className="w-4 h-4" />
+                </motion.button>
               </motion.div>
             )}
 
@@ -361,13 +439,15 @@ export default function HomePage() {
                   <p className="text-white font-bold text-sm mb-3">Placement Highlights</p>
                   <div className="grid grid-cols-3 gap-2">
                     {[
-                      { stat: '120+', label: 'Total Recruiters', icon: '🏢' },
-                      { stat: '600+', label: 'Placement Offers', icon: '📋' },
-                      { stat: '94%', label: 'Placement Rate', icon: '🎯' },
-                    ].map(({ stat, label, icon }) => (
+                      { target: 120, suffix: '+', label: 'Total Recruiters', icon: '🏢' },
+                      { target: 600, suffix: '+', label: 'Placement Offers', icon: '📋' },
+                      { target: 94,  suffix: '%', label: 'Placement Rate',   icon: '🎯' },
+                    ].map(({ target, suffix, label, icon }) => (
                       <div key={label} className="bg-white/15 rounded-xl p-3 text-center">
                         <p className="text-lg">{icon}</p>
-                        <p className="text-white font-bold text-base mt-1">{stat}</p>
+                        <p className="text-white font-bold text-base mt-1">
+                          <CountUp target={target} suffix={suffix} />
+                        </p>
                         <p className="text-white/70 text-[10px] mt-0.5 leading-tight">{label}</p>
                       </div>
                     ))}
@@ -389,6 +469,36 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
+              </motion.div>
+            )}
+
+            {/* AWARDS & RECOGNITIONS */}
+            {activeTab === 'awards' && (
+              <motion.div key="awards"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }} className="space-y-3">
+                {[
+                  { emoji: '💎', title: 'QS I-GAUGE Diamond Rating', desc: 'Conferred at institutional level. Platinum in Teaching & Learning, Social Responsibility, Governance & Structure, and Academic Development.' },
+                  { emoji: '🏅', title: 'QS I-Gauge Platinum — Engineering', desc: 'Prestigious Platinum Badge in QS I-Gauge Subject Ratings for Engineering, recognising excellence in education, research, and technological innovation.' },
+                  { emoji: '😊', title: 'Institution of Happiness', desc: 'Recognised as an "Institution of Happiness" by QS I-GAUGE at the QS I-Gauge Institution of Happiness Conclave 2024.' },
+                  { emoji: '📊', title: 'Platinum Band — OBE Ranking 2025', desc: 'Ranked in the Platinum band in the Outcome-Based Education Ranking 2025 for excellence in outcome-based education.' },
+                  { emoji: '📰', title: 'THE WEEK Ranking 2024', desc: 'Ranked 5th in Delhi NCR & 20th in North India (Private & Deemed Multidisciplinary). 13th nationally and 9th in North India among Emerging Multidisciplinary Universities.' },
+                  { emoji: '⚖️', title: 'GHRDC — School of Law Rankings', desc: 'Rank 3 in Top Outstanding Law School of Excellence, Rank 3 in Haryana, Rank 8 in Northern Region.' },
+                  { emoji: '☁️', title: 'Google Cloud Digital Campus 2.0', desc: 'Partnership with Google Cloud enabling AI-powered tools, digital learning infrastructure, and no-code app creation across campus.' },
+                  { emoji: '⭐', title: 'IIC 3.5-Star Rating 2023–24', desc: 'Awarded 3.5-Star Rating on IIC Activities for promoting Innovation & Startup culture. Ministry of Education, MoE\'s Innovation Cell, AICTE.' },
+                  { emoji: '🔬', title: 'Nodal Centre for Virtual Labs', desc: 'Recognised as Designated Nodal Centre for Virtual Labs — an initiative of HRD under National Mission of Education through ICT, IIT Delhi.' },
+                  { emoji: '🎓', title: 'NAAC A++ Accreditation', desc: 'Awarded NAAC A++ grade, the highest accreditation by the National Assessment and Accreditation Council.' },
+                  { emoji: '🌐', title: 'International Baccalaureate (IB)', desc: 'First university in India to be accredited by the International Baccalaureate Organization, aligning with international educational standards.' },
+                ].map((award, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
+                    className="bg-white rounded-2xl border border-neutral-100 shadow-sm px-4 py-3.5 flex items-start gap-3">
+                    <span className="text-2xl shrink-0">{award.emoji}</span>
+                    <div>
+                      <p className="text-sm font-bold text-gray-800">{award.title}</p>
+                      <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{award.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             )}
 
@@ -425,23 +535,24 @@ export default function HomePage() {
             {activeTab === 'events' && (
               <motion.div key="events"
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }} className="space-y-3">
-                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Upcoming Events</p>
-                {upcomingEvents.map((ev, i) => (
-                  <motion.div key={ev.title} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-                    className="bg-white rounded-2xl overflow-hidden shadow-sm border border-neutral-100 flex">
-                    <div className="relative w-24 shrink-0">
-                      <Image src={ev.image} alt={ev.title} fill className="object-cover" unoptimized />
-                    </div>
-                    <div className="flex-1 px-3 py-3">
-                      <span className="inline-block bg-secondary text-white text-[10px] font-bold px-2 py-0.5 rounded-full mb-1">{ev.date}</span>
-                      <p className="text-sm font-bold text-gray-800 leading-tight">{ev.title}</p>
-                      <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1">{ev.subtitle}</p>
-                    </div>
-                  </motion.div>
-                ))}
+                transition={{ duration: 0.2 }}>
+                <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+                  <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest px-4 pt-4 pb-2">Upcoming Events</p>
+                  <div className="divide-y divide-neutral-100 border-t border-neutral-100">
+                    {upcomingEvents.map((ev, i) => (
+                      <motion.div key={ev.title} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
+                        className="flex items-start gap-3 px-4 py-3.5">
+                        <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1" />
+                        <div>
+                          <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
+                          <p className="text-xs text-neutral-400 mt-0.5">{ev.subtitle} · {ev.date}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
                 <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/events')}
-                  className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-200 rounded-2xl py-3 text-sm font-semibold text-secondary shadow-sm">
+                  className="w-full flex items-center justify-center gap-2 bg-white border border-neutral-200 rounded-2xl py-3 text-sm font-semibold text-secondary shadow-sm mt-3">
                   View All Events <ChevronRight className="w-4 h-4" />
                 </motion.button>
               </motion.div>
@@ -452,20 +563,22 @@ export default function HomePage() {
 
         {/* ── MRU at a Glance + Contact (departments tab only) ── */}
         {activeTab === 'departments' && (
-        <div className="px-4 md:px-8 lg:px-10 mt-6 space-y-4">
+        <div className="px-4 mt-6 space-y-4">
           {/* MRU Stats */}
           <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">MRU at a Glance</p>
           <div className="grid grid-cols-3 gap-3">
             {[
-              { stat: '43000+', label: 'Alumni Globally' },
-              { stat: '135+',   label: 'Collaborations' },
-              { stat: '5900+',  label: 'Research Papers' },
-              { stat: '600+',   label: 'Recruiting MNCs' },
-              { stat: '250+',   label: 'Patents' },
-              { stat: '60L',    label: 'Highest CTC' },
-            ].map(({ stat, label }) => (
+              { target: 43000, suffix: '+', label: 'Alumni Globally' },
+              { target: 135,   suffix: '+', label: 'Collaborations' },
+              { target: 5900,  suffix: '+', label: 'Research Papers' },
+              { target: 600,   suffix: '+', label: 'Recruiting MNCs' },
+              { target: 250,   suffix: '+', label: 'Patents' },
+              { target: 60,    suffix: 'L', label: 'Highest CTC' },
+            ].map(({ target, suffix, label }) => (
               <div key={label} className="bg-white rounded-2xl p-3.5 shadow-sm border border-neutral-100 text-center">
-                <p className="text-lg font-extrabold text-secondary">{stat}</p>
+                <p className="text-lg font-extrabold text-secondary">
+                  <CountUp target={target} suffix={suffix} />
+                </p>
                 <p className="text-[10px] text-neutral-500 mt-1 leading-tight">{label}</p>
               </div>
             ))}
