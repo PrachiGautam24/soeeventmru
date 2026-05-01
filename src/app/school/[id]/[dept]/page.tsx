@@ -10,7 +10,7 @@ const gridItems = [
   { label: 'Student\nAchievements', icon: '🏆', route: 'student-achievements' },
   { label: 'Events\nOrganised',     icon: '📅', route: 'events' },
   { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
-  { label: 'Curriculum',            icon: '📖', route: 'curriculum' },
+  { label: 'Programs',              icon: '📖', route: 'curriculum' },
   { label: 'Podcasts &\nVideos',    icon: '🎧', route: 'podcast' },
 ]
 

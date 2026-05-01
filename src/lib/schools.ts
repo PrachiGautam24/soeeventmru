@@ -1,4 +1,4 @@
-export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media'
+export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media' | 'dsw'
 
 export interface Department {
   id: string
@@ -286,5 +286,17 @@ Students benefit from industry collaborations with leading media houses and regu
         upcomingEvents: [{ title: 'Short Film Festival', date: 'May 9, 2026' }],
       },
     ],
+  },
+  {
+    id: 'dsw',
+    name: 'Dean Students Welfare',
+    tagline: 'Student Support & Well-being',
+    icon: '🤝',
+    color: 'bg-amber-600',
+    about: `The Dean Students Welfare (DSW) office at Manav Rachna University is dedicated to the overall well-being and development of students.
+
+It organizes various cultural, welfare, and awareness programs throughout the year. The DSW office handles student grievances, organizes orientation programs, and ensures a supportive environment for all students.`,
+    academicPartners: [],
+    departments: [],
   },
 ]

@@ -134,7 +134,7 @@ const topFunctionaries = [
   { name: 'Prof. (Dr.) Yogita Sharma', title: 'Dean Students Welfare', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Yogita-Sharma.jpg' },
 ]
 
-const visibleSchools = schools.filter(s => s.id !== 'media' && s.id !== 'dsw')
+const visibleSchools = schools.filter(s => s.id !== 'media')
 
 // ─── CountUp component ────────────────────────────────────────────────────────
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {

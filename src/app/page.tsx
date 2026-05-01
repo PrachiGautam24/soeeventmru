@@ -10,21 +10,61 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col max-w-md mx-auto relative overflow-hidden"
-      style={{ background: 'linear-gradient(160deg, #c0392b 0%, #e74c3c 55%, #c0392b 100%)' }}>
+      style={{ background: '#a50034' }}>
 
-      {/* Decorative glow blobs */}
-      <div className="absolute top-1/3 right-8 w-56 h-56 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(255,180,100,0.25) 0%, transparent 70%)' }} />
-      <div className="absolute top-1/4 left-4 w-40 h-40 rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, rgba(255,120,120,0.2) 0%, transparent 70%)' }} />
+      {/* Animated mesh blobs — CSS keyframes for smooth GPU animation */}
+      <style>{`
+        @keyframes blob1 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          33%  { transform: translate(80px, -60px) scale(1.15); }
+          66%  { transform: translate(-40px, 80px) scale(0.9); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes blob2 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          33%  { transform: translate(-70px, 60px) scale(1.2); }
+          66%  { transform: translate(60px, -80px) scale(0.85); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes blob3 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          33%  { transform: translate(50px, -70px) scale(1.1); }
+          66%  { transform: translate(-80px, 40px) scale(1.2); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+        @keyframes blob4 {
+          0%   { transform: translate(0px, 0px) scale(1); }
+          50%  { transform: translate(-60px, -50px) scale(1.3); }
+          100% { transform: translate(0px, 0px) scale(1); }
+        }
+      `}</style>
 
-      {/* Bottom wave decorations */}
-      <svg className="absolute bottom-0 left-0 w-full pointer-events-none" viewBox="0 0 390 120" fill="none" preserveAspectRatio="none">
-        <path d="M0,60 Q100,100 195,60 Q290,20 390,60 L390,120 L0,120 Z" fill="rgba(0,0,0,0.08)" />
-        <path d="M0,80 Q100,50 195,80 Q290,110 390,80 L390,120 L0,120 Z" fill="rgba(0,0,0,0.06)" />
-      </svg>
+      <div className="absolute pointer-events-none" style={{
+        width: 400, height: 400, borderRadius: '50%',
+        background: 'radial-gradient(circle, #ff0066 0%, transparent 65%)',
+        top: '-100px', left: '-80px', filter: 'blur(50px)',
+        animation: 'blob1 7s ease-in-out infinite',
+      }} />
+      <div className="absolute pointer-events-none" style={{
+        width: 380, height: 380, borderRadius: '50%',
+        background: 'radial-gradient(circle, #e8005a 0%, transparent 65%)',
+        top: '20%', right: '-100px', filter: 'blur(55px)',
+        animation: 'blob2 9s ease-in-out infinite',
+      }} />
+      <div className="absolute pointer-events-none" style={{
+        width: 360, height: 360, borderRadius: '50%',
+        background: 'radial-gradient(circle, #ff3377 0%, transparent 65%)',
+        bottom: '-80px', left: '5%', filter: 'blur(50px)',
+        animation: 'blob3 8s ease-in-out infinite',
+      }} />
+      <div className="absolute pointer-events-none" style={{
+        width: 320, height: 320, borderRadius: '50%',
+        background: 'radial-gradient(circle, #cc0044 0%, transparent 65%)',
+        top: '50%', left: '30%', filter: 'blur(60px)', opacity: 0.8,
+        animation: 'blob4 6s ease-in-out infinite',
+      }} />
 
-      {/* Main content — centered on red bg */}
+      {/* Main content */}
       <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
 
         {/* Logos + title */}
@@ -34,7 +74,7 @@ export default function LandingPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-5"
         >
-          {/* Logos row — white pill background so both are visible on red */}
+          {/* Logos row */}
           <div className="flex items-center gap-4 bg-white/95 rounded-2xl px-6 py-4 shadow-lg">
             <Image
               src="https://manavrachna.edu.in/assets/images/mru-logo.png"
