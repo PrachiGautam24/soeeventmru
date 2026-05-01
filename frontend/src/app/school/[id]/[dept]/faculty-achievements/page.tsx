@@ -56,9 +56,6 @@ const meFacultyAchievements = [
     desc: '• NPTEL Discipline Star Award for session Jan–June 2022\n• Best Paper Award at Conference on Trends and Advances in Mechanical Engineering',
   },
 ]
-
-// ─── CSE specific faculty achievements ───────────────────────────────────────
-const cseFacultyAchievements = [
   {
     name: '9 Faculty Members · CSE Dept',
     role: 'School of Engineering',
