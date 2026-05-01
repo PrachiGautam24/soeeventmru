@@ -1,4 +1,13 @@
-export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media'
+export type SchoolId = 'soe' | 'law' | 'education' | 'business' | 'science' | 'media' | 'dsw'
+
+export interface Achievement {
+  name: string
+  program?: string
+  category: 'Research' | 'Competition' | 'Sports' | 'Award' | 'Publication' | 'MUN'
+  title: string
+  desc: string
+  badge: string
+}
 
 export interface Department {
   id: string
@@ -9,6 +18,8 @@ export interface Department {
   about: string
   upcomingEvents: { title: string; date: string }[]
   completedEvents?: { title: string; date: string; description?: string; slug?: string }[]
+  studentAchievements?: Achievement[]
+  facultyAchievements?: Achievement[]
 }
 
 export interface School {
@@ -17,9 +28,11 @@ export interface School {
   tagline: string
   icon: string
   color: string
-  about: string          // collapsible about text
+  about: string
   academicPartners: { name: string; image: string }[]
   departments: Department[]
+  studentAchievements?: Achievement[]
+  facultyAchievements?: Achievement[]
 }
 
 export const schools: School[] = [
