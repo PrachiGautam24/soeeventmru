@@ -54,28 +54,6 @@ export default function LandingPage() {
       {/* Main content — centered on red bg */}
       <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
 
-        {/* 30 Years animated logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.7, y: -20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.7, type: 'spring', stiffness: 200, damping: 15 }}
-          className="flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, -8, 0], scale: [1, 1.04, 1] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <Image
-              src="/images/mru-30-years-logo.png"
-              alt="MRU 30 Years"
-              width={120}
-              height={120}
-              priority
-              className="object-contain drop-shadow-2xl"
-            />
-          </motion.div>
-        </motion.div>
-
         {/* Logos + title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -83,25 +61,52 @@ export default function LandingPage() {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-5"
         >
-          {/* Logos row — white pill background so both are visible on red */}
-          <div className="flex items-center gap-4 bg-white/95 rounded-2xl px-6 py-4 shadow-lg">
-            <Image
-              src="https://manavrachna.edu.in/assets/images/mru-logo.png"
-              alt="MRU Logo"
-              width={160}
-              height={72}
-              priority
-              className="object-contain"
-            />
-            <div className="w-px h-12 bg-neutral-200" />
-            <Image
-              src="/images/GPTW.jpg"
-              alt="Great Place To Work Certified"
-              width={56}
-              height={72}
-              priority
-              className="object-contain rounded-sm"
-            />
+          {/* Logos box — 2 rows */}
+          <div className="bg-white/95 rounded-2xl px-6 py-5 shadow-lg flex flex-col items-center gap-4">
+            {/* Row 1 — 30 Years logo (big, spinning) */}
+            <motion.div
+              initial={{ rotate: 0, scale: 0.4, opacity: 0 }}
+              animate={{ rotate: 360, scale: 1, opacity: 1 }}
+              transition={{ duration: 0.9, ease: 'easeOut' }}
+            >
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              >
+                <Image
+                  src="/images/mru-30-years-logo.png"
+                  alt="MRU 30 Years"
+                  width={260}
+                  height={100}
+                  priority
+                  className="object-contain"
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Divider */}
+            <div className="w-full h-px bg-neutral-200" />
+
+            {/* Row 2 — MRU logo + GPTW */}
+            <div className="flex items-center gap-4">
+              <Image
+                src="https://manavrachna.edu.in/assets/images/mru-logo.png"
+                alt="MRU Logo"
+                width={160}
+                height={60}
+                priority
+                className="object-contain"
+              />
+              <div className="w-px h-10 bg-neutral-200" />
+              <Image
+                src="/images/GPTW.jpg"
+                alt="Great Place To Work Certified"
+                width={56}
+                height={72}
+                priority
+                className="object-contain rounded-sm"
+              />
+            </div>
           </div>
 
           {/* Title */}

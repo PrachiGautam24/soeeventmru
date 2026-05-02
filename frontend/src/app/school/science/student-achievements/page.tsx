@@ -1,7 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Filter } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const achievements = [
@@ -180,6 +181,9 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
 
 export default function ScienceStudentAchievementsPage() {
   const router = useRouter()
+  const [activeFilter, setActiveFilter] = useState('All')
+  const categories = ['All', ...Array.from(new Set(achievements.map(a => a.category)))]
+  const filtered = activeFilter === 'All' ? achievements : achievements.filter(a => a.category === activeFilter)
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
@@ -204,15 +208,28 @@ export default function ScienceStudentAchievementsPage() {
         </div>
 
         <div className="flex-1 px-4 py-5 space-y-3">
-          <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-1">
-            {achievements.length} Achievements
+          {/* Filter chips */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <Filter className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+            {categories.map(cat => (
+              <button key={cat} onClick={() => setActiveFilter(cat)}
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  activeFilter === cat ? 'bg-neutral-800 text-white' : 'bg-neutral-100 text-neutral-500'
+                }`}>
+                {cat}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">
+            {filtered.length} {activeFilter === 'All' ? 'Total' : activeFilter}
           </p>
 
-          {achievements.map((a, i) => {
+          {filtered.map((a, i) => {
             const color = categoryColors[a.category] ?? { bg: '#f3f4f6', text: '#6b7280' }
             return (
               <motion.div
                 key={i}
+                layout
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04, type: 'spring', stiffness: 260, damping: 22 }}
