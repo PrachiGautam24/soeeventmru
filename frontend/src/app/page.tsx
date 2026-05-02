@@ -54,6 +54,28 @@ export default function LandingPage() {
       {/* Main content — centered on red bg */}
       <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
 
+        {/* 30 Years animated logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7, y: -20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, type: 'spring', stiffness: 200, damping: 15 }}
+          className="flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, -8, 0], scale: [1, 1.04, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <Image
+              src="/images/mru-30-years-logo.png"
+              alt="MRU 30 Years"
+              width={120}
+              height={120}
+              priority
+              className="object-contain drop-shadow-2xl"
+            />
+          </motion.div>
+        </motion.div>
+
         {/* Logos + title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
