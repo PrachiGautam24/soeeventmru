@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import {
-  Search, Bell, ChevronRight, LogIn, LogOut,
+  Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
   Star, X, Mail, PhoneCall, MapPin
 } from 'lucide-react'
@@ -16,10 +16,10 @@ import { schools } from '@/lib/schools'
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const fresherItems = [
-  { icon: Building2,    label: 'Hostel Information', desc: 'Rooms, facilities & rules', href: '/fresher/hostel' },
-  { icon: Users,        label: 'Clans',              desc: 'Find your community',        href: '/fresher/clans' },
-  { icon: CalendarDays, label: 'Academic Calendar',  desc: 'Dates, exams & holidays',   href: '/fresher/academic-calendar' },
-  { icon: BookOpen,     label: 'First Day',          desc: 'What to do on day one',      href: '/fresher/first-day' },
+  { icon: Building2, label: 'Hostel Information', desc: 'Rooms, facilities & rules', href: '/fresher/hostel' },
+  { icon: Users, label: 'Clans', desc: 'Find your community', href: '/fresher/clans' },
+  { icon: CalendarDays, label: 'Academic Calendar', desc: 'Dates, exams & holidays', href: '/fresher/academic-calendar' },
+  { icon: BookOpen, label: 'First Day', desc: 'What to do on day one', href: '/fresher/first-day' },
 ]
 
 const schoolColors: Record<string, string> = {
@@ -29,43 +29,43 @@ const schoolColors: Record<string, string> = {
 const schoolSVGs: Record<string, React.ReactNode> = {
   soe: (
     <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-      <path d="M32 10 C20 10 14 20 14 28 L50 28 C50 20 44 10 32 10Z"/>
-      <rect x="27" y="7" width="10" height="7" rx="1.5"/>
-      <path d="M10 28 L54 28 L54 32 Q54 34 52 34 L12 34 Q10 34 10 32 Z"/>
-      <circle cx="32" cy="46" r="7" strokeWidth={2.5}/>
+      <path d="M32 10 C20 10 14 20 14 28 L50 28 C50 20 44 10 32 10Z" />
+      <rect x="27" y="7" width="10" height="7" rx="1.5" />
+      <path d="M10 28 L54 28 L54 32 Q54 34 52 34 L12 34 Q10 34 10 32 Z" />
+      <circle cx="32" cy="46" r="7" strokeWidth={2.5} />
     </svg>
   ),
   law: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-      <path d="M12 3v18M3 9l4-4 5 2 5-2 4 4M6 20h12"/>
-      <path d="M5 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L7 9M17 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L19 9"/>
+      <path d="M12 3v18M3 9l4-4 5 2 5-2 4 4M6 20h12" />
+      <path d="M5 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L7 9M17 9l-2 5c0 1.66 1.34 3 3 3s3-1.34 3-3L19 9" />
     </svg>
   ),
   education: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-      <path d="M2 10l10-6 10 6-10 6-10-6z"/>
-      <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
+      <path d="M2 10l10-6 10 6-10 6-10-6z" />
+      <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5" />
     </svg>
   ),
   business: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-      <rect x="2" y="7" width="20" height="14" rx="2"/>
-      <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+      <rect x="2" y="7" width="20" height="14" rx="2" />
+      <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
     </svg>
   ),
   science: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
-      <path d="M9 3h6v10l3 8H6l3-8V3z"/>
-      <path d="M6 19h12"/>
+      <path d="M9 3h6v10l3 8H6l3-8V3z" />
+      <path d="M6 19h12" />
     </svg>
   ),
   dsw: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
       {/* Music note + person dancing */}
-      <circle cx="8" cy="18" r="2"/>
-      <circle cx="16" cy="16" r="2"/>
-      <path d="M10 18V8l8-2v10"/>
-      <path d="M10 12l8-2"/>
+      <circle cx="8" cy="18" r="2" />
+      <circle cx="16" cy="16" r="2" />
+      <path d="M10 18V8l8-2v10" />
+      <path d="M10 12l8-2" />
     </svg>
   ),
 }
@@ -183,13 +183,13 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 type TabId = 'departments' | 'elearning' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
-  { id: 'departments',    label: 'Departments',    emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
-  { id: 'elearning',      label: 'E-Learning',     emoji: '💻', color: '#0891b2', bg: '#e0f7fa' },
-  { id: 'functionaries',  label: 'Functionaries',  emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
-  { id: 'awards',         label: 'Awards',         emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
-  { id: 'placements',     label: 'Placements',     emoji: '💼', color: '#b45309', bg: '#fef3e2' },
-  { id: 'campus',         label: 'Campus Life',    emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
-  { id: 'events',         label: 'Events',         emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
+  { id: 'departments', label: 'Departments', emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
+  { id: 'elearning', label: 'E-Learning', emoji: '💻', color: '#0891b2', bg: '#e0f7fa' },
+  { id: 'functionaries', label: 'Functionaries', emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
+  { id: 'awards', label: 'Awards', emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
+  { id: 'placements', label: 'Placements', emoji: '💼', color: '#b45309', bg: '#fef3e2' },
+  { id: 'campus', label: 'Campus Life', emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
+  { id: 'events', label: 'Events', emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
 ]
 
 // ─── Placement Slideshow — 2 photos at a time ─────────────────────────────────
@@ -234,7 +234,6 @@ export default function HomePage() {
   const router = useRouter()
   const { data: session } = useSession()
   const [activeTab, setActiveTab] = useState<TabId>('departments')
-  const [search, setSearch] = useState('')
   const [floatingOpen, setFloatingOpen] = useState(false)
 
   return (
@@ -271,13 +270,6 @@ export default function HomePage() {
               )}
             </div>
           </div>
-          {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search departments, events..."
-              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white text-sm text-gray-700 placeholder-neutral-400 focus:outline-none shadow-sm" />
-          </div>
         </div>
 
         {/* ── Horizontal Scrollable Category Tabs ── */}
@@ -288,9 +280,8 @@ export default function HomePage() {
                 key={tab.id}
                 whileTap={{ scale: 0.93 }}
                 onClick={() => setActiveTab(tab.id)}
-                className={`shrink-0 flex flex-col items-center gap-1 rounded-xl py-2.5 shadow-sm transition-all duration-200 border-2 w-20 ${
-                  activeTab === tab.id ? 'border-transparent shadow-md' : 'bg-white border-transparent'
-                }`}
+                className={`shrink-0 flex flex-col items-center gap-1 rounded-xl py-2.5 shadow-sm transition-all duration-200 border-2 w-20 ${activeTab === tab.id ? 'border-transparent shadow-md' : 'bg-white border-transparent'
+                  }`}
                 style={activeTab === tab.id ? { backgroundColor: tab.bg, borderColor: tab.color + '40' } : {}}
               >
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center text-base"
@@ -441,7 +432,7 @@ export default function HomePage() {
                     {[
                       { target: 120, suffix: '+', label: 'Total Recruiters', icon: '🏢' },
                       { target: 600, suffix: '+', label: 'Placement Offers', icon: '📋' },
-                      { target: 94,  suffix: '%', label: 'Placement Rate',   icon: '🎯' },
+                      { target: 94, suffix: '%', label: 'Placement Rate', icon: '🎯' },
                     ].map(({ target, suffix, label, icon }) => (
                       <div key={label} className="bg-white/15 rounded-xl p-3 text-center">
                         <p className="text-lg">{icon}</p>
@@ -563,50 +554,50 @@ export default function HomePage() {
 
         {/* ── MRU at a Glance + Contact (departments tab only) ── */}
         {activeTab === 'departments' && (
-        <div className="px-4 mt-6 space-y-4">
-          {/* MRU Stats */}
-          <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">MRU at a Glance</p>
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { target: 43000, suffix: '+', label: 'Alumni Globally' },
-              { target: 135,   suffix: '+', label: 'Collaborations' },
-              { target: 5900,  suffix: '+', label: 'Research Papers' },
-              { target: 600,   suffix: '+', label: 'Recruiting MNCs' },
-              { target: 250,   suffix: '+', label: 'Patents' },
-              { target: 60,    suffix: 'L', label: 'Highest CTC' },
-            ].map(({ target, suffix, label }) => (
-              <div key={label} className="bg-white rounded-2xl p-3.5 shadow-sm border border-neutral-100 text-center">
-                <p className="text-lg font-extrabold text-secondary">
-                  <CountUp target={target} suffix={suffix} />
-                </p>
-                <p className="text-[10px] text-neutral-500 mt-1 leading-tight">{label}</p>
-              </div>
-            ))}
-          </div>
+          <div className="px-4 mt-6 space-y-4">
+            {/* MRU Stats */}
+            <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">MRU at a Glance</p>
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { target: 43000, suffix: '+', label: 'Alumni Globally' },
+                { target: 135, suffix: '+', label: 'Collaborations' },
+                { target: 5900, suffix: '+', label: 'Research Papers' },
+                { target: 600, suffix: '+', label: 'Recruiting MNCs' },
+                { target: 250, suffix: '+', label: 'Patents' },
+                { target: 60, suffix: 'L', label: 'Highest CTC' },
+              ].map(({ target, suffix, label }) => (
+                <div key={label} className="bg-white rounded-2xl p-3.5 shadow-sm border border-neutral-100 text-center">
+                  <p className="text-lg font-extrabold text-secondary">
+                    <CountUp target={target} suffix={suffix} />
+                  </p>
+                  <p className="text-[10px] text-neutral-500 mt-1 leading-tight">{label}</p>
+                </div>
+              ))}
+            </div>
 
-          {/* Contact */}
-          <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mt-2">Contact Us</p>
-          <div className="bg-white rounded-2xl p-4 shadow-sm border border-neutral-100 space-y-3">
-            <a href="tel:+911294268500" className="flex items-center gap-3 text-sm text-gray-700">
-              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-                <PhoneCall className="w-4 h-4 text-secondary" />
+            {/* Contact */}
+            <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mt-2">Contact Us</p>
+            <div className="bg-white rounded-2xl p-4 shadow-sm border border-neutral-100 space-y-3">
+              <a href="tel:+911294268500" className="flex items-center gap-3 text-sm text-gray-700">
+                <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                  <PhoneCall className="w-4 h-4 text-secondary" />
+                </div>
+                +91-129-426-8500 (General)
+              </a>
+              <a href="mailto:admissions@manavrachna.edu.in" className="flex items-center gap-3 text-sm text-gray-700">
+                <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
+                  <Mail className="w-4 h-4 text-secondary" />
+                </div>
+                admissions@manavrachna.edu.in
+              </a>
+              <div className="flex items-start gap-3 text-sm text-gray-700">
+                <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-4 h-4 text-secondary" />
+                </div>
+                <span className="text-xs leading-relaxed">Sector 43, Aravalli Hills, Delhi–Surajkund Road, Faridabad, Haryana 121004</span>
               </div>
-              +91-129-426-8500 (General)
-            </a>
-            <a href="mailto:admissions@manavrachna.edu.in" className="flex items-center gap-3 text-sm text-gray-700">
-              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0">
-                <Mail className="w-4 h-4 text-secondary" />
-              </div>
-              admissions@manavrachna.edu.in
-            </a>
-            <div className="flex items-start gap-3 text-sm text-gray-700">
-              <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center shrink-0 mt-0.5">
-                <MapPin className="w-4 h-4 text-secondary" />
-              </div>
-              <span className="text-xs leading-relaxed">Sector 43, Aravalli Hills, Delhi–Surajkund Road, Faridabad, Haryana 121004</span>
             </div>
           </div>
-        </div>
         )}
 
       </div>
