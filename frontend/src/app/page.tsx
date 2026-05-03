@@ -38,11 +38,12 @@ export default function LandingPage() {
           100% { transform: translate(0px, 0px) scale(1); }
         }
       `}</style>
-
       <div className="absolute pointer-events-none" style={{ width:400,height:400,borderRadius:'50%',background:'radial-gradient(circle,#ff0066 0%,transparent 65%)',top:'-100px',left:'-80px',filter:'blur(50px)',animation:'blob1 7s ease-in-out infinite' }} />
       <div className="absolute pointer-events-none" style={{ width:380,height:380,borderRadius:'50%',background:'radial-gradient(circle,#e8005a 0%,transparent 65%)',top:'20%',right:'-100px',filter:'blur(55px)',animation:'blob2 9s ease-in-out infinite' }} />
       <div className="absolute pointer-events-none" style={{ width:360,height:360,borderRadius:'50%',background:'radial-gradient(circle,#ff3377 0%,transparent 65%)',bottom:'-80px',left:'5%',filter:'blur(50px)',animation:'blob3 8s ease-in-out infinite' }} />
       <div className="absolute pointer-events-none" style={{ width:320,height:320,borderRadius:'50%',background:'radial-gradient(circle,#cc0044 0%,transparent 65%)',top:'50%',left:'30%',filter:'blur(60px)',opacity:0.8,animation:'blob4 6s ease-in-out infinite' }} />
+
+      {/* Main content */}
 
       {/* Bottom wave decorations */}
       <svg className="absolute bottom-0 left-0 w-full pointer-events-none" viewBox="0 0 390 120" fill="none" preserveAspectRatio="none">
@@ -50,7 +51,7 @@ export default function LandingPage() {
         <path d="M0,80 Q100,50 195,80 Q290,110 390,80 L390,120 L0,120 Z" fill="rgba(0,0,0,0.06)" />
       </svg>
 
-      {/* Main content */}
+      {/* Main content — centered on red bg */}
       <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
 
         {/* Logos + title */}
@@ -62,7 +63,7 @@ export default function LandingPage() {
         >
           {/* Logos box — 2 rows */}
           <div className="bg-white/95 rounded-2xl px-6 py-5 shadow-lg flex flex-col items-center gap-4">
-            {/* Row 1 — 30 Years logo (spinning animation) */}
+            {/* Row 1 — 30 Years logo (big, spinning) */}
             <motion.div
               initial={{ rotate: 0, scale: 0.4, opacity: 0 }}
               animate={{ rotate: 360, scale: 1, opacity: 1 }}

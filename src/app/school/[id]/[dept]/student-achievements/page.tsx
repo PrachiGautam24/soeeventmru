@@ -300,7 +300,7 @@ export default function StudentAchievementsPage() {
   const department = school?.departments.find(d => d.id === dept)
 
   // Use R&A specific data if this is the ra dept, otherwise show generic
-  const achievements = dept === 'ra' ? raAchievements : dept === 'cse' ? cseAchievements : dept === 'me' ? meAchievements : []
+  const achievements = dept === 'ra' ? raAchievements : dept === 'cse' ? cseAchievements : dept === 'me' ? meAchievements : (department?.studentAchievements ?? [])
 
   if (!school || !department) return (
     <div className="flex items-center justify-center min-h-screen bg-white">
@@ -348,23 +348,25 @@ export default function StudentAchievementsPage() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.06, type: 'spring', stiffness: 260, damping: 22 }}
-                    className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
-                        style={{ backgroundColor: color.bg }}>
-                        {a.badge}
+                    className="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden flex">
+                    {(a as { photo?: string }).photo && (
+                      <div className="shrink-0 w-28 bg-neutral-100 flex items-center justify-center">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={(a as { photo?: string }).photo as string} alt={a.name} className="w-full h-auto object-contain" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <p className="text-sm font-bold text-gray-800">{a.name}</p>
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                            style={{ backgroundColor: color.bg, color: color.text }}>
-                            {a.category}
-                          </span>
-                        </div>
-                        <p className="text-xs font-semibold text-gray-700 mt-1.5 leading-snug">{a.title}</p>
-                        <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{a.desc}</p>
+                    )}
+                    <div className="flex-1 min-w-0 px-3 py-3.5">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-base">{a.badge}</span>
+                        <p className="text-sm font-bold text-gray-800">{a.name}</p>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                          style={{ backgroundColor: color.bg, color: color.text }}>
+                          {a.category}
+                        </span>
                       </div>
+                      {(a as { program?: string }).program && <p className="text-[11px] text-neutral-400 mt-0.5">{(a as { program?: string }).program}</p>}
+                      <p className="text-xs font-semibold text-gray-700 mt-1.5 leading-snug">{a.title}</p>
+                      <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{a.desc}</p>
                     </div>
                   </motion.div>
                 )

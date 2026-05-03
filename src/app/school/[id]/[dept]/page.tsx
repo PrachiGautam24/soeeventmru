@@ -10,7 +10,7 @@ const gridItems = [
   { label: 'Student\nAchievements', icon: '🏆', route: 'student-achievements' },
   { label: 'Events\nOrganised',     icon: '📅', route: 'events' },
   { label: 'Faculty\nAchievements', icon: '🎓', route: 'faculty-achievements' },
-  { label: 'Programs',              icon: '📖', route: 'curriculum' },
+  { label: 'Programs\nOffered',     icon: '📖', route: 'programs' },
   { label: 'Podcasts &\nVideos',    icon: '🎧', route: 'podcast' },
 ]
 
@@ -144,6 +144,29 @@ export default function DepartmentPage() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Major Recruiters */}
+            {department.recruiters && department.recruiters.length > 0 && (
+              <div>
+                <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Major Recruiters</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {department.recruiters.map((r, i) => (
+                    <div key={i} className="bg-white rounded-2xl border border-neutral-100 shadow-sm flex flex-col items-center justify-center gap-2 py-3 px-2">
+                      {r.logo ? (
+                        <div className="relative w-full h-12">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={r.logo} alt={r.name} className="w-full h-full object-contain" />
+                        </div>
+                      ) : (
+                        <div className="w-12 h-12 rounded-xl bg-neutral-100 flex items-center justify-center">
+                          <span className="text-xs font-bold text-neutral-500">{r.name[0]}</span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
           </div>
         </div>

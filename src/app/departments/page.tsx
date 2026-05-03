@@ -21,6 +21,14 @@ const allDepartments = schools.flatMap(school =>
   }))
 )
 
+function getRoute(schoolId: string, deptId: string) {
+  if (schoolId === 'law') return '/school/law/overview'
+  if (schoolId === 'business') return '/school/business/overview'
+  if (schoolId === 'education') return '/school/education/overview'
+  if (schoolId === 'science') return '/school/science'
+  return `/school/${schoolId}/${deptId}`
+}
+
 export default function DepartmentsPage() {
   const router = useRouter()
   const [query, setQuery] = useState('')
@@ -60,7 +68,7 @@ export default function DepartmentsPage() {
             <motion.button key={`${dept.schoolId}-${dept.id}`}
               initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => router.push(`/school/${dept.schoolId}/${dept.id}`)}
+              onClick={() => router.push(getRoute(dept.schoolId, dept.id))}
               className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
               <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 text-xl"
                 style={{ backgroundColor: dept.schoolColor + '18' }}>

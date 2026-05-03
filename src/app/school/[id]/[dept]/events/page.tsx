@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
-import { ArrowLeft, Calendar, Clock } from 'lucide-react'
+import { ArrowLeft, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { schools } from '@/lib/schools'
 
@@ -58,25 +58,23 @@ export default function DeptEventsPage() {
           <div className="px-4 py-4">
             <AnimatePresence mode="wait">
               {tab === 'upcoming' ? (
-                <motion.div key="upcoming" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.2 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <motion.div key="upcoming" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.2 }}>
                   {upcoming.length === 0 ? (
-                    <p className="text-sm text-neutral-400 text-center py-12 col-span-full">No upcoming events.</p>
+                    <p className="text-sm text-neutral-400 text-center py-12">No upcoming events.</p>
                   ) : (
-                    upcoming.map((ev, i) => (
-                      <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                        className="bg-white rounded-2xl border border-neutral-100 shadow-sm p-4 flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
-                          <Clock className="w-5 h-5 text-secondary" />
+                    <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden divide-y divide-neutral-100">
+                      {upcoming.map((ev, i) => (
+                        <div key={i} className="flex items-start gap-3 px-4 py-3.5">
+                          <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0 mt-1.5" />
+                          <div>
+                            <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
+                            <p className="text-xs text-neutral-400 mt-0.5 flex items-center gap-1">
+                              <Calendar className="w-3 h-3" /> {ev.date}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
-                          <p className="text-xs text-neutral-400 mt-0.5 flex items-center gap-1">
-                            <Calendar className="w-3 h-3" /> {ev.date}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))
+                      ))}
+                    </div>
                   )}
                 </motion.div>
               ) : (
