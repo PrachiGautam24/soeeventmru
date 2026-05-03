@@ -76,6 +76,17 @@ The department has active research labs in AI, IoT, and Data Science, and mainta
         completedEvents: [
           { title: 'ICASS 2026', date: 'February 12–13, 2026', description: 'International Conference on Intelligent Computing and Automation for Sustainable Solutions', slug: 'icass-2026' },
         ],
+        studentAchievements: [
+          { name: 'Bhargavi Devapatla, Manas Jha, Manikanta Kancharla & Sankit Singhal', program: 'AIML', category: 'Hackathon', badge: '🥇', title: '1st Place — Code Sangam, SGT University (Feb 2024)', desc: '36-hour hackathon with 3 rounds. Won ₹15,000 prize.' },
+          { name: 'Bhargavi Devapatla', program: 'AIML', category: 'Competition', badge: '🥉', title: '3rd Prize — Altair Data Science Contest, E-Summit\'25 (IIITDM Kancheepuram)', desc: 'Under guidance of Dr. Mamta Arora.' },
+          { name: 'Bhargavi Devapatla & Manikanta Kancharla', program: 'AIML', category: 'Hackathon', badge: '🏆', title: 'Top 6 — SOLVE-A-THON', desc: 'Reached Top 6 teams in innovation challenge.' },
+          { name: 'Narapureddy Durga Prasad Reddy, Manikanta Kancharla, Dogga Pavan Sekhar & Kodati Sai Teja', program: 'CSE', category: 'Hackathon', badge: '🤖', title: 'Hackaccino 2024 — Bennett University', desc: 'Developed ML-based chatbot for health management.' },
+          { name: 'Bhargavi Devapatla', program: 'AIML', category: 'Research', badge: '🧠', title: 'Health Tech Innovations Fest — TinyLife: Fetal Segmentation', desc: 'Deep learning research on fetal brain tumor detection using CNN-based U-Net & SegNet.' },
+          { name: 'Rishav, Harsh & Avdhesh (Team Bring Hope)', program: 'AIML 6th Sem', category: 'Competition', badge: '🥉', title: '3rd Place — Sociothon, IIT Roorkee (Feb 2024)', desc: 'Secured 3rd among ~500 participants at National Social Summit\'24.' },
+          { name: 'Charu Goyal & Drishti Kemni', program: 'CSE', category: 'Best Paper', badge: '📄', title: 'Best Paper Award — ICICC24 (Feb 2024)', desc: '"Evaluation of ML Techniques for Personality Classification using Myers-Briggs Assessment". Guided by Dr. Mrinal Pandey.' },
+          { name: 'Team Shinchan — Harsh Bhardwaj, Swayam Arora, Chhaya Sharma & Khushboo Mehta', program: 'CSE', category: 'Hackathon', badge: '🥉', title: '3rd Prize — HackItUp 1.0, MRSDC MRI (Feb 2024)', desc: '12-hour hackathon.' },
+          { name: 'Shivani Sharma', program: 'CSE', category: 'Competition', badge: '🥇', title: '1st Place — Health Innovation Fest (40+ teams)', desc: '"Indoor Navigation for Visually Impaired Using Real-Time Object Detection".' },
+        ],
       },
       {
         id: 'ece', name: 'Electronics & Communication Engineering', code: 'ECE', icon: '📡',
@@ -84,8 +95,39 @@ The department has active research labs in AI, IoT, and Data Science, and mainta
 
 It has state-of-the-art labs for signal processing, microelectronics, and IoT, and collaborates with Truechip and CISCO for industry-aligned learning.`,
         upcomingEvents: [
-          { title: 'VLSI Design Seminar', date: 'April 18, 2026' },
-          { title: 'IoT Bootcamp', date: 'May 5, 2026' },
+          { title: '2-Day Workshop: Smart Controller Design using Soft Computing', date: 'April 15–16, 2026' },
+        ],
+        completedEvents: [
+          { title: '2-Day Workshop on Smart Controller Design using Soft Computing', date: 'April 15–16, 2026', description: 'A hands-on workshop covering soft computing techniques for smart controller design, organized by the ECE Department, School of Engineering, MRU.', slug: 'ece-workshop-apr2026' },
+        ],
+        studentAchievements: [
+          { name: 'R. Uday Kiran', program: 'ECE 4th Semester', category: 'Competition', badge: '🥇', title: '1st Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 1st prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.', photo: '/images/ece/student-achievements/udaykiran.png' },
+          { name: 'Jayasankar', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 2nd prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
+          { name: 'Anjesh Kumar, Daksh & Kapil', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Build the Circuit, Inno-Skill 2026', desc: 'Secured 2nd prize in the "Build the Circuit" competition at Inno-Skill 2026, April 3–4, 2026.', photo: '/images/ece/student-achievements/anjesh.png' },
+          { name: 'Ankita Mahapatra & Reeyal', program: 'B.Tech ECE 4th Semester', category: 'Competition', badge: '🥉', title: '3rd Position — State-Level India Skills Competition (Industry 4.0)', desc: 'Completed tasks based on PLC (Programmable Logic Controller) within a limited time, gaining hands-on experience in industrial automation systems.', photo: '/images/ece/student-achievements/ankita.png' },
+          { name: 'Harsh Malik, Nitin Pandey, Jhalak Dhingra & G. Kumar Swami', program: 'ECE 2nd & 3rd Year', category: 'Award', badge: '🏅', title: "Dean's List — Top 5% of Class", desc: "Identified in the Dean's List for securing a place in the top 5% of their respective classes. Awarded by the Vice Chancellor, Dean Academics, and Dean Engineering.", photo: '/images/ece/student-achievements/harshmalik.png' },
+          { name: 'Sai Devesh Reddy', program: 'ECE 4th Semester', category: 'Award', badge: '⭐', title: 'Dual Internships, Campus Ambassador & AIU Football Representative', desc: 'Pursuing stipend-based internships in Video Editing at MRIIF and Data Fluxion. Campus Ambassador at MRU, President of Digital Nexus, and represented MRU in the AIU North-West Zone football tournament.', photo: '/images/ece/student-achievements/deveshreddy.png' },
+          { name: 'Manvitha, I V Sanjeev, Anmol & Ranveer', program: 'ECE / CST', category: 'Competition', badge: '🥉', title: '3rd Prize — IDE Bootcamp', desc: 'Won 3rd prize at the IDE Bootcamp along with their team from CST.', photo: '/images/ece/student-achievements/manvitha.png' },
+        ],
+        facultyAchievements: [
+          { name: 'Dr. Shruti Vashist', program: 'Dean Academics, Professor (Ph.D.)', category: 'Award', badge: '🏆', title: "Utkrisht: 'Icons of Manav Rachna' 2023 & Cricket Winner", desc: "Received the prestigious 'Icons of Manav Rachna' Utkrisht Award 2023. Also won the inter Cricket Challenger Event at MRU.", photo: '/images/ece/faculty-achievements/shruti-vashisht.png' },
+          { name: 'Dr. Piyush Charan', program: 'Associate Professor (Ph.D.)', category: 'Award', badge: '🎓', title: 'Google Certified Educator & SWAYAM NPTEL Elite + Silver Medal (2024–25)', desc: 'Recognized as a Google Certified Educator (Feb 2025) for integrating Google tools into teaching. Awarded Elite + Silver Medal (76%) in Managing Intellectual Properties in Universities from SWAYAM NPTEL, IIT Madras, 2024. Recognized by IEEE, USA.', photo: '/images/ece/faculty-achievements/piyush-charan.png' },
+          { name: 'Bhanu Pratap', program: 'Associate Professor (Ph.D.)', category: 'Award', badge: '🏏', title: 'Manav Rachna Corporate Cricket Challenge Winner', desc: 'Won the Manav Rachna Corporate Cricket Challenge organized by Manav Rachna Educational Institutions.', photo: '/images/ece/faculty-achievements/bhanu-pratap.png' },
+          { name: 'Dr. K. Deepa', program: 'ECE Department', category: 'Award', badge: '📜', title: 'Certificate of Appreciation — Reviewer, ICSC 2025', desc: 'Received in recognition of valuable contributions as a Reviewer for the conference held on June 16–17, 2025, in Ho Chi Minh City, Vietnam. Organized by Society for Education and Research Development (India) & Southern Institute of Social Sciences (Vietnam).', photo: '/images/ece/faculty-achievements/k-deepa.png' },
+        ],
+        recruiters: [
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 2.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 3.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 4.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 5.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 6.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 7.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 8.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 9.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 10.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 11.png' },
         ],
       },
       {
@@ -97,6 +139,13 @@ The department has advanced CAD/CAM labs, a 3D printing facility, and an EV rese
         upcomingEvents: [
           { title: 'CAD/CAM Workshop', date: 'April 25, 2026' },
         ],
+        studentAchievements: [
+          { name: 'Vinay Kumar & Team', program: 'ME 3rd Year', category: 'Competition', badge: '🥇', title: '1st Prize — E-Yantra, IIT Bombay', desc: 'Won first prize with team at E-Yantra robotics competition, IIT Bombay.' },
+          { name: 'Gurpreet Singh, Fateh Singh, Tushar Gupta & Tushar Sehgal', program: 'ME', category: 'Grant', badge: '💰', title: 'CSR Funding ₹10,544 — E-Vehicle Startup', desc: 'Received CSR grant for E-vehicle startup under mentorship of Dr. J.P. Sharma.' },
+          { name: 'Karan Khanjuja', program: 'B.Tech ME 4th Sem', category: 'Sports', badge: '⛳', title: 'FIA JCB Tournament Winner · PGTI Pro-AM Runner-Up', desc: 'Group winner at FIA JCB Tournament, Aravali Golf Club. Runner-up at PGTI Pro-AM Delhi NCR Golf Tournament.' },
+          { name: 'Dheeraj Malik, Mohd. Tariq Saifi & Ankit Sharma', program: 'ME', category: 'Competition', badge: '🥉', title: '3rd Prize — Anveshan 2019–20 North Zone · Selected for Nationals', desc: 'Won 3rd prize in Engineering & Technology category at North Zone Anveshan 2019–20.' },
+          { name: 'Karan Sehgal', program: 'ME 2019 batch', category: 'Grant', badge: '💰', title: 'AICTE New Gen IEDC Grant ₹2.5 Lakhs — Electric Tractor', desc: 'Electric Tractor project sanctioned by AICTE-sponsored New Gen IEDC with ₹2.5 lakh grant.' },
+        ],
       },
       {
         id: 'ra', name: 'Robotics & Automation', code: 'R&A', icon: '🤖',
@@ -107,6 +156,13 @@ Students work in dedicated robotics labs equipped with collaborative robots, dro
         upcomingEvents: [
           { title: 'Robo-Wars 2026', date: 'May 10, 2026' },
           { title: 'Drone Tech Expo', date: 'May 18, 2026' },
+        ],
+        studentAchievements: [
+          { name: 'Dev Dixit', program: 'Robotics & AI', category: 'NPTEL', badge: '🥇', title: 'Elite + Gold — Top 2% · IPR & Competition Law', desc: 'Scored 91% in 8-week SWAYAM-NPTEL course, ranking in top 2% of all scorers.' },
+          { name: 'Ujjawal Arora', program: 'Robotics & AI', category: 'NPTEL', badge: '🥈', title: 'Elite + Silver — IPR & Competition Law', desc: 'Scored 76% in 8-week SWAYAM-NPTEL course, earning Elite + Silver Certification.' },
+          { name: 'Ujjawal Arora & Nitin Kumar (Team Sankat Mochan)', program: 'Robotics & AI', category: 'Competition', badge: '🏆', title: '1st Position — Tech Showcase 2.0, MRU (Mar 2025)', desc: 'Won first place in Tech Showcase 2.0 organized by ECE Dept, MRU on 24 March 2025.' },
+          { name: 'Nitin Kumar', program: 'Robotics & AI', category: 'Publication', badge: '📄', title: 'Paper at IEEE SCEECS 2025, MANIT Bhopal', desc: '"Dynamic Equilibrium in Robotics: Techniques and Applications for Self-Balancing Robots" — IEEE International Conference, Jan 18–19, 2025.' },
+          { name: 'Harshil Aron', program: 'B.Tech R&AI 6th Sem', category: 'Academic', badge: '🎓', title: "Dean's List — B.Tech R&AI, 6th Semester", desc: 'Recognized for exceptional academic excellence and consistent dedication to learning.' },
         ],
       },
       {
@@ -133,6 +189,22 @@ It offers five-year integrated programmes (BBA LLB Hons., BA LLB Hons.), postgra
 
 The school is accredited by the Bar Council of India (BCI) and has NAAC A++ accreditation. It emphasises moot court practice, legal aid clinics, and internships with top law firms and courts.`,
     academicPartners: [],
+    studentAchievements: [
+      { name: 'Himanshu Jindal & Vishal Bansal', program: 'LLB Sem 3 & BA LLB Sem I', category: 'Competition', badge: '🥈', title: 'Runner-Up — Maharishi Mahesh Yogi National Client Counseling Competition 2025', desc: 'Secured runner-up at Maharishi Law School, MUIT Noida, November 20–22, 2025.' },
+      { name: 'Riya Suri', program: 'BBA LLB Semester X', category: 'Publication', badge: '📖', title: 'Book Chapter — "LGBTQIA+: The Unfold History", Bharti Publications 2026', desc: 'Published in "75 Years of the Supreme Court of India: Upholding Democracy and Delivering Justice".' },
+      { name: 'Tushar Awana & Aditya Chaudhary', program: 'LLB 2nd Year', category: 'Competition', badge: '🥇', title: '1st Prize — Debate Competition, University of Pécs Summer School, Hungary', desc: 'Won first prize in debate competition organized by University of Pécs, PECS Summer School, Hungary.' },
+      { name: 'Vanshika', program: 'BA LLB Semester IV', category: 'MUN', badge: '🌍', title: 'MUN — AMIFEST\'26, Amity University Haryana (Feb 2026)', desc: 'Represented portfolio of Shri Kalyan Singh Kalvi in the Historic Lok Sabha Committee at Inter-University Fest, February 12–13, 2026.' },
+      { name: 'Adriel Lawrence', program: 'BA LLB Semester II', category: 'Award', badge: '🏅', title: 'Academic Excellence Award — Delhi YMCA, September 2025', desc: 'Received Academic Excellence Award for excellent Board Exam Result, September 26, 2025.' },
+      { name: 'Akhilesh Singh', program: 'BA LLB Sem VII', category: 'Sports', badge: '🏏', title: 'Best Bowler & Best Fielder — Cricket Tournament (Jul 2025)', desc: 'Won Best Bowler and Best Fielder titles at Blue Birds Sports Complex, Faridabad, July 27, 2025.' },
+    ],
+    facultyAchievements: [
+      { name: 'Prof. (Dr.) Asha Verma', category: 'Research', badge: '🎤', title: 'Presented at Legal Education Research Conference, UNSW Sydney (Nov 2025)', desc: '"Revolutionizing Course Design: Decolonizing Content and Enhancing Learning without Curriculum Saturation", November 24–25, 2025.' },
+      { name: 'Prof. (Dr.) Asha Verma', category: 'Award', badge: '🏅', title: 'Outstanding Dean Leadership Award — National Education Conclave, Delhi (Aug 2025)', desc: 'Received Outstanding Dean Leadership Award at Thyagaraj Sports Complex, Delhi, August 06–07, 2025.' },
+      { name: 'Dr. Ghazala Abidin', category: 'Publication', badge: '📰', title: '3 Papers Published — Scopus & Indian Journals (2025)', desc: 'Published in International Journal of Environmental Sciences (Scopus, 2 papers) and Indian Journal of Law and Legal Research (2025).' },
+      { name: 'Dr. Ghazala Abidin & Dr. Chhavi Kulshreshtha', category: 'Publication', badge: '💡', title: 'Patent Published — Autonomous Biometric Monitoring Wrist-Wearable Device', desc: 'Application No. 202511074241 A, Patent Office Journal No. 35/2025, August 29, 2025.' },
+      { name: 'Dr. Superna Venaik', category: 'Award', badge: '⚖️', title: 'Judge — Philip C. Jessup International Law Moot Court 2026, OPJ Sonipat', desc: 'Judged India National Qualifying Rounds, February 13, 2026.' },
+      { name: 'Dr. Aaratrika Pandey', category: 'Publication', badge: '📖', title: 'Book Chapter — Green Criminology and Climate Justice, Routledge (Feb 2026)', desc: '"Conceptualizing the Anatomy of Green Criminology in South Asia", eBook ISBN 9781003385011.' },
+    ],
     departments: [
       {
         id: 'corporate-law', name: 'Corporate & Commercial Law', code: 'CCL', icon: '🏢',
