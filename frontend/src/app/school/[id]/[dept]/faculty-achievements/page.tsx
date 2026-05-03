@@ -77,7 +77,7 @@ const cseFacultyAchievements = [
     desc: '• Fellow, Soft Computing Research Society (SCRS)\n• Research Fellow, Inti International University, Malaysia\n• Senior Member, Indian National Academy of Engineering (IANE), DST Govt. of India\n• Fellow Member, Soft Computing Research Society',
   },
   {
-    name: 'Ms. Gunjan Chandwani',
+    name: 'Dr. Gunjan Chandwani',
     role: 'Faculty · CSE',
     badge: '🏆',
     category: 'Award',
@@ -101,7 +101,7 @@ const cseFacultyAchievements = [
     desc: '• Certificate of Appreciation as Session Chair, SMART GENCON 2022, Bangalore\n• Appreciation Letter as Mentor for CDAC Kolkata team — Winners, AI Grand Challenge (Real-Time Price Prediction 2021), Telangana Govt & Nasscom',
   },
   {
-    name: 'Ms. Chandni Magoo',
+    name: 'Dr. Chandni Magoo',
     role: 'Faculty · CSE',
     badge: '🌏',
     category: 'Award',
