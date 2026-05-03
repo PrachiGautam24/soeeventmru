@@ -233,7 +233,6 @@ export default function FacultyAchievementsPage() {
                 {achievements.length} Achievements
               </p>
               {achievements.map((a, i) => {
-                const color = categoryColors[a.category] ?? { bg: '#f3f4f6', text: '#6b7280' }
                 return (
                   <motion.div key={i}
                     initial={{ opacity: 0, y: 12 }}
