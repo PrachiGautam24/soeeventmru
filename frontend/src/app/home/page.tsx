@@ -180,11 +180,12 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 }
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'elearning' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards'
+type TabId = 'departments' | 'elearning' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards' | 'learning'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
   { id: 'departments', label: 'Departments', emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
   { id: 'elearning', label: 'E-Learning', emoji: '💻', color: '#0891b2', bg: '#e0f7fa' },
+  { id: 'learning', label: 'Learning\nPathways', emoji: '🛤️', color: '#7c3aed', bg: '#f3eeff' },
   { id: 'functionaries', label: 'Functionaries', emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
   { id: 'awards', label: 'Awards', emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
   { id: 'placements', label: 'Placements', emoji: '💼', color: '#b45309', bg: '#fef3e2' },
@@ -391,6 +392,117 @@ export default function HomePage() {
                   className="w-full flex items-center justify-center gap-2 bg-cyan-600 rounded-2xl py-3.5 text-sm font-bold text-white shadow-md">
                   Open Engage Hub 🚀
                 </motion.button>
+              </motion.div>
+            )}
+
+            {/* LEARNING PATHWAYS */}
+            {activeTab === 'learning' && (
+              <motion.div key="learning"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }} className="space-y-4">
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Faculty Learning Pathways</p>
+
+                {[
+                  {
+                    school: 'School of Engineering (CSE/R&I)',
+                    color: '#1e4ba9', bg: '#e8edf8',
+                    courses: [
+                      { faculty: 'Dr. Mamta Arora', course: 'Object Oriented Programming using Java' },
+                      { faculty: 'Dr. Chandani Magoo', course: 'Data Structure Algorithm' },
+                      { faculty: 'Dr. Sujata', course: 'Data Structure and Algorithms' },
+                      { faculty: 'Dr. Pooja Sachdeva', course: 'Introduction to Cyberspace' },
+                      { faculty: 'Dr. Gurpreet Singh Matharou', course: 'Entrepreneurship and Startups' },
+                      { faculty: 'Dr. Neha Chaudhary', course: 'Fundamentals of Electrical and Electronics Engineering' },
+                    ],
+                  },
+                  {
+                    school: 'School of Engineering (ECE/ME)',
+                    color: '#0891b2', bg: '#e0f7fa',
+                    courses: [
+                      { faculty: 'Dr. Nitu Chauhan', course: 'Introduction to Number System' },
+                      { faculty: 'Dr. Nitika', course: 'Microprocessors & Microcontrollers' },
+                      { faculty: 'Dr. Richa Adlakha', course: 'Concepts of Control System Engineering' },
+                      { faculty: 'Dr. Jimmy Mehta', course: 'Material Science' },
+                    ],
+                  },
+                  {
+                    school: 'School of Business (SoB)',
+                    color: '#b12a2e', bg: '#fde8e8',
+                    courses: [
+                      { faculty: 'Dr. Yogita Sharma', course: 'Relevance of Mental Well-Being for a Healthy Entrepreneurial Journey' },
+                      { faculty: 'Dr. Neeraj Arora', course: 'Operations and Supply Chain Management' },
+                      { faculty: 'Dr. Pragati Chauhan', course: 'Entrepreneurship Essential - A Learning Toolkit' },
+                      { faculty: 'Dr. Animesh Singh', course: 'Introduction to HR Analytics' },
+                      { faculty: 'Dr. Pooja Kapoor', course: 'Understanding Business Finance for Everyone' },
+                      { faculty: 'Ms. Shanu Jain', course: 'Macroeconomic Foundations of Growth and Money' },
+                      { faculty: 'Dr. Shelly Agarwal', course: 'Different Types of Risks in the Banking System' },
+                      { faculty: 'Dr. Sunilkumar Premkishore Roy', course: 'Navigating Business & Marketing Environments for Smart Decision Making' },
+                      { faculty: 'Dr. Gurpreet Kaur', course: 'Risk Management and Assessment in Banks' },
+                      { faculty: 'Akanksha', course: 'TBA' },
+                      { faculty: 'Rashi', course: 'TBA' },
+                    ],
+                  },
+                  {
+                    school: 'School of Law (SoL)',
+                    color: '#b45309', bg: '#fef3e2',
+                    courses: [
+                      { faculty: 'Mr. Anupam Sharma', course: 'Environmental Principles' },
+                      { faculty: 'Dr. Tarundeep', course: 'Basics of Sociology' },
+                      { faculty: 'Dr. Superna Venaik', course: 'Foundations of Civil Justice — Substantive Law and Procedural Frameworks' },
+                      { faculty: 'Mr. Aditya Verma', course: 'Introduction to Constitution & Legal System' },
+                      { faculty: 'Dr. Aditi Chaudhary', course: 'Role of Legal Aid Clinics' },
+                      { faculty: 'Prof. (Dr.) SK Bose', course: 'Legal Research Basics' },
+                      { faculty: 'Dr. Apala Vatsa', course: 'Public Policy and Governance in India' },
+                    ],
+                  },
+                  {
+                    school: 'School of Education & Humanities (SoEH)',
+                    color: '#16a34a', bg: '#e8f5ee',
+                    courses: [
+                      { faculty: 'Dr. Savita Sharma', course: 'Understanding the Self' },
+                      { faculty: 'Dr. Eram Aziz', course: 'Action Research' },
+                    ],
+                  },
+                  {
+                    school: 'School of Sciences (SoS)',
+                    color: '#7c3aed', bg: '#f3eeff',
+                    courses: [
+                      { faculty: 'Dr. Vinayak Pathak', course: 'Environment and Sustainable' },
+                    ],
+                  },
+                  {
+                    school: 'Career Development Centre (CDC)',
+                    color: '#0891b2', bg: '#e0f7fa',
+                    courses: [
+                      { faculty: 'Ms. Pranamika Verma', course: 'Reducing Cognitive Bias and Adopting Social Technology — Design Thinking' },
+                      { faculty: 'Ms. Priya Singh', course: 'The Professional Presence: Etiquette That Elevates' },
+                      { faculty: 'Dr. Monika Aggarwal', course: 'SkillSprint: Essential Soft Skills for Career Success' },
+                      { faculty: 'Ms. Shivangee Sharma', course: 'Cross Cultural Communication' },
+                    ],
+                  },
+                ].map((group, gi) => (
+                  <motion.div key={group.school}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: gi * 0.05 }}
+                    className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+                    <div className="px-4 py-3 border-b border-neutral-100" style={{ backgroundColor: group.bg }}>
+                      <p className="text-xs font-bold" style={{ color: group.color }}>{group.school}</p>
+                    </div>
+                    <div className="divide-y divide-neutral-50">
+                      {group.courses.map((c, i) => (
+                        <div key={i} className="px-4 py-3 flex items-start gap-3">
+                          <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-sm mt-0.5"
+                            style={{ backgroundColor: group.bg }}>
+                            🎓
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-gray-800 leading-snug">{c.course}</p>
+                            <p className="text-[11px] text-neutral-400 mt-0.5">{c.faculty}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             )}
 

@@ -112,14 +112,102 @@ const csePrograms = {
   },
 }
 
+// ─── ME Programs Data ─────────────────────────────────────────────────────────
+const mePrograms = {
+  ug: [
+    {
+      title: 'B.Tech M.E (Hons.) — Smart Manufacturing & Automation',
+      duration: '4 Years', level: 'Undergraduate', badge: '🏭',
+      partner: 'In association with L&T EduTech',
+      highlights: ['Smart manufacturing and Industry 4.0 technologies', 'L&T EduTech industry-driven curriculum', 'Automation, robotics, and CNC machining'],
+      careers: ['Manufacturing Engineer', 'Automation Engineer', 'Production Manager'],
+    },
+    {
+      title: 'B.Tech M.E (Hons.) — Electric Vehicle Technology',
+      duration: '4 Years', level: 'Undergraduate', badge: '⚡',
+      partner: 'In association with L&T EduTech',
+      highlights: ['EV powertrain, battery systems, and charging infrastructure', 'L&T EduTech collaboration', 'Hands-on EV design and simulation projects'],
+      careers: ['EV Engineer', 'Battery Systems Engineer', 'Automotive Design Engineer'],
+    },
+    {
+      title: 'B.Tech (Lateral Entry) M.E (Hons.) — Smart Manufacturing & Automation',
+      duration: '3 Years', level: 'Undergraduate', badge: '🔁',
+      partner: 'In association with L&T EduTech',
+      highlights: ['Lateral entry for diploma holders', 'Smart manufacturing specialization', 'Industry 4.0 and automation focus'],
+      careers: ['Manufacturing Engineer', 'Automation Specialist', 'Process Engineer'],
+    },
+    {
+      title: 'B.Tech ME — Electric Vehicle Technology (Lateral Entry)',
+      duration: '3 Years', level: 'Undergraduate', badge: '🔋',
+      partner: 'In association with L&T EduTech',
+      highlights: ['Lateral entry into EV specialization', 'L&T EduTech curriculum', 'EV design, testing, and integration'],
+      careers: ['EV Design Engineer', 'Automotive Engineer', 'EV Systems Analyst'],
+    },
+    {
+      title: 'B.Tech (Lateral Entry) M.E (Hons.) — Electric Vehicle Technology',
+      duration: '3 Years', level: 'Undergraduate', badge: '⚡',
+      partner: 'In association with L&T EduTech',
+      highlights: ['Lateral entry with EV technology focus', 'Hands-on EV lab projects', 'Industry mentorship from L&T EduTech'],
+      careers: ['EV Engineer', 'Battery Engineer', 'Automotive Systems Engineer'],
+    },
+  ],
+  pg: [
+    {
+      title: 'M.Tech in Mechanical Engineering',
+      duration: '2 Years', level: 'Postgraduate', badge: '🎓',
+      highlights: ['Advanced manufacturing, thermal, and design engineering', 'Research-oriented curriculum', 'Industry and academic collaborations'],
+      careers: ['Senior Mechanical Engineer', 'Research Engineer', 'Design Engineer', 'Academic Researcher'],
+    },
+  ],
+  phd: {
+    title: 'Ph.D. in Mechanical Engineering',
+    duration: '3–5 Years', badge: '🔬',
+    highlights: [
+      'Research in Smart Manufacturing, EV Technology, Thermal Engineering',
+      'Active research labs and publication support',
+      'Collaboration with L&T EduTech and industry partners',
+      'Publication support in Scopus/SCI indexed journals',
+    ],
+  },
+}
+
+// ─── RA Programs Data ─────────────────────────────────────────────────────────
+const raPrograms = {
+  ug: [
+    {
+      title: 'B.Tech Robotics and Artificial Intelligence Engineering',
+      duration: '4 Years', level: 'Undergraduate', badge: '🦾',
+      partner: 'In association with L&T Edutech',
+      highlights: ['Robotics + AI integrated curriculum', 'L&T Edutech industry partnership', 'Hands-on robotics lab and AI projects', 'Autonomous systems, drone technology, and industrial automation'],
+      careers: ['Robotics Engineer', 'AI Engineer', 'Automation Specialist', 'Drone Systems Engineer'],
+    },
+    {
+      title: 'B.Tech (Lateral Entry) Robotics and AI Engineering',
+      duration: '3 Years', level: 'Undergraduate', badge: '🤖',
+      partner: 'In association with L&T Edutech',
+      highlights: ['Lateral entry into Robotics & AI program', 'L&T Edutech curriculum', 'Industry-ready robotics training'],
+      careers: ['Robotics Engineer', 'AI Developer', 'Automation Engineer'],
+    },
+  ],
+  pg: [] as typeof ecePrograms.pg,
+  phd: {
+    title: 'Ph.D. in Robotics & Automation',
+    duration: '3–5 Years', badge: '🔬',
+    highlights: [
+      'Research in autonomous systems, AI, and industrial robotics',
+      'Dedicated robotics labs with collaborative robots and drone simulators',
+      'Partnerships with ABB and Fanuc',
+      'Publication support in Scopus/SCI indexed journals',
+    ],
+  },
+}
+
 // ─── ECE Programs Data ────────────────────────────────────────────────────────
 const ecePrograms = {
   ug: [
     {
       title: 'B.Tech — Electronics & Communication Engineering',
-      duration: '4 Years',
-      level: 'Undergraduate',
-      badge: '📡',
+      duration: '4 Years', level: 'Undergraduate', badge: '📡',
       highlights: [
         'Core ECE fundamentals: Communication, VLSI, Embedded Systems',
         'Electives across 3 verticals: Computer/IT, Communication Engineering, Embedded/VLSI',
@@ -131,9 +219,7 @@ const ecePrograms = {
     },
     {
       title: 'B.Tech — ECE (VLSI Design & Verification)',
-      duration: '4 Years',
-      level: 'Undergraduate',
-      badge: '🔬',
+      duration: '4 Years', level: 'Undergraduate', badge: '🔬',
       partner: 'In association with TrueChip',
       highlights: [
         'Guaranteed placement in core VLSI industry',
@@ -142,17 +228,13 @@ const ecePrograms = {
         '20 modules designed by TrueChip & Futurewiz based on current industrial requirements',
         'Hands-on training on Mentor Graphics / Cadence / Synopsys tools',
         'Training in HVL, HDL, System Verilog (OVM, VMM, UVM), Verilog, VHDL, Perl, C, C++, Unix scripting',
-        'Front-end EDA tools: Cadence, Synopsys, Mentor FPGA Synthesis',
-        'Back-end EDA tools for Physical Design: Cadence and Synopsys',
         'Letter of Intent at time of admission',
       ],
       careers: ['ST MicroElectronics', 'Freescale', 'Cadence', 'TrueChip', 'Mentor Graphics'],
     },
     {
       title: 'B.Tech — ECE (Healthcare Technology)',
-      duration: '4 Years',
-      level: 'Undergraduate',
-      badge: '🏥',
+      duration: '4 Years', level: 'Undergraduate', badge: '🏥',
       partner: 'In association with Sahai Research Labs',
       highlights: [
         'Specialization in developing medical electronic devices using AI/ML',
@@ -160,7 +242,6 @@ const ecePrograms = {
         'Stipend starting from ₹9,000/- during prototype development',
         'Certified industry internship',
         'Industry-driven curriculum',
-        'Multidisciplinary project takeaways',
       ],
       careers: ['Healthcare Technology', 'Medical Devices', 'AI/ML in Healthcare', 'Startups'],
     },
@@ -168,45 +249,26 @@ const ecePrograms = {
   pg: [
     {
       title: 'M.Tech — VLSI Design',
-      duration: '2 Years',
-      level: 'Postgraduate',
-      badge: '🎓',
-      highlights: [
-        'Advanced VLSI design and verification techniques',
-        'Industry-aligned curriculum with EDA tools',
-        'Research opportunities in semiconductor design',
-      ],
+      duration: '2 Years', level: 'Postgraduate', badge: '🎓',
+      highlights: ['Advanced VLSI design and verification techniques', 'Industry-aligned curriculum with EDA tools', 'Research opportunities in semiconductor design'],
       careers: ['VLSI Design Engineer', 'Verification Engineer', 'FPGA Developer'],
     },
     {
       title: 'M.Tech — Communication Engineering',
-      duration: '2 Years',
-      level: 'Postgraduate',
-      badge: '📶',
-      highlights: [
-        'Advanced wireless and wired communication systems',
-        'Signal processing and antenna design',
-        'Research in 5G and next-gen communication',
-      ],
+      duration: '2 Years', level: 'Postgraduate', badge: '📶',
+      highlights: ['Advanced wireless and wired communication systems', 'Signal processing and antenna design', 'Research in 5G and next-gen communication'],
       careers: ['RF Engineer', 'Telecom Engineer', 'Signal Processing Specialist'],
     },
     {
       title: 'M.Tech — Embedded Systems',
-      duration: '2 Years',
-      level: 'Postgraduate',
-      badge: '⚙️',
-      highlights: [
-        'Real-time operating systems and microcontroller programming',
-        'IoT and smart systems design',
-        'Industry projects with embedded solutions companies',
-      ],
+      duration: '2 Years', level: 'Postgraduate', badge: '⚙️',
+      highlights: ['Real-time operating systems and microcontroller programming', 'IoT and smart systems design', 'Industry projects with embedded solutions companies'],
       careers: ['Embedded Systems Engineer', 'IoT Developer', 'Firmware Engineer'],
     },
   ],
   phd: {
     title: 'Ph.D — Electronics & Communication Engineering',
-    duration: '3–5 Years',
-    badge: '🔭',
+    duration: '3–5 Years', badge: '🔭',
     highlights: [
       'Research in VLSI, Communication, Embedded Systems, Signal Processing',
       'Active research labs in microelectronics and IoT',
@@ -279,6 +341,10 @@ export default function ProgramsPage() {
   const department = school?.departments.find(d => d.id === dept)
   const isEce = dept === 'ece'
   const isCse = dept === 'cse'
+  const isMe = dept === 'me'
+  const isRa = dept === 'ra'
+  const hasPrograms = isEce || isCse || isMe || isRa
+  const programs = isEce ? ecePrograms : isCse ? csePrograms : isMe ? mePrograms : raPrograms
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
@@ -298,24 +364,26 @@ export default function ProgramsPage() {
           </div>
         </div>
 
-        {(isEce || isCse) ? (
+        {hasPrograms ? (
           <div className="flex-1 bg-neutral-50 overflow-y-auto px-4 py-4 space-y-5">
 
             {/* UG */}
             <div>
               <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Undergraduate Programs</p>
               <div className="space-y-3">
-                {(isEce ? ecePrograms.ug : csePrograms.ug).map((p, i) => <ProgramCard key={i} program={p} index={i} />)}
+                {programs.ug.map((p, i) => <ProgramCard key={i} program={p} index={i} />)}
               </div>
             </div>
 
             {/* PG */}
+            {programs.pg.length > 0 && (
             <div>
               <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Postgraduate Programs</p>
               <div className="space-y-3">
-                {(isEce ? ecePrograms.pg : csePrograms.pg).map((p, i) => <ProgramCard key={i} program={p} index={i} />)}
+                {programs.pg.map((p, i) => <ProgramCard key={i} program={p} index={i} />)}
               </div>
             </div>
+            )}
 
             {/* PhD */}
             <div>
@@ -323,12 +391,12 @@ export default function ProgramsPage() {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
                 className="bg-white rounded-2xl border border-neutral-100 shadow-sm px-4 py-4">
                 <div className="flex items-start gap-3">
-                  <span className="text-2xl">{isEce ? ecePrograms.phd.badge : csePrograms.phd.badge}</span>
+                  <span className="text-2xl">{programs.phd.badge}</span>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-gray-800">{isEce ? ecePrograms.phd.title : csePrograms.phd.title}</p>
-                    <span className="inline-block text-[10px] font-semibold bg-neutral-100 text-neutral-500 px-2 py-0.5 rounded-full mt-1">{isEce ? ecePrograms.phd.duration : csePrograms.phd.duration}</span>
+                    <p className="text-sm font-bold text-gray-800">{programs.phd.title}</p>
+                    <span className="inline-block text-[10px] font-semibold bg-neutral-100 text-neutral-500 px-2 py-0.5 rounded-full mt-1">{programs.phd.duration}</span>
                     <ul className="mt-3 space-y-1.5">
-                      {(isEce ? ecePrograms.phd.highlights : csePrograms.phd.highlights).map((h, i) => (
+                      {programs.phd.highlights.map((h, i) => (
                         <li key={i} className="flex items-start gap-2 text-xs text-gray-600">
                           <span className="text-secondary mt-0.5 shrink-0">•</span>
                           {h}

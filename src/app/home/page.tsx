@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
 import {
-  Search, Bell, ChevronRight, LogIn, LogOut,
+  Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
   Star, X, Mail, PhoneCall, MapPin
 } from 'lucide-react'
@@ -234,7 +234,6 @@ export default function HomePage() {
   const router = useRouter()
   const { data: session } = useSession()
   const [activeTab, setActiveTab] = useState<TabId>('departments')
-  const [search, setSearch] = useState('')
   const [floatingOpen, setFloatingOpen] = useState(false)
 
   return (
@@ -270,13 +269,6 @@ export default function HomePage() {
                 </motion.button>
               )}
             </div>
-          </div>
-          {/* Search */}
-          <div className="relative">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input value={search} onChange={e => setSearch(e.target.value)}
-              placeholder="Search departments, events..."
-              className="w-full pl-10 pr-4 py-3 rounded-2xl bg-white text-sm text-gray-700 placeholder-neutral-400 focus:outline-none shadow-sm" />
           </div>
         </div>
 

@@ -2,64 +2,67 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, ChevronDown, ExternalLink } from 'lucide-react'
+import { ArrowLeft, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const programs = {
   ug: [
     {
-      title: 'ITEP B.A. B.Ed.',
-      duration: '4 Years', level: 'Undergraduate', badge: '📚',
-      highlights: ['Dual-major NCTE-approved program integrating Arts with Teacher Education', 'Prepares for secondary school teaching', 'International Baccalaureate Educator Certificate (IBEC)'],
-      eligibility: '10+2 with min. 50% aggregate marks.',
-      url: 'https://manavrachna.edu.in/mru/academics/itep-ba-bed',
-      applyUrl: 'https://manavrachna.edu.in/mru/academics/itep-ba-bed#howToAply',
-      careers: ['School Teacher', 'Curriculum Developer', 'Education Counsellor'],
-    },
-    {
-      title: 'ITEP B.Sc. B.Ed.',
-      duration: '4 Years', level: 'Undergraduate', badge: '🔭',
-      highlights: ['Dual-major NCTE-approved program integrating Science with Teacher Education', 'Prepares for secondary school science teaching', 'International Baccalaureate Educator Certificate (IBEC)'],
-      eligibility: '10+2 with min. 50% aggregate marks.',
-      url: 'https://manavrachna.edu.in/mru/academics/itep-bsc-bed',
-      applyUrl: 'https://manavrachna.edu.in/mru/academics/itep-bsc-bed#howToAply',
-      careers: ['Science Teacher', 'Lab Instructor', 'Education Researcher'],
-    },
-    {
-      title: 'B.Ed.',
-      duration: '2 Years', level: 'Undergraduate', badge: '🎓',
-      highlights: ['NCTE-approved with prestigious IBEC certification', 'Integrates theory with intensive practicum', 'Nationally and internationally recognised'],
-      eligibility: "50%+ in Bachelor's/Master's in Sciences/Social Sciences/Humanities OR 55%+ in B.E./B.Tech.",
-      url: 'https://manavrachna.edu.in/mru/academics/bachelor-of-education-bed',
-      applyUrl: 'https://manavrachna.edu.in/mru/academics/bachelor-of-education-bed#howToAply',
-      careers: ['School Teacher', 'Education Administrator', 'Academic Coordinator'],
+      title: 'B.Sc. (Hons.) Forensic Science',
+      duration: '3 Years', level: 'Undergraduate', badge: '🔍',
+      highlights: [
+        'Comprehensive study of forensic biology, chemistry, and toxicology',
+        'Hands-on training in forensic labs',
+        'Crime scene investigation and evidence analysis',
+        'NAAC A++ accredited institution',
+      ],
+      careers: ['Forensic Scientist', 'Crime Scene Investigator', 'Forensic Analyst', 'Lab Technician'],
     },
   ],
   pg: [
     {
-      title: 'M.A. Education',
-      duration: '2 Years', level: 'Postgraduate', badge: '🏫',
+      title: 'M.Sc. Chemistry',
+      duration: '2 Years', level: 'Postgraduate', badge: '⚗️',
       highlights: [
-        'Prepares educators for IB demands',
-        'Flexible: full Master\'s in 2 years OR exit after Year 1 with PG Diploma + IB Certificate',
-        'Specialisations: International Education or Educational Leadership & Development',
+        'Advanced organic, inorganic, and physical chemistry',
+        'Research-oriented curriculum with lab-intensive training',
+        'Industry and academic collaborations',
       ],
-      eligibility: "Bachelor's/Master's in Science/Social Sciences/Humanities with 50%+. Min. 3 years teaching experience for Leadership specialisation.",
-      url: 'https://manavrachna.edu.in/mru/academics/ma-in-education-guidance-counselling',
-      applyUrl: 'https://manavrachna.edu.in/mru/academics/ma-in-education-guidance-counselling#howToAply',
-      careers: ['Education Leader', 'IB Coordinator', 'Academic Researcher', 'Policy Advisor'],
+      careers: ['Research Scientist', 'Chemical Analyst', 'Quality Control Officer', 'Academic Researcher'],
+    },
+    {
+      title: 'M.Sc. Agrochemicals and Pest Management',
+      duration: '2 Years', level: 'Postgraduate', badge: '🌿',
+      highlights: [
+        'Pesticide chemistry, formulation, and application',
+        'Integrated pest management strategies',
+        'Field and laboratory training',
+        'Industry exposure with agrochemical companies',
+      ],
+      careers: ['Agrochemical Scientist', 'Pest Management Specialist', 'Agricultural Consultant', 'R&D Scientist'],
+    },
+    {
+      title: 'M.Sc. Physics (Quantum Computing)',
+      duration: '2 Years', level: 'Postgraduate', badge: '⚛️',
+      partner: 'In association with C-DAC',
+      highlights: [
+        'Quantum mechanics, quantum algorithms, and quantum hardware',
+        'C-DAC collaboration for cutting-edge quantum research',
+        'Hands-on with Qiskit and quantum simulation tools',
+        'Prepares for careers in quantum computing and research',
+      ],
+      careers: ['Quantum Researcher', 'Quantum Software Engineer', 'Research Scientist', 'Academic Researcher'],
     },
   ],
   phd: {
-    title: 'Ph.D. in Education',
-    duration: 'Min. 3 Years', badge: '🔬',
+    title: 'Ph.D. in Sciences',
+    duration: '3–5 Years', badge: '🔬',
     highlights: [
-      'Ph.D. in Education and allied disciplines: Economics, English, Political Science, History',
-      'Research areas: Assessment & Evaluation, E-learning, Curriculum Development, Innovative Pedagogies',
-      'NCTE and IB recognised institution',
+      'Research across Physics, Chemistry, Forensic Science, and allied disciplines',
+      'Active research labs and publication support',
+      'Collaboration with C-DAC and industry partners',
       'Publication support in Scopus/SCI indexed journals',
     ],
-    url: 'https://manavrachna.edu.in/mru/academics/phd-in-education-humanities',
   },
 }
 
@@ -76,6 +79,9 @@ function ProgramCard({ program, index }: { program: typeof programs.ug[0]; index
             <span className="text-[10px] font-semibold bg-secondary/10 text-secondary px-2 py-0.5 rounded-full">{program.level}</span>
             <span className="text-[10px] font-semibold bg-neutral-100 text-neutral-500 px-2 py-0.5 rounded-full">{program.duration}</span>
           </div>
+          {'partner' in program && program.partner && (
+            <p className="text-[11px] text-amber-600 font-semibold mt-1">{program.partner}</p>
+          )}
         </div>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }} className="shrink-0 mt-1">
           <ChevronDown className="w-4 h-4 text-neutral-400" />
@@ -98,10 +104,6 @@ function ProgramCard({ program, index }: { program: typeof programs.ug[0]; index
                   ))}
                 </ul>
               </div>
-              <div className="bg-neutral-50 rounded-xl px-3 py-2.5 border border-neutral-100">
-                <p className="text-[10px] font-semibold text-neutral-400 uppercase tracking-widest mb-1">Eligibility</p>
-                <p className="text-xs text-gray-700">{program.eligibility}</p>
-              </div>
               {'careers' in program && program.careers && (
                 <div>
                   <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-2">Career Opportunities</p>
@@ -112,11 +114,6 @@ function ProgramCard({ program, index }: { program: typeof programs.ug[0]; index
                   </div>
                 </div>
               )}
-              <a href={program.applyUrl} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-between bg-secondary/5 border border-secondary/20 rounded-xl px-3 py-2.5">
-                <p className="text-xs font-semibold text-secondary">How to Apply</p>
-                <ExternalLink className="w-3.5 h-3.5 text-secondary" />
-              </a>
             </div>
           </motion.div>
         )}
@@ -125,7 +122,7 @@ function ProgramCard({ program, index }: { program: typeof programs.ug[0]; index
   )
 }
 
-export default function EducationProgramsPage() {
+export default function ScienceProgramsPage() {
   const router = useRouter()
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
@@ -136,7 +133,7 @@ export default function EducationProgramsPage() {
           </button>
           <div className="px-6 pt-10 pb-8 text-center">
             <h1 className="font-bold text-white text-xl">Programs Offered</h1>
-            <p className="text-white/70 text-xs mt-1">School of Education & Humanities</p>
+            <p className="text-white/70 text-xs mt-1">School of Sciences · MRU</p>
           </div>
           <div className="h-8">
             <svg viewBox="0 0 390 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" preserveAspectRatio="none">
@@ -181,10 +178,6 @@ export default function EducationProgramsPage() {
                       </li>
                     ))}
                   </ul>
-                  <a href={programs.phd.url} target="_blank" rel="noopener noreferrer"
-                    className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-secondary">
-                    More Details <ExternalLink className="w-3 h-3" />
-                  </a>
                 </div>
               </div>
             </motion.div>

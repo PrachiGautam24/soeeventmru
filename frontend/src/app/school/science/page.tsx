@@ -14,7 +14,7 @@ const quickActions = [
   { label: 'VAC', emoji: '📖', color: '#16a34a', bg: '#e8f5ee', href: '/school/science/vac' },
   { label: 'Events', emoji: '🎉', color: '#b12a2e', bg: '#fde8e8', href: '/school/science/events' },
   { label: 'Podcast', emoji: '🎙️', color: '#b45309', bg: '#fef3e2', href: '/school/science/podcast' },
-  { label: 'Curriculum', emoji: '📋', color: '#0891b2', bg: '#e0f7fa', href: '/school/science/curriculum' },
+  { label: 'Programs\nOffered', emoji: '📋', color: '#0891b2', bg: '#e0f7fa', href: '/school/science/programs' },
 ]
 
 export default function SciencePage() {
