@@ -1,8 +1,9 @@
 'use client'
 
 import { useRouter, useParams } from 'next/navigation'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Filter } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 import { schools } from '@/lib/schools'
 
 // ─── ME specific faculty achievements ────────────────────────────────────────
@@ -187,6 +188,7 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
 export default function FacultyAchievementsPage() {
   const router = useRouter()
   const { id, dept } = useParams<{ id: string; dept: string }>()
+  const [activeFilter, setActiveFilter] = useState('All')
 
   const school = schools.find(s => s.id === id)
   const department = school?.departments.find(d => d.id === dept)
@@ -198,6 +200,10 @@ export default function FacultyAchievementsPage() {
       <p className="text-neutral-400">Department not found.</p>
     </div>
   )
+
+  // Build filter list
+  const cats = ['All', ...Array.from(new Set(achievements.map(a => a.category.split(' | ')[0].trim())))]
+  const filtered = activeFilter === 'All' ? achievements : achievements.filter(a => a.category.includes(activeFilter))
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
@@ -229,15 +235,29 @@ export default function FacultyAchievementsPage() {
             </div>
           ) : (
             <>
-              <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-1">
-                {achievements.length} Achievements
+              {/* Filter chips */}
+              <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                <Filter className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+                {cats.map(cat => (
+                  <button key={cat} onClick={() => setActiveFilter(cat)}
+                    className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                      activeFilter === cat ? 'bg-neutral-800 text-white' : 'bg-neutral-100 text-neutral-500'
+                    }`}>
+                    {cat}
+                  </button>
+                ))}
+              </div>
+              <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">
+                {filtered.length} {activeFilter === 'All' ? 'Total' : activeFilter}
               </p>
-              {achievements.map((a, i) => {
+              {filtered.map((a, i) => {
+                const color = categoryColors[a.category] ?? { bg: '#f3f4f6', text: '#6b7280' }
                 return (
                   <motion.div key={i}
+                    layout
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.06, type: 'spring', stiffness: 260, damping: 22 }}
+                    transition={{ delay: i * 0.04, type: 'spring', stiffness: 260, damping: 22 }}
                     className="bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden flex">
                     {(a as { photo?: string }).photo && (
                       <div className="shrink-0 w-28 bg-neutral-100 flex items-center justify-center">
@@ -246,23 +266,29 @@ export default function FacultyAchievementsPage() {
                       </div>
                     )}
                     <div className="flex-1 min-w-0 px-3 py-3.5">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-base">{a.badge}</span>
-                        <p className="text-sm font-bold text-gray-800">{a.name}</p>
-                        {a.category.split(' | ').map((cat) => {
-                          const c = categoryColors[cat.trim()] ?? { bg: '#f3f4f6', text: '#6b7280' }
-                          return (
-                            <span key={cat} className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                              style={{ backgroundColor: c.bg, color: c.text }}>
-                              {cat.trim()}
-                            </span>
-                          )
-                        })}
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
+                          style={{ backgroundColor: color.bg }}>
+                          {a.badge}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <p className="text-sm font-bold text-gray-800">{a.name}</p>
+                            {a.category.split(' | ').map((cat) => {
+                              const c = categoryColors[cat.trim()] ?? { bg: '#f3f4f6', text: '#6b7280' }
+                              return (
+                                <span key={cat} className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                                  style={{ backgroundColor: c.bg, color: c.text }}>
+                                  {cat.trim()}
+                                </span>
+                              )
+                            })}
+                          </div>
+                          <p className="text-[11px] text-neutral-400 mt-0.5">{(a as { role?: string; program?: string }).role ?? (a as { role?: string; program?: string }).program}</p>
+                          <p className="text-xs font-semibold text-gray-700 mt-1.5 leading-snug">{a.title}</p>
+                          <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{a.desc}</p>
+                        </div>
                       </div>
-                      {(a as { role?: string }).role && <p className="text-[11px] text-neutral-400 mt-0.5">{(a as { role?: string }).role}</p>}
-                      {(a as { program?: string }).program && <p className="text-[11px] text-neutral-400 mt-0.5">{(a as { program?: string }).program}</p>}
-                      <p className="text-xs font-semibold text-gray-700 mt-1.5 leading-snug">{a.title}</p>
-                      <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{a.desc}</p>
                     </div>
                   </motion.div>
                 )
