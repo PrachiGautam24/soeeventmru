@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const hashtags = ['#FindYourVibe', '#LeadWithDSW', '#MRULife']
 
@@ -213,28 +214,15 @@ export default function DSWPage() {
             </div>
           </div>
 
-          {/* Life Skills */}
-          <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
-            <div className="px-4 pt-4 pb-2 flex items-center gap-2">
-              <span className="text-lg">⭐</span>
-              <p className="text-sm font-bold text-gray-800">Life Skills Programme</p>
-            </div>
-            <p className="text-xs text-neutral-400 px-4 pb-3">Min. 25 activity points/year required to earn a degree.</p>
-            <div className="divide-y divide-neutral-100 border-t border-neutral-100">
-              {[
-                'Purposeful living and values',
-                'Career skills & problem-solving',
-                'Leadership & communication',
-                'Sustainability & social sensitivity',
-                'Entrepreneurship & innovation',
-                'CSR activities',
-              ].map((skill, i) => (
-                <div key={i} className="flex items-center gap-3 px-4 py-3">
-                  <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: '#db2777' }} />
-                  <p className="text-sm text-gray-700">{skill}</p>
-                </div>
-              ))}
-            </div>
+          {/* MR Points */}
+          <div className="rounded-2xl overflow-hidden shadow-sm border border-neutral-100">
+            <Image
+              src="/images/dsw/mrpoints.png"
+              alt="MR Points"
+              width={800}
+              height={600}
+              className="w-full h-auto"
+            />
           </div>
 
           {/* Upcoming Events preview */}
