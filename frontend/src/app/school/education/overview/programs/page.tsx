@@ -63,7 +63,20 @@ const programs = {
   },
 }
 
-function ProgramCard({ program, index }: { program: typeof programs.ug[0]; index: number }) {
+type Program = {
+  title: string
+  duration: string
+  level: string
+  badge: string
+  partner?: string
+  highlights: string[]
+  eligibility?: string
+  url?: string
+  applyUrl?: string
+  careers?: string[]
+}
+
+function ProgramCard({ program, index }: { program: Program; index: number }) {
   const [open, setOpen] = useState(false)
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}
