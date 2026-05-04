@@ -183,13 +183,13 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards' | 'learning'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
-  { id: 'departments',   label: 'Departments',      emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
+  { id: 'departments',   label: 'Departments',        emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
   { id: 'learning',      label: 'Learning\nPathways', emoji: '🛤️', color: '#7c3aed', bg: '#f3eeff' },
-  { id: 'functionaries', label: 'Functionaries',    emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
-  { id: 'awards',        label: 'Awards',           emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
-  { id: 'placements',    label: 'Placements',       emoji: '💼', color: '#b45309', bg: '#fef3e2' },
-  { id: 'campus',        label: 'Campus Life',      emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
-  { id: 'events',        label: 'Events',           emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
+  { id: 'functionaries', label: 'Functionaries',      emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
+  { id: 'awards',        label: 'Awards',             emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
+  { id: 'placements',    label: 'Placements',         emoji: '💼', color: '#b45309', bg: '#fef3e2' },
+  { id: 'campus',        label: 'Campus Life',        emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
+  { id: 'events',        label: 'Events',             emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
 ]
 
 // ─── Placement Slideshow — 2 photos at a time ─────────────────────────────────
