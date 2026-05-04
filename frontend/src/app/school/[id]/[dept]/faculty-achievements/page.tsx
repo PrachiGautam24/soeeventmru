@@ -49,6 +49,14 @@ const meFacultyAchievements = [
     desc: 'Awarded Teaching Excellence Award by Department of Mechanical Engineering at CONVERSHINE 2024.',
   },
   {
+    name: 'Dr. J. P. Sharma',
+    role: 'Faculty · Mechanical Engineering',
+    badge: '🏆',
+    category: 'Award',
+    title: 'Best Faculty Award — ATVC 2026, Monark University, Ahmedabad',
+    desc: 'Honored with the Best Faculty Award at ATVC 2026 organized by Infileague Motorsports for outstanding mentorship and guidance of Team Fenrir Racing. Under his leadership, the team also won Best Innovation in Combustion Engine at the same event.',
+  },
+  {
     name: 'Dr. Joginder Singh',
     role: 'Faculty · Mechanical Engineering',
     badge: '📄',

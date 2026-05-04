@@ -145,6 +145,10 @@ The department has advanced CAD/CAM labs, a 3D printing facility, and an EV rese
           { title: 'CAD/CAM Workshop', date: 'April 25, 2026' },
         ],
         studentAchievements: [
+          { name: 'Team Fenrir Racing', program: 'ME & R&AI', category: 'Competition', badge: '🏆', title: 'Best Innovation in Combustion Engine — ATVC 2026, Monark University, Ahmedabad', desc: 'Team Fenrir Racing won the Best Innovation in Combustion Engine award at ATVC 2026 organized by Infileague Motorsports. A testament to hands-on learning and interdisciplinary collaboration between ME and R&AI departments.' },
+          { name: 'Abhi Tomar & Yashpal', program: 'ME 1st Year', category: 'Competition', badge: '🥇', title: 'Top 5 — Indian Design Week Finale 24-Hr Hackathon, Autodesk & ICT Academy (Apr 2026)', desc: 'Out of 140 teams from across the country at NIET Greater Noida (21–22 April 2026), their team advanced to the final round and secured a position among the Top 5 teams.' },
+          { name: 'ME Students', program: 'ME', category: 'Training', badge: '🖥️', title: 'Autodesk Fusion 360 Training — India Design Week Preparation', desc: '3-day hands-on training on Autodesk Fusion 360 covering sketching, parametric modelling, assembly design, and simulation. Organized by the ME department to prepare students for India Design Week (IDW) by ICT Academy.' },
+          { name: 'Vighnesh Singh & Mehul Sidana', program: 'ME', category: 'Best Paper', badge: '🥇', title: '1st Prize — Poster Presentation, ICASS 2026, MRU', desc: '"Development of a PWM-Controlled DC Motor Vibration System with Zonal Feedback for Driving Simulators" — a low-cost alternative to conventional haptic systems at ~25% of traditional cost. Guided by Prof. Ajit Katiyar.' },
           { name: 'Vinay Kumar & Team', program: 'ME 3rd Year', category: 'Competition', badge: '🥇', title: '1st Prize — E-Yantra, IIT Bombay', desc: 'Won first prize with team at E-Yantra robotics competition, IIT Bombay.' },
           { name: 'Gurpreet Singh, Fateh Singh, Tushar Gupta & Tushar Sehgal', program: 'ME', category: 'Grant', badge: '💰', title: 'CSR Funding ₹10,544 — E-Vehicle Startup', desc: 'Received CSR grant for E-vehicle startup under mentorship of Dr. J.P. Sharma.' },
           { name: 'Karan Khanjuja', program: 'B.Tech ME 4th Sem', category: 'Sports', badge: '⛳', title: 'FIA JCB Tournament Winner · PGTI Pro-AM Runner-Up', desc: 'Group winner at FIA JCB Tournament, Aravali Golf Club. Runner-up at PGTI Pro-AM Delhi NCR Golf Tournament.' },
@@ -159,6 +163,9 @@ The department has advanced CAD/CAM labs, a 3D printing facility, and an EV rese
           { name: 'Somesh S', program: 'ME 2020 batch', category: 'Publication', badge: '📄', title: '2 Papers in International Peer-Reviewed Journals', desc: 'Published 2 papers including at NHTSEE2017, YMCA Faridabad (Mar 9–10, 2017).' },
           { name: 'ME Team', program: 'ME', category: 'Competition', badge: '🥉', title: '3rd Prize — Anveshan 19–20 North Zone (Geothermal Energy Project)', desc: '"Use of Geothermal Energy for Cooling & Heat Transfer" — 3rd prize at Student Research Convention, North Zone.' },
           { name: 'Karan Sehgal', program: 'ME 2019 batch', category: 'Grant', badge: '💰', title: 'AICTE New Gen IEDC Grant ₹2.5 Lakhs — Electric Tractor', desc: 'Electric Tractor project sanctioned by AICTE-sponsored New Gen IEDC with ₹2.5 lakh grant.' },
+        ],
+        facultyAchievements: [
+          { name: 'Dr. J. P. Sharma', program: 'Mechanical Engineering', category: 'Award', badge: '🏆', title: 'Best Faculty Award — ATVC 2026, Monark University, Ahmedabad', desc: 'Honored with the Best Faculty Award at ATVC 2026 organized by Infileague Motorsports for outstanding mentorship and guidance of Team Fenrir Racing, which also won Best Innovation in Combustion Engine at the same event.' },
         ],
       },
       {

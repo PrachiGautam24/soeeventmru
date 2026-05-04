@@ -58,25 +58,46 @@ export default function DeptEventsPage() {
           <div className="px-4 py-4">
             <AnimatePresence mode="wait">
               {tab === 'upcoming' ? (
-                <motion.div key="upcoming" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.2 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <motion.div key="upcoming" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -16 }} transition={{ duration: 0.2 }}>
                   {upcoming.length === 0 ? (
-                    <p className="text-sm text-neutral-400 text-center py-12 col-span-full">No upcoming events.</p>
+                    <p className="text-sm text-neutral-400 text-center py-12">No upcoming events.</p>
                   ) : (
-                    upcoming.map((ev, i) => (
-                      <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }}
-                        className="bg-white rounded-2xl border border-neutral-100 shadow-sm p-4 flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0">
-                          <Clock className="w-5 h-5 text-secondary" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-gray-800">{ev.title}</p>
-                          <p className="text-xs text-neutral-400 mt-0.5 flex items-center gap-1">
-                            <Calendar className="w-3 h-3" /> {ev.date}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))
+                    <div className="relative">
+                      {/* Timeline vertical line */}
+                      <div className="absolute left-5 top-0 bottom-0 w-px bg-secondary/20" />
+
+                      <div className="space-y-0">
+                        {upcoming.map((ev, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.07 }}
+                            className="relative flex items-start gap-4 pb-6 last:pb-0"
+                          >
+                            {/* Timeline dot */}
+                            <div className="relative z-10 w-10 h-10 rounded-full bg-secondary flex items-center justify-center shrink-0 shadow-md shadow-secondary/20">
+                              <Clock className="w-4 h-4 text-white" />
+                            </div>
+
+                            {/* Event card */}
+                            <div className="flex-1 bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+                              {/* Accent bar */}
+                              <div className="h-1 w-full bg-gradient-to-r from-secondary to-secondary/40" />
+                              <div className="px-4 py-3.5">
+                                <p className="text-sm font-bold text-gray-900 leading-snug">{ev.title}</p>
+                                <div className="flex items-center gap-1.5 mt-2">
+                                  <span className="inline-flex items-center gap-1 bg-secondary/10 text-secondary text-[11px] font-semibold px-2.5 py-1 rounded-full">
+                                    <Calendar className="w-3 h-3" />
+                                    {ev.date}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
                   )}
                 </motion.div>
               ) : (

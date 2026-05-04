@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
@@ -97,6 +97,7 @@ function VibeSection() {
 
 export default function DSWPage() {
   const router = useRouter()
+  const [eventsOpen, setEventsOpen] = useState(false)
 
   const quickLinks = [
     {
@@ -214,7 +215,7 @@ export default function DSWPage() {
             </div>
           </div>
 
-          {/* MR Points */}
+          {/* MR Points Scorecard */}
           <div className="rounded-2xl overflow-hidden shadow-sm border border-neutral-100">
             <Image
               src="/images/dsw/mrpoints.png"
@@ -223,39 +224,71 @@ export default function DSWPage() {
               height={600}
               className="w-full h-auto"
             />
+            <a
+              href="/images/dsw/mrpoints.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 px-4 py-4 bg-gradient-to-r from-pink-50 to-purple-50 border-t border-neutral-100 active:opacity-80 transition-opacity"
+            >
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                style={{ background: 'linear-gradient(135deg, #db2777 0%, #9333ea 100%)' }}>
+                <span className="text-2xl">📄</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-gray-800">View Full Scorecard</p>
+                <p className="text-xs text-neutral-400 mt-0.5">Tap to open PDF</p>
+              </div>
+              <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
+            </a>
           </div>
 
-          {/* Upcoming Events preview */}
+          {/* Upcoming Events accordion */}
           <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
-            <div className="flex items-center justify-between px-4 pt-4 pb-2">
+            <button
+              onClick={() => setEventsOpen(o => !o)}
+              className="w-full flex items-center justify-between px-4 py-3.5"
+            >
               <div className="flex items-center gap-2">
                 <span className="text-lg">🎉</span>
-                <p className="text-sm font-bold text-gray-800">Upcoming Events</p>
+                <span className="text-sm font-bold text-gray-800">Upcoming Events</span>
+                <span className="w-5 h-5 rounded-full bg-secondary text-white text-[10px] flex items-center justify-center font-bold">7</span>
               </div>
-              <button onClick={() => router.push('/dsw/events')}
-                className="text-xs font-semibold flex items-center gap-0.5" style={{ color: '#b45309' }}>
-                View All <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-            <div className="divide-y divide-neutral-100 border-t border-neutral-100">
-              {[
-                { date: '23 Apr 2026', title: 'Mental Health Awareness Talk', emoji: '🧠' },
-                { date: '23 Apr 2026', title: 'Sampling Steps', emoji: '💃' },
-                { date: '23 Apr 2026', title: 'Culture Couture', emoji: '🎭' },
-                { date: '30 Apr 2026', title: 'Anti-Ragging Week', emoji: '🤝' },
-                { date: '30 Apr 2026', title: 'Digital Doodlers', emoji: '🎨' },
-                { date: '30 Apr 2026', title: 'Riyaaz-E-Mehfil', emoji: '🎵' },
-                { date: '30 Apr 2026', title: 'Cyber Crime Awareness Camp', emoji: '🔐' },
-              ].map((ev) => (
-                <div key={ev.title} className="flex items-center gap-3 px-4 py-3">
-                  <span className="text-lg shrink-0">{ev.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-800 truncate">{ev.title}</p>
-                    <p className="text-xs text-neutral-400 mt-0.5">{ev.date}</p>
+              <motion.div animate={{ rotate: eventsOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown className="w-4 h-4 text-neutral-400" />
+              </motion.div>
+            </button>
+            <AnimatePresence initial={false}>
+              {eventsOpen && (
+                <motion.div
+                  key="dsw-events"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.22 }}
+                  className="overflow-hidden border-t border-neutral-100"
+                >
+                  <div className="divide-y divide-neutral-100">
+                    {[
+                      { date: '23 Apr 2026', title: 'Mental Health Awareness Talk', emoji: '🧠' },
+                      { date: '23 Apr 2026', title: 'Sampling Steps', emoji: '💃' },
+                      { date: '23 Apr 2026', title: 'Culture Couture', emoji: '🎭' },
+                      { date: '30 Apr 2026', title: 'Anti-Ragging Week', emoji: '🤝' },
+                      { date: '30 Apr 2026', title: 'Digital Doodlers', emoji: '🎨' },
+                      { date: '30 Apr 2026', title: 'Riyaaz-E-Mehfil', emoji: '🎵' },
+                      { date: '30 Apr 2026', title: 'Cyber Crime Awareness Camp', emoji: '🔐' },
+                    ].map((ev) => (
+                      <div key={ev.title} className="flex items-center gap-3 px-4 py-3">
+                        <span className="text-lg shrink-0">{ev.emoji}</span>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-800 truncate">{ev.title}</p>
+                          <p className="text-xs text-neutral-400 mt-0.5">{ev.date}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              ))}
-            </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Navigate to Clans */}

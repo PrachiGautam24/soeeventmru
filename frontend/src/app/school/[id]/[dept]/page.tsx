@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter, useParams } from 'next/navigation'
 import { ArrowLeft, ChevronDown } from 'lucide-react'
+import Image from 'next/image'
 import { schools } from '@/lib/schools'
 
 const gridItems = [
@@ -144,6 +145,26 @@ export default function DepartmentPage() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Recruiters */}
+            {department.recruiters && department.recruiters.length > 0 && (
+              <div>
+                <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Our Recruiters</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {department.recruiters.map((r, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.92 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.04 }}
+                      className="bg-white border border-neutral-100 rounded-2xl p-3 shadow-sm flex items-center justify-center h-20"
+                    >
+                      <Image src={r.logo} alt={r.name} width={90} height={56} className="object-contain max-h-14" unoptimized />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )}
 
           </div>
         </div>
