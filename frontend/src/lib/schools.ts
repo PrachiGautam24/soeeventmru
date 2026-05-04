@@ -8,6 +8,8 @@ export interface Achievement {
   title: string
   desc: string
   badge: string
+  photo?: string
+  url?: string
 }
 
 export interface Department {
@@ -104,13 +106,13 @@ It has state-of-the-art labs for signal processing, microelectronics, and IoT, a
           { title: '2-Day Workshop on Smart Controller Design using Soft Computing', date: 'April 15–16, 2026', description: 'A hands-on workshop covering soft computing techniques for smart controller design, organized by the ECE Department, School of Engineering, MRU.', slug: 'ece-workshop-apr2026' },
         ],
         studentAchievements: [
-          { name: 'R. Uday Kiran', program: 'ECE 4th Semester', category: 'Competition', badge: '🥇', title: '1st Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 1st prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
+          { name: 'R. Uday Kiran', program: 'ECE 4th Semester', category: 'Competition', badge: '🥇', title: '1st Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 1st prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.', photo: '/images/ece/student-achievements/udaykiran.png' },
           { name: 'Jayasankar', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 2nd prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
-          { name: 'Anjesh Kumar, Daksh & Kapil', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Build the Circuit, Inno-Skill 2026', desc: 'Secured 2nd prize in the "Build the Circuit" competition at Inno-Skill 2026, April 3–4, 2026.' },
-          { name: 'Ankita Mahapatra & Reeyal', program: 'B.Tech ECE 4th Semester', category: 'Competition', badge: '🥉', title: '3rd Position — State-Level India Skills Competition (Industry 4.0)', desc: 'Completed tasks based on PLC (Programmable Logic Controller) within a limited time, gaining hands-on experience in industrial automation systems.' },
-          { name: 'Harsh Malik, Nitin Pandey, Jhalak Dhingra & G. Kumar Swami', program: 'ECE 2nd & 3rd Year', category: 'Award', badge: '🏅', title: "Dean's List — Top 5% of Class", desc: "Identified in the Dean's List for securing a place in the top 5% of their respective classes. Awarded by the Vice Chancellor, Dean Academics, and Dean Engineering." },
-          { name: 'Sai Devesh Reddy', program: 'ECE 4th Semester', category: 'Award', badge: '⭐', title: 'Dual Internships, Campus Ambassador & AIU Football Representative', desc: 'Pursuing stipend-based internships in Video Editing at MRIIF and Data Fluxion. Campus Ambassador at MRU, President of Digital Nexus, and represented MRU in the AIU North-West Zone football tournament.' },
-          { name: 'Manvitha, I V Sanjeev, Anmol & Ranveer', program: 'ECE / CST', category: 'Competition', badge: '🥉', title: '3rd Prize — IDE Bootcamp', desc: 'Won 3rd prize at the IDE Bootcamp along with their team from CST.' },
+          { name: 'Anjesh Kumar, Daksh & Kapil', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Build the Circuit, Inno-Skill 2026', desc: 'Secured 2nd prize in the "Build the Circuit" competition at Inno-Skill 2026, April 3–4, 2026.', photo: '/images/ece/student-achievements/anjesh.png' },
+          { name: 'Ankita Mahapatra & Reeyal', program: 'B.Tech ECE 4th Semester', category: 'Competition', badge: '🥉', title: '3rd Position — State-Level India Skills Competition (Industry 4.0)', desc: 'Completed tasks based on PLC (Programmable Logic Controller) within a limited time, gaining hands-on experience in industrial automation systems.', photo: '/images/ece/student-achievements/ankita.png' },
+          { name: 'Harsh Malik, Nitin Pandey, Jhalak Dhingra & G. Kumar Swami', program: 'ECE 2nd & 3rd Year', category: 'Award', badge: '🏅', title: "Dean's List — Top 5% of Class", desc: "Identified in the Dean's List for securing a place in the top 5% of their respective classes. Awarded by the Vice Chancellor, Dean Academics, and Dean Engineering.", photo: '/images/ece/student-achievements/harshmalik.png' },
+          { name: 'Sai Devesh Reddy', program: 'ECE 4th Semester', category: 'Award', badge: '⭐', title: 'Dual Internships, Campus Ambassador & AIU Football Representative', desc: 'Pursuing stipend-based internships in Video Editing at MRIIF and Data Fluxion. Campus Ambassador at MRU, President of Digital Nexus, and represented MRU in the AIU North-West Zone football tournament.', photo: '/images/ece/student-achievements/deveshreddy.png' },
+          { name: 'Manvitha, I V Sanjeev, Anmol & Ranveer', program: 'ECE / CST', category: 'Competition', badge: '🥉', title: '3rd Prize — IDE Bootcamp', desc: 'Won 3rd prize at the IDE Bootcamp along with their team from CST.', photo: '/images/ece/student-achievements/manvitha.png' },
         ],
         facultyAchievements: [
           { name: 'Dr. Shruti Vashist', program: "Dean Academics, Professor (Ph.D.)", category: 'Award', badge: '🏆', title: "Utkrisht: 'Icons of Manav Rachna' 2023 & Cricket Winner", desc: "Received the prestigious 'Icons of Manav Rachna' Utkrisht Award 2023. Also won the inter Cricket Challenger Event at MRU." },
