@@ -7,6 +7,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
       { protocol: 'https', hostname: 'manavrachna.edu.in' },
       { protocol: 'https', hostname: 'mriirs.edu.in' },
+      { protocol: 'https', hostname: 'logo.clearbit.com' },
+      { protocol: 'https', hostname: 'img.logo.dev' },
     ],
   },
 }

@@ -189,14 +189,13 @@ export default function ScienceStudentAchievementsPage() {
     <div className="min-h-screen bg-neutral-100 pb-24">
       <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
 
-        {/* Header */}
-        <div className="relative" style={{ background: '#b12a2e' }}>
+        {/* Header — matches other schools */}
+        <div className="relative bg-secondary overflow-hidden">
           <button onClick={() => router.back()}
             className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
             <ChevronLeft className="w-4 h-4 text-white" />
           </button>
           <div className="px-6 pt-10 pb-8 text-center">
-            <div className="text-3xl mb-1">🏅</div>
             <h1 className="font-bold text-white text-xl leading-tight">Student Achievements</h1>
             <p className="text-white/70 text-xs mt-1">School of Science · MRU</p>
           </div>

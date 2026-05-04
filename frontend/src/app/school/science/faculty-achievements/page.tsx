@@ -1,7 +1,8 @@
 'use client'
 
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft, Filter } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const achievements = [
@@ -33,7 +34,7 @@ const achievements = [
     name: 'Dr. Jitendra Pal Singh',
     role: 'Ramanujan Fellow · Physics',
     badge: '⚛️',
-    category: 'Grant + Award',
+    category: 'Grant',
     title: 'Ramanujan Fellowship ₹1.19 Cr · Stanford Top 2% (2024)',
     desc: 'Ramanujan Fellowship from DST (₹1.19 Cr, 2022). Best Researcher Award, MRU (2025). Top 2% globally — Stanford/Elsevier (2024). Editor-in-Chief: Prabha Materials Science Letters. Associate Editor: Scientific Reports. Guest Editor: J. Alloys & Compounds, J. Magnetism (Elsevier), RSC Advances.',
   },
@@ -91,7 +92,6 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
   'Global Ranking':     { bg: '#fef3e2', text: '#b45309' },
   'Award':              { bg: '#fde8e8', text: '#b12a2e' },
   'Research Excellence':{ bg: '#e8edf8', text: '#1e4ba9' },
-  'Grant + Award':      { bg: '#fde8e8', text: '#b12a2e' },
   'Grant':              { bg: '#e8f5ee', text: '#16a34a' },
   'Fellowship':         { bg: '#f3eeff', text: '#7c3aed' },
   'Reviewer':           { bg: '#e8edf8', text: '#1e4ba9' },
@@ -99,19 +99,21 @@ const categoryColors: Record<string, { bg: string; text: string }> = {
 
 export default function ScienceFacultyAchievementsPage() {
   const router = useRouter()
+  const [activeFilter, setActiveFilter] = useState('All')
+
+  const categories = ['All', ...Array.from(new Set(achievements.map(a => a.category)))]
+  const filtered = activeFilter === 'All' ? achievements : achievements.filter(a => a.category === activeFilter)
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
       <div className="max-w-md mx-auto bg-white min-h-screen flex flex-col">
 
-        {/* Header */}
-        <div className="relative" style={{ background: '#b12a2e' }}>
+        <div className="relative bg-secondary overflow-hidden">
           <button onClick={() => router.back()}
             className="absolute top-4 left-4 z-10 w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
             <ChevronLeft className="w-4 h-4 text-white" />
           </button>
           <div className="px-6 pt-10 pb-8 text-center">
-            <div className="text-3xl mb-1">👨‍🏫</div>
             <h1 className="font-bold text-white text-xl leading-tight">Faculty Achievements</h1>
             <p className="text-white/70 text-xs mt-1">School of Science · MRU</p>
           </div>
@@ -123,20 +125,30 @@ export default function ScienceFacultyAchievementsPage() {
         </div>
 
         <div className="flex-1 px-4 py-5 space-y-3">
-          <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-1">
-            {achievements.length} Achievements
+
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <Filter className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
+            {categories.map(cat => (
+              <button key={cat} onClick={() => setActiveFilter(cat)}
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
+                  activeFilter === cat ? 'bg-neutral-800 text-white' : 'bg-neutral-100 text-neutral-500'
+                }`}>
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">
+            {filtered.length} {activeFilter === 'All' ? 'Total' : activeFilter}
           </p>
 
-          {achievements.map((a, i) => {
+          {filtered.map((a, i) => {
             const color = categoryColors[a.category] ?? { bg: '#f3f4f6', text: '#6b7280' }
             return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
+              <motion.div key={i} layout
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04, type: 'spring', stiffness: 260, damping: 22 }}
-                className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100"
-              >
+                className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0"
                     style={{ backgroundColor: color.bg }}>

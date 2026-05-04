@@ -92,6 +92,21 @@ The department has active research labs in AI, IoT, and Data Science, and mainta
           { name: 'Poonam Biswas, Kanan Arora & Mansi Gusian', program: 'CST', category: 'Sports', badge: '🏏', title: 'Winners — Cricket, 10th MREI Girls Sports Meet (Feb 2024)', desc: 'Won cricket match at 10th MREI Girls Sports Meet.' },
           { name: 'Shivani Sharma', program: 'CSE', category: 'Competition', badge: '🥇', title: '1st Place — Health Innovation Fest (40+ teams)', desc: '"Indoor Navigation for Visually Impaired Using Real-Time Object Detection".' },
         ],
+        recruiters: [
+          { name: 'Google',                          logo: '/images/cse/recruiters/google.png' },
+          { name: 'KPMG',                            logo: '/images/cse/recruiters/kpmg.png' },
+          { name: 'CDAC',                            logo: '/images/cse/recruiters/cdac.png' },
+          { name: 'HCL GUVI',                        logo: '/images/cse/recruiters/hclguvi.png' },
+          { name: 'Xebia',                           logo: '/images/cse/recruiters/xebia.png' },
+          { name: 'Quick Heal',                      logo: '/images/cse/recruiters/quickheal.png' },
+          { name: 'AWS',                             logo: '/images/cse/recruiters/aws.png' },
+          { name: 'Infosys',                         logo: '/images/cse/recruiters/infosys.png' },
+          { name: 'Artificially Intelligent Workforce', logo: '/images/cse/recruiters/aiw.png' },
+          { name: 'Coding Ninja',                    logo: '/images/cse/recruiters/codingninjas.png' },
+          { name: 'NPTEL',                           logo: '/images/cse/recruiters/nptel.png' },
+          { name: 'Virtual Labs',                    logo: '/images/cse/recruiters/virtuallabs.png' },
+          { name: 'Sofocle Labs',                    logo: '/images/cse/recruiters/sofocle.png' },
+        ],
       },
       {
         id: 'ece', name: 'Electronics & Communication Engineering', code: 'ECE', icon: '📡',
@@ -166,6 +181,11 @@ The department has advanced CAD/CAM labs, a 3D printing facility, and an EV rese
         ],
         facultyAchievements: [
           { name: 'Dr. J. P. Sharma', program: 'Mechanical Engineering', category: 'Award', badge: '🏆', title: 'Best Faculty Award — ATVC 2026, Monark University, Ahmedabad', desc: 'Honored with the Best Faculty Award at ATVC 2026 organized by Infileague Motorsports for outstanding mentorship and guidance of Team Fenrir Racing, which also won Best Innovation in Combustion Engine at the same event.' },
+        ],
+        recruiters: [
+          { name: 'Altair',   logo: '/images/me/recruiters/altair.png' },
+          { name: 'Daikin',   logo: '/images/me/recruiters/daikin.png' },
+          { name: 'L&T',      logo: '/images/me/recruiters/lnt.png' },
         ],
       },
       {
