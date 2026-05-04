@@ -21,6 +21,7 @@ export interface Department {
   completedEvents?: { title: string; date: string; description?: string; slug?: string }[]
   studentAchievements?: Achievement[]
   facultyAchievements?: Achievement[]
+  recruiters?: { name: string; logo: string }[]
 }
 
 export interface School {
@@ -99,6 +100,9 @@ It has state-of-the-art labs for signal processing, microelectronics, and IoT, a
         upcomingEvents: [
           { title: '2-Day Workshop: Smart Controller Design using Soft Computing', date: 'April 15–16, 2026' },
         ],
+        completedEvents: [
+          { title: '2-Day Workshop on Smart Controller Design using Soft Computing', date: 'April 15–16, 2026', description: 'A hands-on workshop covering soft computing techniques for smart controller design, organized by the ECE Department, School of Engineering, MRU.', slug: 'ece-workshop-apr2026' },
+        ],
         studentAchievements: [
           { name: 'R. Uday Kiran', program: 'ECE 4th Semester', category: 'Competition', badge: '🥇', title: '1st Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 1st prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
           { name: 'Jayasankar', program: 'ECE 4th Semester', category: 'Competition', badge: '🥈', title: '2nd Prize — Technical Meme Competition, Inno-Skill 2026', desc: 'Secured 2nd prize in the Technical Meme competition at Inno-Skill Competition, April 3–4, 2026.' },
@@ -109,9 +113,24 @@ It has state-of-the-art labs for signal processing, microelectronics, and IoT, a
           { name: 'Manvitha, I V Sanjeev, Anmol & Ranveer', program: 'ECE / CST', category: 'Competition', badge: '🥉', title: '3rd Prize — IDE Bootcamp', desc: 'Won 3rd prize at the IDE Bootcamp along with their team from CST.' },
         ],
         facultyAchievements: [
-          { name: 'Dr. Shruti Vashist', program: 'HOD & Dean Academics · ECE', category: 'Award', badge: '🏆', title: 'Best Researcher Award — MRU 2025', desc: 'Awarded Best Researcher Award by Manav Rachna University for outstanding research contributions in 2025.' },
-          { name: 'ECE Faculty', program: 'Department of ECE', category: 'Research', badge: '📄', title: 'Publications in SCIE/Scopus Indexed Journals', desc: 'Faculty members have published research in VLSI, Embedded Systems, Signal Processing, and IoT in high-impact indexed journals.' },
-          { name: 'ECE Department', program: 'School of Engineering', category: 'Award', badge: '🎓', title: 'NBA Accreditation — B.Tech ECE (2023–2026)', desc: 'The ECE programme is NBA accredited, reflecting excellence in curriculum, faculty, and outcomes-based education.' },
+          { name: 'Dr. Shruti Vashist', program: "Dean Academics, Professor (Ph.D.)", category: 'Award', badge: '🏆', title: "Utkrisht: 'Icons of Manav Rachna' 2023 & Cricket Winner", desc: "Received the prestigious 'Icons of Manav Rachna' Utkrisht Award 2023. Also won the inter Cricket Challenger Event at MRU." },
+          { name: 'Dr. Piyush Charan', program: 'Associate Professor (Ph.D.)', category: 'Award', badge: '🎓', title: 'Google Certified Educator & SWAYAM NPTEL Elite + Silver Medal (2024–25)', desc: 'Recognized as a Google Certified Educator (Feb 2025) for integrating Google tools into teaching. Awarded Elite + Silver Medal (76%) in Managing Intellectual Properties in Universities from SWAYAM NPTEL, IIT Madras, 2024. Recognized by IEEE, USA.' },
+          { name: 'Bhanu Pratap', program: 'Associate Professor (Ph.D.)', category: 'Award', badge: '🏏', title: 'Manav Rachna Corporate Cricket Challenge Winner', desc: 'Won the Manav Rachna Corporate Cricket Challenge organized by Manav Rachna Educational Institutions.' },
+          { name: 'Dr. K. Deepa', program: 'ECE Department', category: 'Award', badge: '📜', title: 'Certificate of Appreciation — Reviewer, ICSC 2025', desc: 'Received in recognition of valuable contributions as a Reviewer for the conference held on June 16–17, 2025, in Ho Chi Minh City, Vietnam.' },
+        ],
+        recruiters: [
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 2.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 3.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 4.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 5.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 6.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 7.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 8.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 9.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 10.png' },
+          { name: 'Recruiter', logo: '/images/ece/recruiters/image copy 11.png' },
         ],
       },
       {
