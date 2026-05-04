@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { MessageCircle, X, Send, Mic } from 'lucide-react'
-import { chatbotKnowledge } from '@/lib/chatbotknowledge'
 import { schools } from '@/lib/schools'
 
 type Message = {
@@ -47,7 +46,8 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'bot',
-      text: 'Hi! I am SOE Voice Assistant. You can type or speak your query.',
+      text:
+        'Hi! I am SOE Voice Assistant. Ask me to open departments, learning pathways, leaderboard, events, campus life, hostel, ICASS, placements, awards, or any school/department.',
     },
   ])
 
@@ -129,85 +129,199 @@ export default function Chatbot() {
   }
 
   const getBotReply = (msg: string) => {
-    const text = msg.toLowerCase()
+    const text = msg.toLowerCase().trim()
 
-    if (text.includes('ece')) {
-      if (text.includes('event')) {
-        return `${chatbotKnowledge.schools.ece.name}
-
-Events:
-${chatbotKnowledge.schools.ece.events.join('\n')}`
-      }
-
-      return `${chatbotKnowledge.schools.ece.name}
-
-Student Achievements:
-${chatbotKnowledge.schools.ece.studentAchievements.join('\n')}`
+    const go = (path: string, reply: string) => {
+      router.push(path)
+      return reply
     }
 
-    if (text.includes('law')) {
-      if (text.includes('faculty')) {
-        return `${chatbotKnowledge.schools.law.name}
-
-Faculty Achievements:
-${chatbotKnowledge.schools.law.facultyAchievements}`
-      }
-
-      return `${chatbotKnowledge.schools.law.name}
-
-Student Achievements:
-${chatbotKnowledge.schools.law.studentAchievements.join('\n')}`
+    // Main navigation
+    if (text.includes('home') || text.includes('main page')) {
+      return go('/home', 'Opening Home page.')
     }
 
-    if (text.includes('science')) {
-      if (text.includes('course')) {
-        return `${chatbotKnowledge.schools.sciences.name}
-
-Courses:
-${chatbotKnowledge.schools.sciences.valueAddedCourses.join('\n')}`
-      }
-
-      if (text.includes('event')) {
-        return `${chatbotKnowledge.schools.sciences.name}
-
-Events:
-${chatbotKnowledge.schools.sciences.upcomingEvents.join('\n')}`
-      }
-
-      return chatbotKnowledge.schools.sciences.highlights
+    if (text.includes('event') || text.includes('events')) {
+      return go('/events', 'Opening Events page.')
     }
 
-    if (text.includes('event')) {
-      router.push('/events')
-
-      return `Opening Events page.
-
-On this page, you can explore upcoming and completed events organized at MRU, including event title, date, location and detailed descriptions.`
+    if (
+      text.includes('department') ||
+      text.includes('departments') ||
+      text.includes('program') ||
+      text.includes('programs')
+    ) {
+      return go('/departments', 'Opening Departments page.')
     }
 
-    if (text.includes('department') || text.includes('program')) {
-      router.push('/departments')
+    if (text.includes('profile') || text.includes('my account') || text.includes('account')) {
+      return go('/profile', 'Opening Profile page.')
+    }
 
-      const totalDepartments = schools.reduce(
-        (total, school) => total + school.departments.length,
-        0
-      )
+    if (text.includes('quick')) {
+      return go('/quick-links', 'Opening Quick Links page.')
+    }
 
-      return `Opening Departments page.
+    if (text.includes('login')) {
+      return go('/login', 'Opening Login page.')
+    }
 
-This page lists all departments and schools. You can search programs, departments and school-wise courses.
+    // SOE Engage
+    if (
+      text.includes('learning pathway') ||
+      text.includes('learning pathways') ||
+      text.includes('linkedin') ||
+      text.includes('course') ||
+      text.includes('courses') ||
+      text.includes('badge') ||
+      text.includes('badges')
+    ) {
+      return go('/engage/learning', 'Opening Learning Pathways.')
+    }
 
-There are ${totalDepartments} departments altogether.`
+    if (text.includes('e-learning') || text.includes('elearning')) {
+      return go('/engage', 'Opening SOE Engage platform.')
+    }
+
+    if (text.includes('leaderboard') || text.includes('rank') || text.includes('ranking')) {
+      return go('/engage/leaderboard', 'Opening Leaderboard.')
+    }
+
+    if (text.includes('challenge') || text.includes('challenges') || text.includes('quest')) {
+      return go('/engage/challenges', 'Opening Quests and Challenges.')
+    }
+
+    if (text.includes('quiz')) {
+      return go('/engage/polls', 'Opening Quiz section.')
+    }
+
+    if (text.includes('poll')) {
+      return go('/engage/polls', 'Opening Polls section.')
+    }
+
+    if (text.includes('feed') || text.includes('post') || text.includes('social')) {
+      return go('/engage/feed', 'Opening Feed page.')
+    }
+
+    // Fresher / campus life
+    if (text.includes('campus life')) {
+      return go('/fresher', 'Opening Campus Life section.')
     }
 
     if (text.includes('hostel')) {
-      router.push('/fresher/hostel')
-      return 'Opening Hostel page.'
+      return go('/fresher/hostel', 'Opening Hostel Information.')
+    }
+
+    if (text.includes('clan')) {
+      return go('/fresher/clans', 'Opening Clans page.')
+    }
+
+    if (text.includes('academic calendar')) {
+      return go('/fresher/academic-calendar', 'Opening Academic Calendar.')
+    }
+
+    if (text.includes('first day')) {
+      return go('/fresher/first-day', 'Opening First Day guide.')
+    }
+
+    // ICASS
+    if (text.includes('speaker')) {
+      return go('/icass-2026/speakers', 'Opening ICASS Speakers.')
+    }
+
+    if (text.includes('schedule')) {
+      return go('/icass-2026/schedule', 'Opening ICASS Schedule.')
+    }
+
+    if (text.includes('poster')) {
+      return go('/icass-2026/poster-presentation', 'Opening Poster Presentation.')
+    }
+
+    if (text.includes('organiser') || text.includes('organizer')) {
+      return go('/icass-2026/organisers', 'Opening ICASS Organisers.')
+    }
+
+    if (text.includes('patron')) {
+      return go('/icass-2026/patrons', 'Opening ICASS Patrons.')
+    }
+
+    if (text.includes('location')) {
+      return go('/icass-2026/location', 'Opening ICASS Location.')
+    }
+
+    if (text.includes('workshop')) {
+      return go('/icass-2026/workshop', 'Opening ICASS Workshop.')
     }
 
     if (text.includes('icass')) {
-      router.push('/icass-2026')
-      return 'Opening ICASS page.'
+      return go('/icass-2026', 'Opening ICASS 2026 page.')
+    }
+
+    // Home tabs / sections
+    if (text.includes('functionary') || text.includes('functionaries') || text.includes('leadership')) {
+      return go('/functionaries', 'Opening Functionaries page.')
+    }
+
+    if (text.includes('award') || text.includes('awards')) {
+      return go('/home?tab=awards', 'Opening Awards section.')
+    }
+
+    if (text.includes('placement') || text.includes('placements')) {
+      return go('/home?tab=placements', 'Opening Placements section.')
+    }
+
+    // Schools
+    if (text.includes('school of engineering') || text.includes('soe')) {
+      return go('/school/soe', 'Opening School of Engineering.')
+    }
+
+    if (text.includes('school of law') || text.includes('law')) {
+      return go('/school/law', 'Opening School of Law.')
+    }
+
+    if (text.includes('school of education') || text.includes('education')) {
+      return go('/school/education', 'Opening School of Education.')
+    }
+
+    if (text.includes('school of business') || text.includes('business')) {
+      return go('/school/business', 'Opening School of Business.')
+    }
+
+    if (text.includes('school of science') || text.includes('science')) {
+      return go('/school/science', 'Opening School of Science.')
+    }
+
+    // Dynamic school match from schools.ts
+    const matchedSchool = schools.find(
+      school =>
+        text.includes(school.name.toLowerCase()) ||
+        text.includes(school.id.toLowerCase())
+    )
+
+    if (matchedSchool) {
+      return go(`/school/${matchedSchool.id}`, `Opening ${matchedSchool.name}.`)
+    }
+
+    // Dynamic department match from schools.ts
+    for (const school of schools) {
+      const matchedDept = school.departments.find(
+        dept =>
+          text.includes(dept.name.toLowerCase()) ||
+          text.includes(dept.code.toLowerCase()) ||
+          text.includes(dept.id.toLowerCase())
+      )
+
+      if (matchedDept) {
+        return go(
+          `/school/${school.id}/${matchedDept.id}`,
+          `Opening ${matchedDept.name} department.`
+        )
+      }
+    }
+
+    // Info only
+    if (text.includes('xp') || text.includes('points')) {
+      return 'XP means experience points. Students can earn XP through courses, challenges, quizzes, polls, events and feed activities.'
     }
 
     if (
@@ -215,14 +329,22 @@ There are ${totalDepartments} departments altogether.`
       text.includes('mru') ||
       text.includes('university')
     ) {
-      return `Manav Rachna University (MRU), located in Faridabad, Haryana, is a leading private state university established in 2014 (formerly MRCE).
-
-It is known for programs in engineering, law, management and research, with a 127-acre campus and strong research clusters.
-
-In global rankings, MRU is placed in the 1501+ bracket in the Times Higher Education World University Rankings 2026.`
+      return 'Manav Rachna University is a leading private university in Faridabad. You can ask me to open departments, events, learning pathways, placements, awards, campus life or ICASS.'
     }
 
-    return 'Try asking about ECE, Law, Science, Events, Departments, Hostel, ICASS or Manav Rachna University.'
+    return `I can help you navigate the app.
+
+Try:
+• Open departments
+• Open learning pathways
+• Open leaderboard
+• Open placements
+• Open awards
+• Open campus life
+• Open hostel
+• Open ICASS
+• Open CSE department
+• Open School of Law`
   }
 
   const handleSend = () => {
