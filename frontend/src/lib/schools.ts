@@ -141,9 +141,9 @@ The department has advanced CAD/CAM labs, a 3D printing facility, and an EV rese
         ],
       },
       {
-        id: 'ra', name: 'Robotics & Automation', code: 'R&A', icon: '🤖',
-        description: 'R&A department is at the forefront of autonomous systems, industrial automation, and intelligent robotics research.',
-        about: `The Robotics & Automation department offers specialised B.Tech and M.Tech programmes focused on autonomous systems, drone technology, and industrial automation.
+        id: 'ra', name: 'Robotics & Artificial Intelligence', code: 'R&AI', icon: '🤖',
+        description: 'R&AI department is at the forefront of autonomous systems, industrial automation, and intelligent robotics research.',
+        about: `The Robotics & Artificial Intelligence department offers specialised B.Tech and M.Tech programmes focused on autonomous systems, drone technology, and industrial automation.
 
 Students work in dedicated robotics labs equipped with collaborative robots, drone simulators, and PLC/SCADA systems, with partnerships with ABB and Fanuc.`,
         upcomingEvents: [
