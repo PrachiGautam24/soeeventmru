@@ -180,17 +180,16 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 }
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'elearning' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards' | 'learning'
+type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards' | 'learning'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
-  { id: 'departments', label: 'Departments', emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
-  { id: 'elearning', label: 'E-Learning', emoji: '💻', color: '#0891b2', bg: '#e0f7fa' },
-  { id: 'learning', label: 'Learning\nPathways', emoji: '🛤️', color: '#7c3aed', bg: '#f3eeff' },
-  { id: 'functionaries', label: 'Functionaries', emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
-  { id: 'awards', label: 'Awards', emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
-  { id: 'placements', label: 'Placements', emoji: '💼', color: '#b45309', bg: '#fef3e2' },
-  { id: 'campus', label: 'Campus Life', emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
-  { id: 'events', label: 'Events', emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
+  { id: 'departments',   label: 'Departments',      emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
+  { id: 'learning',      label: 'Learning\nPathways', emoji: '🛤️', color: '#7c3aed', bg: '#f3eeff' },
+  { id: 'functionaries', label: 'Functionaries',    emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
+  { id: 'awards',        label: 'Awards',           emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
+  { id: 'placements',    label: 'Placements',       emoji: '💼', color: '#b45309', bg: '#fef3e2' },
+  { id: 'campus',        label: 'Campus Life',      emoji: '🎓', color: '#7c3aed', bg: '#f3eeff' },
+  { id: 'events',        label: 'Events',           emoji: '📅', color: '#b12a2e', bg: '#fde8e8' },
 ]
 
 // ─── Placement Slideshow — 2 photos at a time ─────────────────────────────────
@@ -352,45 +351,6 @@ export default function HomePage() {
                     <p className="text-xs text-neutral-400 mt-0.5">Student Welfare & Campus Life</p>
                   </div>
                   <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
-                </motion.button>
-              </motion.div>
-            )}
-
-            {/* E-LEARNING */}
-            {activeTab === 'elearning' && (
-              <motion.div key="elearning"
-                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="space-y-3">
-                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">SOE Engage Platform</p>
-                {[
-                  { icon: '🎯', label: 'Quests & Challenges', desc: 'Daily & weekly challenges to earn XP', href: '/engage/challenges' },
-                  { icon: '🏆', label: 'Leaderboard', desc: 'See where you rank among students', href: '/engage/leaderboard' },
-                  { icon: '🧠', label: 'Quiz', desc: 'Play daily trivia and earn up to 100 XP', href: '/engage/quiz' },
-                  { icon: '🗳️', label: 'Polls', desc: 'Vote on campus topics', href: '/engage/polls' },
-                  { icon: '📡', label: 'Feed', desc: 'Student activity feed', href: '/engage/feed' },
-                  { icon: '🎓', label: 'Learning Modules', desc: 'Structured learning content', href: '/engage/learning' },
-                  { icon: '📅', label: 'Event Check-in', desc: 'Check in to events for XP', href: '/engage/events' },
-                  { icon: '🎁', label: 'Rewards', desc: 'Redeem coins for rewards', href: '/engage/rewards' },
-                ].map((item, i) => (
-                  <motion.button key={item.label}
-                    initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => router.push(item.href)}
-                    className="w-full flex items-center gap-3 bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-neutral-100">
-                    <div className="w-11 h-11 rounded-xl bg-cyan-50 flex items-center justify-center shrink-0 text-xl">
-                      {item.icon}
-                    </div>
-                    <div className="flex-1 text-left">
-                      <p className="text-sm font-semibold text-gray-800">{item.label}</p>
-                      <p className="text-xs text-neutral-400 mt-0.5">{item.desc}</p>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-neutral-300 shrink-0" />
-                  </motion.button>
-                ))}
-                <motion.button whileTap={{ scale: 0.97 }} onClick={() => router.push('/engage')}
-                  className="w-full flex items-center justify-center gap-2 bg-cyan-600 rounded-2xl py-3.5 text-sm font-bold text-white shadow-md">
-                  Open Engage Hub 🚀
                 </motion.button>
               </motion.div>
             )}

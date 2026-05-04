@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, CalendarDays, Building2, Zap, User, Star, Share2 } from 'lucide-react'
+import { Home, CalendarDays, GraduationCap, Zap, User, Star, Share2 } from 'lucide-react'
 
 export default function BottomNav() {
   const pathname = usePathname()
@@ -16,11 +16,11 @@ export default function BottomNav() {
         { name: 'More',     href: `${eventPrefix}/more`,     icon: Share2 },
       ]
     : [
-        { name: 'Home',        href: '/home',        icon: Home },
-        { name: 'Events',      href: '/events',      icon: CalendarDays },
-        { name: 'Departments', href: '/departments', icon: Building2 },
-        { name: 'Quick Links', href: '/quick-links', icon: Zap },
-        { name: 'Profile',     href: '/profile',     icon: User },
+        { name: 'Home',        href: '/home',           icon: Home },
+        { name: 'Events',      href: '/events',         icon: CalendarDays },
+        { name: 'E-Learning',  href: '/engage/learning', icon: GraduationCap },
+        { name: 'Quick Links', href: '/quick-links',    icon: Zap },
+        { name: 'Profile',     href: '/profile',        icon: User },
       ]
 
   // Hide on landing page and login page
