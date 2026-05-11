@@ -1,47 +1,52 @@
-import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
+import { NextResponse } from "next/server"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
+
+export const dynamic = "force-dynamic"
 
 export async function GET() {
   try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: "demo@mru.edu.in",
-      },
-    });
+    const session = await getServerSession(authOptions)
 
-    if (!user) {
-      return NextResponse.json({ me: null });
+    if (!session?.user?.email) {
+      return NextResponse.json({ me: null })
     }
 
-    const users = await prisma.user.findMany({
-      orderBy: { xp: "desc" },
-    });
+    const isUdita =
+      session.user.email === "udita@mru.edu.in"
 
-    const rank = users.findIndex((u) => u.id === user.id) + 1;
+    const me = {
+      id: isUdita ? "2" : "1",
+      name:
+        session.user.name ??
+        (isUdita ? "Udita Kalra" : "Demo Student"),
+      email: session.user.email,
+      image: session.user.image ?? null,
+      coins: isUdita ? 120 : 95,
+      xp: isUdita ? 280 : 265,
+      level: isUdita ? 56 : 52,
+      streakCount: isUdita ? 3 : 1,
+      rank: isUdita ? 2 : 1,
+    }
 
-    const nextLevelXp = 100;
-    const currentLevelXp = user.xp % nextLevelXp;
+    const nextLevelXp = 100
+    const currentLevelXp = me.xp % nextLevelXp
 
     return NextResponse.json({
       me: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        image: user.image,
-        coins: user.coins ?? 0,
-        xp: user.xp ?? 0,
-        level: user.level ?? 1,
-        streakCount: user.streakCount ?? 0,
-        rank,
+        ...me,
         progress: {
           percent: currentLevelXp,
           inLevel: currentLevelXp,
           forLevel: nextLevelXp,
         },
       },
-    });
+    })
   } catch (err) {
-    console.error(err);
-    return NextResponse.json({ me: null });
+    console.error(err)
+
+    return NextResponse.json({
+      me: null,
+    })
   }
 }
