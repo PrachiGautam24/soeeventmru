@@ -9,38 +9,29 @@ import { ArrowRight } from 'lucide-react'
 export default function LandingPage() {
   const router = useRouter()
 
+  const speakWelcome = () => {
+    window.speechSynthesis.cancel()
+
+    const speech = new SpeechSynthesisUtterance(
+      'Welcome to Manav Rachna University'
+    )
+
+    speech.lang = 'en-IN'
+    speech.rate = 1.08
+    speech.pitch = 1
+    speech.volume = 1
+
+    window.speechSynthesis.speak(speech)
+  }
+
   useEffect(() => {
-    let hasSpoken = false
-
-    const speakWelcome = () => {
-      if (hasSpoken) return
-      hasSpoken = true
-
-      window.speechSynthesis.cancel()
-
-      const speech = new SpeechSynthesisUtterance(
-        'Welcome to Manav Rachna University'
-      )
-
-      speech.lang = 'en-IN'
-      speech.rate = 1.05
-      speech.pitch = 1
-      speech.volume = 1
-
-      window.speechSynthesis.speak(speech)
-    }
-
-    speakWelcome()
-
-    const handleVoicesChanged = () => {
+    const timer = setTimeout(() => {
       speakWelcome()
-    }
-
-    window.speechSynthesis.onvoiceschanged = handleVoicesChanged
+    }, 300)
 
     return () => {
+      clearTimeout(timer)
       window.speechSynthesis.cancel()
-      window.speechSynthesis.onvoiceschanged = null
     }
   }, [])
 
@@ -79,15 +70,13 @@ export default function LandingPage() {
         }
       `}</style>
 
-      {/* Background blobs */}
       <div
         className="absolute pointer-events-none"
         style={{
           width: 400,
           height: 400,
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle,#ff0066 0%,transparent 65%)',
+          background: 'radial-gradient(circle,#ff0066 0%,transparent 65%)',
           top: '-100px',
           left: '-80px',
           filter: 'blur(50px)',
@@ -101,8 +90,7 @@ export default function LandingPage() {
           width: 380,
           height: 380,
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle,#e8005a 0%,transparent 65%)',
+          background: 'radial-gradient(circle,#e8005a 0%,transparent 65%)',
           top: '20%',
           right: '-100px',
           filter: 'blur(55px)',
@@ -116,8 +104,7 @@ export default function LandingPage() {
           width: 360,
           height: 360,
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle,#ff3377 0%,transparent 65%)',
+          background: 'radial-gradient(circle,#ff3377 0%,transparent 65%)',
           bottom: '-80px',
           left: '5%',
           filter: 'blur(50px)',
@@ -131,8 +118,7 @@ export default function LandingPage() {
           width: 320,
           height: 320,
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle,#cc0044 0%,transparent 65%)',
+          background: 'radial-gradient(circle,#cc0044 0%,transparent 65%)',
           top: '50%',
           left: '30%',
           filter: 'blur(60px)',
@@ -141,7 +127,6 @@ export default function LandingPage() {
         }}
       />
 
-      {/* Bottom waves */}
       <svg
         className="absolute bottom-0 left-0 w-full pointer-events-none"
         viewBox="0 0 390 120"
@@ -159,18 +144,14 @@ export default function LandingPage() {
         />
       </svg>
 
-      {/* Main content */}
       <div className="relative flex-1 flex flex-col items-center justify-center px-8 gap-8 z-10 py-16">
-        {/* Logos + title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-5"
         >
-          {/* Logo box */}
           <div className="bg-white/95 rounded-2xl px-6 py-5 shadow-lg flex flex-col items-center gap-4">
-            {/* 30 years logo */}
             <motion.div
               initial={{ rotate: 0, scale: 0.4, opacity: 0 }}
               animate={{ rotate: 360, scale: 1, opacity: 1 }}
@@ -196,10 +177,8 @@ export default function LandingPage() {
               </motion.div>
             </motion.div>
 
-            {/* Divider */}
             <div className="w-full h-px bg-neutral-200" />
 
-            {/* Logos row */}
             <div className="flex items-center gap-4">
               <Image
                 src="https://manavrachna.edu.in/assets/images/mru-logo.png"
@@ -223,7 +202,6 @@ export default function LandingPage() {
             </div>
           </div>
 
-          {/* Heading */}
           <div className="text-center">
             <h1 className="text-3xl font-extrabold text-white drop-shadow-md leading-snug">
               Manav Rachna University
@@ -241,7 +219,6 @@ export default function LandingPage() {
           </div>
         </motion.div>
 
-        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -253,7 +230,6 @@ export default function LandingPage() {
           At Manav Rachna University
         </motion.p>
 
-        {/* Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -261,7 +237,10 @@ export default function LandingPage() {
           className="w-full"
         >
           <button
-            onClick={() => router.push('/home')}
+            onClick={() => {
+              speakWelcome()
+              router.push('/home')
+            }}
             className="w-full flex items-center justify-center gap-3 bg-white rounded-2xl py-4 text-base font-bold text-red-600 shadow-lg active:scale-95 transition-transform"
           >
             Get Started
