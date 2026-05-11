@@ -68,6 +68,14 @@ export default function PollsPage() {
       return
     }
     const d = await res.json()
+    // 🔥 QUEST TRACKING ADD KARO
+await fetch('/api/challenges/track', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    type: 'POLL_VOTE',
+  }),
+})
     setPolls((prev) =>
       prev.map((p) =>
         p.id === poll.id

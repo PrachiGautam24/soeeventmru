@@ -204,9 +204,6 @@ export default function Chatbot() {
     }
 
     // Fresher / campus life
-    if (text.includes('campus life')) {
-      return go('/fresher', 'Opening Campus Life section.')
-    }
 
     if (text.includes('hostel')) {
       return go('/fresher/hostel', 'Opening Hostel Information.')

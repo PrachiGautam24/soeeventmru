@@ -30,11 +30,17 @@ export default function FeedPage() {
   const [commentsFor, setCommentsFor] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/posts?limit=30', { cache: 'no-store' })
-      .then((r) => r.json())
-      .then((d) => setPosts(d.posts ?? []))
-      .finally(() => setLoading(false))
-  }, [])
+  fetch('/api/posts?limit=30', { cache: 'no-store' })
+    .then((r) => r.json())
+    .then((d) => setPosts(d.posts ?? []))
+    .finally(() => setLoading(false))
+
+  fetch('/api/challenges/track', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ type: 'FEED_VIEW' }),
+  })
+}, [])
 
   async function createPost() {
     const content = text.trim()
