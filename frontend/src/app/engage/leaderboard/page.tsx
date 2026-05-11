@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, Crown, Flame, User as UserIcon, Trophy } from 'lucide-react'
+import { ChevronLeft, Crown, User as UserIcon, Trophy } from 'lucide-react'
 
 type Scope = 'day' | 'week' | 'all'
 
@@ -12,12 +11,17 @@ type Leader = {
   rank: number
   id: string
   name: string
-  image: string | null
   xp: number
   level: number
-  streak: number
-  department: string | null
   isMe: boolean
+}
+
+type ApiLeader = {
+  rank?: number
+  id?: string
+  name?: string
+  xp?: number
+  level?: number
 }
 
 export default function LeaderboardPage() {
@@ -28,23 +32,24 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     setLoading(true)
+
     fetch(`/api/leaderboard?scope=${scope}&limit=50`, { cache: 'no-store' })
       .then((r) => r.json())
-      .then((d) => {
+      .then((d: { leaderboard?: ApiLeader[] }) => {
         const data = d.leaderboard ?? []
 
-        // ✅ convert API → UI format
-        const formatted = data.map((u: any) => ({
-          ...u,
-          image: null,
-          streak: 0,
-          department: null,
+        const formatted: Leader[] = data.map((u, index) => ({
+          rank: u.rank ?? index + 1,
+          id: u.id ?? String(index),
+          name: u.name ?? 'Student',
+          xp: u.xp ?? 0,
+          level: u.level ?? 1,
           isMe: u.name === 'Demo Student',
         }))
 
         setLeaders(formatted)
 
-        const me = formatted.find((u: any) => u.isMe)
+        const me = formatted.find((u) => u.isMe)
         setMyRank(me?.rank ?? null)
       })
       .finally(() => setLoading(false))
@@ -59,6 +64,7 @@ export default function LeaderboardPage() {
         <Link href="/engage" className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
           <ChevronLeft className="w-4 h-4" />
         </Link>
+
         <div className="flex-1">
           <h1 className="text-base font-black leading-tight">Leaderboard</h1>
           <p className="text-[11px] opacity-90">
@@ -67,6 +73,7 @@ export default function LeaderboardPage() {
             {scope === 'all' && 'All-time XP champions'}
           </p>
         </div>
+
         <div className="bg-white/20 rounded-full px-3 py-1.5 text-[11px] font-bold flex items-center gap-1">
           <Trophy className="w-3 h-3" /> Rank #{myRank ?? '—'}
         </div>
@@ -88,7 +95,6 @@ export default function LeaderboardPage() {
         </div>
       </div>
 
-      {/* 🥇 Podium */}
       {top3.length > 0 && (
         <section className="mx-4 mt-4 rounded-3xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 p-4">
           <div className="flex items-end justify-around gap-3 h-40">
@@ -99,11 +105,11 @@ export default function LeaderboardPage() {
         </section>
       )}
 
-      {/* 📊 List */}
       <section className="mx-4 mt-4">
-        {loading && Array.from({ length: 8 }).map((_, i) => (
-          <div key={i} className="h-14 rounded-2xl bg-white border border-neutral-100 mb-2 animate-pulse" />
-        ))}
+        {loading &&
+          Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="h-14 rounded-2xl bg-white border border-neutral-100 mb-2 animate-pulse" />
+          ))}
 
         <AnimatePresence initial={false}>
           {rest.map((l, i) => (
@@ -117,6 +123,7 @@ export default function LeaderboardPage() {
               } mb-2 shadow-sm`}
             >
               <span className="w-7 text-center text-xs font-black text-neutral-500">#{l.rank}</span>
+
               <div className="w-10 h-10 rounded-full bg-neutral-100 flex items-center justify-center">
                 <UserIcon className="w-5 h-5 text-neutral-400" />
               </div>
@@ -125,14 +132,10 @@ export default function LeaderboardPage() {
                 <p className="text-sm font-bold text-neutral-900 truncate">
                   {l.name} {l.isMe && <span className="text-[10px] text-primary">(you)</span>}
                 </p>
-                <p className="text-[10px] text-neutral-500">
-                  Lvl {l.level}
-                </p>
+                <p className="text-[10px] text-neutral-500">Lvl {l.level}</p>
               </div>
 
-              <span className="text-sm font-black text-primary">
-                {l.xp.toLocaleString()}
-              </span>
+              <span className="text-sm font-black text-primary">{l.xp.toLocaleString()}</span>
             </motion.div>
           ))}
         </AnimatePresence>
@@ -169,11 +172,14 @@ function PodiumSlot({
   return (
     <div className="flex-1 flex flex-col items-center gap-1">
       {isFirst && <Crown className="w-5 h-5 text-amber-500" />}
+
       <div className="w-14 h-14 rounded-full bg-neutral-100 flex items-center justify-center">
         <UserIcon className="w-6 h-6 text-neutral-400" />
       </div>
+
       <p className="text-[11px] font-bold">{leader.name}</p>
       <p className="text-[10px] font-black">{leader.xp} XP</p>
+
       <div className={`${height} w-full rounded-t-2xl bg-gradient-to-b ${colors[rank]}`}>
         <span className="text-white font-black text-lg flex justify-center">{rank}</span>
       </div>
