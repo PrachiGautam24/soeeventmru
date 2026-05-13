@@ -15,6 +15,17 @@ type Pathway = {
   progressPercent?: number
 }
 
+type SavedCompletion = {
+  id: string
+  status: 'PENDING' | 'APPROVED' | 'REJECTED'
+  proofType: string
+  proofUrl: string | null
+  proofText: string | null
+  notes: string | null
+}
+
+const STORAGE_KEY = 'learning_pending_submissions'
+
 export default function LearningPage() {
   const router = useRouter()
   const [pathways, setPathways] = useState<Pathway[]>([])
@@ -22,15 +33,41 @@ export default function LearningPage() {
 
   useEffect(() => {
     fetch('/api/learning/pathways', { cache: 'no-store' })
-      .then(res => res.json())
-      .then(data => setPathways(data.pathways ?? []))
+      .then((res) => res.json())
+      .then((data) => {
+        const saved = JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || '{}'
+        ) as Record<string, SavedCompletion>
+
+        const approvedCount = Object.values(saved).filter(
+          (item) => item.status === 'APPROVED'
+        ).length
+
+        const updatedPathways = (data.pathways ?? []).map(
+          (pathway: Pathway) => {
+            if (pathway.slug !== 'ai-ml-track') return pathway
+
+            const totalCourses = pathway.totalCourses ?? 3
+
+            return {
+              ...pathway,
+              approvedCount,
+              progressPercent:
+                totalCourses === 0
+                  ? 0
+                  : Math.round((approvedCount / totalCourses) * 100),
+            }
+          }
+        )
+
+        setPathways(updatedPathways)
+      })
       .finally(() => setLoading(false))
   }, [])
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
       <div className="max-w-md mx-auto">
-
         <div className="relative bg-secondary px-5 pt-10 pb-6 rounded-b-3xl shadow-lg">
           <button
             onClick={() => router.push('/engage')}
@@ -40,7 +77,10 @@ export default function LearningPage() {
           </button>
 
           <div className="text-center">
-            <h1 className="text-white text-xl font-bold">Learning Pathways</h1>
+            <h1 className="text-white text-xl font-bold">
+              Learning Pathways
+            </h1>
+
             <p className="text-white/70 text-xs mt-1">
               Complete courses, submit proof, earn XP and badges
             </p>
@@ -60,21 +100,23 @@ export default function LearningPage() {
           href="/admin/learning"
           className="mx-4 mt-3 flex items-center justify-center rounded-2xl bg-red-600 px-4 py-3 text-sm font-bold text-white shadow-md"
         >
-          Admin Review Panel (Admin Login Required)
+          Admin Review Panel
         </Link>
 
         <div className="px-4 mt-5 space-y-3">
           {loading && (
-            <div className="text-sm text-neutral-500">Loading pathways...</div>
+            <div className="text-sm text-neutral-500">
+              Loading pathways...
+            </div>
           )}
 
           {!loading && pathways.length === 0 && (
             <div className="bg-white rounded-2xl p-4 text-sm text-neutral-500">
-              No pathways found. Run seed data first.
+              No pathways found.
             </div>
           )}
 
-          {pathways.map(pathway => (
+          {pathways.map((pathway) => (
             <Link
               key={pathway.id}
               href={`/engage/learning/${pathway.slug}`}
@@ -88,19 +130,24 @@ export default function LearningPage() {
                 <p className="text-sm font-semibold text-gray-800">
                   {pathway.title}
                 </p>
+
                 <p className="text-xs text-neutral-400 mt-0.5 line-clamp-2">
-                  {pathway.description ?? 'Curated LinkedIn Learning pathway'}
+                  {pathway.description ??
+                    'Curated LinkedIn Learning pathway'}
                 </p>
 
                 <div className="mt-2 h-1.5 bg-neutral-100 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-cyan-600"
-                    style={{ width: `${pathway.progressPercent ?? 0}%` }}
+                    style={{
+                      width: `${pathway.progressPercent ?? 0}%`,
+                    }}
                   />
                 </div>
 
                 <p className="text-[10px] text-neutral-400 mt-1">
-                  {pathway.approvedCount ?? 0}/{pathway.totalCourses ?? 0} courses approved
+                  {pathway.approvedCount ?? 0}/
+                  {pathway.totalCourses ?? 0} courses approved
                 </p>
               </div>
 

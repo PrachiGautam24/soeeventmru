@@ -9,32 +9,54 @@ import { ArrowRight } from 'lucide-react'
 export default function LandingPage() {
   const router = useRouter()
 
+  useEffect(() => {
+  let hasSpoken = false
+
   const speakWelcome = () => {
-    window.speechSynthesis.cancel()
+    if (hasSpoken) return
+    if (!('speechSynthesis' in window)) return
+
+    const synth = window.speechSynthesis
+    const voices = synth.getVoices()
+
+    if (!voices.length) return
+
+    hasSpoken = true
+    synth.cancel()
+
+    const femaleVoice =
+      voices.find((v) => v.name.toLowerCase().includes('female')) ||
+      voices.find((v) => v.name.toLowerCase().includes('zira')) ||
+      voices.find((v) => v.name.toLowerCase().includes('samantha')) ||
+      voices.find((v) => v.name.toLowerCase().includes('google uk english female')) ||
+      voices[0]
 
     const speech = new SpeechSynthesisUtterance(
       'Welcome to Manav Rachna University'
     )
 
+    speech.voice = femaleVoice
     speech.lang = 'en-IN'
-    speech.rate = 1.08
-    speech.pitch = 1
+    speech.rate = 1
+    speech.pitch = 1.1
     speech.volume = 1
 
-    window.speechSynthesis.speak(speech)
+    synth.speak(speech)
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      speakWelcome()
-    }, 300)
+  window.speechSynthesis.getVoices()
 
-    return () => {
-      clearTimeout(timer)
-      window.speechSynthesis.cancel()
-    }
-  }, [])
+  window.speechSynthesis.onvoiceschanged = () => {
+    speakWelcome()
+  }
 
+  // logo animation ke saath immediately try
+  speakWelcome()
+
+  return () => {
+    window.speechSynthesis.cancel()
+  }
+}, [])
   return (
     <div
       className="min-h-screen flex flex-col max-w-md mx-auto relative overflow-hidden"
@@ -237,10 +259,7 @@ export default function LandingPage() {
           className="w-full"
         >
           <button
-            onClick={() => {
-              speakWelcome()
-              router.push('/home')
-            }}
+            onClick={() => router.push('/home')}
             className="w-full flex items-center justify-center gap-3 bg-white rounded-2xl py-4 text-base font-bold text-red-600 shadow-lg active:scale-95 transition-transform"
           >
             Get Started
