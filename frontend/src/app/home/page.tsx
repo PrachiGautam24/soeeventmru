@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react'
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +8,7 @@ import { useSession, signOut } from 'next-auth/react'
 import {
   Bell, ChevronRight, LogIn, LogOut,
   Building2, Users, CalendarDays, BookOpen,
-  Star, X, Mail, PhoneCall, MapPin
+  Star, X, Mail, PhoneCall, MapPin, Trophy
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
 
@@ -236,6 +235,7 @@ export default function HomePage() {
   const { data: session } = useSession()
   const [activeTab, setActiveTab] = useState<TabId>('schools')
   const [floatingOpen, setFloatingOpen] = useState(false)
+  const [leaderboardOpen, setLeaderboardOpen] = useState(false)
 
   return (
     <div className="min-h-screen bg-neutral-100 pb-24">
@@ -298,9 +298,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Tab Content ── */}
-        <div className="px-4 mt-4">
-          <AnimatePresence mode="wait">
+{/* ── Tab Content ── */}
+<div className="px-4 mt-4">
 
             {/* SCHOOLS */}
             {activeTab === 'schools' && (
@@ -752,6 +751,99 @@ export default function HomePage() {
 
       </div>
 
+
+
+      {/* ── Floating Leaderboard Button + Side Panel ── */}
+      <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50">
+        <motion.button
+          whileTap={{ scale: 0.92 }}
+          onClick={() => setLeaderboardOpen(true)}
+          className="w-14 h-14 rounded-full bg-orange-500 text-white shadow-xl flex items-center justify-center"
+        >
+          <Trophy className="w-6 h-6" />
+        </motion.button>
+      </div>
+
+      <AnimatePresence>
+        {leaderboardOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setLeaderboardOpen(false)}
+              className="fixed inset-0 bg-black/30 z-[60]"
+            />
+
+            <motion.div
+              initial={{ x: 360 }}
+              animate={{ x: 0 }}
+              exit={{ x: 360 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+              className="fixed top-0 right-0 h-full w-[330px] bg-gradient-to-b from-orange-500 to-amber-500 z-[70] shadow-2xl p-5 text-white overflow-y-auto"
+            >
+              <div className="flex items-center justify-between mb-5">
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-white/70 font-semibold">
+                    Featured Students
+                  </p>
+                  <h2 className="text-xl font-black">
+                    Leaderboard Champions 🏆
+                  </h2>
+                </div>
+
+                <button
+                  onClick={() => setLeaderboardOpen(false)}
+                  className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="space-y-3">
+                {[
+                  { rank: 1, name: 'Demo Student', xp: '5165 XP', badge: '🥇' },
+                  { rank: 2, name: 'Udita Kalra', xp: '2800 XP', badge: '🥈' },
+                  { rank: 3, name: 'Aarav Sharma', xp: '2450 XP', badge: '🥉' },
+                ].map((student) => (
+                  <div
+                    key={student.rank}
+                    className="bg-white/15 backdrop-blur-md rounded-2xl px-4 py-3 flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center text-lg">
+                        {student.badge}
+                      </div>
+
+                      <div>
+                        <p className="font-bold text-sm">{student.name}</p>
+                        <p className="text-[11px] text-white/70">
+                          Rank #{student.rank}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="font-black text-base">{student.xp}</p>
+                      <p className="text-[10px] text-white/70">Total XP</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => {
+                  setLeaderboardOpen(false)
+                  router.push('/engage/leaderboard')
+                }}
+                className="mt-5 w-full rounded-2xl bg-white text-orange-600 py-3 font-black shadow-md"
+              >
+                View Full Leaderboard
+              </button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
       {/* ── Floating Fresher Guide button ── */}
       <div className="fixed bottom-20 right-4 z-50 flex flex-col items-end gap-2">
         <AnimatePresence>

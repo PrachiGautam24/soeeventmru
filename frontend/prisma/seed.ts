@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import bcrypt from 'bcryptjs'
-import prisma from '@/lib/prisma'
+import prisma from '../src/lib/prisma.ts'
 
 async function main() {
   console.log('🌱 Seeding SOE Engage database…')
