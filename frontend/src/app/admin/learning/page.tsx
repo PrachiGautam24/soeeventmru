@@ -4,18 +4,27 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Check, X, ArrowLeft } from 'lucide-react'
 
+type CompletionData = {
+  status: 'PENDING' | 'APPROVED' | 'REJECTED'
+  proofUrl?: string
+  proofText?: string
+}
+
 type AdminItem = {
   id: string
   status: 'PENDING' | 'APPROVED' | 'REJECTED'
   proofUrl: string | null
   proofText: string | null
+
   user: {
     name: string
     email: string
   }
+
   course: {
     title: string
     xpReward: number
+
     pathway: {
       title: string
     }
@@ -29,16 +38,18 @@ export default function AdminLearningPage() {
   const [note, setNote] = useState<Record<string, string>>({})
 
   useEffect(() => {
-    const saved = JSON.parse(
+    const saved: Record<string, CompletionData> = JSON.parse(
       localStorage.getItem(STORAGE_KEY) || '{}'
     )
 
     const formattedItems: AdminItem[] = Object.entries(saved).map(
-      ([courseId, completion]: any, index) => ({
+      ([courseId, completion], index) => ({
         id: courseId,
+
         status: completion.status,
-        proofUrl: completion.proofUrl,
-        proofText: completion.proofText,
+
+        proofUrl: completion.proofUrl || null,
+        proofText: completion.proofText || null,
 
         user: {
           name: 'Student',
@@ -48,6 +59,7 @@ export default function AdminLearningPage() {
         course: {
           title: `Course ${index + 1}`,
           xpReward: 120,
+
           pathway: {
             title: 'AI / ML Track',
           },
@@ -59,12 +71,13 @@ export default function AdminLearningPage() {
   }, [])
 
   function approve(id: string) {
-    const saved = JSON.parse(
+    const saved: Record<string, CompletionData> = JSON.parse(
       localStorage.getItem(STORAGE_KEY) || '{}'
     )
 
     if (saved[id]) {
       saved[id].status = 'APPROVED'
+
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(saved)
@@ -77,13 +90,13 @@ export default function AdminLearningPage() {
   }
 
   function reject(id: string) {
-    const saved = JSON.parse(
+    const saved: Record<string, CompletionData> = JSON.parse(
       localStorage.getItem(STORAGE_KEY) || '{}'
     )
 
     if (saved[id]) {
       saved[id].status = 'REJECTED'
-      saved[id].notes = note[id] ?? ''
+
       localStorage.setItem(
         STORAGE_KEY,
         JSON.stringify(saved)

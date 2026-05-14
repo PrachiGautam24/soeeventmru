@@ -9,85 +9,47 @@ import { ArrowRight } from 'lucide-react'
 export default function LandingPage() {
   const router = useRouter()
 
+  
+
   useEffect(() => {
-  let hasSpoken = false
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices()
+    }
 
-  const speakWelcome = () => {
-    if (hasSpoken) return
-    if (!('speechSynthesis' in window)) return
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel()
+      }
+    }
+  }, [])
 
-    const synth = window.speechSynthesis
-    const voices = synth.getVoices()
-
-    if (!voices.length) return
-
-    hasSpoken = true
-    synth.cancel()
-
-    const femaleVoice =
-      voices.find((v) => v.name.toLowerCase().includes('female')) ||
-      voices.find((v) => v.name.toLowerCase().includes('zira')) ||
-      voices.find((v) => v.name.toLowerCase().includes('samantha')) ||
-      voices.find((v) => v.name.toLowerCase().includes('google uk english female')) ||
-      voices[0]
-
-    const speech = new SpeechSynthesisUtterance(
-      'Welcome to Manav Rachna University'
-    )
-
-    speech.voice = femaleVoice
-    speech.lang = 'en-IN'
-    speech.rate = 1
-    speech.pitch = 1.1
-    speech.volume = 1
-
-    synth.speak(speech)
-  }
-
-  window.speechSynthesis.getVoices()
-
-  window.speechSynthesis.onvoiceschanged = () => {
-    speakWelcome()
-  }
-
-  // logo animation ke saath immediately try
-  speakWelcome()
-
-  return () => {
-    window.speechSynthesis.cancel()
-  }
-}, [])
   return (
     <div
       className="min-h-screen flex flex-col max-w-md mx-auto relative overflow-hidden"
       style={{ background: '#a50034' }}
     >
-      {/* Animated mesh blobs */}
       <style>{`
         @keyframes blob1 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          33%  { transform: translate(80px, -60px) scale(1.15); }
-          66%  { transform: translate(-40px, 80px) scale(0.9); }
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(80px, -60px) scale(1.15); }
+          66% { transform: translate(-40px, 80px) scale(0.9); }
           100% { transform: translate(0px, 0px) scale(1); }
         }
-
         @keyframes blob2 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          33%  { transform: translate(-70px, 60px) scale(1.2); }
-          66%  { transform: translate(60px, -80px) scale(0.85); }
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(-70px, 60px) scale(1.2); }
+          66% { transform: translate(60px, -80px) scale(0.85); }
           100% { transform: translate(0px, 0px) scale(1); }
         }
-
         @keyframes blob3 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          33%  { transform: translate(50px, -70px) scale(1.1); }
-          66%  { transform: translate(-80px, 40px) scale(1.2); }
+          0% { transform: translate(0px, 0px) scale(1); }
+          33% { transform: translate(50px, -70px) scale(1.1); }
+          66% { transform: translate(-80px, 40px) scale(1.2); }
           100% { transform: translate(0px, 0px) scale(1); }
         }
-
         @keyframes blob4 {
-          0%   { transform: translate(0px, 0px) scale(1); }
-          50%  { transform: translate(-60px, -50px) scale(1.3); }
+          0% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(-60px, -50px) scale(1.3); }
           100% { transform: translate(0px, 0px) scale(1); }
         }
       `}</style>
@@ -159,7 +121,6 @@ export default function LandingPage() {
           d="M0,60 Q100,100 195,60 Q290,20 390,60 L390,120 L0,120 Z"
           fill="rgba(0,0,0,0.08)"
         />
-
         <path
           d="M0,80 Q100,50 195,80 Q290,110 390,80 L390,120 L0,120 Z"
           fill="rgba(0,0,0,0.06)"
@@ -259,12 +220,44 @@ export default function LandingPage() {
           className="w-full"
         >
           <button
-            onClick={() => router.push('/home')}
-            className="w-full flex items-center justify-center gap-3 bg-white rounded-2xl py-4 text-base font-bold text-red-600 shadow-lg active:scale-95 transition-transform"
-          >
-            Get Started
-            <ArrowRight className="w-5 h-5" />
-          </button>
+  onClick={() => {
+    if (!('speechSynthesis' in window)) {
+      router.push('/home')
+      return
+    }
+
+    const synth = window.speechSynthesis
+    synth.cancel()
+
+    const voices = synth.getVoices()
+
+    const femaleVoice =
+      voices.find((v) => v.name.toLowerCase().includes('female')) ||
+      voices.find((v) => v.name.toLowerCase().includes('zira')) ||
+      voices.find((v) => v.name.toLowerCase().includes('samantha')) ||
+      voices[0]
+
+    const speech = new SpeechSynthesisUtterance(
+      'Welcome to Manav Rachna University'
+    )
+
+    speech.voice = femaleVoice
+    speech.lang = 'en-IN'
+    speech.rate = 1
+    speech.pitch = 1.1
+    speech.volume = 1
+
+    speech.onend = () => {
+      router.push('/home')
+    }
+
+    synth.speak(speech)
+  }}
+  className="w-full flex items-center justify-center gap-3 bg-white rounded-2xl py-4 text-base font-bold text-red-600 shadow-lg active:scale-95 transition-transform"
+>
+  Get Started
+  <ArrowRight className="w-5 h-5" />
+</button>
         </motion.div>
       </div>
     </div>
