@@ -180,11 +180,12 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 }
 
 // ─── Category tabs config ──────────────────────────────────────────────────────
-type TabId = 'departments' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards' | 'learning'
+type TabId = 'schools' | 'functionaries' | 'placements' | 'campus' | 'events' | 'awards' | 'learning' | 'research'
 
 const tabs: { id: TabId; label: string; emoji: string; color: string; bg: string }[] = [
-  { id: 'departments',   label: 'Departments',        emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
+  { id: 'schools',       label: 'Schools',            emoji: '🏫', color: '#1e4ba9', bg: '#e8edf8' },
   { id: 'learning',      label: 'Learning\nPathways', emoji: '🛤️', color: '#7c3aed', bg: '#f3eeff' },
+  { id: 'research',      label: 'Research\nPublications', emoji: '📄', color: '#0891b2', bg: '#e0f7fa' },
   { id: 'functionaries', label: 'Functionaries',      emoji: '👥', color: '#16a34a', bg: '#e8f5ee' },
   { id: 'awards',        label: 'Awards',             emoji: '🏆', color: '#f59e0b', bg: '#fef3c7' },
   { id: 'placements',    label: 'Placements',         emoji: '💼', color: '#b45309', bg: '#fef3e2' },
@@ -233,7 +234,7 @@ function PlacementSlideshow({ photos }: { photos: string[] }) {
 export default function HomePage() {
   const router = useRouter()
   const { data: session } = useSession()
-  const [activeTab, setActiveTab] = useState<TabId>('departments')
+  const [activeTab, setActiveTab] = useState<TabId>('schools')
   const [floatingOpen, setFloatingOpen] = useState(false)
 
   return (
@@ -301,9 +302,9 @@ export default function HomePage() {
         <div className="px-4 mt-4">
           <AnimatePresence mode="wait">
 
-            {/* DEPARTMENTS */}
-            {activeTab === 'departments' && (
-              <motion.div key="departments"
+            {/* SCHOOLS */}
+            {activeTab === 'schools' && (
+              <motion.div key="schools"
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }} className="space-y-2.5">
                 <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-3">Explore Schools</p>
@@ -458,6 +459,83 @@ export default function HomePage() {
                             <p className="text-xs font-semibold text-gray-800 leading-snug">{c.course}</p>
                             <p className="text-[11px] text-neutral-400 mt-0.5">{c.faculty}</p>
                           </div>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* RESEARCH PUBLICATIONS */}
+            {activeTab === 'research' && (
+              <motion.div key="research"
+                initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.2 }} className="space-y-3">
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Research Publications</p>
+                {[
+                  {
+                    school: 'School of Engineering', color: '#1e4ba9', bg: '#e8edf8', emoji: '⚙️',
+                    stats: '200+ Scopus/SCI papers · 50+ Patents',
+                    highlights: [
+                      'Research in AI/ML, VLSI, Embedded Systems, Robotics',
+                      'Collaboration with Google Cloud, CISCO, TrueChip',
+                      'Active IEEE publications by ECE & CSE faculty',
+                      'ICASS 2026 — International Conference on Intelligent Computing',
+                    ],
+                  },
+                  {
+                    school: 'School of Business', color: '#b12a2e', bg: '#fde8e8', emoji: '📊',
+                    stats: 'Publications in ABDC, Scopus indexed journals',
+                    highlights: [
+                      'Research in Finance, Marketing, HR Analytics, Operations',
+                      'Faculty publications in national & international journals',
+                      'Case studies and industry research collaborations',
+                    ],
+                  },
+                  {
+                    school: 'School of Law', color: '#b45309', bg: '#fef3e2', emoji: '⚖️',
+                    stats: 'Ranked 51st among law schools in India (India Today 2025)',
+                    highlights: [
+                      'Research in Constitutional Law, Corporate Law, Human Rights',
+                      'Student publications in peer-reviewed law journals',
+                      'Moot court research and legal aid clinic studies',
+                    ],
+                  },
+                  {
+                    school: 'School of Sciences', color: '#7c3aed', bg: '#f3eeff', emoji: '🔬',
+                    stats: 'Research in Chemistry, Physics, Forensic Science',
+                    highlights: [
+                      'Quantum Computing research with C-DAC',
+                      'Agrochemicals and environmental science publications',
+                      'Scopus/SCI indexed journal publications',
+                    ],
+                  },
+                  {
+                    school: 'School of Education & Humanities', color: '#16a34a', bg: '#e8f5ee', emoji: '📚',
+                    stats: 'NCTE & IB recognised research',
+                    highlights: [
+                      'Research in pedagogy, curriculum development, e-learning',
+                      'Action research and educational leadership studies',
+                      'Publications in education and humanities journals',
+                    ],
+                  },
+                ].map((group, gi) => (
+                  <motion.div key={group.school}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: gi * 0.06 }}
+                    className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
+                    <div className="px-4 py-3 flex items-center gap-2 border-b border-neutral-100" style={{ backgroundColor: group.bg }}>
+                      <span className="text-lg">{group.emoji}</span>
+                      <div>
+                        <p className="text-xs font-bold" style={{ color: group.color }}>{group.school}</p>
+                        <p className="text-[10px] text-neutral-500 mt-0.5">{group.stats}</p>
+                      </div>
+                    </div>
+                    <div className="px-4 py-3 space-y-1.5">
+                      {group.highlights.map((h, i) => (
+                        <div key={i} className="flex items-start gap-2 text-xs text-gray-600">
+                          <span className="mt-0.5 shrink-0" style={{ color: group.color }}>•</span>
+                          {h}
                         </div>
                       ))}
                     </div>
@@ -624,8 +702,8 @@ export default function HomePage() {
           </AnimatePresence>
         </div>
 
-        {/* ── MRU at a Glance + Contact (departments tab only) ── */}
-        {activeTab === 'departments' && (
+        {/* ── MRU at a Glance + Contact (schools tab only) ── */}
+        {activeTab === 'schools' && (
           <div className="px-4 mt-6 space-y-4">
             {/* MRU Stats */}
             <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">MRU at a Glance</p>
