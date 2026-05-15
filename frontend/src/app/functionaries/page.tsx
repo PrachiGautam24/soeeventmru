@@ -13,7 +13,7 @@ const functionaries = [
   { section: 'University Leadership', name: 'Prof. (Dr.) Sangita Banga', title: 'Pro Vice Chancellor & Dean Education', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Sangita.jpg' },
   { section: 'University Leadership', name: 'Mr. Ramesh Nair', title: 'Registrar', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Ramesh-Nair.jpg' },
   // Academic Leadership
-  { section: 'Academic Leadership', name: 'Prof. (Dr.) Shruti Vashist', title: 'Dean Academics & Dean Research, HOD-ECE', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg' },
+  { section: 'Academic Leadership', name: 'Prof. (Dr.) Shruti Vashist', title: 'Dean Academics & Dean Research', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Shruti-Vashist.jpg' },
   { section: 'Academic Leadership', name: 'Prof. (Dr.) Dipali Bansal', title: 'Dean Engineering', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Dipali.jpg' },
   { section: 'Academic Leadership', name: 'Prof. (Dr.) Meena Kapahi', title: 'Director International Relations', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Meena-Kapahi.jpg' },
   { section: 'Academic Leadership', name: 'Prof. (Dr.) Asha Verma', title: 'Dean, School of Law', photo: 'https://manavrachna.edu.in/assets/campus/mru/images/Dr.-Asha-Verma.jpg' },
