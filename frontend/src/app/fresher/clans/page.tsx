@@ -18,8 +18,6 @@ const coordinators = [
 
 const whyClans = ['Develop communication, planning, and organizational management skills.', 'Take responsibility for large projects and demonstrate leadership.', 'Foster healthy rivalry that sets performance benchmarks.', 'Build connections across physical infrastructures and departments.', 'Promote friendship, respect, and tolerance among students.', 'Harness talent and arrive at a consensus from a larger student base.']
 
-const lifeSkills = ['Purposeful living and values', 'Career skills & problem-solving', 'Leadership & communication', 'Sustainability & social sensitivity', 'Entrepreneurship & innovation', 'CSR activities']
-
 export default function ClansPage() {
   const router = useRouter()
   return (
