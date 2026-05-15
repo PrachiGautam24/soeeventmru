@@ -85,6 +85,27 @@ export default function LawSchoolPage() {
               <p className="text-sm text-gray-600 leading-relaxed">Practice-driven and application-based legal education with a transdisciplinary approach. Ranked 51st among law schools in India (India Today 2025) and 4th in Haryana.</p>
             </div>
 
+            {/* About accordion */}
+            <div className="rounded-2xl overflow-hidden shadow-sm">
+              <button onClick={() => setAboutOpen(o => !o)} className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
+                <span className="font-bold text-white text-sm">About School of Law</span>
+                <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                  <ChevronDown className="w-4 h-4 text-white/80" />
+                </motion.div>
+              </button>
+              <AnimatePresence initial={false}>
+                {aboutOpen && (
+                  <motion.div key="about" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
+                    <div className="px-4 pb-5 pt-3 space-y-3">
+                      {school.about.split('\n\n').map((para, i) => (
+                        <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Explore More — 3+2 grid */}
             <div>
               <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
@@ -114,27 +135,6 @@ export default function LawSchoolPage() {
                   </motion.button>
                 ))}
               </div>
-            </div>
-
-            {/* About accordion */}
-            <div className="rounded-2xl overflow-hidden shadow-sm">
-              <button onClick={() => setAboutOpen(o => !o)} className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
-                <span className="font-bold text-white text-sm">About School of Law</span>
-                <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                  <ChevronDown className="w-4 h-4 text-white/80" />
-                </motion.div>
-              </button>
-              <AnimatePresence initial={false}>
-                {aboutOpen && (
-                  <motion.div key="about" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }} className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
-                    <div className="px-4 pb-5 pt-3 space-y-3">
-                      {school.about.split('\n\n').map((para, i) => (
-                        <p key={i} className="text-sm text-gray-600 leading-relaxed">{para}</p>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
 
           </div>

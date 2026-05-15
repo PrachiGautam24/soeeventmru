@@ -97,20 +97,6 @@ export default function ClansPage() {
             </div>
           </div>
 
-          {/* Life Skills */}
-          <div className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
-            <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest px-4 pt-4 pb-1">Life Skills Programme</p>
-            <p className="text-xs text-neutral-400 px-4 pb-3">Min. 25 activity points/year required to earn a degree.</p>
-            <div className="divide-y divide-neutral-100 border-t border-neutral-100">
-              {lifeSkills.map((skill, i) => (
-                <div key={i} className="flex items-center gap-3 px-4 py-3">
-                  <div className="w-2.5 h-2.5 rounded-full bg-secondary shrink-0" />
-                  <p className="text-sm text-gray-700">{skill}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Students Welfare */}
           <div className="bg-white rounded-2xl p-4 border border-neutral-100 shadow-sm">
             <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-2">Students Welfare</p>

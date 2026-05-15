@@ -11,6 +11,7 @@ import {
   Star, X, Mail, PhoneCall, MapPin, Trophy
 } from 'lucide-react'
 import { schools } from '@/lib/schools'
+import { publishedPapers, acceptedPapers, communicatedPapers } from '@/lib/researchPublications'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -299,7 +300,8 @@ export default function HomePage() {
         </div>
 
 {/* ── Tab Content ── */}
-<div className="px-4 mt-4">
+        <div className="px-4 mt-4">
+          <AnimatePresence mode="wait">
 
             {/* SCHOOLS */}
             {activeTab === 'schools' && (
@@ -471,74 +473,27 @@ export default function HomePage() {
               <motion.div key="research"
                 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2 }} className="space-y-3">
-                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Research Publications</p>
+                <p className="text-xs font-semibold text-neutral-400 uppercase tracking-widest">Research Publications · 2026</p>
                 {[
-                  {
-                    school: 'School of Engineering', color: '#1e4ba9', bg: '#e8edf8', emoji: '⚙️',
-                    stats: '200+ Scopus/SCI papers · 50+ Patents',
-                    highlights: [
-                      'Research in AI/ML, VLSI, Embedded Systems, Robotics',
-                      'Collaboration with Google Cloud, CISCO, TrueChip',
-                      'Active IEEE publications by ECE & CSE faculty',
-                      'ICASS 2026 — International Conference on Intelligent Computing',
-                    ],
-                  },
-                  {
-                    school: 'School of Business', color: '#b12a2e', bg: '#fde8e8', emoji: '📊',
-                    stats: 'Publications in ABDC, Scopus indexed journals',
-                    highlights: [
-                      'Research in Finance, Marketing, HR Analytics, Operations',
-                      'Faculty publications in national & international journals',
-                      'Case studies and industry research collaborations',
-                    ],
-                  },
-                  {
-                    school: 'School of Law', color: '#b45309', bg: '#fef3e2', emoji: '⚖️',
-                    stats: 'Ranked 51st among law schools in India (India Today 2025)',
-                    highlights: [
-                      'Research in Constitutional Law, Corporate Law, Human Rights',
-                      'Student publications in peer-reviewed law journals',
-                      'Moot court research and legal aid clinic studies',
-                    ],
-                  },
-                  {
-                    school: 'School of Sciences', color: '#7c3aed', bg: '#f3eeff', emoji: '🔬',
-                    stats: 'Research in Chemistry, Physics, Forensic Science',
-                    highlights: [
-                      'Quantum Computing research with C-DAC',
-                      'Agrochemicals and environmental science publications',
-                      'Scopus/SCI indexed journal publications',
-                    ],
-                  },
-                  {
-                    school: 'School of Education & Humanities', color: '#16a34a', bg: '#e8f5ee', emoji: '📚',
-                    stats: 'NCTE & IB recognised research',
-                    highlights: [
-                      'Research in pedagogy, curriculum development, e-learning',
-                      'Action research and educational leadership studies',
-                      'Publications in education and humanities journals',
-                    ],
-                  },
-                ].map((group, gi) => (
-                  <motion.div key={group.school}
-                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: gi * 0.06 }}
-                    className="bg-white rounded-2xl border border-neutral-100 shadow-sm overflow-hidden">
-                    <div className="px-4 py-3 flex items-center gap-2 border-b border-neutral-100" style={{ backgroundColor: group.bg }}>
-                      <span className="text-lg">{group.emoji}</span>
-                      <div>
-                        <p className="text-xs font-bold" style={{ color: group.color }}>{group.school}</p>
-                        <p className="text-[10px] text-neutral-500 mt-0.5">{group.stats}</p>
-                      </div>
+                  { label: 'Published Papers',    route: '/research/published',    emoji: '✅', color: '#16a34a', bg: '#e8f5ee', desc: `${publishedPapers.length} papers published in journals & conferences` },
+                  { label: 'Accepted Papers',     route: '/research/accepted',     emoji: '📬', color: '#1e4ba9', bg: '#e8edf8', desc: `${acceptedPapers.length} papers accepted, awaiting publication` },
+                  { label: 'Communicated Papers', route: '/research/communicated', emoji: '📤', color: '#0891b2', bg: '#e0f7fa', desc: `${communicatedPapers.length} papers submitted & under review` },
+                ].map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => router.push(item.route)}
+                    className="w-full flex items-center gap-4 bg-white rounded-2xl px-4 py-4 shadow-sm border border-neutral-100 text-left">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0"
+                      style={{ backgroundColor: item.bg }}>
+                      {item.emoji}
                     </div>
-                    <div className="px-4 py-3 space-y-1.5">
-                      {group.highlights.map((h, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-gray-600">
-                          <span className="mt-0.5 shrink-0" style={{ color: group.color }}>•</span>
-                          {h}
-                        </div>
-                      ))}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-gray-800">{item.label}</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">{item.desc}</p>
                     </div>
-                  </motion.div>
+                    <ChevronRight className="w-4 h-4 shrink-0" style={{ color: item.color }} />
+                  </motion.button>
                 ))}
               </motion.div>
             )}

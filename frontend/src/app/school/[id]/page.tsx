@@ -106,26 +106,6 @@ export default function SchoolPage() {
               </AnimatePresence>
             </div>
 
-            {/* Departments list */}
-            <div>
-              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Departments</p>
-              <div className="space-y-2.5">
-                {school.departments.map((dept, i) => (
-                  <motion.button key={dept.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} whileTap={{ scale: 0.97 }}
-                    onClick={() => router.push(`/school/${school.id}/${dept.id}`)}
-                    className="w-full flex items-center gap-3 bg-white border border-neutral-100 rounded-2xl px-4 py-3.5 shadow-sm text-left">
-                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${deptGradients[i % deptGradients.length]} flex items-center justify-center shadow shrink-0`}>
-                      <span className="text-white font-bold text-xs text-center leading-tight px-1">{dept.code}</span>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-gray-800 leading-snug">{dept.name}</p>
-                      <p className="text-xs text-neutral-400 mt-0.5">{dept.description.slice(0, 50)}…</p>
-                    </div>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-
             {/* About accordion */}
             <div className="rounded-2xl overflow-hidden shadow-sm">
               <button onClick={() => setAboutOpen(o => !o)} className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
@@ -145,6 +125,26 @@ export default function SchoolPage() {
                   </motion.div>
                 )}
               </AnimatePresence>
+            </div>
+
+            {/* Departments list */}
+            <div>
+              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Departments</p>
+              <div className="space-y-2.5">
+                {school.departments.map((dept, i) => (
+                  <motion.button key={dept.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.06 }} whileTap={{ scale: 0.97 }}
+                    onClick={() => router.push(`/school/${school.id}/${dept.id}`)}
+                    className="w-full flex items-center gap-3 bg-white border border-neutral-100 rounded-2xl px-4 py-3.5 shadow-sm text-left">
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${deptGradients[i % deptGradients.length]} flex items-center justify-center shadow shrink-0`}>
+                      <span className="text-white font-bold text-xs text-center leading-tight px-1">{dept.code}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-gray-800 leading-snug">{dept.name}</p>
+                      <p className="text-xs text-neutral-400 mt-0.5">{dept.description.slice(0, 50)}…</p>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
             </div>
 
             {/* Academic Partners */}

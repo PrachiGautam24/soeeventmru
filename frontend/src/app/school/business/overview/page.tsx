@@ -88,6 +88,30 @@ export default function BusinessOverviewPage() {
               </p>
             </div>
 
+            {/* About accordion */}
+            <div className="rounded-2xl overflow-hidden shadow-sm">
+              <button onClick={() => setAboutOpen(o => !o)}
+                className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
+                <span className="font-bold text-white text-sm">About School of Business</span>
+                <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                  <ChevronDown className="w-4 h-4 text-white/80" />
+                </motion.div>
+              </button>
+              <AnimatePresence initial={false}>
+                {aboutOpen && (
+                  <motion.div key="about" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}
+                    className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
+                    <div className="px-4 pb-5 pt-3 space-y-3">
+                      <p className="text-sm text-gray-600 leading-relaxed">The School of Business at Manav Rachna University equips students with strategic thinking, entrepreneurial mindset, and global business acumen.</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">It offers MBA, BBA, B.Com, and Ph.D. programmes with specialisations in Finance, Marketing, Human Resources, Operations, and Entrepreneurship. The school has received QS I-GAUGE Diamond Rating for excellence in teaching, faculty quality, and employability.</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">The school has active industry partnerships with KPMG, Deloitte, and EY for curriculum co-creation and placement support, with an 85%+ placement rate in recent batches.</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Explore More — 3+3+2 grid */}
             <div>
               <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
@@ -121,30 +145,6 @@ export default function BusinessOverviewPage() {
                   </motion.button>
                 ))}
               </div>
-            </div>
-
-            {/* About accordion */}
-            <div className="rounded-2xl overflow-hidden shadow-sm">
-              <button onClick={() => setAboutOpen(o => !o)}
-                className={`w-full flex items-center justify-between px-4 py-4 bg-red-600 ${aboutOpen ? 'rounded-t-2xl' : 'rounded-2xl'}`}>
-                <span className="font-bold text-white text-sm">About School of Business</span>
-                <motion.div animate={{ rotate: aboutOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                  <ChevronDown className="w-4 h-4 text-white/80" />
-                </motion.div>
-              </button>
-              <AnimatePresence initial={false}>
-                {aboutOpen && (
-                  <motion.div key="about" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.25 }}
-                    className="overflow-hidden bg-white rounded-b-2xl border border-t-0 border-neutral-100">
-                    <div className="px-4 pb-5 pt-3 space-y-3">
-                      <p className="text-sm text-gray-600 leading-relaxed">The School of Business at Manav Rachna University equips students with strategic thinking, entrepreneurial mindset, and global business acumen.</p>
-                      <p className="text-sm text-gray-600 leading-relaxed">It offers MBA, BBA, B.Com, and Ph.D. programmes with specialisations in Finance, Marketing, Human Resources, Operations, and Entrepreneurship. The school has received QS I-GAUGE Diamond Rating for excellence in teaching, faculty quality, and employability.</p>
-                      <p className="text-sm text-gray-600 leading-relaxed">The school has active industry partnerships with KPMG, Deloitte, and EY for curriculum co-creation and placement support, with an 85%+ placement rate in recent batches.</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
 
           </div>

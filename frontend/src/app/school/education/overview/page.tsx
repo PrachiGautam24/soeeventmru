@@ -84,37 +84,6 @@ export default function EducationOverviewPage() {
               </p>
             </div>
 
-            {/* Explore More — 3+2 grid */}
-            <div>
-              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
-              {/* Row 1: 3 items */}
-              <div className="grid grid-cols-3 gap-2 mb-2">
-                {gridItems.slice(0, 3).map((item, i) => (
-                  <motion.button key={item.label}
-                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => router.push(`/school/education/overview/${item.route}`)}
-                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100">
-                    <span className="text-2xl">{item.icon}</span>
-                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
-                  </motion.button>
-                ))}
-              </div>
-              {/* Row 2: 2 items centered */}
-              <div className="flex justify-center gap-2">
-                {gridItems.slice(3).map((item, i) => (
-                  <motion.button key={item.label}
-                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => router.push(`/school/education/overview/${item.route}`)}
-                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100 w-[31%]">
-                    <span className="text-2xl">{item.icon}</span>
-                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-
             {/* About accordion */}
             <div className="rounded-2xl overflow-hidden shadow-sm">
               <button onClick={() => setAboutOpen(o => !o)}
@@ -152,6 +121,37 @@ export default function EducationOverviewPage() {
                   </motion.div>
                 )}
               </AnimatePresence>
+            </div>
+
+            {/* Explore More — 3+2 grid */}
+            <div>
+              <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-3 px-1">Explore More</p>
+              {/* Row 1: 3 items */}
+              <div className="grid grid-cols-3 gap-2 mb-2">
+                {gridItems.slice(0, 3).map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => router.push(`/school/education/overview/${item.route}`)}
+                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100">
+                    <span className="text-2xl">{item.icon}</span>
+                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
+                  </motion.button>
+                ))}
+              </div>
+              {/* Row 2: 2 items centered */}
+              <div className="flex justify-center gap-2">
+                {gridItems.slice(3).map((item, i) => (
+                  <motion.button key={item.label}
+                    initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 3) * 0.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => router.push(`/school/education/overview/${item.route}`)}
+                    className="flex flex-col items-center gap-1.5 bg-white rounded-2xl px-2 py-3 shadow-sm border border-neutral-100 w-[31%]">
+                    <span className="text-2xl">{item.icon}</span>
+                    <span className="text-[10px] text-center text-gray-700 font-semibold leading-tight whitespace-pre-line">{item.label}</span>
+                  </motion.button>
+                ))}
+              </div>
             </div>
 
           </div>
